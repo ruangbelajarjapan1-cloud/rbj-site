@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Galeri - RBMJ</title>
+  <meta name="description" content="" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: {
+              DEFAULT: '#16a34a',
+              50: '#f0fdf4',
+              100: '#dcfce7',
+              200: '#bbf7d0',
+              300: '#86efac',
+              400: '#4ade80',
+              500: '#22c55e',
+              600: '#16a34a',
+              700: '#15803d',
+              800: '#166534',
+              900: '#14532d'
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+
+<body class="bg-white text-slate-900">
+
+<header class="sticky top-0 z-50 bg-white/90 backdrop-blur border-b">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="flex items-center justify-between h-16">
+      <a href="index.html" class="flex items-center gap-3">
+        <img src="assets/logo.jpg" alt="Logo Ruang Belajar" class="h-9 w-9 rounded-lg ring-1 ring-primary-200" />
+        <span class="font-bold text-lg">Ruang Belajar Muslim Jepang</span>
+      </a>
+      <nav class="hidden md:flex items-center gap-4 text-sm">
+        <a href="index.html" class="px-2 hover:text-primary-700 ">Beranda</a>
+        <a href="tentang.html" class="px-2 hover:text-primary-700 ">Tentang</a>
+        <a href="program.html" class="px-2 hover:text-primary-700 ">Program</a>
+        <a href="artikel.html" class="px-2 hover:text-primary-700 ">Artikel</a>
+        <a href="galeri.html" class="px-2 hover:text-primary-700 text-primary-700 font-semibold">Galeri</a>
+        <a href="kontak.html" class="px-2 hover:text-primary-700 ">Kontak</a>
+        <a href="program.html#daftar" class="inline-flex items-center px-4 py-2 rounded-xl bg-primary-600 text-white hover:bg-primary-700">Daftar</a>
+      </nav>
+      <a href="program.html#daftar" class="md:hidden inline-flex items-center px-3 py-2 rounded-lg bg-primary-600 text-white">Daftar</a>
+    </div>
+  </div>
+</header>
+
+<section class="py-16">
+  <div class="max-w-7xl mx-auto px-4">
+    <h1 class="text-3xl font-bold">Galeri Kegiatan</h1>
+    <div class="mt-8 grid grid-cols-2 md:grid-cols-4 gap-3">
+      <img src="assets/g1.jpg" alt="Kegiatan 1" class="w-full h-40 object-cover rounded-xl ring-1 ring-slate-200" />
+      <img src="assets/g2.jpg" alt="Kegiatan 2" class="w-full h-40 object-cover rounded-xl ring-1 ring-slate-200" />
+      <img src="assets/g3.jpg" alt="Kegiatan 3" class="w-full h-40 object-cover rounded-xl ring-1 ring-slate-200" />
+      <img src="assets/g4.jpg" alt="Kegiatan 4" class="w-full h-40 object-cover rounded-xl ring-1 ring-slate-200" />
+    </div>
+  </div>
+</section>
+
+<footer class="py-10 border-t">
+  <div class="max-w-7xl mx-auto px-4 text-sm text-slate-600 flex flex-col md:flex-row gap-3 md:items-center md:justify-between">
+    <div class="flex items-center gap-3">
+      <img src="assets/logo.jpg" alt="Logo" class="h-8 w-8 rounded-md ring-1 ring-slate-200"/>
+      <p>© <span id="year"></span> Ruang Belajar Muslim Jepang. Semua hak cipta dilindungi.</p>
+    </div>
+    <div class="flex gap-4">
+      <a href="#" class="hover:text-primary-700">Privasi</a>
+      <a href="#" class="hover:text-primary-700">S&K</a>
+    </div>
+  </div>
+</footer>
+<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>

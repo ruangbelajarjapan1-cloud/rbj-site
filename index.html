@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ruang Belajar Muslim Jepang</title>
+  <meta name="description" content="Ruang belajar komunitas Muslim di Jepang: info kegiatan, pendaftaran, materi, dan jaringan komunitas." />
+  <meta property="og:title" content="Ruang Belajar Muslim Jepang" />
+  <meta property="og:description" content="Info kegiatan, pendaftaran, dan materi pembelajaran untuk komunitas Muslim di Jepang." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="/og-image.jpg" />
+  <meta name="theme-color" content="#16a34a" />
+
+  <!-- TailwindCSS CDN (for quick start). Replace with your build pipeline later if needed. -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: {
+              DEFAULT: '#16a34a', // green-600
+              50: '#f0fdf4',
+              100: '#dcfce7',
+              200: '#bbf7d0',
+              300: '#86efac',
+              400: '#4ade80',
+              500: '#22c55e',
+              600: '#16a34a',
+              700: '#15803d',
+              800: '#166534',
+              900: '#14532d'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Smooth scroll */
+    html { scroll-behavior: smooth; }
+  </style>
+</head>
+<body class="bg-white text-slate-900">
+  <!-- Top bar / announcement -->
+  <div class="bg-primary-600 text-white text-sm">
+    <div class="max-w-7xl mx-auto px-4 py-2 flex items-center justify-between">
+      <span id="top-banner" class="truncate">Assalamualaikum—Pendaftaran Kelas Musim Gugur dibuka sampai 30 September.</span>
+      <a href="#daftar" class="underline font-medium">Daftar sekarang</a>
+    </div>
+  </div>
+
+  <!-- Navbar -->
+  <header class="sticky top-0 z-50 bg-white/90 backdrop-blur border-b">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="flex items-center justify-between h-16">
+        <a href="#" class="flex items-center gap-3">
+          <img src="logo.jpg" alt="Logo Ruang Belajar" class="h-9 w-9 rounded-lg ring-1 ring-primary-200" />
+          <span class="font-bold text-lg">Ruang Belajar Muslim Jepang</span>
+        </a>
+        <nav class="hidden md:flex items-center gap-6 text-sm">
+          <a href="#tentang" class="hover:text-primary-700">Tentang</a>
+          <a href="#program" class="hover:text-primary-700">Program</a>
+          <a href="#jadwal" class="hover:text-primary-700">Jadwal</a>
+          <a href="#artikel" class="hover:text-primary-700">Artikel</a>
+          <a href="#galeri" class="hover:text-primary-700">Galeri</a>
+          <a href="#kontak" class="hover:text-primary-700">Kontak</a>
+          <a href="#daftar" class="inline-flex items-center px-4 py-2 rounded-xl bg-primary-600 text-white hover:bg-primary-700">Daftar</a>
+        </nav>
+        <button id="menuBtn" class="md:hidden p-2 rounded-lg border" aria-label="Buka menu">☰</button>
+      </div>
+    </div>
+    <!-- Mobile menu -->
+    <div id="mobileMenu" class="md:hidden hidden border-t bg-white">
+      <nav class="max-w-7xl mx-auto px-4 py-3 grid gap-2 text-sm">
+        <a href="#tentang" class="py-2">Tentang</a>
+        <a href="#program" class="py-2">Program</a>
+        <a href="#jadwal" class="py-2">Jadwal</a>
+        <a href="#artikel" class="py-2">Artikel</a>
+        <a href="#galeri" class="py-2">Galeri</a>
+        <a href="#kontak" class="py-2">Kontak</a>
+        <a href="#daftar" class="inline-flex items-center justify-center px-4 py-2 rounded-xl bg-primary-600 text-white">Daftar</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-b from-primary-50 to-white pointer-events-none"></div>
+    <div class="max-w-7xl mx-auto px-4 py-16 md:py-24 relative">
+      <div class="grid md:grid-cols-2 gap-10 items-center">
+        <div>
+          <h1 class="text-3xl md:text-5xl font-extrabold leading-tight">Belajar islam sesuai sunnah<span class="text-primary-700"> di Jepang</span></h1>
+          <p class="mt-4 text-slate-700 text-lg">Platform komunitas Muslim untuk belajar islam sesuai sunnah di jepang. Terbuka untuk anak - anak dan kalangan usia tertentu</p>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <a href="#daftar" class="px-5 py-3 rounded-xl bg-primary-600 text-white hover:bg-primary-700">Daftar Kegiatan</a>
+            <a href="#program" class="px-5 py-3 rounded-xl border hover:bg-slate-50">Lihat Program</a>
+          </div>
+          <ul class="mt-6 grid grid-cols-2 gap-4 text-sm">
+            <li class="flex items-center gap-2">✅ Kelas rutin online & offline</li>
+            <li class="flex items-center gap-2">✅ Materi bisa diunduh</li>
+            <li class="flex items-center gap-2">✅ Info halal & komunitas</li>
+            <li class="flex items-center gap-2">✅ Gratis & mudah diupdate</li>
+          </ul>
+        </div>
+        <div class="relative">
+          <img src="/hero.jpg" alt="Kegiatan belajar" class="rounded-2xl w-full ring-1 ring-primary-100 shadow" />
+          <div class="absolute -bottom-6 -right-4 bg-white p-4 rounded-xl shadow ring-1 ring-slate-200 w-60">
+            <p class="text-sm font-semibold">Event Terdekat</p>
+            <p class="text-xs text-slate-600">Kajian Akhlak (Online) • Sabtu 19:30 JST</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ... (konten lainnya tetap sama seperti sebelumnya) ... -->
+
+  <!-- Footer -->
+  <footer class="py-10 border-t">
+    <div class="max-w-7xl mx-auto px-4 text-sm text-slate-600 flex flex-col md:flex-row gap-3 md:items-center md:justify-between">
+      <p>© <span id="year"></span> Ruang Belajar Muslim Jepang. Semua hak cipta dilindungi.</p>
+      <div class="flex gap-4">
+        <a href="#" class="hover:text-primary-700">Kebijakan Privasi</a>
+        <a href="#" class="hover:text-primary-700">Syarat & Ketentuan</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu toggle
+    const btn = document.getElementById('menuBtn');
+    const menu = document.getElementById('mobileMenu');
+    btn?.addEventListener('click', () => menu.classList.toggle('hidden'));
+    // Dynamic year
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
