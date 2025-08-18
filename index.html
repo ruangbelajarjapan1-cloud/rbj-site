@@ -11,21 +11,21 @@
   <meta property="og:title" content="Ruang Belajar Muslim Jepang" />
   <meta property="og:description" content="Info kegiatan, pendaftaran, dan materi, dan program belajar." />
   <meta property="og:type" content="website" />
-  <!-- Pakai salah satu: social-preview-rbmj.png ATAU hero.jpg (semua di root) -->
-  <meta property="og:image" content="social-preview-rbmj.png" />
+  <!-- Pakai gambar hero untuk social preview -->
+  <meta property="og:image" content="daftar.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="theme-color" content="#16a34a" />
 
-  <!-- Favicon (pakai logo.jpg di root) -->
+  <!-- Favicon -->
   <link rel="icon" href="logo.jpg" />
 
-  <!-- SEO: canonical + hreflang (ganti domain canonical saat sudah pasti) -->
+  <!-- SEO: canonical + hreflang -->
   <link rel="canonical" href="https://example.com/" />
   <link rel="alternate" hreflang="id" href="?lang=id" />
   <link rel="alternate" hreflang="ja" href="?lang=ja" />
 
-  <!-- Performance: preload hero -->
-  <link rel="preload" as="image" href="hero.jpg" />
+  <!-- Preload hero -->
+  <link rel="preload" as="image" href="daftar.jpg" />
 
   <!-- TailwindCSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -47,7 +47,6 @@
   </script>
   <style>
     html { scroll-behavior: smooth; }
-    /* Aksesibilitas: skip link + nav aktif */
     .skip-link { position:absolute; left:-999px; top:auto; width:1px; height:1px; overflow:hidden; }
     .skip-link:focus { position:static; width:auto; height:auto; padding:8px 12px; background:#fff; border:1px solid #ccc; border-radius:10px; }
     .active-link { color:#15803d; font-weight:600; }
@@ -148,7 +147,9 @@
           </div>
 
           <div class="relative">
-            <img src="hero.jpg" alt="Kegiatan belajar" class="rounded-2xl w-full ring-1 ring-primary-100 shadow" loading="eager" />
+            <!-- Ganti hero ke daftar.jpg -->
+            <img src="daftar.jpg" alt="Kegiatan belajar" class="rounded-2xl w-full ring-1 ring-primary-100 shadow"
+                 loading="eager" onerror="this.onerror=null; this.src='hero.jpg';" />
             <div class="absolute -bottom-6 -right-4 bg-white p-4 rounded-xl shadow ring-1 ring-slate-200 w-60">
               <p class="text-sm font-semibold" data-i18n="event.nearby">Event Terdekat</p>
               <p class="text-xs text-slate-600" data-i18n="event.sample">Kajian Online • Belum Terjadwalkan</p>
@@ -208,7 +209,11 @@
     <section id="galeri" class="py-16 border-t">
       <div class="max-w-7xl mx-auto px-4">
         <h2 class="text-2xl md:text-3xl font-bold" data-i18n="sec.galeri">Galeri Kegiatan</h2>
-        <p class="mt-4 text-slate-700" data-i18n="galeri.p">g1.jpg</p>
+        <!-- Tampilkan daftar.jpg agar galeri tidak kosong -->
+        <div class="mt-6 grid grid-cols-2 md:grid-cols-3 gap-3">
+          <img src="daftar.jpg" alt="Foto pendaftaran" class="w-full h-40 object-cover rounded-xl ring-1 ring-slate-200" loading="lazy">
+          <!-- Tambah gambar lain di sini kalau sudah di-upload -->
+        </div>
       </div>
     </section>
 
