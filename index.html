@@ -3,14 +3,29 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title data-i18n="brand.name">Ruang Belajar Muslim Jepang</title>
-  <meta name="description" content="Ruang belajar komunitas Muslim di Jepang: info kegiatan, pendaftaran, materi, dan jaringan komunitas." />
+
+  <title>Ruang Belajar Muslim Jepang</title>
+  <meta name="description" content="Ruang Belajar Muslim Jepang: info kegiatan, pendaftaran, materi, dan program belajar." />
+
+  <!-- Open Graph / Twitter -->
   <meta property="og:title" content="Ruang Belajar Muslim Jepang" />
-  <meta property="og:description" content="Info kegiatan, pendaftaran, dan materi pembelajaran untuk komunitas Muslim di Jepang." />
+  <meta property="og:description" content="Info kegiatan, pendaftaran, dan materi, dan program belajar." />
   <meta property="og:type" content="website" />
-  <!-- Pakai salah satu: social-preview-rbmj.png ATAU hero.jpg -->
-  <meta property="og:image" content="g1.jpg" />
+  <!-- Pakai salah satu: social-preview-rbmj.png ATAU hero.jpg (semua di root) -->
+  <meta property="og:image" content="social-preview-rbmj.png" />
+  <meta name="twitter:card" content="summary_large_image" />
   <meta name="theme-color" content="#16a34a" />
+
+  <!-- Favicon (pakai logo.jpg di root) -->
+  <link rel="icon" href="logo.jpg" />
+
+  <!-- SEO: canonical + hreflang (ganti domain canonical saat sudah pasti) -->
+  <link rel="canonical" href="https://example.com/" />
+  <link rel="alternate" hreflang="id" href="?lang=id" />
+  <link rel="alternate" hreflang="ja" href="?lang=ja" />
+
+  <!-- Performance: preload hero -->
+  <link rel="preload" as="image" href="hero.jpg" />
 
   <!-- TailwindCSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -21,16 +36,9 @@
           colors: {
             primary: {
               DEFAULT: '#16a34a',
-              50: '#f0fdf4',
-              100: '#dcfce7',
-              200: '#bbf7d0',
-              300: '#86efac',
-              400: '#4ade80',
-              500: '#22c55e',
-              600: '#16a34a',
-              700: '#15803d',
-              800: '#166534',
-              900: '#14532d'
+              50: '#f0fdf4', 100: '#dcfce7', 200: '#bbf7d0',
+              300: '#86efac', 400: '#4ade80', 500: '#22c55e',
+              600: '#16a34a', 700: '#15803d', 800: '#166534', 900: '#14532d'
             }
           }
         }
@@ -39,13 +47,32 @@
   </script>
   <style>
     html { scroll-behavior: smooth; }
+    /* Aksesibilitas: skip link + nav aktif */
+    .skip-link { position:absolute; left:-999px; top:auto; width:1px; height:1px; overflow:hidden; }
+    .skip-link:focus { position:static; width:auto; height:auto; padding:8px 12px; background:#fff; border:1px solid #ccc; border-radius:10px; }
+    .active-link { color:#15803d; font-weight:600; }
   </style>
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Ruang Belajar Muslim Jepang",
+    "url": "https://example.com/",
+    "logo": "logo.jpg",
+    "sameAs": []
+  }
+  </script>
 </head>
+
 <body class="bg-white text-slate-900">
+  <a href="#main" class="skip-link">Skip to content</a>
+
   <!-- Top bar -->
   <div class="bg-primary-600 text-white text-sm">
     <div class="max-w-7xl mx-auto px-4 py-2 flex items-center justify-between">
-      <span id="top-banner" class="truncate" data-i18n="banner.text">Assalamualaikum—Pendaftaran Kelas menanti masa baligh dibuka sampai 30 September.</span>
+      <span class="truncate" data-i18n="banner.text">Assalamualaikum—Pendaftaran Kelas Menyambut masa Baligh dibuka sampai 30 September.</span>
       <a href="#daftar" class="underline font-medium" data-i18n="banner.cta">Daftar sekarang</a>
     </div>
   </div>
@@ -55,10 +82,10 @@
     <div class="max-w-7xl mx-auto px-4">
       <div class="flex items-center justify-between h-16">
         <a href="index.html" class="flex items-center gap-3">
-          <img src="logo.jpg" alt="Logo Ruang Belajar" class="h-9 w-9 rounded-lg ring-1 ring-primary-200" />
+          <img src="logo.jpg" alt="Logo Ruang Belajar" class="h-9 w-9 rounded-lg ring-1 ring-primary-200" width="36" height="36" />
           <span class="font-bold text-lg" data-i18n="brand.name">Ruang Belajar Muslim Jepang</span>
         </a>
-        <nav class="hidden md:flex items-center gap-6 text-sm">
+        <nav class="hidden md:flex items-center gap-5 text-sm" id="mainNav">
           <a href="#tentang" class="hover:text-primary-700" data-i18n="nav.tentang">Tentang</a>
           <a href="#program" class="hover:text-primary-700" data-i18n="nav.program">Program</a>
           <a href="#jadwal" class="hover:text-primary-700" data-i18n="nav.jadwal">Jadwal</a>
@@ -67,10 +94,10 @@
           <a href="#kontak" class="hover:text-primary-700" data-i18n="nav.kontak">Kontak</a>
           <a href="#daftar" class="inline-flex items-center px-4 py-2 rounded-xl bg-primary-600 text-white hover:bg-primary-700" data-i18n="nav.daftar">Daftar</a>
 
-          <!-- Toggle Bahasa -->
-          <div class="ml-2 inline-flex rounded-xl ring-1 ring-slate-200 overflow-hidden">
-            <button onclick="changeLang('id')" class="px-3 py-2 text-sm hover:bg-slate-50" data-i18n-lang-id>ID</button>
-            <button onclick="changeLang('ja')" class="px-3 py-2 text-sm hover:bg-slate-50" data-i18n-lang-ja>日本語</button>
+          <!-- Language toggle -->
+          <div class="ml-1 inline-flex rounded-xl ring-1 ring-slate-200 overflow-hidden" role="group" aria-label="Language">
+            <button data-lang-btn="id" onclick="changeLang('id')" class="px-3 py-2 text-sm hover:bg-slate-50" aria-pressed="false" data-i18n-lang-id>ID</button>
+            <button data-lang-btn="ja" onclick="changeLang('ja')" class="px-3 py-2 text-sm hover:bg-slate-50" aria-pressed="false" data-i18n-lang-ja>日本語</button>
           </div>
         </nav>
         <button id="menuBtn" class="md:hidden p-2 rounded-lg border" aria-label="Buka menu">☰</button>
@@ -87,160 +114,197 @@
         <a href="#kontak" class="py-2" data-i18n="nav.kontak">Kontak</a>
         <a href="#daftar" class="inline-flex items-center justify-center px-4 py-2 rounded-xl bg-primary-600 text-white" data-i18n="nav.daftar">Daftar</a>
         <div class="mt-2 inline-flex rounded-xl ring-1 ring-slate-200 overflow-hidden">
-          <button onclick="changeLang('id')" class="px-3 py-2 text-sm hover:bg-slate-50" data-i18n-lang-id>ID</button>
-          <button onclick="changeLang('ja')" class="px-3 py-2 text-sm hover:bg-slate-50" data-i18n-lang-ja>日本語</button>
+          <button data-lang-btn="id" onclick="changeLang('id')" class="px-3 py-2 text-sm hover:bg-slate-50" aria-pressed="false" data-i18n-lang-id>ID</button>
+          <button data-lang-btn="ja" onclick="changeLang('ja')" class="px-3 py-2 text-sm hover:bg-slate-50" aria-pressed="false" data-i18n-lang-ja>日本語</button>
         </div>
       </nav>
     </div>
   </header>
 
-  <!-- Hero -->
-  <section class="relative overflow-hidden">
-    <div class="absolute inset-0 bg-gradient-to-b from-primary-50 to-white pointer-events-none"></div>
-    <div class="max-w-7xl mx-auto px-4 py-16 md:py-24 relative">
-      <div class="grid md:grid-cols-2 gap-10 items-center">
+  <main id="main">
+    <!-- Hero -->
+    <section class="relative overflow-hidden">
+      <div class="absolute inset-0 bg-gradient-to-b from-primary-50 to-white pointer-events-none"></div>
+      <div class="max-w-7xl mx-auto px-4 py-16 md:py-24 relative">
+        <div class="grid md:grid-cols-2 gap-10 items-center">
+          <div>
+            <h1 class="text-3xl md:text-5xl font-extrabold leading-tight">
+              <span data-i18n="hero.title.pre">Belajar islam sesuai sunnah </span>
+              <span class="text-primary-700" data-i18n="hero.title.hl">di Jepang</span>
+            </h1>
+            <p class="mt-4 text-slate-700 text-lg" data-i18n="hero.subtitle">
+              Platform komunitas Muslim untuk belajar islam sesuai sunnah di Jepang. Terbuka untuk anak-anak dan semua kalangan usia.
+            </p>
+            <div class="mt-6 flex flex-wrap gap-3">
+              <a href="#daftar" class="px-5 py-3 rounded-xl bg-primary-600 text-white hover:bg-primary-700" data-i18n="hero.cta.primary">Daftar Kegiatan</a>
+              <a href="#program" class="px-5 py-3 rounded-xl border hover:bg-slate-50" data-i18n="hero.cta.secondary">Lihat Program</a>
+            </div>
+            <ul class="mt-6 grid grid-cols-2 gap-4 text-sm">
+              <li class="flex items-center gap-2" data-i18n="hero.b1">✅ Kelas rutin online & offline</li>
+              <li class="flex items-center gap-2" data-i18n="hero.b2">✅ Artikel</li>
+              <li class="flex items-center gap-2" data-i18n="hero.b3">✅ Info halal & komunitas</li>
+              <li class="flex items-center gap-2" data-i18n="hero.b4">✅ download materi</li>
+            </ul>
+          </div>
+
+          <div class="relative">
+            <img src="hero.jpg" alt="Kegiatan belajar" class="rounded-2xl w-full ring-1 ring-primary-100 shadow" loading="eager" />
+            <div class="absolute -bottom-6 -right-4 bg-white p-4 rounded-xl shadow ring-1 ring-slate-200 w-60">
+              <p class="text-sm font-semibold" data-i18n="event.nearby">Event Terdekat</p>
+              <p class="text-xs text-slate-600" data-i18n="event.sample">Kajian Online • Belum Terjadwalkan</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tentang -->
+    <section id="tentang" class="py-16 border-t">
+      <div class="max-w-7xl mx-auto px-4">
+        <h2 class="text-2xl md:text-3xl font-bold" data-i18n="sec.tentang">Tentang Kami</h2>
+        <p class="mt-4 text-slate-700" data-i18n="tentang.p">
+          Ruang Belajar Muslim (RBM) Jepang adalah lembaga pendidikan nonformal yang berlokasi di Yokohama, sekitar 40 menit hingga 1 jam perjalanan dari Tokyo. RBM Jepang berdiri pada 18 Desember 2022, sebagai respons atas kebutuhan pendidikan agama dan bahasa Arab bagi anak-anak Muslim diaspora yang semakin meningkat di wilayah Yokohama dan sekitarnya. 
+        </p>
+      </div>
+    </section>
+
+    <!-- Program -->
+    <section id="program" class="py-16 border-t">
+      <div class="max-w-7xl mx-auto px-4">
+        <h2 class="text-2xl md:text-3xl font-bold" data-i18n="sec.program">Program & Kegiatan</h2>
+        <div class="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div class="p-6 rounded-2xl ring-1 ring-slate-200 shadow-sm"><h3 class="font-semibold" data-i18n="card.jp.title">Kelas Iqro` anak</h3><p class="mt-2 text-sm text-slate-700" data-i18n="card.jp.p">hijaiyah</p></div>
+          <div class="p-6 rounded-2xl ring-1 ring-slate-200 shadow-sm"><h3 class="font-semibold" data-i18n="card.islam.title">Kelas PAI Online</h3><p class="mt-2 text-sm text-slate-700" data-i18n="card.islam.p">Adab, fiqh praktis.</p></div>
+          <div class="p-6 rounded-2xl ring-1 ring-slate-200 shadow-sm"><h3 class="font-semibold" data-i18n="card.tahfidz.title">Kelas Perbaikan Bacaan Al-Qur`an dewasa</h3><p class="mt-2 text-sm text-slate-700" data-i18n="card.tahfidz.p">tajwid, hafalan</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Jadwal -->
+    <section id="jadwal" class="py-16 border-t">
+      <div class="max-w-7xl mx-auto px-4">
+        <h2 class="text-2xl md:text-3xl font-bold" data-i18n="sec.jadwal">Jadwal</h2>
+        <ul class="mt-6 space-y-3 text-sm">
+          <li data-i18n="sch.1">Kelas Iqro` anak — Selasa ~ Kamis 15:30 JST</li>
+          <li data-i18n="sch.2">Kelas PAI Online — Kamis 19:30 JST</li>
+          <li data-i18n="sch.3">Kelas Perbaikan Bacaan Al-Qur`an dewasa — Ahad 21:00 JST</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Artikel -->
+    <section id="artikel" class="py-16 border-t">
+      <div class="max-w-7xl mx-auto px-4">
+        <h2 class="text-2xl md:text-3xl font-bold" data-i18n="sec.artikel">Artikel & Informasi</h2>
+        <div class="mt-6 grid md:grid-cols-3 gap-6">
+          <article class="p-6 rounded-2xl ring-1 ring-slate-200"><h3 class="font-semibold" data-i18n="art.1.t">Tips Belajar</h3><p class="mt-2 text-sm text-slate-700" data-i18n="art.1.p">Strategi belajar efektif.</p></article>
+          <article class="p-6 rounded-2xl ring-1 ring-slate-200"><h3 class="font-semibold" data-i18n="art.2.t">Panduan Masjid</h3><p class="mt-2 text-sm text-slate-700" data-i18n="art.2.p">Lokasi tempat ibadah di Yokohama.</p></article>
+          <article class="p-6 rounded-2xl ring-1 ring-slate-200"><h3 class="font-semibold" data-i18n="art.3.t">Etika Kerja</h3><p class="mt-2 text-sm text-slate-700" data-i18n="art.3.p">Kebiasaan profesional di Jepang.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Galeri -->
+    <section id="galeri" class="py-16 border-t">
+      <div class="max-w-7xl mx-auto px-4">
+        <h2 class="text-2xl md:text-3xl font-bold" data-i18n="sec.galeri">Galeri Kegiatan</h2>
+        <p class="mt-4 text-slate-700" data-i18n="galeri.p">g1.jpg</p>
+      </div>
+    </section>
+
+    <!-- Kontak -->
+    <section id="kontak" class="py-16 border-t bg-slate-50">
+      <div class="max-w-7xl mx-auto px-4 grid lg:grid-cols-2 gap-10 items-start">
         <div>
-          <h1 class="text-3xl md:text-5xl font-extrabold leading-tight">
-            <span data-i18n="hero.title.pre">Belajar islam sesuai sunnah </span>
-            <span class="text-primary-700" data-i18n="hero.title.hl">di Jepang</span>
-          </h1>
-          <p class="mt-4 text-slate-700 text-lg" data-i18n="hero.subtitle">Platform komunitas Muslim untuk belajar islam sesuai sunnah di Jepang. Terbuka untuk anak-anak dan kalangan usia tertentu.</p>
-          <div class="mt-6 flex flex-wrap gap-3">
-            <a href="#daftar" class="px-5 py-3 rounded-xl bg-primary-600 text-white hover:bg-primary-700" data-i18n="hero.cta.primary">Daftar Kegiatan</a>
-            <a href="#program" class="px-5 py-3 rounded-xl border hover:bg-slate-50" data-i18n="hero.cta.secondary">Lihat Program</a>
-          </div>
-          <ul class="mt-6 grid grid-cols-2 gap-4 text-sm">
-            <li class="flex items-center gap-2" data-i18n="hero.b1">✅ Kelas rutin online & offline</li>
-            <li class="flex items-center gap-2" data-i18n="hero.b2">✅ Materi bisa diunduh</li>
-            <li class="flex items-center gap-2" data-i18n="hero.b3">✅ Info halal & komunitas</li>
-            <li class="flex items-center gap-2" data-i18n="hero.b4">✅ Gratis & mudah diupdate</li>
-          </ul>
-        </div>
-        <div class="relative">
-          <img src="hero.jpg" alt="Kegiatan belajar" class="rounded-2xl w-full ring-1 ring-primary-100 shadow" />
-          <div class="absolute -bottom-6 -right-4 bg-white p-4 rounded-xl shadow ring-1 ring-slate-200 w-60">
-            <p class="text-sm font-semibold" data-i18n="event.nearby">Event Terdekat</p>
-            <p class="text-xs text-slate-600" data-i18n="event.sample">Kajian (Online) • tentative</p>
+          <h2 class="text-2xl md:text-3xl font-bold" data-i18n="sec.kontak">Kontak</h2>
+          <div class="mt-6 grid sm:grid-cols-2 gap-4">
+            <div class="p-4 rounded-xl bg-white ring-1 ring-slate-200">
+              <p class="text-sm text-slate-600" data-i18n="kontak.email">Email</p>
+              <a href="mailto:ruangbelajarjapan1@gmail.com" class="font-medium">ruangbelajarjapan1@gmail.com</a>
+            </div>
+            <div class="p-4 rounded-xl bg-white ring-1 ring-slate-200">
+              <p class="text-sm text-slate-600" data-i18n="kontak.wa">WhatsApp / Telegram</p>
+              <a href="#" class="font-medium" data-i18n="btn.join">Gabung Grup</a>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- Tentang -->
-  <section id="tentang" class="py-16 border-t">
-    <div class="max-w-7xl mx-auto px-4">
-      <h2 class="text-2xl md:text-3xl font-bold" data-i18n="sec.tentang">Tentang Kami</h2>
-      <p class="mt-4 text-slate-700" data-i18n="tentang.p">Ruang Belajar Muslim Jepang adalah komunitas belajar yang memfasilitasi kelas iqro`, kajian Islam, dan lain lain.</p>
-    </div>
-  </section>
-
-  <!-- Program -->
-  <section id="program" class="py-16 border-t">
-    <div class="max-w-7xl mx-auto px-4">
-      <h2 class="text-2xl md:text-3xl font-bold" data-i18n="sec.program">Program & Kegiatan</h2>
-      <div class="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        <div class="p-6 rounded-2xl ring-1 ring-slate-200 shadow-sm"><h3 class="font-semibold" data-i18n="card.jp.title">Kelas Iqro`</h3><p class="mt-2 text-sm text-slate-700" data-i18n="card.jp.p">tajwid, makhrojul huruf</p></div>
-        <div class="p-6 rounded-2xl ring-1 ring-slate-200 shadow-sm"><h3 class="font-semibold" data-i18n="card.islam.title">Kajian Islam Tematik</h3><p class="mt-2 text-sm text-slate-700" data-i18n="card.islam.p">Akhlak, fiqh praktis.</p></div>
-        <div class="p-6 rounded-2xl ring-1 ring-slate-200 shadow-sm"><h3 class="font-semibold" data-i18n="card.tahfidz.title">Perbaikan bacaan Al-Qur`an dewasa</h3><p class="mt-2 text-sm text-slate-700" data-i18n="card.tahfidz.p">makhrojul huruf, tajwid dll</p></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Jadwal -->
-  <section id="jadwal" class="py-16 border-t">
-    <div class="max-w-7xl mx-auto px-4">
-      <h2 class="text-2xl md:text-3xl font-bold" data-i18n="sec.jadwal">Jadwal</h2>
-      <ul class="mt-6 space-y-3 text-sm">
-        <li data-i18n="sch.1">Kajian Online — tentative</li>
-        <li data-i18n="sch.2">Kelas iqro` anak — selasa~kamis 15:00 JST</li>
-        <li data-i18n="sch.3">Tahfidz & Tahsin — ahad 21:15 JST</li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- Artikel -->
-  <section id="artikel" class="py-16 border-t">
-    <div class="max-w-7xl mx-auto px-4">
-      <h2 class="text-2xl md:text-3xl font-bold" data-i18n="sec.artikel">Artikel & Informasi</h2>
-      <div class="mt-6 grid md:grid-cols-3 gap-6">
-        <article class="p-6 rounded-2xl ring-1 ring-slate-200"><h3 class="font-semibold" data-i18n="art.1.t">Tips Belajar</h3><p class="mt-2 text-sm text-slate-700" data-i18n="art.1.p">Strategi belajar efektif.</p></article>
-        <article class="p-6 rounded-2xl ring-1 ring-slate-200"><h3 class="font-semibold" data-i18n="art.2.t">Panduan Masjid</h3><p class="mt-2 text-sm text-slate-700" data-i18n="art.2.p">Lokasi tempat ibadah di Tokyo.</p></article>
-        <article class="p-6 rounded-2xl ring-1 ring-slate-200"><h3 class="font-semibold" data-i18n="art.3.t">Etika Kerja</h3><p class="mt-2 text-sm text-slate-700" data-i18n="art.3.p">Kebiasaan profesional di Jepang.</p></article>
-      </div>
-    </div>
-  </section>
-
-  <!-- Galeri -->
-  <section id="galeri" class="py-16 border-t">
-    <div class="max-w-7xl mx-auto px-4">
-      <h2 class="text-2xl md:text-3xl font-bold" data-i18n="sec.galeri">Galeri Kegiatan</h2>
-      <p class="mt-4 text-slate-700" data-i18n="galeri.p">g1.jpg</p>
-    </div>
-  </section>
-
-  <!-- Kontak -->
-  <section id="kontak" class="py-16 border-t bg-slate-50">
-    <div class="max-w-7xl mx-auto px-4 grid lg:grid-cols-2 gap-10 items-start">
-      <div>
-        <h2 class="text-2xl md:text-3xl font-bold" data-i18n="sec.kontak">Kontak & Jejaring</h2>
-        <div class="mt-6 grid sm:grid-cols-2 gap-4">
-          <div class="p-4 rounded-xl bg-white ring-1 ring-slate-200">
-            <p class="text-sm text-slate-600" data-i18n="kontak.email">Email</p>
-            <a href="mailto:ruangbelajarjapan1@gmail.com" class="font-medium">ruangbelajarjapan1@gmail.com</a>
-          </div>
-          <div class="p-4 rounded-xl bg-white ring-1 ring-slate-200">
-            <p class="text-sm text-slate-600" data-i18n="kontak.wa">WhatsApp / LINE</p>
-            <a href="#" class="font-medium" data-i18n="btn.join">Gabung Grup</a>
-          </div>
+        <div class="bg-white p-4 rounded-2xl ring-1 ring-slate-200 shadow-sm">
+          <form class="grid gap-4" onsubmit="alert('Form contoh. Silakan kirim via email/WA.'); return false;">
+            <div><label class="text-sm" data-i18n="form.name">Nama</label><input class="mt-1 w-full rounded-xl border p-3" placeholder="Nama Anda" /></div>
+            <div><label class="text-sm" data-i18n="form.email">Email</label><input type="email" class="mt-1 w-full rounded-xl border p-3" placeholder="email@contoh.com" /></div>
+            <div><label class="text-sm" data-i18n="form.message">Pesan</label><textarea rows="4" class="mt-1 w-full rounded-xl border p-3" placeholder="Tulis pesan Anda"></textarea></div>
+            <button type="submit" class="px-5 py-3 rounded-xl bg-primary-600 text-white" data-i18n="form.send">Kirim</button>
+          </form>
         </div>
       </div>
-      <div class="bg-white p-4 rounded-2xl ring-1 ring-slate-200 shadow-sm">
-        <form class="grid gap-4" onsubmit="alert('Form contoh. Silakan kirim via email/WA.'); return false;">
-          <div><label class="text-sm" data-i18n="form.name">Nama</label><input class="mt-1 w-full rounded-xl border p-3" placeholder="Nama Anda" /></div>
-          <div><label class="text-sm" data-i18n="form.email">Email</label><input type="email" class="mt-1 w-full rounded-xl border p-3" placeholder="email@contoh.com" /></div>
-          <div><label class="text-sm" data-i18n="form.message">Pesan</label><textarea rows="4" class="mt-1 w-full rounded-xl border p-3" placeholder="Tulis pesan Anda"></textarea></div>
-          <button type="submit" class="px-5 py-3 rounded-xl bg-primary-600 text-white" data-i18n="form.send">Kirim</button>
-        </form>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Daftar -->
-  <section id="daftar" class="py-16 border-t bg-primary-50">
-    <div class="max-w-3xl mx-auto px-4">
-      <h2 class="text-2xl md:text-3xl font-bold" data-i18n="sec.daftar">Pendaftaran</h2>
-      <p class="mt-2 text-slate-700" data-i18n="daftar.p">Silakan isi form pendaftaran (gantikan embed di bawah dengan Google Form Anda).</p>
-      <div class="mt-6 bg-white p-4 md:p-6 rounded-2xl ring-1 ring-primary-100 shadow-sm">
-        <!-- Contoh embed; ganti dengan URL Google Form Anda -->
-        <iframe title="Form Pendaftaran" class="w-full h-[720px] rounded-xl" src="https://docs.google.com/forms/d/e/1FAIpQLScEXAMPLE/viewform?embedded=true">Memuat…</iframe>
+    <!-- Daftar -->
+    <section id="daftar" class="py-16 border-t bg-primary-50">
+      <div class="max-w-3xl mx-auto px-4">
+        <h2 class="text-2xl md:text-3xl font-bold" data-i18n="sec.daftar">Pendaftaran</h2>
+        <p class="mt-2 text-slate-700" data-i18n="daftar.p">Silakan isi form pendaftaran (gantikan embed di bawah dengan Google Form Anda).</p>
+        <div class="mt-6 bg-white p-4 md:p-6 rounded-2xl ring-1 ring-primary-100 shadow-sm">
+          <iframe title="Form Pendaftaran" class="w-full h-[720px] rounded-xl" src="https://docs.google.com/forms/d/e/1FAIpQLScEXAMPLE/viewform?embedded=true" loading="lazy">Memuat…</iframe>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </main>
 
   <!-- Footer -->
   <footer class="py-10 border-t">
     <div class="max-w-7xl mx-auto px-4 text-sm text-slate-600 flex flex-col md:flex-row gap-3 md:items-center md:justify-between">
       <p>© <span id="year"></span> <span data-i18n="brand.name">Ruang Belajar Muslim Jepang</span>. <span data-i18n="footer.copyright">Semua hak cipta dilindungi.</span></p>
       <div class="flex gap-4">
-        <a href="#" class="hover:text-primary-700">Kebijakan Privasi</a>
-        <a href="#" class="hover:text-primary-700">Syarat & Ketentuan</a>
+        <a href="#" class="hover:text-primary-700">Privasi</a>
+        <a href="#" class="hover:text-primary-700">S&K</a>
       </div>
     </div>
   </footer>
 
+  <!-- Back-to-top -->
+  <button id="backToTop" aria-label="Kembali ke atas" class="fixed bottom-6 right-6 hidden px-4 py-3 rounded-full shadow bg-primary-600 text-white">↑</button>
+
   <script>
-    // Mobile menu toggle
+    // Mobile menu
     const btn = document.getElementById('menuBtn');
     const menu = document.getElementById('mobileMenu');
     btn?.addEventListener('click', () => menu.classList.toggle('hidden'));
-    // Dynamic year
+
+    // Tahun dinamis
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Back-to-top
+    const btt = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 600) btt.classList.remove('hidden'); else btt.classList.add('hidden');
+    });
+    btt?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    // Highlight nav aktif (untuk halaman index)
+    const nav = document.getElementById('mainNav');
+    if (nav) {
+      const links = nav.querySelectorAll('a[href^="#"]');
+      const ids = ['tentang','program','jadwal','artikel','galeri','kontak','daftar'];
+      const sections = ids.map(id => document.getElementById(id)).filter(Boolean);
+      const onScroll = () => {
+        let current = null;
+        sections.forEach(sec => {
+          const top = sec.getBoundingClientRect().top + window.scrollY - 120;
+          if (window.scrollY >= top) current = sec.id;
+        });
+        links.forEach(a => a.classList.remove('active-link'));
+        if (current) {
+          links.forEach(a => { if (a.getAttribute('href') === '#' + current) a.classList.add('active-link'); });
+        }
+      };
+      window.addEventListener('scroll', onScroll);
+      onScroll();
+    }
   </script>
 
-  <!-- PENTING: load i18n di paling akhir -->
+  <!-- i18n -->
   <script src="i18n.js"></script>
 </body>
 </html>
-
-
