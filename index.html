@@ -1,133 +1,92 @@
-<!-- ... (semua head & konten sebelumnya tetap sama) ... -->
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <!-- Kontak -->
-    <section id="kontak" class="py-16 border-t bg-slate-50">
-      <div class="max-w-7xl mx-auto px-4 grid lg:grid-cols-2 gap-10 items-start">
-        <div>
-          <h2 class="text-2xl md:text-3xl font-bold" data-i18n="sec.kontak">Kontak</h2>
-          <div class="mt-6 grid sm:grid-cols-2 gap-4">
-            <div class="p-4 rounded-xl bg-white ring-1 ring-slate-200">
-              <p class="text-sm text-slate-600" data-i18n="kontak.email">Email</p>
-              <a href="mailto:ruangbelajarjapan1@gmail.com" class="font-medium">ruangbelajarjapan1@gmail.com</a>
-            </div>
-            <div class="p-4 rounded-xl bg-white ring-1 ring-slate-200">
-              <p class="text-sm text-slate-600" data-i18n="kontak.wa">WhatsApp / Telegram</p>
-              <a href="#" class="font-medium" data-i18n="btn.join">Gabung Grup</a>
-            </div>
-          </div>
-        </div>
+  <title>Ruang Belajar Muslim Jepang</title>
+  <meta name="description" content="Ruang Belajar Muslim Jepang: info kegiatan, pendaftaran, materi, dan program belajar." />
 
-        <!-- FORM KONTAK: SUDAH TERHUBUNG FORMSPREE -->
-        <div class="bg-white p-4 rounded-2xl ring-1 ring-slate-200 shadow-sm">
-          <form id="contactForm"
-                action="https://formspree.io/f/mldlkpdq"
-                method="POST"
-                class="grid gap-4">
-            <div>
-              <label class="text-sm" for="cf-name" data-i18n="form.name">Nama</label>
-              <input id="cf-name" name="name" required
-                     class="mt-1 w-full rounded-xl border p-3"
-                     placeholder="Nama Anda" />
-            </div>
-            <div>
-              <label class="text-sm" for="cf-email" data-i18n="form.email">Email</label>
-              <input id="cf-email" type="email" name="email" required
-                     class="mt-1 w-full rounded-xl border p-3"
-                     placeholder="email@contoh.com" />
-            </div>
-            <div>
-              <label class="text-sm" for="cf-message" data-i18n="form.message">Pesan</label>
-              <textarea id="cf-message" name="message" rows="4" required
-                        class="mt-1 w-full rounded-xl border p-3"
-                        placeholder="Tulis pesan Anda"></textarea>
-            </div>
+  <!-- Open Graph / Twitter -->
+  <meta property="og:title" content="Ruang Belajar Muslim Jepang" />
+  <meta property="og:description" content="Info kegiatan, pendaftaran, dan materi, dan program belajar." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="daftar.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="theme-color" content="#16a34a" />
 
-            <!-- metadata (opsional tapi berguna) -->
-            <input type="hidden" name="page" value="rbj-site/index.html">
-            <!-- honeypot anti-spam -->
-            <input type="text" name="_gotcha" style="display:none">
+  <!-- Favicon -->
+  <link rel="icon" href="logo.jpg" />
 
-            <button type="submit" id="contactSubmit"
-                    class="px-5 py-3 rounded-xl bg-primary-600 text-white"
-                    data-i18n="form.send">Kirim</button>
+  <!-- SEO: canonical + hreflang -->
+  <link rel="canonical" href="https://example.com/" />
+  <link rel="alternate" hreflang="id" href="?lang=id" />
+  <link rel="alternate" hreflang="ja" href="?lang=ja" />
 
-            <p id="contactStatus" class="text-sm text-slate-600"></p>
-          </form>
-        </div>
-      </div>
-    </section>
+  <!-- Preload hero -->
+  <link rel="preload" as="image" href="daftar.jpg" />
 
-<!-- ... (bagian lain tetap sama) ... -->
-
+  <!-- TailwindCSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
   <script>
-    // Mobile menu
-    const btn = document.getElementById('menuBtn');
-    const menu = document.getElementById('mobileMenu');
-    btn?.addEventListener('click', () => menu.classList.toggle('hidden'));
-
-    // Tahun dinamis
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Back-to-top
-    const btt = document.getElementById('backToTop');
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 600) btt.classList.remove('hidden'); else btt.classList.add('hidden');
-    });
-    btt?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-
-    // Highlight nav aktif
-    const nav = document.getElementById('mainNav');
-    if (nav) {
-      const links = nav.querySelectorAll('a[href^="#"]');
-      const ids = ['tentang','program','jadwal','artikel','galeri','kontak','daftar'];
-      const sections = ids.map(id => document.getElementById(id)).filter(Boolean);
-      const onScroll = () => {
-        let current = null;
-        sections.forEach(sec => {
-          const top = sec.getBoundingClientRect().top + window.scrollY - 120;
-          if (window.scrollY >= top) current = sec.id;
-        });
-        links.forEach(a => a.classList.remove('active-link'));
-        if (current) {
-          links.forEach(a => { if (a.getAttribute('href') === '#' + current) a.classList.add('active-link'); });
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: {
+              DEFAULT: '#16a34a',
+              50: '#f0fdf4', 100: '#dcfce7', 200: '#bbf7d0',
+              300: '#86efac', 400: '#4ade80', 500: '#22c55e',
+              600: '#16a34a', 700: '#15803d', 800: '#166534', 900: '#14532d'
+            }
+          }
         }
-      };
-      window.addEventListener('scroll', onScroll);
-      onScroll();
-    }
-
-    // ===== Formspree submit (AJAX) =====
-    const f = document.getElementById('contactForm');
-    const s = document.getElementById('contactStatus');
-    const submitBtn = document.getElementById('contactSubmit');
-
-    f?.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      s.textContent = 'Mengirim...';
-      submitBtn.disabled = true;
-
-      try {
-        const formData = new FormData(f);
-        const res = await fetch(f.action, {
-          method: 'POST',
-          body: formData,
-          headers: { 'Accept': 'application/json' }
-        });
-        if (res.ok) {
-          s.textContent = 'Terima kasih! Pesan Anda sudah terkirim.';
-          f.reset();
-        } else {
-          s.textContent = 'Gagal mengirim. Coba lagi atau email langsung.';
-        }
-      } catch (err) {
-        s.textContent = 'Koneksi bermasalah. Coba lagi ya.';
-      } finally {
-        submitBtn.disabled = false;
       }
-    });
+    }
   </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    .skip-link { position:absolute; left:-999px; top:auto; width:1px; height:1px; overflow:hidden; }
+    .skip-link:focus { position:static; width:auto; height:auto; padding:8px 12px; background:#fff; border:1px solid #ccc; border-radius:10px; }
+    .active-link { color:#15803d; font-weight:600; }
+  </style>
 
-  <!-- i18n -->
-  <script src="i18n.js"></script>
-</body>
-</html>
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Ruang Belajar Muslim Jepang",
+    "url": "https://example.com/",
+    "logo": "logo.jpg",
+    "sameAs": []
+  }
+  </script>
+</head>
+
+<body class="bg-white text-slate-900">
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <!-- Top bar -->
+  <div class="bg-primary-600 text-white text-sm">
+    <div class="max-w-7xl mx-auto px-4 py-2 flex items-center justify-between">
+      <span class="truncate" data-i18n="banner.text">Assalamualaikum—Pendaftaran Kelas Menyambut masa Baligh dibuka sampai 30 September.</span>
+      <a href="#daftar" class="underline font-medium" data-i18n="banner.cta">Daftar sekarang</a>
+    </div>
+  </div>
+
+  <!-- Navbar -->
+  <header class="sticky top-0 z-50 bg-white/90 backdrop-blur border-b">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="flex items-center justify-between h-16">
+        <a href="index.html" class="flex items-center gap-3">
+          <img src="logo.jpg" alt="Logo Ruang Belajar" class="h-9 w-9 rounded-lg ring-1 ring-primary-200" width="36" height="36" />
+          <span class="font-bold text-lg" data-i18n="brand.name">Ruang Belajar Muslim Jepang</span>
+        </a>
+        <nav class="hidden md:flex items-center gap-5 text-sm" id="mainNav">
+          <a href="#tentang" class="hover:text-primary-700" data-i18n="nav.tentang">Tentang</a>
+          <a href="#program" class="hover:text-primary-700" data-i18n="nav.program">Program</a>
+          <a href="#jadwal" class="hover:text-primary-700" data-i18n="nav.jadwal">Jadwal</a>
+          <a href="#artikel" class="hover:text-primary-700" data-i18n="nav.artikel">Artikel</a>
+          <a href="#galeri" class="hover:text-primary-700" data-i18n="nav.galeri">Galeri</a>
+          <a href="#kontak" class="hover:text-primary-700
