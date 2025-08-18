@@ -273,9 +273,9 @@
     <section id="daftar" class="py-16 border-t bg-primary-50">
       <div class="max-w-3xl mx-auto px-4">
         <h2 class="text-2xl md:text-3xl font-bold" data-i18n="sec.daftar">Pendaftaran</h2>
-        <p class="mt-2 text-slate-700" data-i18n="daftar.p">Silakan isi form pendaftaran.</p>
+        <p class="mt-2 text-slate-700" data-i18n="daftar.p">Silakan isi form pendaftaran (gantikan embed di bawah dengan Google Form Anda).</p>
         <div class="mt-6 bg-white p-4 md:p-6 rounded-2xl ring-1 ring-primary-100 shadow-sm">
-          <iframe title="Form Pendaftaran Kelas" class="w-full h-[720px] rounded-xl" src="https://forms.gle/asNWfnSUaXKznSNm7" loading="lazy">Memuat…</iframe>
+          <iframe title="Form Pendaftaran" class="w-full h-[720px] rounded-xl" src="https://docs.google.com/forms/d/e/1FAIpQLScEXAMPLE/viewform?embedded=true" loading="lazy">Memuat…</iframe>
         </div>
       </div>
     </section>
@@ -370,9 +370,62 @@
     });
   </script>
 
-  <!-- i18n -->
-  <script src="i18n.js"></script>
+  <!-- ====== AUTO TRANSLATE (ID <-> JA) — DROP-IN ====== -->
+  <style>
+    /* Rapikan UI: sembunyikan banner & icon bawaan Google */
+    #goog-gt-tt, .goog-te-banner-frame, .goog-te-gadget-icon { display: none !important; }
+    body { top: 0 !important; }
+    .goog-te-combo { display: none !important; } /* kita pakai tombol custom */
+  </style>
+
+  <!-- container widget (boleh disembunyikan) -->
+  <div id="gt-widget" style="display:none"></div>
+
+  <script>
+    // Inisialisasi widget Google Translate
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'id',
+        includedLanguages: 'id,ja',
+        autoDisplay: false
+      }, 'gt-widget');
+    }
+
+    // Ganti bahasa via tombol custom
+    function setLang(lng) {
+      try {
+        const combo = document.querySelector('.goog-te-combo');
+        if (!combo) return console.warn('Google Translate belum siap');
+        combo.value = (lng === 'ja') ? 'ja' : 'id';
+        combo.dispatchEvent(new Event('change'));
+        localStorage.setItem('rbmjLang', lng);
+        document.documentElement.lang = (lng === 'ja') ? 'ja' : 'id';
+        // status tombol
+        document.querySelectorAll('[data-lang-btn]').forEach(b => {
+          b.setAttribute('aria-pressed', b.getAttribute('data-lang-btn') === lng ? 'true' : 'false');
+        });
+      } catch (e) { console.error(e); }
+    }
+    // Alias agar onclick="changeLang('ja')" tetap berfungsi
+    window.setLang = setLang;
+    window.changeLang = setLang;
+
+    // Terapkan bahasa awal (?lang=... atau localStorage)
+    document.addEventListener('DOMContentLoaded', () => {
+      const url = new URL(location.href);
+      const param = url.searchParams.get('lang');
+      const stored = localStorage.getItem('rbmjLang');
+      const init = param || stored || 'id';
+      (function waitGT(){
+        const combo = document.querySelector('.goog-te-combo');
+        if (combo) setLang(init); else setTimeout(waitGT, 300);
+      })();
+    });
+  </script>
+  <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+  <!-- ====== END AUTO TRANSLATE ====== -->
+
+  <!-- (HAPUS i18n.js lama agar tidak bentrok) -->
+  <!-- <script src="i18n.js"></script> -->
 </body>
 </html>
-
-
