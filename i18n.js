@@ -1,4 +1,3 @@
-<script>
 (function(){
   const dict = {
     id: {
@@ -26,6 +25,12 @@
       'sec.tentang': 'Tentang Kami',
       'tentang.p': 'Ruang Belajar Muslim Jepang adalah komunitas belajar yang memfasilitasi kelas bahasa, kajian Islam, dan kegiatan keluarga.',
       'sec.program': 'Program & Kegiatan',
+      'card.jp.title': 'Bahasa Jepang Pemula',
+      'card.jp.p': 'Hiragana, frasa sehari-hari.',
+      'card.islam.title': 'Kajian Islam Tematik',
+      'card.islam.p': 'Akhlak, fiqh praktis.',
+      'card.tahfidz.title': 'Tahfidz & Tahsin',
+      'card.tahfidz.p': 'Setoran hafalan & tajwid.',
       'sec.jadwal': 'Jadwal',
       'sch.1': 'Kajian Akhlak (Online) — Sabtu 19:30 JST',
       'sch.2': 'Bahasa Jepang Pemula — Rabu & Jumat 20:00 JST',
@@ -78,6 +83,12 @@
       'sec.tentang': '私たちについて',
       'tentang.p': '日本のムスリムのために、日本語学習・イスラーム学習・家族向け活動を提供しています。',
       'sec.program': 'プログラム・活動',
+      'card.jp.title': '初級日本語',
+      'card.jp.p': 'ひらがな、日常フレーズ',
+      'card.islam.title': 'テーマ別イスラーム学習',
+      'card.islam.p': '徳目、実践フィクフ',
+      'card.tahfidz.title': 'タフフィズ＆タフシーン',
+      'card.tahfidz.p': '暗誦提出とタジュウィード',
       'sec.jadwal': 'スケジュール',
       'sch.1': '徳目の学び（オンライン）— 土曜 19:30 JST',
       'sch.2': '初級日本語 — 水・金 20:00 JST',
@@ -130,4 +141,3 @@
     applyLang(lang);
   };
 })();
-</script>

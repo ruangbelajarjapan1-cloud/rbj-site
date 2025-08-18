@@ -3,8 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Tentang Kami - RBM Jepang</title>
-  <meta name="description" content="" />
+  <title>Tentang - RBMJ</title>
+  <meta name="description" content="Ruang belajar komunitas Muslim di Jepang: info kegiatan, pendaftaran, materi, dan jaringan komunitas." />
+  <meta property="og:title" content="Tentang - RBMJ" />
+  <meta property="og:description" content="Info kegiatan, pendaftaran, dan materi pembelajaran untuk komunitas Muslim di Jepang." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="hero.jpg" />
+  <meta name="theme-color" content="#16a34a" />
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -13,65 +18,50 @@
           colors: {
             primary: {
               DEFAULT: '#16a34a',
-              50: '#f0fdf4',
-              100: '#dcfce7',
-              200: '#bbf7d0',
-              300: '#86efac',
-              400: '#4ade80',
-              500: '#22c55e',
-              600: '#16a34a',
-              700: '#15803d',
-              800: '#166534',
-              900: '#14532d'
+              50: '#f0fdf4',100:'#dcfce7',200:'#bbf7d0',300:'#86efac',400:'#4ade80',500:'#22c55e',600:'#16a34a',700:'#15803d',800:'#166534',900:'#14532d'
             }
           }
         }
       }
     }
   </script>
+  <style>html{scroll-behavior:smooth}</style>
 </head>
-
 <body class="bg-white text-slate-900">
-
 <header class="sticky top-0 z-50 bg-white/90 backdrop-blur border-b">
   <div class="max-w-7xl mx-auto px-4">
     <div class="flex items-center justify-between h-16">
       <a href="index.html" class="flex items-center gap-3">
-        <img src="assets/logo.jpg" alt="Logo Ruang Belajar" class="h-9 w-9 rounded-lg ring-1 ring-primary-200" />
-        <span class="font-bold text-lg">Ruang Belajar Muslim Jepang</span>
+        <img src="logo.jpg" alt="Logo Ruang Belajar" class="h-9 w-9 rounded-lg ring-1 ring-primary-200" />
+        <span class="font-bold text-lg" data-i18n="brand.name">Ruang Belajar Muslim Jepang</span>
       </a>
       <nav class="hidden md:flex items-center gap-4 text-sm">
-        <a href="index.html" class="px-2 hover:text-primary-700 ">Beranda</a>
-        <a href="tentang.html" class="px-2 hover:text-primary-700 text-primary-700 font-semibold">Tentang</a>
-        <a href="program.html" class="px-2 hover:text-primary-700 ">Program</a>
-        <a href="artikel.html" class="px-2 hover:text-primary-700 ">Artikel</a>
-        <a href="galeri.html" class="px-2 hover:text-primary-700 ">Galeri</a>
-        <a href="kontak.html" class="px-2 hover:text-primary-700 ">Kontak</a>
-        <a href="program.html#daftar" class="inline-flex items-center px-4 py-2 rounded-xl bg-primary-600 text-white hover:bg-primary-700">Daftar</a>
+        <a href="index.html#tentang" class="px-2 hover:text-primary-700" data-i18n="nav.tentang">Tentang</a>
+        <a href="index.html#program" class="px-2 hover:text-primary-700" data-i18n="nav.program">Program</a>
+        <a href="index.html#jadwal" class="px-2 hover:text-primary-700" data-i18n="nav.jadwal">Jadwal</a>
+        <a href="index.html#artikel" class="px-2 hover:text-primary-700" data-i18n="nav.artikel">Artikel</a>
+        <a href="index.html#galeri" class="px-2 hover:text-primary-700" data-i18n="nav.galeri">Galeri</a>
+        <a href="index.html#kontak" class="px-2 hover:text-primary-700" data-i18n="nav.kontak">Kontak</a>
+        <a href="index.html#daftar" class="px-4 py-2 rounded-xl bg-primary-600 text-white hover:bg-primary-700" data-i18n="nav.daftar">Daftar</a>
+        <div class="ml-2 inline-flex rounded-xl ring-1 ring-slate-200 overflow-hidden">
+          <button onclick="changeLang('id')" class="px-3 py-2 text-sm hover:bg-slate-50" data-i18n-lang-id>ID</button>
+          <button onclick="changeLang('ja')" class="px-3 py-2 text-sm hover:bg-slate-50" data-i18n-lang-ja>日本語</button>
+        </div>
       </nav>
-      <a href="program.html#daftar" class="md:hidden inline-flex items-center px-3 py-2 rounded-lg bg-primary-600 text-white">Daftar</a>
     </div>
   </div>
 </header>
 
 <section class="py-16">
-  <div class="max-w-5xl mx-auto px-4">
-    <h1 class="text-3xl font-bold">Tentang Kami</h1>
-    <p class="mt-4 text-slate-700">Ruang Belajar Muslim (RBM) Jepang adalah lembaga pendidikan nonformal yang berlokasi di Yokohama, sekitar 40 menit hingga 1 jam perjalanan dari Tokyo. RBM Jepang berdiri pada 18 Desember 2022, sebagai respons atas kebutuhan pendidikan agama dan bahasa Arab bagi anak-anak Muslim diaspora yang semakin meningkat di wilayah Yokohama dan sekitarnya.</p>
-    <div class="mt-8 grid md:grid-cols-3 gap-6">
-      <div class="p-6 rounded-2xl ring-1 ring-slate-200"><h3 class="font-semibold">Misi</h3><p class="text-sm mt-2">Memudahkan akses ilmu, memperkuat ukhuwah, dan berkontribusi pada masyarakat.</p></div>
-      <div class="p-6 rounded-2xl ring-1 ring-slate-200"><h3 class="font-semibold">Nilai</h3><p class="text-sm mt-2">Adab, kolaborasi, keterbukaan, kebermanfaatan.</p></div>
-      <div class="p-6 rounded-2xl ring-1 ring-slate-200"><h3 class="font-semibold">Kontak</h3><p class="text-sm mt-2">Email: ruangbelajarmuslimjapan1@gmail.com • Yokohama, Jepang</p></div>
-    </div>
+  <div class="max-w-7xl mx-auto px-4">
+    <h1 class="text-3xl md:text-4xl font-bold" data-i18n="sec.tentang">Tentang Kami</h1>
+    <p class="mt-4 text-slate-700" data-i18n="tentang.p">Ruang Belajar Muslim Jepang adalah komunitas belajar yang memfasilitasi kelas bahasa, kajian Islam, dan kegiatan keluarga.</p>
   </div>
 </section>
 
-<footer class="py-10 border-t">
+<footer class="py-10 border-t mt-16">
   <div class="max-w-7xl mx-auto px-4 text-sm text-slate-600 flex flex-col md:flex-row gap-3 md:items-center md:justify-between">
-    <div class="flex items-center gap-3">
-      <img src="assets/logo.jpg" alt="Logo" class="h-8 w-8 rounded-md ring-1 ring-slate-200"/>
-      <p>© <span id="year"></span> Ruang Belajar Muslim Jepang. Semua hak cipta dilindungi.</p>
-    </div>
+    <p>© <span id="year"></span> <span data-i18n="brand.name">Ruang Belajar Muslim Jepang</span>. <span data-i18n="footer.copyright">Semua hak cipta dilindungi.</span></p>
     <div class="flex gap-4">
       <a href="#" class="hover:text-primary-700">Privasi</a>
       <a href="#" class="hover:text-primary-700">S&K</a>
@@ -79,5 +69,6 @@
   </div>
 </footer>
 <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+<script src="i18n.js"></script>
 </body>
 </html>

@@ -3,8 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Program - RBM Jepang</title>
-  <meta name="description" content="" />
+  <title>Program - RBMJ</title>
+  <meta name="description" content="Ruang belajar komunitas Muslim di Jepang: info kegiatan, pendaftaran, materi, dan jaringan komunitas." />
+  <meta property="og:title" content="Program - RBMJ" />
+  <meta property="og:description" content="Info kegiatan, pendaftaran, dan materi pembelajaran untuk komunitas Muslim di Jepang." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="hero.jpg" />
+  <meta name="theme-color" content="#16a34a" />
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -13,90 +18,54 @@
           colors: {
             primary: {
               DEFAULT: '#16a34a',
-              50: '#f0fdf4',
-              100: '#dcfce7',
-              200: '#bbf7d0',
-              300: '#86efac',
-              400: '#4ade80',
-              500: '#22c55e',
-              600: '#16a34a',
-              700: '#15803d',
-              800: '#166534',
-              900: '#14532d'
+              50: '#f0fdf4',100:'#dcfce7',200:'#bbf7d0',300:'#86efac',400:'#4ade80',500:'#22c55e',600:'#16a34a',700:'#15803d',800:'#166534',900:'#14532d'
             }
           }
         }
       }
     }
   </script>
+  <style>html{scroll-behavior:smooth}</style>
 </head>
-
 <body class="bg-white text-slate-900">
-
 <header class="sticky top-0 z-50 bg-white/90 backdrop-blur border-b">
   <div class="max-w-7xl mx-auto px-4">
     <div class="flex items-center justify-between h-16">
       <a href="index.html" class="flex items-center gap-3">
-        <img src="assets/logo.jpg" alt="Logo Ruang Belajar" class="h-9 w-9 rounded-lg ring-1 ring-primary-200" />
-        <span class="font-bold text-lg">Ruang Belajar Muslim Jepang</span>
+        <img src="logo.jpg" alt="Logo Ruang Belajar" class="h-9 w-9 rounded-lg ring-1 ring-primary-200" />
+        <span class="font-bold text-lg" data-i18n="brand.name">Ruang Belajar Muslim Jepang</span>
       </a>
       <nav class="hidden md:flex items-center gap-4 text-sm">
-        <a href="index.html" class="px-2 hover:text-primary-700 ">Beranda</a>
-        <a href="tentang.html" class="px-2 hover:text-primary-700 ">Tentang</a>
-        <a href="program.html" class="px-2 hover:text-primary-700 text-primary-700 font-semibold">Program</a>
-        <a href="artikel.html" class="px-2 hover:text-primary-700 ">Artikel</a>
-        <a href="galeri.html" class="px-2 hover:text-primary-700 ">Galeri</a>
-        <a href="kontak.html" class="px-2 hover:text-primary-700 ">Kontak</a>
-        <a href="program.html#daftar" class="inline-flex items-center px-4 py-2 rounded-xl bg-primary-600 text-white hover:bg-primary-700">Daftar</a>
+        <a href="index.html#tentang" class="px-2 hover:text-primary-700" data-i18n="nav.tentang">Tentang</a>
+        <a href="index.html#program" class="px-2 hover:text-primary-700" data-i18n="nav.program">Program</a>
+        <a href="index.html#jadwal" class="px-2 hover:text-primary-700" data-i18n="nav.jadwal">Jadwal</a>
+        <a href="index.html#artikel" class="px-2 hover:text-primary-700" data-i18n="nav.artikel">Artikel</a>
+        <a href="index.html#galeri" class="px-2 hover:text-primary-700" data-i18n="nav.galeri">Galeri</a>
+        <a href="index.html#kontak" class="px-2 hover:text-primary-700" data-i18n="nav.kontak">Kontak</a>
+        <a href="index.html#daftar" class="px-4 py-2 rounded-xl bg-primary-600 text-white hover:bg-primary-700" data-i18n="nav.daftar">Daftar</a>
+        <div class="ml-2 inline-flex rounded-xl ring-1 ring-slate-200 overflow-hidden">
+          <button onclick="changeLang('id')" class="px-3 py-2 text-sm hover:bg-slate-50" data-i18n-lang-id>ID</button>
+          <button onclick="changeLang('ja')" class="px-3 py-2 text-sm hover:bg-slate-50" data-i18n-lang-ja>日本語</button>
+        </div>
       </nav>
-      <a href="program.html#daftar" class="md:hidden inline-flex items-center px-3 py-2 rounded-lg bg-primary-600 text-white">Daftar</a>
     </div>
   </div>
 </header>
 
 <section class="py-16">
   <div class="max-w-7xl mx-auto px-4">
-    <h1 class="text-3xl font-bold">Program & Kegiatan</h1>
-    <div class="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      <div class="p-6 rounded-2xl ring-1 ring-slate-200 shadow-sm">
-        <img src="assets/g1.jpg" class="rounded-xl w-full h-40 object-cover" alt="Bahasa Jepang"/>
-        <h3 class="mt-3 font-semibold">Hijaiyah Untuk anak</h3>
-        <p class="mt-2 text-sm text-slate-700">Fun hijaiyah, mufrodat bahasa arab, do`a sehari - hari</p>
-        <p class="mt-2 text-xs text-slate-600">Jadwal: selasa ~ kamis • 15:00 JST</p>
-      </div>
-      <div class="p-6 rounded-2xl ring-1 ring-slate-200 shadow-sm">
-        <img src="assets/g2.jpg" class="rounded-xl w-full h-40 object-cover" alt="Kajian Islam"/>
-        <h3 class="mt-3 font-semibold">Kajian Islam Tematik</h3>
-        <p class="mt-2 text-sm text-slate-700">adab, akidah</p>
-        <p class="mt-2 text-xs text-slate-600">Jadwal: tentative</p>
-      </div>
-      <div class="p-6 rounded-2xl ring-1 ring-slate-200 shadow-sm">
-        <img src="assets/g3.jpg" class="rounded-xl w-full h-40 object-cover" alt="Tahfidz"/>
-        <h3 class="mt-3 font-semibold">Tahsin ihwan dewasa</h3>
-        <p class="mt-2 text-sm text-slate-700">Perbaikan bacaan Al Qur`an</p>
-        <p class="mt-2 text-xs text-slate-600">Jadwal: Ahad • 21:15 JST</p>
-      </div>
-    </div>
-
-    <h2 id="daftar" class="text-2xl font-bold mt-12">Pendaftaran</h2>
-    <p class="mt-2 text-slate-700">Isi formulir berikut. Anda akan menerima email konfirmasi.</p>
-    <div class="mt-4 bg-white p-4 md:p-6 rounded-2xl ring-1 ring-primary-100 shadow-sm">
-      <iframe title="Form Pendaftaran" class="w-full h-[960px] rounded-xl" src="https://docs.google.com/forms/d/e/1FAIpQLScEXAMPLE/viewform?embedded=true">Memuat…</iframe>
-    </div>
-
-    <h2 class="text-2xl font-bold mt-12">Kalender Kegiatan</h2>
-    <div class="mt-4 bg-white p-3 rounded-2xl ring-1 ring-slate-200 shadow-sm">
-      <iframe title="Kalender Kegiatan" class="w-full h-[480px] rounded-xl" src="https://calendar.google.com/calendar/embed?src=YOUR_PUBLIC_CALENDAR_ID&ctz=Asia%2FTokyo"></iframe>
+    <h1 class="text-3xl md:text-4xl font-bold" data-i18n="sec.program">Program & Kegiatan</h1>
+    <div class="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="p-6 rounded-2xl ring-1 ring-slate-200 shadow-sm"><h3 class="font-semibold" data-i18n="card.jp.title">Bahasa Jepang Pemula</h3><p class="mt-2 text-sm text-slate-700" data-i18n="card.jp.p">Hiragana, frasa sehari-hari.</p></div>
+      <div class="p-6 rounded-2xl ring-1 ring-slate-200 shadow-sm"><h3 class="font-semibold" data-i18n="card.islam.title">Kajian Islam Tematik</h3><p class="mt-2 text-sm text-slate-700" data-i18n="card.islam.p">Akhlak, fiqh praktis.</p></div>
+      <div class="p-6 rounded-2xl ring-1 ring-slate-200 shadow-sm"><h3 class="font-semibold" data-i18n="card.tahfidz.title">Tahfidz & Tahsin</h3><p class="mt-2 text-sm text-slate-700" data-i18n="card.tahfidz.p">Setoran hafalan & tajwid.</p></div>
     </div>
   </div>
 </section>
 
-<footer class="py-10 border-t">
+<footer class="py-10 border-t mt-16">
   <div class="max-w-7xl mx-auto px-4 text-sm text-slate-600 flex flex-col md:flex-row gap-3 md:items-center md:justify-between">
-    <div class="flex items-center gap-3">
-      <img src="assets/logo.jpg" alt="Logo" class="h-8 w-8 rounded-md ring-1 ring-slate-200"/>
-      <p>© <span id="year"></span> Ruang Belajar Muslim Jepang. Semua hak cipta dilindungi.</p>
-    </div>
+    <p>© <span id="year"></span> <span data-i18n="brand.name">Ruang Belajar Muslim Jepang</span>. <span data-i18n="footer.copyright">Semua hak cipta dilindungi.</span></p>
     <div class="flex gap-4">
       <a href="#" class="hover:text-primary-700">Privasi</a>
       <a href="#" class="hover:text-primary-700">S&K</a>
@@ -104,5 +73,6 @@
   </div>
 </footer>
 <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+<script src="i18n.js"></script>
 </body>
 </html>
