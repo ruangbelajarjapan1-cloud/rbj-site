@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
@@ -225,7 +225,8 @@
             <span class="text-primary-700">☪️</span>
             <span data-i18n="sec.shalat">Agenda Shalat (lokal)</span>
           </h2>
-          <span id="shalatNext" class="text-sm px-3 py-1 rounded-full bg-primary-100 text-primary-800 ring-1 ring-primary-200"></span>
+          <!-- Badge diperbesar -->
+          <span id="shalatNext" class="text-base md:text-lg px-4 py-1.5 rounded-xl bg-primary-100 text-primary-900 ring-1 ring-primary-200 font-medium shadow-sm"></span>
         </div>
         <p class="mt-2 text-slate-600 text-sm" data-i18n="shalat.desc">Otomatis deteksi lokasi (izin browser) atau gunakan default Yokohama.</p>
         <div class="mt-4 flex flex-wrap gap-3 items-center">
@@ -380,9 +381,7 @@
 
   <script>
     // ======= CONFIG =======
-    // Ganti dengan link grup WhatsApp/Telegram komunitas
     const COMMUNITY_JOIN_URL = 'https://chat.whatsapp.com/YOUR_GROUP_ID';
-    // Nomor WA admin (untuk tombol chat cepat)
     const WA_NUMBER = '6285211286642';
 
     // ======= UI basics =======
@@ -476,18 +475,18 @@
       t(key){return (I18N[this.lang]&&I18N[this.lang][key])||I18N['id'][key]||key;},
       apply(){
         document.documentElement.lang=this.lang;
-        // text nodes
         document.querySelectorAll('[data-i18n]').forEach(el=>{
           const k=el.getAttribute('data-i18n'); const txt=this.t(k); if(txt!==undefined){ el.textContent=txt; }
         });
-        // placeholders
         document.querySelectorAll('[data-i18n-ph]').forEach(el=>{
           const k=el.getAttribute('data-i18n-ph'); const txt=this.t(k); if(txt!==undefined){ el.setAttribute('placeholder', txt); }
         });
-        // pressed state on lang buttons
         document.querySelectorAll('[data-lang-btn]').forEach(b=>{
           b.setAttribute('aria-pressed', b.getAttribute('data-lang-btn')===this.lang?'true':'false');
         });
+
+        // ==== re-render badge "Next prayer / Shalat berikut" saat bahasa diganti
+        if (window.LAST_SHALAT_TIMINGS) showNextPrayerInfo(window.LAST_SHALAT_TIMINGS);
       },
       set(l){ this.lang=(l==='en')?'en':'id'; localStorage.setItem('rbm_lang',this.lang); this.apply(); }
     };
@@ -563,6 +562,9 @@
     }
 
     // ====== SHALAT (AlAdhan) dengan cache + highlight next prayer ======
+    // simpan timings terakhir agar bisa re-render saat ganti bahasa
+    let LAST_SHALAT_TIMINGS = null;
+
     function getCache(key){ try{ const x=JSON.parse(localStorage.getItem(key)||'null'); if(!x) return null; if(Date.now()>x.exp){ localStorage.removeItem(key); return null; } return x.val; }catch{return null;} }
     function setCache(key,val,ttl){ try{ localStorage.setItem(key, JSON.stringify({val,exp:Date.now()+ttl})); }catch{} }
 
@@ -579,7 +581,6 @@
         const dt = toTodayDate(t[k]);
         if(dt && dt > now) return {key:k, when:dt, tomorrow:false};
       }
-      // lewat Isha → next Fajr besok (pakai jam hari ini sebagai indikator saja)
       return {key:'Fajr', when: toTodayDate(t['Fajr']), tomorrow:true};
     }
 
@@ -596,7 +597,15 @@
       const today=new Date().toISOString().slice(0,10);
       const cacheKey=`rbm_pray_${today}_${lat.toFixed(2)}_${lon.toFixed(2)}_${method||7}`;
       let t=getCache(cacheKey);
-      if(!t){ const url=`https://api.aladhan.com/v1/timings?latitude=${lat}&longitude=${lon}&method=${method||7}&timezonestring=${encodeURIComponent(tz)}`; const res=await fetch(url); const data=await res.json(); t=(data&&data.data&&data.data.timings)||{}; setCache(cacheKey,t,12*60*60*1000); }
+      if(!t){
+        const url=`https://api.aladhan.com/v1/timings?latitude=${lat}&longitude=${lon}&method=${method||7}&timezonestring=${encodeURIComponent(tz)}`;
+        const res=await fetch(url); const data=await res.json();
+        t=(data&&data.data&&data.data.timings)||{};
+        setCache(cacheKey,t,12*60*60*1000);
+      }
+
+      LAST_SHALAT_TIMINGS = t; // simpan
+
       const wrap=document.getElementById('shalatWrap'); if(!wrap) return; wrap.innerHTML='';
       const order=['Fajr','Dhuhr','Asr','Maghrib','Isha'];
       const nextKey = findNextPrayer(t).key;
