@@ -4,16 +4,18 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Ruang Belajar Muslim Jepang — RBM Jepang</title>
-  <meta name="description" content="Situs komunitas RBM Jepang: kajian, program, artikel harian, pendaftaran. Bahasa otomatis Indonesia & English." />
-  <meta property="og:title" content=\"Ruang Belajar Muslim Jepang — RBM Jepang\" />
+  <meta name="description" content="Situs RBM Jepang: kajian, program, artikel harian, pendaftaran. Bahasa otomatis Indonesia & English." />
+  <meta property="og:title" content="Ruang Belajar Muslim Jepang — RBM Jepang" />
   <meta property="og:description" content="Kajian, program, artikel harian, dan pendaftaran." />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="logo.png" />
+  <meta property="og:image" content="logo-brand.png" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:image" content="logo.png" />
+  <meta name="twitter:image" content="logo-brand.png" />
   <meta name="theme-color" content="#22c55e" />
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+  <link rel="manifest" href="site.webmanifest" />
   <link rel="canonical" href="https://example.com/" />
   <link rel="alternate" hreflang="id" href="?lang=id" />
   <link rel="alternate" hreflang="en" href="?lang=en" />
@@ -21,9 +23,6 @@
 
   <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Leaflet CSS for map -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
-
   <script>
     tailwind.config = { theme: { extend: { colors: { primary: { DEFAULT:'#16a34a',50:'#f0fdf4',100:'#dcfce7',200:'#bbf7d0',300:'#86efac',400:'#4ade80',500:'#22c55e',600:'#16a34a',700:'#15803d',800:'#166534',900:'#14532d' }, sand:{50:'#faf7f2',100:'#f4efe6',200:'#e6dcc4'} } } } };
   </script>
@@ -32,10 +31,8 @@
     .pattern{background-image:radial-gradient(circle at 1px 1px, rgba(20,83,45,0.15) 1px, transparent 1px);background-size:20px 20px}
   </style>
   <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"Organization","name":"Ruang Belajar Muslim Jepang (RBM)","url":"https://example.com/","logo":"logo.png","sameAs":[]}
+  {"@context":"https://schema.org","@type":"Organization","name":"Ruang Belajar Muslim Jepang (RBM Jepang)","url":"https://example.com/","logo":"logo-brand.png","sameAs":[]}
   </script>
-  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
-  <link rel="manifest" href="site.webmanifest" />
 </head>
 <body class="bg-white text-slate-900">
   <a href="#main" class="skip-link">Skip to content</a>
@@ -52,13 +49,14 @@
       <div class="flex items-center justify-between h-16">
         <a href="#" class="flex items-center gap-3">
           <img src="logo.png" alt="Logo RBM" class="h-9 w-9 rounded-lg ring-1 ring-primary-200" width="36" height="36" />
-          <span class=\"font-bold text-lg\" data-i18n=\"brand.name\">Ruang Belajar Muslim Jepang</span>
+          <span class="font-bold text-lg" data-i18n="brand.name">Ruang Belajar Muslim Jepang</span>
         </a>
         <nav class="hidden md:flex items-center gap-5 text-sm" id="mainNav">
           <a href="#tentang" class="hover:text-primary-700" data-i18n="nav.tentang">Tentang</a>
           <a href="#program" class="hover:text-primary-700" data-i18n="nav.program">Program</a>
           <a href="#jadwal" class="hover:text-primary-700" data-i18n="nav.jadwal">Jadwal</a>
-          <a href="#artikel" class="hover:text-primary-700" data-i18n="nav.artikel">Artikel</a>
+          <a href=\"#artikel\" class=\"hover:text-primary-700\" data-i18n=\"nav.artikel\">Artikel<\/a>
+          <a href=\"#materi\" class=\"hover:text-primary-700\" data-i18n=\"nav.materi\">Materi<\/a>
           <a href="#galeri" class="hover:text-primary-700" data-i18n="nav.galeri">Galeri</a>
           <a href="#kontak" class="hover:text-primary-700" data-i18n="nav.kontak">Kontak</a>
           <a href="#daftar" class="inline-flex items-center px-4 py-2 rounded-xl bg-primary-600 text-white hover:bg-primary-700" data-i18n="nav.daftar">Daftar</a>
@@ -75,7 +73,8 @@
         <a href="#tentang" class="py-2" data-i18n="nav.tentang">Tentang</a>
         <a href="#program" class="py-2" data-i18n="nav.program">Program</a>
         <a href="#jadwal" class="py-2" data-i18n="nav.jadwal">Jadwal</a>
-        <a href="#artikel" class="py-2" data-i18n="nav.artikel">Artikel</a>
+        <a href=\"#artikel\" class=\"py-2\" data-i18n=\"nav.artikel\">Artikel<\/a>
+        <a href=\"#materi\" class=\"py-2\" data-i18n=\"nav.materi\">Materi<\/a>
         <a href="#galeri" class="py-2" data-i18n="nav.galeri">Galeri</a>
         <a href="#kontak" class="py-2" data-i18n="nav.kontak">Kontak</a>
         <a href="#daftar" class="inline-flex items-center justify-center px-4 py-2 rounded-xl bg-primary-600 text-white" data-i18n="nav.daftar">Daftar</a>
@@ -130,71 +129,26 @@
       <div class="max-w-7xl mx-auto px-4">
         <h2 class="text-2xl md:text-3xl font-bold" data-i18n="sec.program">Program & Kegiatan</h2>
         <div class="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          <div class="p-6 rounded-2xl ring-1 ring-slate-200 shadow-sm bg-white"><h3 class="font-semibold" data-i18n="card.jp.title">Kelas Iqro` Anak</h3><p class="mt-2 text-sm text-slate-700" data-i18n="card.jp.p">Huruf hijaiyah, tartil menyenangkan.</p></div>
+          <div class="p-6 rounded-2xl ring-1 ring-slate-200 shadow-sm bg-white"><h3 class="font-semibold" data-i18n="card.jp.title">Kelas Iqro` Anak</h3><p class="mt-2 text-sm text-slate-700" data-i18n="card.jp.p">Huruf hijaiyah, makharijul huruf.</p></div>
           <div class="p-6 rounded-2xl ring-1 ring-slate-200 shadow-sm bg-white"><h3 class="font-semibold" data-i18n="card.islam.title">Kelas PAI Online</h3><p class="mt-2 text-sm text-slate-700" data-i18n="card.islam.p">Adab harian, fiqh praktis, akhlak.</p></div>
-          <div class="p-6 rounded-2xl ring-1 ring-slate-200 shadow-sm bg-white"><h3 class="font-semibold" data-i18n="card.tahfidz.title">Perbaikan Bacaan Dewasa</h3><p class="mt-2 text-sm text-slate-700" data-i18n="card.tahfidz.p">Tajwid & muraja'ah.</p></div>
+          <div class="p-6 rounded-2xl ring-1 ring-slate-200 shadow-sm bg-white"><h3 class="font-semibold" data-i18n="card.islam.title">Kelas Qur`an Online Anak</h3><p class="mt-2 text-sm text-slate-700" data-i18n="card.islam.p">makharijul huruf.</p></div>
+          <div class="p-6 rounded-2xl ring-1 ring-slate-200 shadow-sm bg-white"><h3 class="font-semibold" data-i18n="card.tahfidz.title">Perbaikan Bacaan Al Qur`an Dewasa</h3><p class="mt-2 text-sm text-slate-700" data-i18n="card.tahfidz.p">Tajwid & muraja'ah.</p></div>
         </div>
       </div>
     </section>
 
-    <!-- ARTIKEL dengan sumber Google Sheets + Filter kategori -->
+    <!-- ARTIKEL dari Google Sheets + Filter kategori -->
     <section id="artikel" class="py-16 border-t">
       <div class="max-w-7xl mx-auto px-4">
         <div class="flex items-center justify-between gap-3">
           <h2 class="text-2xl md:text-3xl font-bold" data-i18n="sec.artikel">Artikel & Informasi Harian</h2>
-          <button id="btnAdd" class="hidden px-4 py-2 rounded-xl border hover:bg-slate-50 text-sm">+ <span data-i18n="art.add">Tambah Artikel</span></button>
         </div>
-        
         <div id="catFilter" class="mt-4 flex flex-wrap gap-2"></div>
-        <div class="mt-6 grid lg:grid-cols-3 gap-6">
-          <div class="lg:col-span-2">
-            <div id="articles" class="grid md:grid-cols-2 xl:grid-cols-3 gap-6"></div>
-          </div>
-          <aside>
-            <div class="p-6 rounded-2xl ring-1 ring-slate-200 bg-white">
-              <h3 class="font-semibold mb-2">Galeri Komunitas</h3>
-              <div class="text-sm text-slate-600 mb-3">Foto dari Google Drive folder. Isi <code>DRIVE_FOLDER_ID</code> dan <code>DRIVE_API_KEY</code> di kode untuk menampilkan grid otomatis. Jika kosong, akan tampil embed standar.</div>
-              <div class="flex items-center gap-2 mb-3">
-                <button id="galleryReload" class="px-3 py-2 rounded-xl border text-sm">Muat Ulang</button>
-                <a id="galleryAdminLink" class="px-3 py-2 rounded-xl border text-sm" target="_blank" rel="noopener" href="#">Buka Folder</a>
-              </div>
-              <div id="galleryCloud" class="grid grid-cols-2 sm:grid-cols-3 gap-3"></div>
-              <iframe id="galleryEmbed" title="Galeri Drive" class="mt-4 w-full h-[360px] rounded-xl ring-1 ring-slate-200 hidden"></iframe>
-            </div>
-          </aside>
-        </div>
-
-        <!-- Modal tambah (aktif hanya jika pakai local/endpoint) -->
-        <dialog id="articleDialog" class="rounded-2xl p-0 w-full max-w-xl">
-          <form id="articleForm" method="dialog" class="bg-white rounded-2xl ring-1 ring-slate-200">
-            <div class="p-5 border-b"><h3 class="font-semibold" data-i18n="art.modal.title">Tambah Artikel</h3></div>
-            <div class="p-5 grid gap-4">
-              <div><label class="text-sm" for="art-title" data-i18n="art.modal.judul">Judul</label>
-                <input id="art-title" required class="mt-1 w-full rounded-xl border p-3" placeholder="Judul artikel" /></div>
-              <div class="grid sm:grid-cols-2 gap-4">
-                <div><label class="text-sm" for="art-date" data-i18n="art.modal.tanggal">Tanggal</label>
-                  <input id="art-date" type="date" required class="mt-1 w-full rounded-xl border p-3" /></div>
-                <div><label class="text-sm" for="art-cat">Kategori</label>
-                  <select id="art-cat" class="mt-1 w-full rounded-xl border p-3">
-                    <option value="Kajian">Kajian</option>
-                    <option value="Pengumuman">Pengumuman</option>
-                    <option value="Parenting">Parenting</option>
-                    <option value="Umum" selected>Umum</option>
-                  </select></div>
-              </div>
-              <div><label class="text-sm" for="art-body" data-i18n="art.modal.isi">Isi</label>
-                <textarea id="art-body" rows="6" required class="mt-1 w-full rounded-xl border p-3" placeholder="Tulis artikel"></textarea></div>
-            </div>
-            <div class="p-5 flex items-center justify-end gap-3 border-t">
-              <button type="button" data-close class="px-4 py-2 rounded-xl border" data-i18n="art.modal.batal">Batal</button>
-              <button type="submit" class="px-4 py-2 rounded-xl bg-primary-600 text-white" data-i18n="art.modal.simpan">Simpan</button>
-            </div>
-          </form>
-        </dialog>
+        <div id="articles" class="mt-6 grid md:grid-cols-3 gap-6"></div>
       </div>
     </section>
 
-    <!-- Shalat & Masjid -->
+    <!-- Shalat -->
     <section id="shalat" class="py-16 border-t bg-white">
       <div class="max-w-7xl mx-auto px-4">
         <h2 class="text-2xl md:text-3xl font-bold" data-i18n="sec.shalat">Agenda Shalat (lokal)</h2>
@@ -214,19 +168,79 @@
       </div>
     </section>
 
-    <section id="peta" class="py-16 border-t bg-sand-50">
+    <!-- Permintaan Materi -->
+    <section id="materi" class="py-16 border-t bg-sand-50">
       <div class="max-w-7xl mx-auto px-4">
-        <h2 class="text-2xl md:text-3xl font-bold" data-i18n="sec.peta">Peta Masjid Terdekat</h2>
-        <p class="mt-2 text-slate-600 text-sm" data-i18n="peta.desc">Sumber peta: OpenStreetMap. Klik marker untuk detail.</p>
-        <div id="map" class="mt-6 w-full h-[420px] rounded-2xl ring-1 ring-slate-200"></div>
+        <h2 class="text-2xl md:text-3xl font-bold" data-i18n="sec.materi">Permintaan Materi</h2>
+        <p class="mt-2 text-slate-600 text-sm" data-i18n="materi.desc">Isi formulir untuk meminta materi atau hubungi kami via WhatsApp.</p>
+        <div class="mt-6 grid lg:grid-cols-3 gap-6">
+          <!-- Form permintaan materi -->
+          <div class="lg:col-span-2">
+            <div class="p-6 rounded-2xl ring-1 ring-slate-200 bg-white">
+              <form id="reqForm" action="https://formspree.io/f/mldlkpdq" method="POST" class="grid gap-4">
+                <div class="grid sm:grid-cols-2 gap-4">
+                  <div>
+                    <label class="text-sm" for="req-name" data-i18n="materi.form.name">Nama</label>
+                    <input id="req-name" name="name" required class="mt-1 w-full rounded-xl border p-3" placeholder="Nama Anda"/>
+                  </div>
+                  <div>
+                    <label class="text-sm" for="req-email" data-i18n="materi.form.email">Email</label>
+                    <input id="req-email" type="email" name="email" required class="mt-1 w-full rounded-xl border p-3" placeholder="email@contoh.com"/>
+                  </div>
+                </div>
+                <div class="grid sm:grid-cols-2 gap-4">
+                  <div>
+                    <label class="text-sm" for="req-wa" data-i18n="materi.form.wa">Nomor WhatsApp</label>
+                    <input id="req-wa" name="wa" class="mt-1 w-full rounded-xl border p-3" placeholder="6285211286642"/>
+                  </div>
+                  <div>
+                    <label class="text-sm" for="req-cat" data-i18n="materi.form.cat">Kategori Materi</label>
+                    <select id="req-cat" name="category" class="mt-1 w-full rounded-xl border p-3">
+                      <option>PDF</option>
+                      <option>Audio</option>
+                      <option>Video</option>
+                      <option>Worksheet</option>
+                      <option>Poster</option>
+                    </select>
+                  </div>
+                </div>
+                <div>
+                  <label class="text-sm" for="req-title" data-i18n="materi.form.title">Judul/Topik Materi</label>
+                  <input id="req-title" name="title" required class="mt-1 w-full rounded-xl border p-3" placeholder="Contoh: Makharijul Huruf"/>
+                </div>
+                <div>
+                  <label class="text-sm" for="req-msg" data-i18n="materi.form.msg">Pesan</label>
+                  <textarea id="req-msg" name="message" rows="4" class="mt-1 w-full rounded-xl border p-3" placeholder="Kebutuhan atau catatan tambahan"></textarea>
+                </div>
+                <input type="hidden" name="type" value="request_materi">
+                <div class="flex items-center gap-3">
+                  <button type="submit" class="px-5 py-3 rounded-xl bg-primary-600 text-white" data-i18n="materi.form.send">Kirim Permintaan</button>
+                  <span id="reqStatus" class="text-sm text-slate-600" aria-live="polite"></span>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <!-- Kontak cepat WhatsApp -->
+          <aside>
+            <div class="p-6 rounded-2xl ring-1 ring-slate-200 bg-white">
+              <h3 class="font-semibold mb-2">Butuh cepat?</h3>
+              <p class="text-sm text-slate-600 mb-3">Kirim permintaan materi via WhatsApp. Pesan akan otomatis terisi dari formulir.</p>
+              <button id="waBtn" class="w-full px-4 py-2 rounded-xl border hover:bg-slate-50 text-sm" data-i18n="materi.wa.cta">Chat WhatsApp</button>
+              <p class="mt-2 text-xs text-slate-500">Catatan: Ganti nomor WhatsApp panitia di kode (variabel <code>6285211286642</code>).</p>
+            </div>
+          </aside>
+        </div>
       </div>
     </section>
 
+    <!-- Galeri (Drive embed, tanpa API) -->
     <section id="galeri" class="py-16 border-t">
       <div class="max-w-7xl mx-auto px-4">
         <h2 class="text-2xl md:text-3xl font-bold" data-i18n="sec.galeri">Galeri Kegiatan</h2>
-        <div class="mt-6 grid grid-cols-2 md:grid-cols-3 gap-3">
-          <img src="daftar.jpg" alt="Foto pendaftaran" class="w-full h-40 object-cover rounded-xl ring-1 ring-slate-200" loading="lazy">
+        <p class="mt-2 text-slate-600 text-sm">Galeri ditarik langsung dari Google Drive folder.</p>
+        <div class="mt-6">
+          <iframe title="Galeri Drive" class="w-full h-[540px] rounded-2xl ring-1 ring-slate-200" src="https://drive.google.com/embeddedfolderview?id=19ZWDoIjY-5NavNYQCX3OpkxNuYyV6HFW#grid"></iframe>
         </div>
       </div>
     </section>
@@ -276,16 +290,13 @@
 
   <footer class="py-10 border-t">
     <div class="max-w-7xl mx-auto px-4 text-sm text-slate-600 flex flex-col md:flex-row gap-3 md:items-center md:justify-between">
-      <p>© <span id="year"></span> <span data-i18n="brand.name">Komunitas Muslim Jepang</span>. <span data-i18n="footer.copyright">Semua hak cipta dilindungi.</span></p>
+      <p>© <span id="year"></span> <span data-i18n="brand.name">Ruang Belajar Muslim Jepang</span>. <span data-i18n="footer.copyright">Semua hak cipta dilindungi.</span></p>
       <div class="flex gap-4">
         <a href="#" class="hover:text-primary-700" data-i18n="footer.privacy">Privasi</a>
         <a href="#" class="hover:text-primary-700" data-i18n="footer.tos">S&K</a>
       </div>
     </div>
   </footer>
-
-  <!-- Leaflet JS for map -->
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
   <button id="backToTop" aria-label="Kembali ke atas" class="fixed bottom-6 right-6 hidden px-4 py-3 rounded-full shadow bg-primary-600 text-white">↑</button>
 
@@ -302,7 +313,7 @@
     const nav = document.getElementById('mainNav');
     if (nav) {
       const links = nav.querySelectorAll('a[href^="#"]');
-      const ids = ['tentang','program','jadwal','artikel','galeri','kontak','daftar'];
+      const ids = ['tentang','program','jadwal','artikel','materi','galeri','kontak','daftar'];
       const sections = ids.map(id => document.getElementById(id)).filter(Boolean);
       const onScroll = () => {
         let current = null;
@@ -317,25 +328,21 @@
     const I18N = {
       id: {
         'banner.text':'Assalamualaikum—Pendaftaran Program Semester Baru dibuka sampai 30 Agustus.','banner.cta':'Daftar sekarang','brand.name':'Ruang Belajar Muslim Jepang',
-        'nav.tentang':'Tentang','nav.program':'Program','nav.jadwal':'Jadwal','nav.artikel':'Artikel','nav.galeri':'Galeri','nav.kontak':'Kontak','nav.daftar':'Daftar',
-        'hero.badge':'Bismillah • Komunitas Belajar & Berbagi','hero.title.pre':'Belajar Islam sesuai sunnah ','hero.title.hl':'di Jepang','hero.subtitle':'Platform komunitas Muslim untuk kajian, program keluarga, dan kontribusi artikel harian.','hero.cta.primary':'Daftar Kegiatan','hero.cta.secondary':'Baca Artikel','hero.ayah':'“Sebaik-baik kalian adalah yang belajar Al-Qur\'an dan mengajarkannya.”','event.nearby':'Event Terdekat','event.sample':'Kajian Keluarga • Sabtu (lihat Jadwal)','sec.tentang':'Tentang Komunitas','tentang.p':'RBM Jepang adalah komunitas belajar nonformal di Yokohama—wadah keluarga Muslim untuk bertumbuh bersama: akidah, adab, dan bahasa Arab. Terbuka untuk anak, remaja, dan dewasa.','sec.program':'Program & Kegiatan','card.jp.title':'Kelas Iqro` Anak','card.jp.p':'Huruf hijaiyah, tartil menyenangkan.','card.islam.title':'Kelas PAI Online','card.islam.p':'Adab harian, fiqh praktis, akhlak.','card.tahfidz.title':'Perbaikan Bacaan Dewasa','card.tahfidz.p':'Tajwid & muraja\'ah.','sec.jadwal':'Jadwal','sch.1':'Kelas Iqro` anak — Selasa ~ Kamis 15:30 JST','sch.2':'Kelas PAI Online — Kamis 19:30 JST','sch.3':'Kelas Tajwid Online — Ahad 19:30 JST','sch.4':'Perbaikan Bacaan Dewasa — Ahad 21:00 JST','sec.artikel':'Artikel & Informasi Harian','art.add':'Tambah Artikel','art.hint':'Sumber artikel: Google Sheets (publish to web). Kolom: title/date/body/category.','art.modal.title':'Tambah Artikel','art.modal.judul':'Judul','art.modal.tanggal':'Tanggal','art.modal.isi':'Isi','art.modal.batal':'Batal','art.modal.simpan':'Simpan','sec.galeri':'Galeri Kegiatan','sec.kontak':'Kontak','kontak.email':'Email','kontak.wa':'WhatsApp / Telegram','btn.join':'Gabung Komunitas','form.name':'Nama','form.email':'Email','form.message':'Pesan','form.send':'Kirim','form.sending':'Mengirim...','form.sent':'Terima kasih! Pesan Anda terkirim.','form.fail':'Gagal mengirim. Coba lagi atau email langsung.','form.net':'Koneksi bermasalah. Coba lagi ya.','sec.daftar':'Pendaftaran','daftar.p':'Silakan isi form pendaftaran (gantikan embed di bawah dengan Google Form Anda).','footer.copyright':'Semua hak cipta dilindungi.',
-        'sec.shalat':'Agenda Shalat (lokal)','shalat.desc':'Otomatis deteksi lokasi (izin browser) atau gunakan default Yokohama.','shalat.locate':'Gunakan Lokasi Saya','sec.peta':'Peta Masjid Terdekat','peta.desc':'Sumber peta: OpenStreetMap. Klik marker untuk detail.'
+        'nav.tentang':'Tentang','nav.program':'Program','nav.jadwal':'Jadwal','nav.artikel':'Artikel','nav.materi':'Permintaan Materi','nav.galeri':'Galeri','nav.kontak':'Kontak','nav.daftar':'Daftar',
+        'hero.badge':'Bismillah • Komunitas Belajar & Berbagi','hero.title.pre':'Belajar Islam sesuai sunnah ','hero.title.hl':'di Jepang','hero.subtitle':'Platform komunitas Muslim untuk kajian, program keluarga, dan kontribusi artikel harian.','hero.cta.primary':'Daftar Kegiatan','hero.cta.secondary':'Baca Artikel','hero.ayah':'“Sebaik-baik kalian adalah yang belajar Al-Qur\'an dan mengajarkannya.”','event.nearby':'Event Terdekat','event.sample':'Kajian Keluarga • Sabtu (lihat Jadwal)','sec.tentang':'Tentang Komunitas','tentang.p':'RBM Jepang adalah komunitas belajar nonformal di Yokohama—wadah keluarga Muslim untuk bertumbuh bersama: akidah, adab, dan bahasa Arab. Terbuka untuk anak, remaja, dan dewasa.','sec.program':'Program & Kegiatan','card.jp.title':'Kelas Iqro` Anak','card.jp.p':'Huruf hijaiyah, tartil menyenangkan.','card.islam.title':'Kelas PAI Online','card.islam.p':'Adab harian, fiqh praktis, akhlak.','card.tahfidz.title':'Perbaikan Bacaan Dewasa','card.tahfidz.p':'Tajwid & muraja\'ah.','sec.jadwal':'Jadwal','sch.1':'Kelas Iqro` anak — Selasa ~ Kamis 15:30 JST','sch.2':'Kelas PAI Online — Kamis 19:30 JST','sch.3':'Kelas Tajwid Online — Ahad 19:30 JST','sch.4':'Perbaikan Bacaan Dewasa — Ahad 21:00 JST','sec.artikel':'Artikel & Informasi Harian','art.add':'Tambah Artikel','art.hint':'Sumber artikel: Google Sheets (publish to web). Kolom: title/date/body/category.','art.modal.title':'Tambah Artikel','art.modal.judul':'Judul','art.modal.tanggal':'Tanggal','art.modal.isi':'Isi','art.modal.batal':'Batal','art.modal.simpan':'Simpan','sec.materi':'Permintaan Materi','materi.desc':'Isi formulir untuk meminta materi atau hubungi kami via WhatsApp.','materi.form.name':'Nama','materi.form.email':'Email','materi.form.wa':'Nomor WhatsApp','materi.form.title':'Judul/Topik Materi','materi.form.cat':'Kategori Materi','materi.form.msg':'Pesan','materi.form.send':'Kirim Permintaan','materi.wa.cta':'Chat WhatsApp','sec.galeri':'Galeri Kegiatan','sec.kontak':'Kontak','kontak.email':'Email','kontak.wa':'WhatsApp / Telegram','btn.join':'Gabung Komunitas','form.name':'Nama','form.email':'Email','form.message':'Pesan','form.send':'Kirim','form.sending':'Mengirim...','form.sent':'Terima kasih! Pesan Anda terkirim.','form.fail':'Gagal mengirim. Coba lagi atau email langsung.','form.net':'Koneksi bermasalah. Coba lagi ya.','sec.daftar':'Pendaftaran','daftar.p':'Silakan isi form pendaftaran (gantikan embed di bawah dengan Google Form Anda).','footer.copyright':'Semua hak cipta dilindungi.',
+        'sec.shalat':'Agenda Shalat (lokal)','shalat.desc':'Otomatis deteksi lokasi (izin browser) atau gunakan default Yokohama.','shalat.locate':'Gunakan Lokasi Saya'
       },
       en: {
-        'banner.text':'Assalamu\'alaykum—New Semester Registration is open until August 30.','banner.cta':'Register now','brand.name':'RBM Japan','nav.tentang':'About','nav.program':'Programs','nav.jadwal':'Schedule','nav.artikel':'Articles','nav.galeri':'Gallery','nav.kontak':'Contact','nav.daftar':'Register','hero.badge':'Bismillah • Learn & Share','hero.title.pre':'Learn Islam upon the Sunnah ','hero.title.hl':'in Japan','hero.subtitle':'A community platform for studies, family programs, and daily article contributions.','hero.cta.primary':'See Activities','hero.cta.secondary':'Read Articles','hero.ayah':'“The best of you are those who learn the Qur\'an and teach it.”','event.nearby':'Upcoming Event','event.sample':'Family Study • Saturday (see Schedule)','sec.tentang':'About the Community','tentang.p':'RBM Japan is a non-formal learning community in Yokohama—supporting Muslim families in creed, manners, and Arabic. Open to kids, teens, and adults.','sec.program':'Programs & Activities','card.jp.title':'Kids\' Iqro Class','card.jp.p':'Hijaiyah letters, joyful tartil.','card.islam.title':'Online Islamic Studies','card.islam.p':'Daily manners, practical fiqh, character.','card.tahfidz.title':'Adult Recitation Improvement','card.tahfidz.p':'Tajwid & revision.','sec.jadwal':'Schedule','sch.1':'Kids\' Iqro — Tue ~ Thu 15:30 JST','sch.2':'Online PAI — Thu 19:30 JST','sch.3':'Online Tajwid — Sun 19:30 JST','sch.4':'Adult Recitation — Sun 21:00 JST','sec.artikel':'Daily Articles & Updates','art.add':'Add Article','art.hint':'Source: Google Sheets (publish to web). Columns: title/date/body/category.','art.modal.title':'Add Article','art.modal.judul':'Title','art.modal.tanggal':'Date','art.modal.isi':'Content','art.modal.batal':'Cancel','art.modal.simpan':'Save','sec.galeri':'Activity Gallery','sec.kontak':'Contact','kontak.email':'Email','kontak.wa':'WhatsApp / Telegram','btn.join':'Join the Community','form.name':'Name','form.email':'Email','form.message':'Message','form.send':'Send','form.sending':'Sending...','form.sent':'Thank you! Your message was sent.','form.fail':'Failed to send. Please try again or email us.','form.net':'Network error. Please try again.','sec.daftar':'Registration','daftar.p':'Please fill the registration form (replace the embed below with your Google Form).','sec.shalat':'Prayer Times (local)','shalat.desc':'Auto-detect location (browser permission) or use Yokohama default.','shalat.locate':'Use My Location','sec.peta':'Nearby Mosques Map','peta.desc':'Map source: OpenStreetMap. Click a marker for details.'
+        'banner.text':'Assalamu\'alaykum—New Semester Registration is open until August 30.','banner.cta':'Register now','brand.name':'RBM Japan','nav.tentang':'About','nav.program':'Programs','nav.jadwal':'Schedule','nav.artikel':'Articles','nav.materi':'Request Materials','nav.galeri':'Gallery','nav.kontak':'Contact','nav.daftar':'Register','hero.badge':'Bismillah • Learn & Share','hero.title.pre':'Learn Islam upon the Sunnah ','hero.title.hl':'in Japan','hero.subtitle':'A community platform for studies, family programs, and daily article contributions.','hero.cta.primary':'See Activities','hero.cta.secondary':'Read Articles','hero.ayah':'“The best of you are those who learn the Qur\'an and teach it.”','event.nearby':'Upcoming Event','event.sample':'Family Study • Saturday (see Schedule)','sec.tentang':'About the Community','tentang.p':'RBM Japan is a non-formal learning community in Yokohama—supporting Muslim families in creed, manners, and Arabic. Open to kids, teens, and adults.','sec.program':'Programs & Activities','card.jp.title':'Kids\' Iqro Class','card.jp.p':'Hijaiyah letters, joyful tartil.','card.islam.title':'Online Islamic Studies','card.islam.p':'Daily manners, practical fiqh, character.','card.tahfidz.title':'Adult Recitation Improvement','card.tahfidz.p':'Tajwid & revision.','sec.jadwal':'Schedule','sch.1':'Kids\' Iqro — Tue ~ Thu 15:30 JST','sch.2':'Online PAI — Thu 19:30 JST','sch.3':'Online Tajwid — Sun 19:30 JST','sch.4':'Adult Recitation — Sun 21:00 JST','sec.artikel':'Daily Articles & Updates','sec.materi':'Material Request','materi.desc':'Fill the form to request materials or contact us via WhatsApp.','materi.form.name':'Name','materi.form.email':'Email','materi.form.wa':'WhatsApp Number','materi.form.title':'Material Title/Topic','materi.form.cat':'Material Category','materi.form.msg':'Message','materi.form.send':'Submit Request','materi.wa.cta':'WhatsApp Chat','sec.galeri':'Activity Gallery','sec.kontak':'Contact','kontak.email':'Email','kontak.wa':'WhatsApp / Telegram','btn.join':'Join the Community','form.name':'Name','form.email':'Email','form.message':'Message','form.send':'Send','form.sending':'Sending...','form.sent':'Thank you! Your message was sent.','form.fail':'Failed to send. Please try again or email us.','form.net':'Network error. Please try again.','sec.daftar':'Registration','daftar.p':'Please fill the registration form (replace the embed below with your Google Form).','sec.shalat':'Prayer Times (local)','shalat.desc':'Auto-detect location (browser permission) or use Yokohama default.','shalat.locate':'Use My Location'
       }
     };
     const i18n = { lang:'id', t(key){return (I18N[this.lang]&&I18N[this.lang][key])||I18N['id'][key]||key;}, apply(){ document.documentElement.lang=this.lang; document.querySelectorAll('[data-i18n]').forEach(el=>{const k=el.getAttribute('data-i18n'); const txt=this.t(k); if(txt) el.textContent=txt;}); document.querySelectorAll('[data-lang-btn]').forEach(b=>{ b.setAttribute('aria-pressed', b.getAttribute('data-lang-btn')===this.lang?'true':'false'); });}, set(l){ this.lang=(l==='en')?'en':'id'; localStorage.setItem('rbm_lang',this.lang); this.apply(); } };
     document.querySelectorAll('[data-lang-btn]')?.forEach(btn=>btn.addEventListener('click',()=>i18n.set(btn.getAttribute('data-lang-btn'))));
-    (function initLang(){ const url=new URL(location.href); const q=(url.searchParams.get('lang')||'').toLowerCase(); const stored=localStorage.getItem('rbm_lang'); const browser=navigator.language?.startsWith('en')?'en':'id'; const init=(q==='en'||q==='id')?q:(stored||browser||'id'); i18n.set(init); })();
+    (function initLang(){ const url=new URL(location.href); const q=(url.searchParams.get('lang')||'').toLowerCase(); const stored=localStorage.getItem('rbm_lang'); const browser=navigator.language?.startsWith('en')?'en':'id'; const init=(q==='en'||q==='id')?q:(stored||browser||'id'); i18n.set(init); const brand=document.querySelector('[data-i18n="brand.name"]'); if(brand && /brand\.name/i.test(brand.textContent)) brand.textContent=i18n.t('brand.name'); })();
 
     // ======= Artikel (Google Sheets CSV) + kategori =======
-    // GANTI URL di bawah dengan URL publish-to-web CSV dari Google Sheets kamu (punyamu sudah disiapkan):
     const SHEETS_GVIZ_CSV = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS3pnUWK5c46NBvOhWg2-687urkAMMqOpocnribyfSriA28cJ-HgWLUh482bUxpSmnHKu2G4FStk0A6/pub?gid=0&single=true&output=csv';
-    const ARTICLES_JSON_URL = ''; // kosongkan saat pakai Sheets
-    const ADMIN_ENDPOINT = '';    // kosong (tidak dipakai saat Sheets)
-    const ADMIN_TOKEN = '';
-
+    const ARTICLES_JSON_URL = '';
     const CATEGORIES = ['Semua','Kajian','Pengumuman','Parenting','Umum'];
 
     async function fetchCSV(url){
@@ -343,7 +350,6 @@
       if(!res.ok) throw new Error('HTTP '+res.status);
       const text = await res.text();
       const rows = text.trim().split(/\r?\n/).map(line=>{
-        // basic CSV parse: split by comma, handle simple quoted entries
         const out=[]; let cur=''; let q=false;
         for(let i=0;i<line.length;i++){
           const ch=line[i];
@@ -357,12 +363,7 @@
       const headers = rows.shift().map(h=>h.trim().toLowerCase());
       return rows.map(cells=>{
         const obj={}; headers.forEach((h,i)=> obj[h]=(cells[i]||'').trim());
-        return {
-          title: obj.title||obj.judul||'',
-          date: obj.date||obj.tanggal||'',
-          body: obj.body||obj.isi||'',
-          category: obj.category||obj.kategori||'Umum'
-        };
+        return { title: obj.title||obj.judul||'', date: obj.date||obj.tanggal||'', body: obj.body||obj.isi||'', category: obj.category||obj.kategori||'Umum' };
       }).filter(r=>r.title);
     }
 
@@ -385,16 +386,6 @@
       if(!list.length){ wrap.innerHTML='<p class="text-slate-600">Belum ada artikel.</p>'; return; }
       list.forEach(a=>{ const el=document.createElement('article'); el.className='p-6 rounded-2xl ring-1 ring-slate-200 bg-white'; el.innerHTML=`<div class=\"text-xs text-primary-700 font-medium\">${a.category||'Umum'}</div><h3 class=\"mt-1 font-semibold\">${a.title||''}</h3><p class=\"mt-1 text-xs text-slate-500\">${a.date||''}</p><p class=\"mt-3 text-sm text-slate-700\">${(a.body||'').replace(/\n/g,'<br>')}</p>`; wrap.appendChild(el); });
     }
-
-    // Admin add modal (hidden when using Sheets)
-    const isAdmin=new URL(location.href).searchParams.get('admin')==='1';
-    const btnAdd=document.getElementById('btnAdd');
-    const dlg=document.getElementById('articleDialog');
-    const form=document.getElementById('articleForm');
-    (function toggleAdmin(){ const usingRemote=Boolean(SHEETS_GVIZ_CSV||ARTICLES_JSON_URL); if(isAdmin && !usingRemote && btnAdd) btnAdd.classList.remove('hidden'); else btnAdd?.classList.add('hidden'); })();
-    btnAdd?.addEventListener('click',()=>{ document.getElementById('art-title').value=''; document.getElementById('art-date').value=(new Date()).toISOString().slice(0,10); document.getElementById('art-body').value=''; document.getElementById('art-cat').value='Umum'; dlg.showModal(); });
-    form?.querySelector('[data-close]')?.addEventListener('click',()=> dlg.close());
-    form?.addEventListener('submit', (e)=>{ e.preventDefault(); alert('Saat sumber = Google Sheets, tambah artikel dilakukan di Sheet.'); dlg.close(); });
 
     // ======= Shalat (AlAdhan) dengan cache =======
     function getCache(key){ try{ const x=JSON.parse(localStorage.getItem(key)||'null'); if(!x) return null; if(Date.now()>x.exp){ localStorage.removeItem(key); return null; } return x.val; }catch{return null;} }
@@ -420,93 +411,45 @@
       document.getElementById('btnLocate')?.addEventListener('click', async ()=>{ try{ const gp=await new Promise((res,rej)=> navigator.geolocation ? navigator.geolocation.getCurrentPosition(res,rej,{enableHighAccuracy:true,timeout:7000}) : rej('no geo')); pos={lat:gp.coords.latitude, lon:gp.coords.longitude, name:'Lokasi Anda'}; where.textContent=`${pos.name} (${pos.lat.toFixed(3)}, ${pos.lon.toFixed(3)})`; await loadShalat(pos.lat,pos.lon,methodSel.value); }catch{} });
     }
 
-    // ======= Galeri via Google Drive (tanpa Apps Script) =======
-    // 1) Isi konstanta di bawah ini
-    const DRIVE_FOLDER_ID = '19ZWDoIjY-5NavNYQCX3OpkxNuYyV6HFW'; // ganti dengan ID folder Google Drive
-    const DRIVE_API_KEY   = 'AIzaSyB-GmZHngEejQExZauz7vExBUS8Duu7mJM';            // ganti dengan API Key (Drive API enabled)
-    // 2) Pastikan folder Drive: Anyone with link (Viewer)
-    // 3) API Key: restrict by HTTP referrer + enable Drive API
-
-    async function listDriveImages(){
-      if (!DRIVE_FOLDER_ID || !DRIVE_API_KEY) return null;
-      const q = `('${DRIVE_FOLDER_ID}' in parents) and mimeType contains 'image/' and trashed = false`;
-      const fields = 'nextPageToken,files(id,name,mimeType,modifiedTime)';
-      const base = 'https://www.googleapis.com/drive/v3/files';
-      let pageToken = '', all = [];
-      for (let i=0;i<5;i++) { // up to 5 pages safeguard
-        const url = `${base}?q=${encodeURIComponent(q)}&fields=${encodeURIComponent(fields)}&orderBy=modifiedTime desc&pageSize=1000${pageToken?`&pageToken=${pageToken}`:''}&key=${DRIVE_API_KEY}`;
-        const res = await fetch(url);
-        if (!res.ok) throw new Error('Drive list failed '+res.status);
-        const data = await res.json();
-        all = all.concat(data.files||[]);
-        if (!data.nextPageToken) break; pageToken = data.nextPageToken;
-      }
-      return all.map(f=>({ id:f.id, name:f.name, time:f.modifiedTime, url:`https://drive.google.com/uc?export=view&id=${f.id}` }));
-    }
-
-    async function renderDriveGallery(){
-      const wrap = document.getElementById('galleryCloud');
-      const embed = document.getElementById('galleryEmbed');
-      const admin = document.getElementById('galleryAdminLink');
-      if (admin && DRIVE_FOLDER_ID) admin.href = `https://drive.google.com/drive/folders/${DRIVE_FOLDER_ID}`; else if (admin) admin.removeAttribute('href');
-
-      wrap.innerHTML = '<p class="text-slate-500 text-sm">Memuat...</p>';
-      if (!DRIVE_FOLDER_ID || !DRIVE_API_KEY) {
-        // fallback to iframe embed if ID exists
-        wrap.innerHTML = '<p class="text-slate-500 text-sm">Mode embed standar digunakan.</p>';
-        if (embed) {
-          if (DRIVE_FOLDER_ID) { embed.src = `https://drive.google.com/embeddedfolderview?id=${DRIVE_FOLDER_ID}#grid`; embed.classList.remove('hidden'); }
-          else { embed.classList.add('hidden'); }
-        }
-        return;
-      }
-      try {
-        const cacheKey = `rbm_gdrive_${DRIVE_FOLDER_ID}`;
-        let list = getCache(cacheKey);
-        if (!list) {
-          list = await listDriveImages();
-          setCache(cacheKey, list, 6*60*60*1000); // 6 jam
-        }
-        embed?.classList.add('hidden');
-        if (!list || !list.length) { wrap.innerHTML = '<p class="text-slate-500 text-sm">Belum ada foto.</p>'; return; }
-        wrap.innerHTML = '';
-        list.forEach(it=>{
-          const el = document.createElement('a');
-          el.href = `https://drive.google.com/file/d/${it.id}/view`;
-          el.target = '_blank'; el.rel = 'noopener';
-          el.className = 'block group';
-          el.innerHTML = `<img alt="${it.name||'Foto'}" src="${it.url}" class="w-full h-28 object-cover rounded-xl ring-1 ring-slate-200"/>`;
-          wrap.appendChild(el);
-        });
-      } catch(e){
-        wrap.innerHTML = `<p class='text-red-600 text-sm'>Gagal memuat galeri: ${String(e).slice(0,120)}</p>`;
-        if (embed && DRIVE_FOLDER_ID) { embed.src = `https://drive.google.com/embeddedfolderview?id=${DRIVE_FOLDER_ID}#grid`; embed.classList.remove('hidden'); }
-      }
-    }
-
-    document.getElementById('galleryReload')?.addEventListener('click', ()=>{ if (DRIVE_FOLDER_ID) { localStorage.removeItem(`rbm_gdrive_${DRIVE_FOLDER_ID}`); } renderDriveGallery(); });
-
-    // ======= Map (Leaflet + Overpass) dengan cache =======
-    async function initMap(){
-      const mapEl=document.getElementById('map'); if(!mapEl || !window.L) return;
-      const def={lat:35.4437, lon:139.6380, name:'Yokohama'}; let center=def;
-      try{ const gp=await new Promise((res,rej)=> navigator.geolocation ? navigator.geolocation.getCurrentPosition(res,rej,{enableHighAccuracy:true,timeout:7000}) : rej('no geo')); center={lat:gp.coords.latitude, lon:gp.coords.longitude, name:'Lokasi Anda'}; }catch{}
-      const map=L.map('map').setView([center.lat,center.lon],13);
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution:'&copy; OpenStreetMap' }).addTo(map);
-      const cacheKey=`rbm_overpass_${center.lat.toFixed(2)}_${center.lon.toFixed(2)}`; let elements=getCache(cacheKey);
-      if(!elements){ const query=`[out:json];node(around:5000,${center.lat},${center.lon})[amenity=place_of_worship][religion=muslim];out;`; const url='https://overpass-api.de/api/interpreter?data='+encodeURIComponent(query); try{ const res=await fetch(url); const data=await res.json(); elements=data.elements||[]; setCache(cacheKey,elements,24*60*60*1000);}catch(e){ console.warn('Overpass failed',e); elements=[]; } }
-      elements.forEach(n=>{ const name=(n.tags&&(n.tags.name||n.tags['name:en']||n.tags['name:ja']||'Masjid')); L.marker([n.lat,n.lon]).addTo(map).bindPopup(`<strong>${name}</strong>`); });
-    }
-
     // ======= Init =======
     renderCategoryChips();
     renderArticles();
     initShalat();
-    initMap();
 
     // Formspree messages (i18n)
     const f=document.getElementById('contactForm'); const s=document.getElementById('contactStatus'); const submitBtn=document.getElementById('contactSubmit');
     f?.addEventListener('submit', async (e)=>{ e.preventDefault(); s.textContent=i18n.t('form.sending'); submitBtn.disabled=true; try{ const formData=new FormData(f); const res=await fetch(f.action,{method:'POST',body:formData,headers:{'Accept':'application/json'}}); if(res.ok){ s.textContent=i18n.t('form.sent'); f.reset(); } else { s.textContent=i18n.t('form.fail'); } } catch{ s.textContent=i18n.t('form.net'); } finally { submitBtn.disabled=false; } });
+  </script>
+  <script>
+    // ====== WhatsApp helper for Material Request ======
+    const WA_NUMBER = '6285211286642'; // Ganti ke nomor admin RBM
+    function buildWaText(){
+      const name = document.getElementById('req-name')?.value || '';
+      const email= document.getElementById('req-email')?.value || '';
+      const wa   = document.getElementById('req-wa')?.value || '';
+      const title= document.getElementById('req-title')?.value || '';
+      const cat  = document.getElementById('req-cat')?.value || '';
+      const msg  = document.getElementById('req-msg')?.value || '';
+      const lines = [
+        'Assalamualaikum admin RBM, saya ingin meminta materi.',
+        name?`Nama: ${name}`:'',
+        title?`Judul/Topik: ${title}`:'',
+        cat?`Kategori: ${cat}`:'',
+        email?`Email: ${email}`:'',
+        wa?`No WA: ${wa}`:'',
+        msg?`Pesan: ${msg}`:''
+      ].filter(Boolean).join('
+');
+      return encodeURIComponent(lines);
+    }
+    document.getElementById('waBtn')?.addEventListener('click', ()=>{
+      const url = `https://wa.me/${WA_NUMBER}?text=${buildWaText()}`;
+      window.open(url, '_blank');
+    });
+
+    // ===== Formspree for Material Request =====
+    const rf=document.getElementById('reqForm'); const rs=document.getElementById('reqStatus');
+    rf?.addEventListener('submit', async (e)=>{ e.preventDefault(); rs.textContent=(window.i18n?.t('form.sending'))||'Mengirim...'; const btn=rf.querySelector('button[type="submit"]'); if(btn) btn.disabled=true; try{ const fd=new FormData(rf); const res=await fetch(rf.action,{method:'POST',body:fd,headers:{'Accept':'application/json'}}); if(res.ok){ rs.textContent=(window.i18n?.t('form.sent'))||'Terkirim.'; rf.reset(); } else { rs.textContent=(window.i18n?.t('form.fail'))||'Gagal mengirim.'; } } catch{ rs.textContent=(window.i18n?.t('form.net'))||'Koneksi bermasalah.'; } finally { if(btn) btn.disabled=false; } });
   </script>
 </body>
 </html>
