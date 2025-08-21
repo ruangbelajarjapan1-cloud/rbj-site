@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Komunitas Muslim Jepang — RBM</title>
+  <title>Komunitas Muslim Jepang — RBMJ</title>
   <meta name="description" content="Situs komunitas RBM Jepang: kajian, program, artikel harian, pendaftaran. Bahasa otomatis Indonesia & English." />
-  <meta property="og:title" content="Komunitas Muslim Jepang — RBM" />
+  <meta property="og:title" content="Komunitas Muslim Jepang — RBMJ" />
   <meta property="og:description" content="Kajian, program, artikel harian, dan pendaftaran." />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="logo.jpg" />
@@ -30,7 +30,7 @@
     .pattern{background-image:radial-gradient(circle at 1px 1px, rgba(20,83,45,0.15) 1px, transparent 1px);background-size:20px 20px}
   </style>
   <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"Organization","name":"Ruang Belajar Muslim Jepang (RBM)","url":"https://example.com/","logo":"logo.jpg","sameAs":[]}
+  {"@context":"https://schema.org","@type":"Organization","name":"Ruang Belajar Muslim Jepang (RBMJ)","url":"https://example.com/","logo":"logo.jpg","sameAs":[]}
   </script>
 </head>
 <body class="bg-white text-slate-900">
@@ -47,8 +47,8 @@
     <div class="max-w-7xl mx-auto px-4">
       <div class="flex items-center justify-between h-16">
         <a href="#" class="flex items-center gap-3">
-          <img src="logo.jpg" alt="Logo RBM" class="h-9 w-9 rounded-lg ring-1 ring-primary-200" width="36" height="36" />
-          <span class="font-bold text-lg" data-i18n="brand.name">Komunitas Muslim Jepang</span>
+          <img src="logo.jpg" alt="Logo RBMJ" class="h-9 w-9 rounded-lg ring-1 ring-primary-200" width="36" height="36" />
+          <span class="font-bold text-lg" data-i18n="brand.name">Ruang Belajar Muslim Jepang</span>
         </a>
         <nav class="hidden md:flex items-center gap-5 text-sm" id="mainNav">
           <a href="#tentang" class="hover:text-primary-700" data-i18n="nav.tentang">Tentang</a>
@@ -94,7 +94,7 @@
               <span data-i18n="hero.title.pre">Belajar Islam sesuai sunnah </span>
               <span class="text-primary-700" data-i18n="hero.title.hl">di Jepang</span>
             </h1>
-            <p class="mt-4 text-slate-700 text-lg" data-i18n="hero.subtitle">Platform komunitas Muslim untuk kajian, program keluarga, dan kontribusi artikel harian.</p>
+            <p class="mt-4 text-slate-700 text-lg" data-i18n="hero.subtitle">Platform komunitas Belajar Muslim untuk kajian, program keluarga, dan kontribusi artikel harian.</p>
             <div class="mt-6 flex flex-wrap gap-3">
               <a href="#daftar" class="px-5 py-3 rounded-xl bg-primary-600 text-white hover:bg-primary-700" data-i18n="hero.cta.primary">Daftar Kegiatan</a>
               <a href="#artikel" class="px-5 py-3 rounded-xl border hover:bg-slate-50" data-i18n="hero.cta.secondary">Baca Artikel</a>
@@ -105,7 +105,7 @@
             </blockquote>
           </div>
           <div class="relative">
-            <img src="daftar.jpg" alt="Kegiatan komunitas" class="rounded-2xl w-full ring-1 ring-primary-100 shadow" loading="eager" onerror="this.onerror=null; this.src='hero.jpg';" />
+            <img src="daftar1.jpeg" alt="Kegiatan komunitas" class="rounded-2xl w-full ring-1 ring-primary-100 shadow" loading="eager" onerror="this.onerror=null; this.src='hero.jpg';" />
             <div class="absolute -bottom-6 -right-4 bg-white p-4 rounded-xl shadow ring-1 ring-slate-200 w-64">
               <p class="text-sm font-semibold" data-i18n="event.nearby">Event Terdekat</p>
               <p class="text-xs text-slate-600" data-i18n="event.sample">Kajian Keluarga • Sabtu (lihat Jadwal)</p>
@@ -140,9 +140,23 @@
           <h2 class="text-2xl md:text-3xl font-bold" data-i18n="sec.artikel">Artikel & Informasi Harian</h2>
           <button id="btnAdd" class="hidden px-4 py-2 rounded-xl border hover:bg-slate-50 text-sm">+ <span data-i18n="art.add">Tambah Artikel</span></button>
         </div>
-        <p class="mt-2 text-slate-600 text-sm" data-i18n="art.hint">Sumber artikel: Google Sheets (publish to web). Kolom: title/date/body/category.</p>
+        
         <div id="catFilter" class="mt-4 flex flex-wrap gap-2"></div>
-        <div id="articles" class="mt-6 grid md:grid-cols-3 gap-6"></div>
+        <div class="mt-6 grid lg:grid-cols-3 gap-6">
+          <div class="lg:col-span-2">
+            <div id="articles" class="grid md:grid-cols-2 xl:grid-cols-3 gap-6"></div>
+          </div>
+          <aside>
+            <div class="p-6 rounded-2xl ring-1 ring-slate-200 bg-white">
+              <h3 class="font-semibold mb-2">Galeri Komunitas</h3>
+              <p class="text-sm text-slate-600 mb-3">Foto disimpan di Google Drive (tanpa Apps Script). Ganti <code>FOLDER_ID</code> dengan ID folder Drive.</p>
+              <div class="space-y-3">
+                <iframe title="Galeri Drive" class="w-full h-[360px] rounded-xl ring-1 ring-slate-200" src="https://drive.google.com/drive/folders/19ZWDoIjY-5NavNYQCX3OpkxNuYyV6HFW?usp=sharing"></iframe>
+                <a class="inline-flex items-center gap-2 px-4 py-2 rounded-xl border hover:bg-slate-50 text-sm" target="_blank" rel="noopener" href="https://drive.google.com/drive/folders/19ZWDoIjY-5NavNYQCX3OpkxNuYyV6HFW?usp=sharing">Buka Folder (Admin)</a>
+              </div>
+            </div>
+          </aside>
+        </div>
 
         <!-- Modal tambah (aktif hanya jika pakai local/endpoint) -->
         <dialog id="articleDialog" class="rounded-2xl p-0 w-full max-w-xl">
@@ -399,6 +413,10 @@
       methodSel?.addEventListener('change',()=> loadShalat(pos.lat,pos.lon,methodSel.value));
       document.getElementById('btnLocate')?.addEventListener('click', async ()=>{ try{ const gp=await new Promise((res,rej)=> navigator.geolocation ? navigator.geolocation.getCurrentPosition(res,rej,{enableHighAccuracy:true,timeout:7000}) : rej('no geo')); pos={lat:gp.coords.latitude, lon:gp.coords.longitude, name:'Lokasi Anda'}; where.textContent=`${pos.name} (${pos.lat.toFixed(3)}, ${pos.lon.toFixed(3)})`; await loadShalat(pos.lat,pos.lon,methodSel.value); }catch{} });
     }
+
+    // ======= Galeri via Google Drive (tanpa Apps Script) =======
+    // HTML sudah menampilkan galeri lewat embedded folder view.
+    // Cukup ganti FOLDER_ID pada src iframe & tombol "Buka Folder".
 
     // ======= Map (Leaflet + Overpass) dengan cache =======
     async function initMap(){
