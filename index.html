@@ -279,7 +279,7 @@
                       <option data-i18n="materi.cat.audio">Audio</option>
                       <option data-i18n="materi.cat.video">Video</option>
                       <option data-i18n="materi.cat.worksheet">Worksheet</option>
-                      <option data-i18n="materi.cat.poster">Poster</option>
+                      <option data-i18n="materi.cat.poster">Rekaman Pelajaran</option>
                     </select>
                   </div>
                 </div>
@@ -456,7 +456,7 @@
         'sec.artikel':'Daily Articles & Updates','art.none':'No articles yet.',
         'sec.materi':'Material Request','materi.desc':'Fill the form to request materials or contact us via WhatsApp.',
         'materi.form.name':'Name','materi.form.email':'Email','materi.form.wa':'WhatsApp Number','materi.form.title':'Material Title/Topic','materi.form.cat':'Material Category','materi.form.msg':'Message','materi.form.send':'Submit Request',
-        'materi.cat.pdf':'PDF','materi.cat.audio':'Audio','materi.cat.video':'Video','materi.cat.worksheet':'Worksheet','materi.cat.poster':'Poster',
+        'materi.cat.pdf':'PDF','materi.cat.audio':'Audio','materi.cat.video':'Video','materi.cat.worksheet':'Worksheet','materi.cat.rekaman':'Rekaman',
         'materi.ph.name':'Your name','materi.ph.email':'email@example.com','materi.ph.wa':'e.g., 6285211286642','materi.ph.title':'e.g., Makharijul Huruf','materi.ph.msg':'Your needs or extra notes',
         'materi.quick.title':'Need it fast?','materi.quick.desc':'Send your material request via WhatsApp. The message will auto-fill from the form.','materi.quick.note':'Please contact the admin via WhatsApp. Baarakallahu feekum.',
         'materi.wa.cta':'WhatsApp Chat',
@@ -485,7 +485,7 @@
           b.setAttribute('aria-pressed', b.getAttribute('data-lang-btn')===this.lang?'true':'false');
         });
 
-        // ==== re-render badge "Next prayer / Shalat berikut" saat bahasa diganti
+        // ==== re-render badge "Next prayer / Shalat berikutnya" saat bahasa diganti
         if (window.LAST_SHALAT_TIMINGS) showNextPrayerInfo(window.LAST_SHALAT_TIMINGS);
       },
       set(l){ this.lang=(l==='en')?'en':'id'; localStorage.setItem('rbm_lang',this.lang); this.apply(); }
@@ -819,3 +819,4 @@
   <script async defer src="https://apis.google.com/js/platform.js"></script>
 </body>
 </html>
+
