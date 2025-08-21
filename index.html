@@ -12,10 +12,12 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:image" content="logo-brand.png" />
   <meta name="theme-color" content="#22c55e" />
+
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
   <link rel="manifest" href="site.webmanifest" />
+
   <link rel="canonical" href="https://example.com/" />
   <link rel="alternate" hreflang="id" href="?lang=id" />
   <link rel="alternate" hreflang="en" href="?lang=en" />
@@ -27,7 +29,10 @@
     tailwind.config = { theme: { extend: { colors: { primary: { DEFAULT:'#16a34a',50:'#f0fdf4',100:'#dcfce7',200:'#bbf7d0',300:'#86efac',400:'#4ade80',500:'#22c55e',600:'#16a34a',700:'#15803d',800:'#166534',900:'#14532d' }, sand:{50:'#faf7f2',100:'#f4efe6',200:'#e6dcc4'} } } } };
   </script>
   <style>
-    html{scroll-behavior:smooth} .skip-link{position:absolute;left:-999px;top:auto;width:1px;height:1px;overflow:hidden}.skip-link:focus{position:static;width:auto;height:auto;padding:8px 12px;background:#fff;border:1px solid #ccc;border-radius:10px}.active-link{color:#15803d;font-weight:600}
+    html{scroll-behavior:smooth}
+    .skip-link{position:absolute;left:-999px;top:auto;width:1px;height:1px;overflow:hidden}
+    .skip-link:focus{position:static;width:auto;height:auto;padding:8px 12px;background:#fff;border:1px solid #ccc;border-radius:10px}
+    .active-link{color:#15803d;font-weight:600}
     .pattern{background-image:radial-gradient(circle at 1px 1px, rgba(20,83,45,0.15) 1px, transparent 1px);background-size:20px 20px}
   </style>
   <script type="application/ld+json">
@@ -55,11 +60,13 @@
           <a href="#tentang" class="hover:text-primary-700" data-i18n="nav.tentang">Tentang</a>
           <a href="#program" class="hover:text-primary-700" data-i18n="nav.program">Program</a>
           <a href="#jadwal" class="hover:text-primary-700" data-i18n="nav.jadwal">Jadwal</a>
-          <a href=\"#artikel\" class=\"hover:text-primary-700\" data-i18n=\"nav.artikel\">Artikel<\/a>
-          <a href=\"#materi\" class=\"hover:text-primary-700\" data-i18n=\"nav.materi\">Materi<\/a>
+          <a href="#artikel" class="hover:text-primary-700" data-i18n="nav.artikel">Artikel</a>
+          <a href="#materi" class="hover:text-primary-700" data-i18n="nav.materi">Permintaan Materi</a>
           <a href="#galeri" class="hover:text-primary-700" data-i18n="nav.galeri">Galeri</a>
           <a href="#kontak" class="hover:text-primary-700" data-i18n="nav.kontak">Kontak</a>
           <a href="#daftar" class="inline-flex items-center px-4 py-2 rounded-xl bg-primary-600 text-white hover:bg-primary-700" data-i18n="nav.daftar">Daftar</a>
+          <!-- JOIN button -->
+          <a data-join-link target="_blank" rel="noopener" class="inline-flex items-center px-4 py-2 rounded-xl border hover:bg-slate-50" data-i18n="btn.join">Gabung Komunitas</a>
           <div class="ml-1 inline-flex rounded-xl ring-1 ring-slate-200 overflow-hidden" role="group" aria-label="Language">
             <button data-lang-btn="id" class="px-3 py-2 text-sm hover:bg-slate-50" aria-pressed="false">ID</button>
             <button data-lang-btn="en" class="px-3 py-2 text-sm hover:bg-slate-50" aria-pressed="false">EN</button>
@@ -73,11 +80,13 @@
         <a href="#tentang" class="py-2" data-i18n="nav.tentang">Tentang</a>
         <a href="#program" class="py-2" data-i18n="nav.program">Program</a>
         <a href="#jadwal" class="py-2" data-i18n="nav.jadwal">Jadwal</a>
-        <a href=\"#artikel\" class=\"py-2\" data-i18n=\"nav.artikel\">Artikel<\/a>
-        <a href=\"#materi\" class=\"py-2\" data-i18n=\"nav.materi\">Materi<\/a>
+        <a href="#artikel" class="py-2" data-i18n="nav.artikel">Artikel</a>
+        <a href="#materi" class="py-2" data-i18n="nav.materi">Permintaan Materi</a>
         <a href="#galeri" class="py-2" data-i18n="nav.galeri">Galeri</a>
         <a href="#kontak" class="py-2" data-i18n="nav.kontak">Kontak</a>
         <a href="#daftar" class="inline-flex items-center justify-center px-4 py-2 rounded-xl bg-primary-600 text-white" data-i18n="nav.daftar">Daftar</a>
+        <!-- JOIN button (mobile) -->
+        <a data-join-link target="_blank" rel="noopener" class="inline-flex items-center justify-center px-4 py-2 rounded-xl border" data-i18n="btn.join">Gabung Komunitas</a>
         <div class="mt-2 inline-flex rounded-xl ring-1 ring-slate-200 overflow-hidden">
           <button data-lang-btn="id" class="px-3 py-2 text-sm hover:bg-slate-50" aria-pressed="false">ID</button>
           <button data-lang-btn="en" class="px-3 py-2 text-sm hover:bg-slate-50" aria-pressed="false">EN</button>
@@ -92,15 +101,18 @@
       <div class="max-w-7xl mx-auto px-4 py-16 md:py-24 relative min-h-[360px]">
         <div class="grid md:grid-cols-2 gap-10 items-center">
           <div>
-            <p class="text-sm text-primary-700 font-semibold tracking-wide" data-i18n="hero.badge">Bismillah • Komunitas Belajar & Berbagi</p>
+            <p class="text-sm text-primary-700 font-semibold tracking-wide" data-i18n="hero.badge">RBM Jepang • Komunitas Belajar & Berbagi</p>
             <h1 class="text-3xl md:text-5xl font-extrabold leading-tight">
               <span data-i18n="hero.title.pre">Belajar Islam sesuai sunnah </span>
               <span class="text-primary-700" data-i18n="hero.title.hl">di Jepang</span>
             </h1>
-            <p class="mt-4 text-slate-700 text-lg" data-i18n="hero.subtitle">Platform komunitas Muslim untuk kajian, program keluarga, dan kontribusi artikel harian.</p>
+            <p class="mt-4 text-slate-700 text-lg" data-i18n="hero.subtitle">Platform komunitas Muslim untuk kajian, program keluarga, dan kontribusi artikel islam.</p>
             <div class="mt-6 flex flex-wrap gap-3">
               <a href="#daftar" class="px-5 py-3 rounded-xl bg-primary-600 text-white hover:bg-primary-700" data-i18n="hero.cta.primary">Daftar Kegiatan</a>
               <a href="#artikel" class="px-5 py-3 rounded-xl border hover:bg-slate-50" data-i18n="hero.cta.secondary">Baca Artikel</a>
+              <!-- Optional hero join button:
+              <a data-join-link target="_blank" rel="noopener" class="px-5 py-3 rounded-xl border hover:bg-slate-50" data-i18n="btn.join">Gabung Komunitas</a>
+              -->
             </div>
             <blockquote class="mt-6 p-4 rounded-xl bg-sand-50 ring-1 ring-slate-200 text-sm">
               <p class="italic" data-i18n="hero.ayah">“Sebaik-baik kalian adalah yang belajar Al-Qur'an dan mengajarkannya.”</p>
@@ -108,7 +120,7 @@
             </blockquote>
           </div>
           <div class="relative">
-            <img src="daftar.jpg" alt="Kegiatan komunitas" class="rounded-2xl w-full ring-1 ring-primary-100 shadow" loading="eager" onerror="this.onerror=null; this.src='hero.jpg';" />
+            <img src="daftar1.jpeg" alt="Kegiatan komunitas" class="rounded-2xl w-full ring-1 ring-primary-100 shadow" loading="eager" onerror="this.onerror=null; this.src='hero.jpg';" />
             <div class="absolute -bottom-6 -right-4 bg-white p-4 rounded-xl shadow ring-1 ring-slate-200 w-64">
               <p class="text-sm font-semibold" data-i18n="event.nearby">Event Terdekat</p>
               <p class="text-xs text-slate-600" data-i18n="event.sample">Kajian Keluarga • Sabtu (lihat Jadwal)</p>
@@ -227,7 +239,7 @@
               <h3 class="font-semibold mb-2">Butuh cepat?</h3>
               <p class="text-sm text-slate-600 mb-3">Kirim permintaan materi via WhatsApp. Pesan akan otomatis terisi dari formulir.</p>
               <button id="waBtn" class="w-full px-4 py-2 rounded-xl border hover:bg-slate-50 text-sm" data-i18n="materi.wa.cta">Chat WhatsApp</button>
-              <p class="mt-2 text-xs text-slate-500">Catatan: Ganti nomor WhatsApp panitia di kode (variabel <code>6285211286642</code>).</p>
+              <p class="mt-2 text-xs text-slate-500">Nomor WA admin bisa diganti di variabel <code>WA_NUMBER</code>.</p>
             </div>
           </aside>
         </div>
@@ -238,7 +250,7 @@
     <section id="galeri" class="py-16 border-t">
       <div class="max-w-7xl mx-auto px-4">
         <h2 class="text-2xl md:text-3xl font-bold" data-i18n="sec.galeri">Galeri Kegiatan</h2>
-        <p class="mt-2 text-slate-600 text-sm">Galeri ditarik langsung dari Google Drive folder.</p>
+        <p class="mt-2 text-slate-600 text-sm">Galeri info dan kegiatan</p>
         <div class="mt-6">
           <iframe title="Galeri Drive" class="w-full h-[540px] rounded-2xl ring-1 ring-slate-200" src="https://drive.google.com/embeddedfolderview?id=19ZWDoIjY-5NavNYQCX3OpkxNuYyV6HFW#grid"></iframe>
         </div>
@@ -256,7 +268,7 @@
             </div>
             <div class="p-4 rounded-xl bg-white ring-1 ring-slate-200">
               <p class="text-sm text-slate-600" data-i18n="kontak.wa">WhatsApp / Telegram</p>
-              <a href="#" class="font-medium" data-i18n="btn.join">Gabung Komunitas</a>
+              <a data-join-link target="_blank" rel="noopener" class="font-medium" data-i18n="btn.join">Gabung Komunitas</a>
             </div>
           </div>
         </div>
@@ -301,6 +313,12 @@
   <button id="backToTop" aria-label="Kembali ke atas" class="fixed bottom-6 right-6 hidden px-4 py-3 rounded-full shadow bg-primary-600 text-white">↑</button>
 
   <script>
+    // ======= CONFIG: Join Community URL =======
+    // Ganti dengan link grup WhatsApp/Telegram komunitas, contoh:
+    // WhatsApp: https://chat.whatsapp.com/ID_GRUP
+    // Telegram: https://t.me/+INVITE_CODE
+    const COMMUNITY_JOIN_URL = 'https://chat.whatsapp.com/YOUR_GROUP_ID';
+
     // ======= UI basics =======
     document.getElementById('year').textContent = new Date().getFullYear();
     const btn = document.getElementById('menuBtn');
@@ -323,6 +341,9 @@
       };
       window.addEventListener('scroll', onScroll); onScroll();
     }
+
+    // Set all [data-join-link] hrefs
+    document.querySelectorAll('[data-join-link]').forEach(a => { a.href = COMMUNITY_JOIN_URL; });
 
     // ====== I18N (ID <-> EN) ======
     const I18N = {
@@ -384,7 +405,7 @@
       const listAll=await getArticles();
       const list=listAll.filter(a=> CURRENT_CATEGORY==='Semua' || (a.category||'Umum')===CURRENT_CATEGORY);
       if(!list.length){ wrap.innerHTML='<p class="text-slate-600">Belum ada artikel.</p>'; return; }
-      list.forEach(a=>{ const el=document.createElement('article'); el.className='p-6 rounded-2xl ring-1 ring-slate-200 bg-white'; el.innerHTML=`<div class=\"text-xs text-primary-700 font-medium\">${a.category||'Umum'}</div><h3 class=\"mt-1 font-semibold\">${a.title||''}</h3><p class=\"mt-1 text-xs text-slate-500\">${a.date||''}</p><p class=\"mt-3 text-sm text-slate-700\">${(a.body||'').replace(/\n/g,'<br>')}</p>`; wrap.appendChild(el); });
+      list.forEach(a=>{ const el=document.createElement('article'); el.className='p-6 rounded-2xl ring-1 ring-slate-200 bg-white'; el.innerHTML=`<div class="text-xs text-primary-700 font-medium">${a.category||'Umum'}</div><h3 class="mt-1 font-semibold">${a.title||''}</h3><p class="mt-1 text-xs text-slate-500">${a.date||''}</p><p class="mt-3 text-sm text-slate-700">${(a.body||'').replace(/\n/g,'<br>')}</p>`; wrap.appendChild(el); });
     }
 
     // ======= Shalat (AlAdhan) dengan cache =======
@@ -398,17 +419,17 @@
       let t=getCache(cacheKey);
       if(!t){ const url=`https://api.aladhan.com/v1/timings?latitude=${lat}&longitude=${lon}&method=${method||7}&timezonestring=${encodeURIComponent(tz)}`; const res=await fetch(url); const data=await res.json(); t=(data&&data.data&&data.data.timings)||{}; setCache(cacheKey,t,12*60*60*1000); }
       const wrap=document.getElementById('shalatWrap'); wrap.innerHTML='';
-      ['Fajr','Dhuhr','Asr','Maghrib','Isha'].forEach(k=>{ const card=document.createElement('div'); card.className='p-5 rounded-2xl ring-1 ring-slate-200 bg-white'; card.innerHTML=`<div class=\"text-xs text-slate-500\">${k}</div><div class=\"mt-1 text-2xl font-bold\">${t[k]||'-'}</div>`; wrap.appendChild(card); });
+      ['Fajr','Dhuhr','Asr','Maghrib','Isha'].forEach(k=>{ const card=document.createElement('div'); card.className='p-5 rounded-2xl ring-1 ring-slate-200 bg-white'; card.innerHTML=`<div class="text-xs text-slate-500">${k}</div><div class="mt-1 text-2xl font-bold">${t[k]||'-'}</div>`; wrap.appendChild(card); });
     }
 
     async function initShalat(){
       const where=document.getElementById('shalatWhere'); const methodSel=document.getElementById('calcMethod');
       const def={lat:35.4437, lon:139.6380, name:'Yokohama'}; let pos=def;
       try{ const gp=await new Promise((res,rej)=> navigator.geolocation ? navigator.geolocation.getCurrentPosition(res,rej,{enableHighAccuracy:true,timeout:7000}) : rej('no geo')); pos={lat:gp.coords.latitude, lon:gp.coords.longitude, name:'Lokasi Anda'}; }catch{}
-      where.textContent=`${pos.name} (${pos.lat.toFixed(3)}, ${pos.lon.toFixed(3)})`;
+      if(where) where.textContent=`${pos.name} (${pos.lat.toFixed(3)}, ${pos.lon.toFixed(3)})`;
       await loadShalat(pos.lat,pos.lon,methodSel?.value||7);
       methodSel?.addEventListener('change',()=> loadShalat(pos.lat,pos.lon,methodSel.value));
-      document.getElementById('btnLocate')?.addEventListener('click', async ()=>{ try{ const gp=await new Promise((res,rej)=> navigator.geolocation ? navigator.geolocation.getCurrentPosition(res,rej,{enableHighAccuracy:true,timeout:7000}) : rej('no geo')); pos={lat:gp.coords.latitude, lon:gp.coords.longitude, name:'Lokasi Anda'}; where.textContent=`${pos.name} (${pos.lat.toFixed(3)}, ${pos.lon.toFixed(3)})`; await loadShalat(pos.lat,pos.lon,methodSel.value); }catch{} });
+      document.getElementById('btnLocate')?.addEventListener('click', async ()=>{ try{ const gp=await new Promise((res,rej)=> navigator.geolocation ? navigator.geolocation.getCurrentPosition(res,rej,{enableHighAccuracy:true,timeout:7000}) : rej('no geo')); pos={lat:gp.coords.latitude, lon:gp.coords.longitude, name:'Lokasi Anda'}; if(where) where.textContent=`${pos.name} (${pos.lat.toFixed(3)}, ${pos.lon.toFixed(3)})`; await loadShalat(pos.lat,pos.lon,methodSel.value); }catch{} });
     }
 
     // ======= Init =======
@@ -438,8 +459,7 @@
         email?`Email: ${email}`:'',
         wa?`No WA: ${wa}`:'',
         msg?`Pesan: ${msg}`:''
-      ].filter(Boolean).join('
-');
+      ].filter(Boolean).join('\n');
       return encodeURIComponent(lines);
     }
     document.getElementById('waBtn')?.addEventListener('click', ()=>{
