@@ -3,85 +3,52 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-  <title>Ruang Belajar Muslim Jepang</title>
-  <meta name="description" content="Ruang Belajar Muslim Jepang: info kegiatan, pendaftaran, materi, dan program belajar." />
-
-  <!-- Open Graph / Twitter -->
-  <meta property="og:title" content="Ruang Belajar Muslim Jepang" />
-  <meta property="og:description" content="Info kegiatan, pendaftaran, dan materi, dan program belajar." />
+  <title>Komunitas Muslim Jepang — RBM</title>
+  <meta name="description" content="Situs komunitas RBM Jepang: kajian, program, artikel harian, pendaftaran. Bahasa otomatis Indonesia & English." />
+  <meta property="og:title" content="Komunitas Muslim Jepang — RBM" />
+  <meta property="og:description" content="Kajian, program, artikel harian, dan pendaftaran." />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="daftar.jpg" />
+  <meta property="og:image" content="logo.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="theme-color" content="#16a34a" />
-
-  <!-- Favicon -->
+  <meta name="theme-color" content="#22c55e" />
   <link rel="icon" href="logo.jpg" />
-
-  <!-- SEO: canonical + hreflang -->
   <link rel="canonical" href="https://example.com/" />
   <link rel="alternate" hreflang="id" href="?lang=id" />
-  <link rel="alternate" hreflang="ja" href="?lang=ja" />
-
-  <!-- Preload hero -->
+  <link rel="alternate" hreflang="en" href="?lang=en" />
   <link rel="preload" as="image" href="daftar.jpg" />
 
-  <!-- TailwindCSS CDN -->
+  <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Leaflet CSS for map -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+
   <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            primary: {
-              DEFAULT: '#16a34a',
-              50: '#f0fdf4', 100: '#dcfce7', 200: '#bbf7d0',
-              300: '#86efac', 400: '#4ade80', 500: '#22c55e',
-              600: '#16a34a', 700: '#15803d', 800: '#166534', 900: '#14532d'
-            }
-          }
-        }
-      }
-    }
+    tailwind.config = { theme: { extend: { colors: { primary: { DEFAULT:'#16a34a',50:'#f0fdf4',100:'#dcfce7',200:'#bbf7d0',300:'#86efac',400:'#4ade80',500:'#22c55e',600:'#16a34a',700:'#15803d',800:'#166534',900:'#14532d' }, sand:{50:'#faf7f2',100:'#f4efe6',200:'#e6dcc4'} } } } };
   </script>
   <style>
-    html { scroll-behavior: smooth; }
-    .skip-link { position:absolute; left:-999px; top:auto; width:1px; height:1px; overflow:hidden; }
-    .skip-link:focus { position:static; width:auto; height:auto; padding:8px 12px; background:#fff; border:1px solid #ccc; border-radius:10px; }
-    .active-link { color:#15803d; font-weight:600; }
+    html{scroll-behavior:smooth} .skip-link{position:absolute;left:-999px;top:auto;width:1px;height:1px;overflow:hidden}.skip-link:focus{position:static;width:auto;height:auto;padding:8px 12px;background:#fff;border:1px solid #ccc;border-radius:10px}.active-link{color:#15803d;font-weight:600}
+    .pattern{background-image:radial-gradient(circle at 1px 1px, rgba(20,83,45,0.15) 1px, transparent 1px);background-size:20px 20px}
   </style>
-
-  <!-- Structured Data -->
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "Ruang Belajar Muslim Jepang",
-    "url": "https://example.com/",
-    "logo": "logo.jpg",
-    "sameAs": []
-  }
+  {"@context":"https://schema.org","@type":"Organization","name":"Ruang Belajar Muslim Jepang (RBM)","url":"https://example.com/","logo":"logo.jpg","sameAs":[]}
   </script>
 </head>
-
 <body class="bg-white text-slate-900">
   <a href="#main" class="skip-link">Skip to content</a>
 
-  <!-- Top bar -->
-  <div class="bg-primary-600 text-white text-sm">
-    <div class="max-w-7xl mx-auto px-4 py-2 flex items-center justify-between">
-      <span class="truncate" data-i18n="banner.text">Assalamualaikum—Pendaftaran Kelas Menyambut masa Baligh dibuka sampai 30 September.</span>
+  <div class="bg-gradient-to-r from-primary-600 to-primary-500 text-white text-sm">
+    <div class="max-w-7xl mx-auto px-4 py-2 flex items-center justify-between gap-3">
+      <span class="truncate" data-i18n="banner.text">Assalamualaikum—Pendaftaran Program Semester Baru dibuka sampai 30 Agustus.</span>
       <a href="#daftar" class="underline font-medium" data-i18n="banner.cta">Daftar sekarang</a>
     </div>
   </div>
 
-  <!-- Navbar -->
   <header class="sticky top-0 z-50 bg-white/90 backdrop-blur border-b">
     <div class="max-w-7xl mx-auto px-4">
       <div class="flex items-center justify-between h-16">
-        <a href="index.html" class="flex items-center gap-3">
-          <img src="logo.jpg" alt="Logo Ruang Belajar" class="h-9 w-9 rounded-lg ring-1 ring-primary-200" width="36" height="36" />
-          <span class="font-bold text-lg" data-i18n="brand.name">Ruang Belajar Muslim Jepang</span>
+        <a href="#" class="flex items-center gap-3">
+          <img src="logo.jpg" alt="Logo RBM" class="h-9 w-9 rounded-lg ring-1 ring-primary-200" width="36" height="36" />
+          <span class="font-bold text-lg" data-i18n="brand.name">Komunitas Muslim Jepang</span>
         </a>
         <nav class="hidden md:flex items-center gap-5 text-sm" id="mainNav">
           <a href="#tentang" class="hover:text-primary-700" data-i18n="nav.tentang">Tentang</a>
@@ -91,16 +58,14 @@
           <a href="#galeri" class="hover:text-primary-700" data-i18n="nav.galeri">Galeri</a>
           <a href="#kontak" class="hover:text-primary-700" data-i18n="nav.kontak">Kontak</a>
           <a href="#daftar" class="inline-flex items-center px-4 py-2 rounded-xl bg-primary-600 text-white hover:bg-primary-700" data-i18n="nav.daftar">Daftar</a>
-          <!-- Language toggle -->
           <div class="ml-1 inline-flex rounded-xl ring-1 ring-slate-200 overflow-hidden" role="group" aria-label="Language">
-            <button data-lang-btn="id" onclick="changeLang('id')" class="px-3 py-2 text-sm hover:bg-slate-50" aria-pressed="false" data-i18n-lang-id>ID</button>
-            <button data-lang-btn="ja" onclick="changeLang('ja')" class="px-3 py-2 text-sm hover:bg-slate-50" aria-pressed="false" data-i18n-lang-ja>日本語</button>
+            <button data-lang-btn="id" class="px-3 py-2 text-sm hover:bg-slate-50" aria-pressed="false">ID</button>
+            <button data-lang-btn="en" class="px-3 py-2 text-sm hover:bg-slate-50" aria-pressed="false">EN</button>
           </div>
         </nav>
         <button id="menuBtn" class="md:hidden p-2 rounded-lg border" aria-label="Buka menu">☰</button>
       </div>
     </div>
-    <!-- Mobile menu -->
     <div id="mobileMenu" class="md:hidden hidden border-t bg-white">
       <nav class="max-w-7xl mx-auto px-4 py-3 grid gap-2 text-sm">
         <a href="#tentang" class="py-2" data-i18n="nav.tentang">Tentang</a>
@@ -111,99 +76,132 @@
         <a href="#kontak" class="py-2" data-i18n="nav.kontak">Kontak</a>
         <a href="#daftar" class="inline-flex items-center justify-center px-4 py-2 rounded-xl bg-primary-600 text-white" data-i18n="nav.daftar">Daftar</a>
         <div class="mt-2 inline-flex rounded-xl ring-1 ring-slate-200 overflow-hidden">
-          <button data-lang-btn="id" onclick="changeLang('id')" class="px-3 py-2 text-sm hover:bg-slate-50" aria-pressed="false" data-i18n-lang-id>ID</button>
-          <button data-lang-btn="ja" onclick="changeLang('ja')" class="px-3 py-2 text-sm hover:bg-slate-50" aria-pressed="false" data-i18n-lang-ja>日本語</button>
+          <button data-lang-btn="id" class="px-3 py-2 text-sm hover:bg-slate-50" aria-pressed="false">ID</button>
+          <button data-lang-btn="en" class="px-3 py-2 text-sm hover:bg-slate-50" aria-pressed="false">EN</button>
         </div>
       </nav>
     </div>
   </header>
 
   <main id="main">
-    <!-- Hero -->
     <section class="relative overflow-hidden">
-      <!-- FIX: overlay di bawah konten -->
-      <div class="absolute inset-0 -z-10 bg-gradient-to-b from-primary-50 to-white"></div>
+      <div class="absolute inset-0 -z-10 bg-[conic-gradient(at_20%_20%,#f0fdf4,#ffffff,#f4efe6)] pattern"></div>
       <div class="max-w-7xl mx-auto px-4 py-16 md:py-24 relative min-h-[360px]">
         <div class="grid md:grid-cols-2 gap-10 items-center">
           <div>
+            <p class="text-sm text-primary-700 font-semibold tracking-wide" data-i18n="hero.badge">Bismillah • Komunitas Belajar & Berbagi</p>
             <h1 class="text-3xl md:text-5xl font-extrabold leading-tight">
-              <span data-i18n="hero.title.pre">Belajar islam sesuai sunnah </span>
+              <span data-i18n="hero.title.pre">Belajar Islam sesuai sunnah </span>
               <span class="text-primary-700" data-i18n="hero.title.hl">di Jepang</span>
             </h1>
-            <p class="mt-4 text-slate-700 text-lg" data-i18n="hero.subtitle">
-              Platform komunitas Muslim untuk belajar islam sesuai sunnah di Jepang. Terbuka untuk anak-anak dan semua kalangan usia.
-            </p>
+            <p class="mt-4 text-slate-700 text-lg" data-i18n="hero.subtitle">Platform komunitas Muslim untuk kajian, program keluarga, dan kontribusi artikel harian.</p>
             <div class="mt-6 flex flex-wrap gap-3">
               <a href="#daftar" class="px-5 py-3 rounded-xl bg-primary-600 text-white hover:bg-primary-700" data-i18n="hero.cta.primary">Daftar Kegiatan</a>
-              <a href="#program" class="px-5 py-3 rounded-xl border hover:bg-slate-50" data-i18n="hero.cta.secondary">Lihat Program</a>
+              <a href="#artikel" class="px-5 py-3 rounded-xl border hover:bg-slate-50" data-i18n="hero.cta.secondary">Baca Artikel</a>
             </div>
-            <ul class="mt-6 grid grid-cols-2 gap-4 text-sm">
-              <li class="flex items-center gap-2" data-i18n="hero.b1">✅ Kelas rutin online & offline</li>
-              <li class="flex items-center gap-2" data-i18n="hero.b2">✅ Artikel</li>
-              <li class="flex items-center gap-2" data-i18n="hero.b3">✅ Info halal & komunitas</li>
-              <li class="flex items-center gap-2" data-i18n="hero.b4">✅ download materi</li>
-            </ul>
+            <blockquote class="mt-6 p-4 rounded-xl bg-sand-50 ring-1 ring-slate-200 text-sm">
+              <p class="italic" data-i18n="hero.ayah">“Sebaik-baik kalian adalah yang belajar Al-Qur'an dan mengajarkannya.”</p>
+              <footer class="mt-1 text-slate-600">— HR. Bukhari</footer>
+            </blockquote>
           </div>
-
           <div class="relative">
-            <img src="daftar.jpg" alt="Kegiatan belajar" class="rounded-2xl w-full ring-1 ring-primary-100 shadow"
-                 loading="eager" onerror="this.onerror=null; this.src='hero.jpg';" />
-            <div class="absolute -bottom-6 -right-4 bg-white p-4 rounded-xl shadow ring-1 ring-slate-200 w-60">
+            <img src="daftar.jpg" alt="Kegiatan komunitas" class="rounded-2xl w-full ring-1 ring-primary-100 shadow" loading="eager" onerror="this.onerror=null; this.src='hero.jpg';" />
+            <div class="absolute -bottom-6 -right-4 bg-white p-4 rounded-xl shadow ring-1 ring-slate-200 w-64">
               <p class="text-sm font-semibold" data-i18n="event.nearby">Event Terdekat</p>
-              <p class="text-xs text-slate-600" data-i18n="event.sample">Kajian Online • Belum Terjadwalkan</p>
+              <p class="text-xs text-slate-600" data-i18n="event.sample">Kajian Keluarga • Sabtu (lihat Jadwal)</p>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Tentang -->
     <section id="tentang" class="py-16 border-t">
       <div class="max-w-7xl mx-auto px-4">
-        <h2 class="text-2xl md:text-3xl font-bold" data-i18n="sec.tentang">Tentang Kami</h2>
-        <p class="mt-4 text-slate-700" data-i18n="tentang.p">
-          Ruang Belajar Muslim (RBM) Jepang adalah lembaga pendidikan nonformal yang berlokasi di Yokohama, sekitar 40 menit hingga 1 jam perjalanan dari Tokyo. RBM Jepang berdiri pada 18 Desember 2022, sebagai respons atas kebutuhan pendidikan agama dan bahasa Arab bagi anak-anak Muslim diaspora yang semakin meningkat di wilayah Yokohama dan sekitarnya. 
-        </p>
+        <h2 class="text-2xl md:text-3xl font-bold" data-i18n="sec.tentang">Tentang Komunitas</h2>
+        <p class="mt-4 text-slate-700" data-i18n="tentang.p">RBM Jepang adalah komunitas belajar nonformal di Yokohama—wadah keluarga Muslim untuk bertumbuh bersama: akidah, adab, dan bahasa Arab. Terbuka untuk anak, remaja, dan dewasa.</p>
       </div>
     </section>
 
-    <!-- Program -->
     <section id="program" class="py-16 border-t">
       <div class="max-w-7xl mx-auto px-4">
         <h2 class="text-2xl md:text-3xl font-bold" data-i18n="sec.program">Program & Kegiatan</h2>
         <div class="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          <div class="p-6 rounded-2xl ring-1 ring-slate-200 shadow-sm"><h3 class="font-semibold" data-i18n="card.jp.title">Kelas Iqro` anak</h3><p class="mt-2 text-sm text-slate-700" data-i18n="card.jp.p">hijaiyah</p></div>
-          <div class="p-6 rounded-2xl ring-1 ring-slate-200 shadow-sm"><h3 class="font-semibold" data-i18n="card.islam.title">Kelas PAI Online</h3><p class="mt-2 text-sm text-slate-700" data-i18n="card.islam.p">Adab, fiqh praktis.</p></div>
-          <div class="p-6 rounded-2xl ring-1 ring-slate-200 shadow-sm"><h3 class="font-semibold" data-i18n="card.tahfidz.title">Kelas Perbaikan Bacaan Al-Qur`an dewasa</h3><p class="mt-2 text-sm text-slate-700" data-i18n="card.tahfidz.p">tajwid, hafalan</p></div>
+          <div class="p-6 rounded-2xl ring-1 ring-slate-200 shadow-sm bg-white"><h3 class="font-semibold" data-i18n="card.jp.title">Kelas Iqro` Anak</h3><p class="mt-2 text-sm text-slate-700" data-i18n="card.jp.p">Huruf hijaiyah, tartil menyenangkan.</p></div>
+          <div class="p-6 rounded-2xl ring-1 ring-slate-200 shadow-sm bg-white"><h3 class="font-semibold" data-i18n="card.islam.title">Kelas PAI Online</h3><p class="mt-2 text-sm text-slate-700" data-i18n="card.islam.p">Adab harian, fiqh praktis, akhlak.</p></div>
+          <div class="p-6 rounded-2xl ring-1 ring-slate-200 shadow-sm bg-white"><h3 class="font-semibold" data-i18n="card.tahfidz.title">Perbaikan Bacaan Dewasa</h3><p class="mt-2 text-sm text-slate-700" data-i18n="card.tahfidz.p">Tajwid & muraja'ah.</p></div>
         </div>
       </div>
     </section>
 
-    <!-- Jadwal -->
-    <section id="jadwal" class="py-16 border-t">
-      <div class="max-w-7xl mx-auto px-4">
-        <h2 class="text-2xl md:text-3xl font-bold" data-i18n="sec.jadwal">Jadwal</h2>
-        <ul class="mt-6 space-y-3 text-sm">
-          <li data-i18n="sch.1">Kelas Iqro` anak — Selasa ~ Kamis 15:30 JST</li>
-          <li data-i18n="sch.2">Kelas PAI Online — Kamis 19:30 JST</li>
-          <li data-i18n="sch.3">Kelas Perbaikan Bacaan Al-Qur`an dewasa — Ahad 21:00 JST</li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- Artikel -->
+    <!-- ARTIKEL dengan sumber Google Sheets + Filter kategori -->
     <section id="artikel" class="py-16 border-t">
       <div class="max-w-7xl mx-auto px-4">
-        <h2 class="text-2xl md:text-3xl font-bold" data-i18n="sec.artikel">Artikel & Informasi</h2>
-        <div class="mt-6 grid md:grid-cols-3 gap-6">
-          <article class="p-6 rounded-2xl ring-1 ring-slate-200"><h3 class="font-semibold" data-i18n="art.1.t">Tips Belajar</h3><p class="mt-2 text-sm text-slate-700" data-i18n="art.1.p">Strategi belajar efektif.</p></article>
-          <article class="p-6 rounded-2xl ring-1 ring-slate-200"><h3 class="font-semibold" data-i18n="art.2.t">Panduan Masjid</h3><p class="mt-2 text-sm text-slate-700" data-i18n="art.2.p">Lokasi tempat ibadah di Yokohama.</p></article>
-          <article class="p-6 rounded-2xl ring-1 ring-slate-200"><h3 class="font-semibold" data-i18n="art.3.t">Etika Kerja</h3><p class="mt-2 text-sm text-slate-700" data-i18n="art.3.p">Kebiasaan profesional di Jepang.</p></article>
+        <div class="flex items-center justify-between gap-3">
+          <h2 class="text-2xl md:text-3xl font-bold" data-i18n="sec.artikel">Artikel & Informasi Harian</h2>
+          <button id="btnAdd" class="hidden px-4 py-2 rounded-xl border hover:bg-slate-50 text-sm">+ <span data-i18n="art.add">Tambah Artikel</span></button>
         </div>
+        <p class="mt-2 text-slate-600 text-sm" data-i18n="art.hint">Sumber artikel: Google Sheets (publish to web). Kolom: title/date/body/category.</p>
+        <div id="catFilter" class="mt-4 flex flex-wrap gap-2"></div>
+        <div id="articles" class="mt-6 grid md:grid-cols-3 gap-6"></div>
+
+        <!-- Modal tambah (aktif hanya jika pakai local/endpoint) -->
+        <dialog id="articleDialog" class="rounded-2xl p-0 w-full max-w-xl">
+          <form id="articleForm" method="dialog" class="bg-white rounded-2xl ring-1 ring-slate-200">
+            <div class="p-5 border-b"><h3 class="font-semibold" data-i18n="art.modal.title">Tambah Artikel</h3></div>
+            <div class="p-5 grid gap-4">
+              <div><label class="text-sm" for="art-title" data-i18n="art.modal.judul">Judul</label>
+                <input id="art-title" required class="mt-1 w-full rounded-xl border p-3" placeholder="Judul artikel" /></div>
+              <div class="grid sm:grid-cols-2 gap-4">
+                <div><label class="text-sm" for="art-date" data-i18n="art.modal.tanggal">Tanggal</label>
+                  <input id="art-date" type="date" required class="mt-1 w-full rounded-xl border p-3" /></div>
+                <div><label class="text-sm" for="art-cat">Kategori</label>
+                  <select id="art-cat" class="mt-1 w-full rounded-xl border p-3">
+                    <option value="Kajian">Kajian</option>
+                    <option value="Pengumuman">Pengumuman</option>
+                    <option value="Parenting">Parenting</option>
+                    <option value="Umum" selected>Umum</option>
+                  </select></div>
+              </div>
+              <div><label class="text-sm" for="art-body" data-i18n="art.modal.isi">Isi</label>
+                <textarea id="art-body" rows="6" required class="mt-1 w-full rounded-xl border p-3" placeholder="Tulis artikel"></textarea></div>
+            </div>
+            <div class="p-5 flex items-center justify-end gap-3 border-t">
+              <button type="button" data-close class="px-4 py-2 rounded-xl border" data-i18n="art.modal.batal">Batal</button>
+              <button type="submit" class="px-4 py-2 rounded-xl bg-primary-600 text-white" data-i18n="art.modal.simpan">Simpan</button>
+            </div>
+          </form>
+        </dialog>
       </div>
     </section>
 
-    <!-- Galeri -->
+    <!-- Shalat & Masjid -->
+    <section id="shalat" class="py-16 border-t bg-white">
+      <div class="max-w-7xl mx-auto px-4">
+        <h2 class="text-2xl md:text-3xl font-bold" data-i18n="sec.shalat">Agenda Shalat (lokal)</h2>
+        <p class="mt-2 text-slate-600 text-sm" data-i18n="shalat.desc">Otomatis deteksi lokasi (izin browser) atau gunakan default Yokohama.</p>
+        <div class="mt-4 flex flex-wrap gap-3 items-center">
+          <button id="btnLocate" class="px-4 py-2 rounded-xl border hover:bg-slate-50 text-sm" data-i18n="shalat.locate">Gunakan Lokasi Saya</button>
+          <select id="calcMethod" class="px-3 py-2 rounded-xl border text-sm">
+            <option value="2">ISNA</option>
+            <option value="3">MWL</option>
+            <option value="4">Umm Al-Qura</option>
+            <option value="5">Egypt</option>
+            <option value="7" selected>UOIF</option>
+          </select>
+          <span id="shalatWhere" class="text-sm text-slate-600"></span>
+        </div>
+        <div id="shalatWrap" class="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+      </div>
+    </section>
+
+    <section id="peta" class="py-16 border-t bg-sand-50">
+      <div class="max-w-7xl mx-auto px-4">
+        <h2 class="text-2xl md:text-3xl font-bold" data-i18n="sec.peta">Peta Masjid Terdekat</h2>
+        <p class="mt-2 text-slate-600 text-sm" data-i18n="peta.desc">Sumber peta: OpenStreetMap. Klik marker untuk detail.</p>
+        <div id="map" class="mt-6 w-full h-[420px] rounded-2xl ring-1 ring-slate-200"></div>
+      </div>
+    </section>
+
     <section id="galeri" class="py-16 border-t">
       <div class="max-w-7xl mx-auto px-4">
         <h2 class="text-2xl md:text-3xl font-bold" data-i18n="sec.galeri">Galeri Kegiatan</h2>
@@ -213,8 +211,7 @@
       </div>
     </section>
 
-    <!-- Kontak -->
-    <section id="kontak" class="py-16 border-t bg-slate-50">
+    <section id="kontak" class="py-16 border-t bg-sand-50">
       <div class="max-w-7xl mx-auto px-4 grid lg:grid-cols-2 gap-10 items-start">
         <div>
           <h2 class="text-2xl md:text-3xl font-bold" data-i18n="sec.kontak">Kontak</h2>
@@ -225,93 +222,63 @@
             </div>
             <div class="p-4 rounded-xl bg-white ring-1 ring-slate-200">
               <p class="text-sm text-slate-600" data-i18n="kontak.wa">WhatsApp / Telegram</p>
-              <a href="#" class="font-medium" data-i18n="btn.join">Gabung Grup</a>
+              <a href="#" class="font-medium" data-i18n="btn.join">Gabung Komunitas</a>
             </div>
           </div>
         </div>
-
-        <!-- FORM KONTAK (FORMSPREE) -->
         <div class="bg-white p-4 rounded-2xl ring-1 ring-slate-200 shadow-sm">
-          <form id="contactForm"
-                action="https://formspree.io/f/mldlkpdq"
-                method="POST"
-                class="grid gap-4">
-            <div>
-              <label class="text-sm" for="cf-name" data-i18n="form.name">Nama</label>
-              <input id="cf-name" name="name" required
-                     class="mt-1 w-full rounded-xl border p-3"
-                     placeholder="Nama Anda" />
-            </div>
-            <div>
-              <label class="text-sm" for="cf-email" data-i18n="form.email">Email</label>
-              <input id="cf-email" type="email" name="email" required
-                     class="mt-1 w-full rounded-xl border p-3"
-                     placeholder="email@contoh.com" />
-            </div>
-            <div>
-              <label class="text-sm" for="cf-message" data-i18n="form.message">Pesan</label>
-              <textarea id="cf-message" name="message" rows="4" required
-                        class="mt-1 w-full rounded-xl border p-3"
-                        placeholder="Tulis pesan Anda"></textarea>
-            </div>
-
-            <!-- metadata opsional -->
-            <input type="hidden" name="page" value="rbj-site/index.html">
+          <form id="contactForm" action="https://formspree.io/f/mldlkpdq" method="POST" class="grid gap-4">
+            <div><label class="text-sm" for="cf-name" data-i18n="form.name">Nama</label>
+              <input id="cf-name" name="name" required class="mt-1 w-full rounded-xl border p-3" placeholder="Nama Anda" /></div>
+            <div><label class="text-sm" for="cf-email" data-i18n="form.email">Email</label>
+              <input id="cf-email" type="email" name="email" required class="mt-1 w-full rounded-xl border p-3" placeholder="email@contoh.com" /></div>
+            <div><label class="text-sm" for="cf-message" data-i18n="form.message">Pesan</label>
+              <textarea id="cf-message" name="message" rows="4" required class="mt-1 w-full rounded-xl border p-3" placeholder="Tulis pesan Anda"></textarea></div>
+            <input type="hidden" name="page" value="rbm-site/index.html">
             <input type="text" name="_gotcha" style="display:none">
-
-            <button type="submit" id="contactSubmit"
-                    class="px-5 py-3 rounded-xl bg-primary-600 text-white"
-                    data-i18n="form.send">Kirim</button>
-
+            <button type="submit" id="contactSubmit" class="px-5 py-3 rounded-xl bg-primary-600 text-white" data-i18n="form.send">Kirim</button>
             <p id="contactStatus" class="text-sm text-slate-600" aria-live="polite"></p>
           </form>
         </div>
       </div>
     </section>
 
-    <!-- Daftar -->
     <section id="daftar" class="py-16 border-t bg-primary-50">
       <div class="max-w-3xl mx-auto px-4">
         <h2 class="text-2xl md:text-3xl font-bold" data-i18n="sec.daftar">Pendaftaran</h2>
         <p class="mt-2 text-slate-700" data-i18n="daftar.p">Silakan isi form pendaftaran (gantikan embed di bawah dengan Google Form Anda).</p>
         <div class="mt-6 bg-white p-4 md:p-6 rounded-2xl ring-1 ring-primary-100 shadow-sm">
-          <iframe title="Form Pendaftaran" class="w-full h-[720px] rounded-xl" src="https://docs.google.com/forms/d/e/1FAIpQLScEXAMPLE/viewform?embedded=true" loading="lazy">Memuat…</iframe>
+          <iframe title="Form Pendaftaran" class="w-full h-[720px] rounded-xl" src="https://bit.ly/rbmj_baligh" loading="lazy">Memuat…</iframe>
         </div>
       </div>
     </section>
   </main>
 
-  <!-- Footer -->
   <footer class="py-10 border-t">
     <div class="max-w-7xl mx-auto px-4 text-sm text-slate-600 flex flex-col md:flex-row gap-3 md:items-center md:justify-between">
-      <p>© <span id="year"></span> <span data-i18n="brand.name">Ruang Belajar Muslim Jepang</span>. <span data-i18n="footer.copyright">Semua hak cipta dilindungi.</span></p>
+      <p>© <span id="year"></span> <span data-i18n="brand.name">Komunitas Muslim Jepang</span>. <span data-i18n="footer.copyright">Semua hak cipta dilindungi.</span></p>
       <div class="flex gap-4">
-        <a href="#" class="hover:text-primary-700">Privasi</a>
-        <a href="#" class="hover:text-primary-700">S&K</a>
+        <a href="#" class="hover:text-primary-700" data-i18n="footer.privacy">Privasi</a>
+        <a href="#" class="hover:text-primary-700" data-i18n="footer.tos">S&K</a>
       </div>
     </div>
   </footer>
 
-  <!-- Back-to-top -->
+  <!-- Leaflet JS for map -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
   <button id="backToTop" aria-label="Kembali ke atas" class="fixed bottom-6 right-6 hidden px-4 py-3 rounded-full shadow bg-primary-600 text-white">↑</button>
 
   <script>
-    // Mobile menu
+    // ======= UI basics =======
+    document.getElementById('year').textContent = new Date().getFullYear();
     const btn = document.getElementById('menuBtn');
     const menu = document.getElementById('mobileMenu');
     btn?.addEventListener('click', () => menu.classList.toggle('hidden'));
-
-    // Tahun dinamis
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Back-to-top
     const btt = document.getElementById('backToTop');
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 600) btt.classList.remove('hidden'); else btt.classList.add('hidden');
-    });
+    window.addEventListener('scroll', () => { if (window.scrollY > 600) btt.classList.remove('hidden'); else btt.classList.add('hidden'); });
     btt?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-    // Highlight nav aktif
     const nav = document.getElementById('mainNav');
     if (nav) {
       const links = nav.querySelectorAll('a[href^="#"]');
@@ -319,113 +286,141 @@
       const sections = ids.map(id => document.getElementById(id)).filter(Boolean);
       const onScroll = () => {
         let current = null;
-        sections.forEach(sec => {
-          const top = sec.getBoundingClientRect().top + window.scrollY - 120;
-          if (window.scrollY >= top) current = sec.id;
-        });
+        sections.forEach(sec => { const top = sec.getBoundingClientRect().top + window.scrollY - 120; if (window.scrollY >= top) current = sec.id; });
         links.forEach(a => a.classList.remove('active-link'));
-        if (current) {
-          links.forEach(a => { if (a.getAttribute('href') === '#' + current) a.classList.add('active-link'); });
-        }
+        if (current) { links.forEach(a => { if (a.getAttribute('href') === '#' + current) a.classList.add('active-link'); }); }
       };
-      window.addEventListener('scroll', onScroll);
-      onScroll();
+      window.addEventListener('scroll', onScroll); onScroll();
     }
 
-    // ===== Formspree submit (AJAX) + pesan sukses / redirect =====
-    const f = document.getElementById('contactForm');
-    const s = document.getElementById('contactStatus');
-    const submitBtn = document.getElementById('contactSubmit');
-
-    const REDIRECT_TO_THANKYOU = false; // ubah ke true jika pakai halaman terima kasih
-    const THANKYOU_URL = 'terima-kasih.html';
-
-    f?.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      s.textContent = 'Mengirim...';
-      submitBtn.disabled = true;
-
-      try {
-        const formData = new FormData(f);
-        const res = await fetch(f.action, {
-          method: 'POST',
-          body: formData,
-          headers: { 'Accept': 'application/json' }
-        });
-        if (res.ok) {
-          if (REDIRECT_TO_THANKYOU) {
-            window.location.href = THANKYOU_URL;
-          } else {
-            s.textContent = 'Terima kasih! Pesan Anda sudah terkirim.';
-            f.reset();
-          }
-        } else {
-          s.textContent = 'Gagal mengirim. Coba lagi atau email langsung.';
-        }
-      } catch {
-        s.textContent = 'Koneksi bermasalah. Coba lagi ya.';
-      } finally {
-        submitBtn.disabled = false;
+    // ====== I18N (ID <-> EN) ======
+    const I18N = {
+      id: {
+        'banner.text':'Assalamualaikum—Pendaftaran Program Semester Baru dibuka sampai 30 Agustus.','banner.cta':'Daftar sekarang','brand.name':'Komunitas Muslim Jepang',
+        'nav.tentang':'Tentang','nav.program':'Program','nav.jadwal':'Jadwal','nav.artikel':'Artikel','nav.galeri':'Galeri','nav.kontak':'Kontak','nav.daftar':'Daftar',
+        'hero.badge':'Bismillah • Komunitas Belajar & Berbagi','hero.title.pre':'Belajar Islam sesuai sunnah ','hero.title.hl':'di Jepang','hero.subtitle':'Platform komunitas Muslim untuk kajian, program keluarga, dan kontribusi artikel harian.','hero.cta.primary':'Daftar Kegiatan','hero.cta.secondary':'Baca Artikel','hero.ayah':'“Sebaik-baik kalian adalah yang belajar Al-Qur\'an dan mengajarkannya.”','event.nearby':'Event Terdekat','event.sample':'Kajian Keluarga • Sabtu (lihat Jadwal)','sec.tentang':'Tentang Komunitas','tentang.p':'RBM Jepang adalah komunitas belajar nonformal di Yokohama—wadah keluarga Muslim untuk bertumbuh bersama: akidah, adab, dan bahasa Arab. Terbuka untuk anak, remaja, dan dewasa.','sec.program':'Program & Kegiatan','card.jp.title':'Kelas Iqro` Anak','card.jp.p':'Huruf hijaiyah, tartil menyenangkan.','card.islam.title':'Kelas PAI Online','card.islam.p':'Adab harian, fiqh praktis, akhlak.','card.tahfidz.title':'Perbaikan Bacaan Dewasa','card.tahfidz.p':'Tajwid & muraja\'ah.','sec.jadwal':'Jadwal','sch.1':'Kelas Iqro` anak — Selasa ~ Kamis 15:30 JST','sch.2':'Kelas PAI Online — Kamis 19:30 JST','sch.3':'Kelas Tajwid Online — Ahad 19:30 JST','sch.4':'Perbaikan Bacaan Dewasa — Ahad 21:00 JST','sec.artikel':'Artikel & Informasi Harian','art.add':'Tambah Artikel','art.hint':'Sumber artikel: Google Sheets (publish to web). Kolom: title/date/body/category.','art.modal.title':'Tambah Artikel','art.modal.judul':'Judul','art.modal.tanggal':'Tanggal','art.modal.isi':'Isi','art.modal.batal':'Batal','art.modal.simpan':'Simpan','sec.galeri':'Galeri Kegiatan','sec.kontak':'Kontak','kontak.email':'Email','kontak.wa':'WhatsApp / Telegram','btn.join':'Gabung Komunitas','form.name':'Nama','form.email':'Email','form.message':'Pesan','form.send':'Kirim','form.sending':'Mengirim...','form.sent':'Terima kasih! Pesan Anda terkirim.','form.fail':'Gagal mengirim. Coba lagi atau email langsung.','form.net':'Koneksi bermasalah. Coba lagi ya.','sec.daftar':'Pendaftaran','daftar.p':'Silakan isi form pendaftaran (gantikan embed di bawah dengan Google Form Anda).','footer.copyright':'Semua hak cipta dilindungi.',
+        'sec.shalat':'Agenda Shalat (lokal)','shalat.desc':'Otomatis deteksi lokasi (izin browser) atau gunakan default Yokohama.','shalat.locate':'Gunakan Lokasi Saya','sec.peta':'Peta Masjid Terdekat','peta.desc':'Sumber peta: OpenStreetMap. Klik marker untuk detail.'
+      },
+      en: {
+        'banner.text':'Assalamu\'alaykum—New Semester Registration is open until August 30.','banner.cta':'Register now','brand.name':'Muslim Community Japan','nav.tentang':'About','nav.program':'Programs','nav.jadwal':'Schedule','nav.artikel':'Articles','nav.galeri':'Gallery','nav.kontak':'Contact','nav.daftar':'Register','hero.badge':'Bismillah • Learn & Share','hero.title.pre':'Learn Islam upon the Sunnah ','hero.title.hl':'in Japan','hero.subtitle':'A community platform for studies, family programs, and daily article contributions.','hero.cta.primary':'See Activities','hero.cta.secondary':'Read Articles','hero.ayah':'“The best of you are those who learn the Qur\'an and teach it.”','event.nearby':'Upcoming Event','event.sample':'Family Study • Saturday (see Schedule)','sec.tentang':'About the Community','tentang.p':'RBM Japan is a non-formal learning community in Yokohama—supporting Muslim families in creed, manners, and Arabic. Open to kids, teens, and adults.','sec.program':'Programs & Activities','card.jp.title':'Kids\' Iqro Class','card.jp.p':'Hijaiyah letters, joyful tartil.','card.islam.title':'Online Islamic Studies','card.islam.p':'Daily manners, practical fiqh, character.','card.tahfidz.title':'Adult Recitation Improvement','card.tahfidz.p':'Tajwid & revision.','sec.jadwal':'Schedule','sch.1':'Kids\' Iqro — Tue ~ Thu 15:30 JST','sch.2':'Online PAI — Thu 19:30 JST','sch.3':'Online Tajwid — Sun 19:30 JST','sch.4':'Adult Recitation — Sun 21:00 JST','sec.artikel':'Daily Articles & Updates','art.add':'Add Article','art.hint':'Source: Google Sheets (publish to web). Columns: title/date/body/category.','art.modal.title':'Add Article','art.modal.judul':'Title','art.modal.tanggal':'Date','art.modal.isi':'Content','art.modal.batal':'Cancel','art.modal.simpan':'Save','sec.galeri':'Activity Gallery','sec.kontak':'Contact','kontak.email':'Email','kontak.wa':'WhatsApp / Telegram','btn.join':'Join the Community','form.name':'Name','form.email':'Email','form.message':'Message','form.send':'Send','form.sending':'Sending...','form.sent':'Thank you! Your message was sent.','form.fail':'Failed to send. Please try again or email us.','form.net':'Network error. Please try again.','sec.daftar':'Registration','daftar.p':'Please fill the registration form (replace the embed below with your Google Form).','sec.shalat':'Prayer Times (local)','shalat.desc':'Auto-detect location (browser permission) or use Yokohama default.','shalat.locate':'Use My Location','sec.peta':'Nearby Mosques Map','peta.desc':'Map source: OpenStreetMap. Click a marker for details.'
       }
-    });
-  </script>
+    };
+    const i18n = { lang:'id', t(key){return (I18N[this.lang]&&I18N[this.lang][key])||I18N['id'][key]||key;}, apply(){ document.documentElement.lang=this.lang; document.querySelectorAll('[data-i18n]').forEach(el=>{const k=el.getAttribute('data-i18n'); const txt=this.t(k); if(txt) el.textContent=txt;}); document.querySelectorAll('[data-lang-btn]').forEach(b=>{ b.setAttribute('aria-pressed', b.getAttribute('data-lang-btn')===this.lang?'true':'false'); });}, set(l){ this.lang=(l==='en')?'en':'id'; localStorage.setItem('rbm_lang',this.lang); this.apply(); } };
+    document.querySelectorAll('[data-lang-btn]')?.forEach(btn=>btn.addEventListener('click',()=>i18n.set(btn.getAttribute('data-lang-btn'))));
+    (function initLang(){ const url=new URL(location.href); const q=(url.searchParams.get('lang')||'').toLowerCase(); const stored=localStorage.getItem('rbm_lang'); const browser=navigator.language?.startsWith('en')?'en':'id'; const init=(q==='en'||q==='id')?q:(stored||browser||'id'); i18n.set(init); })();
 
-  <!-- ====== AUTO TRANSLATE (ID <-> JA) — DROP-IN ====== -->
-  <style>
-    /* Rapikan UI: sembunyikan banner & icon bawaan Google */
-    #goog-gt-tt, .goog-te-banner-frame, .goog-te-gadget-icon { display: none !important; }
-    body { top: 0 !important; }
-    .goog-te-combo { display: none !important; } /* kita pakai tombol custom */
-  </style>
+    // ======= Artikel (Google Sheets CSV) + kategori =======
+    // GANTI URL di bawah dengan URL publish-to-web CSV dari Google Sheets kamu (punyamu sudah disiapkan):
+    const SHEETS_GVIZ_CSV = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS3pnUWK5c46NBvOhWg2-687urkAMMqOpocnribyfSriA28cJ-HgWLUh482bUxpSmnHKu2G4FStk0A6/pub?gid=0&single=true&output=csv';
+    const ARTICLES_JSON_URL = ''; // kosongkan saat pakai Sheets
+    const ADMIN_ENDPOINT = '';    // kosong (tidak dipakai saat Sheets)
+    const ADMIN_TOKEN = '';
 
-  <!-- container widget (boleh disembunyikan) -->
-  <div id="gt-widget" style="display:none"></div>
+    const CATEGORIES = ['Semua','Kajian','Pengumuman','Parenting','Umum'];
 
-  <script>
-    // Inisialisasi widget Google Translate
-    function googleTranslateElementInit() {
-      new google.translate.TranslateElement({
-        pageLanguage: 'id',
-        includedLanguages: 'id,ja',
-        autoDisplay: false
-      }, 'gt-widget');
+    async function fetchCSV(url){
+      const res = await fetch(url + (url.includes('?')?'&':'?') + 't=' + Date.now(), {cache:'no-store'});
+      if(!res.ok) throw new Error('HTTP '+res.status);
+      const text = await res.text();
+      const rows = text.trim().split(/\r?\n/).map(line=>{
+        // basic CSV parse: split by comma, handle simple quoted entries
+        const out=[]; let cur=''; let q=false;
+        for(let i=0;i<line.length;i++){
+          const ch=line[i];
+          if(ch==='"'){ q=!q; continue; }
+          if(ch===',' && !q){ out.push(cur); cur=''; continue; }
+          cur+=ch;
+        }
+        out.push(cur);
+        return out;
+      });
+      const headers = rows.shift().map(h=>h.trim().toLowerCase());
+      return rows.map(cells=>{
+        const obj={}; headers.forEach((h,i)=> obj[h]=(cells[i]||'').trim());
+        return {
+          title: obj.title||obj.judul||'',
+          date: obj.date||obj.tanggal||'',
+          body: obj.body||obj.isi||'',
+          category: obj.category||obj.kategori||'Umum'
+        };
+      }).filter(r=>r.title);
     }
 
-    // Ganti bahasa via tombol custom
-    function setLang(lng) {
-      try {
-        const combo = document.querySelector('.goog-te-combo');
-        if (!combo) return console.warn('Google Translate belum siap');
-        combo.value = (lng === 'ja') ? 'ja' : 'id';
-        combo.dispatchEvent(new Event('change'));
-        localStorage.setItem('rbmjLang', lng);
-        document.documentElement.lang = (lng === 'ja') ? 'ja' : 'id';
-        // status tombol
-        document.querySelectorAll('[data-lang-btn]').forEach(b => {
-          b.setAttribute('aria-pressed', b.getAttribute('data-lang-btn') === lng ? 'true' : 'false');
-        });
-      } catch (e) { console.error(e); }
+    async function getArticles(){
+      if (SHEETS_GVIZ_CSV) { try { const data=await fetchCSV(SHEETS_GVIZ_CSV); return data.sort((a,b)=> (b.date||'').localeCompare(a.date||'')); } catch(e){ console.warn(e); } }
+      if (ARTICLES_JSON_URL) { try { const r=await fetch(ARTICLES_JSON_URL + (ARTICLES_JSON_URL.includes('?')?'&':'?') + 't=' + Date.now()); const j=await r.json(); return (j||[]).sort((a,b)=> (b.date||'').localeCompare(a.date||'')); } catch(e){ console.warn(e); } }
+      return [];
     }
-    // Alias agar onclick="changeLang('ja')" tetap berfungsi
-    window.setLang = setLang;
-    window.changeLang = setLang;
 
-    // Terapkan bahasa awal (?lang=... atau localStorage)
-    document.addEventListener('DOMContentLoaded', () => {
-      const url = new URL(location.href);
-      const param = url.searchParams.get('lang');
-      const stored = localStorage.getItem('rbmjLang');
-      const init = param || stored || 'id';
-      (function waitGT(){
-        const combo = document.querySelector('.goog-te-combo');
-        if (combo) setLang(init); else setTimeout(waitGT, 300);
-      })();
-    });
+    let CURRENT_CATEGORY='Semua';
+    function renderCategoryChips(){
+      const wrap=document.getElementById('catFilter'); wrap.innerHTML='';
+      CATEGORIES.forEach(cat=>{ const btn=document.createElement('button'); btn.className='px-3 py-1.5 rounded-full border text-sm hover:bg-slate-50 ' + (cat===CURRENT_CATEGORY?'bg-primary-600 text-white border-primary-600':''); btn.textContent=cat; btn.addEventListener('click',()=>{CURRENT_CATEGORY=cat; renderArticles(); renderCategoryChips();}); wrap.appendChild(btn); });
+    }
+
+    async function renderArticles(){
+      const wrap=document.getElementById('articles'); wrap.innerHTML='';
+      const listAll=await getArticles();
+      const list=listAll.filter(a=> CURRENT_CATEGORY==='Semua' || (a.category||'Umum')===CURRENT_CATEGORY);
+      if(!list.length){ wrap.innerHTML='<p class="text-slate-600">Belum ada artikel.</p>'; return; }
+      list.forEach(a=>{ const el=document.createElement('article'); el.className='p-6 rounded-2xl ring-1 ring-slate-200 bg-white'; el.innerHTML=`<div class=\"text-xs text-primary-700 font-medium\">${a.category||'Umum'}</div><h3 class=\"mt-1 font-semibold\">${a.title||''}</h3><p class=\"mt-1 text-xs text-slate-500\">${a.date||''}</p><p class=\"mt-3 text-sm text-slate-700\">${(a.body||'').replace(/\n/g,'<br>')}</p>`; wrap.appendChild(el); });
+    }
+
+    // Admin add modal (hidden when using Sheets)
+    const isAdmin=new URL(location.href).searchParams.get('admin')==='1';
+    const btnAdd=document.getElementById('btnAdd');
+    const dlg=document.getElementById('articleDialog');
+    const form=document.getElementById('articleForm');
+    (function toggleAdmin(){ const usingRemote=Boolean(SHEETS_GVIZ_CSV||ARTICLES_JSON_URL); if(isAdmin && !usingRemote && btnAdd) btnAdd.classList.remove('hidden'); else btnAdd?.classList.add('hidden'); })();
+    btnAdd?.addEventListener('click',()=>{ document.getElementById('art-title').value=''; document.getElementById('art-date').value=(new Date()).toISOString().slice(0,10); document.getElementById('art-body').value=''; document.getElementById('art-cat').value='Umum'; dlg.showModal(); });
+    form?.querySelector('[data-close]')?.addEventListener('click',()=> dlg.close());
+    form?.addEventListener('submit', (e)=>{ e.preventDefault(); alert('Saat sumber = Google Sheets, tambah artikel dilakukan di Sheet.'); dlg.close(); });
+
+    // ======= Shalat (AlAdhan) dengan cache =======
+    function getCache(key){ try{ const x=JSON.parse(localStorage.getItem(key)||'null'); if(!x) return null; if(Date.now()>x.exp){ localStorage.removeItem(key); return null; } return x.val; }catch{return null;} }
+    function setCache(key,val,ttl){ try{ localStorage.setItem(key, JSON.stringify({val,exp:Date.now()+ttl})); }catch{} }
+
+    async function loadShalat(lat,lon,method){
+      const tz=Intl.DateTimeFormat().resolvedOptions().timeZone||'Asia/Tokyo';
+      const today=new Date().toISOString().slice(0,10);
+      const cacheKey=`rbm_pray_${today}_${lat.toFixed(2)}_${lon.toFixed(2)}_${method||7}`;
+      let t=getCache(cacheKey);
+      if(!t){ const url=`https://api.aladhan.com/v1/timings?latitude=${lat}&longitude=${lon}&method=${method||7}&timezonestring=${encodeURIComponent(tz)}`; const res=await fetch(url); const data=await res.json(); t=(data&&data.data&&data.data.timings)||{}; setCache(cacheKey,t,12*60*60*1000); }
+      const wrap=document.getElementById('shalatWrap'); wrap.innerHTML='';
+      ['Fajr','Dhuhr','Asr','Maghrib','Isha'].forEach(k=>{ const card=document.createElement('div'); card.className='p-5 rounded-2xl ring-1 ring-slate-200 bg-white'; card.innerHTML=`<div class=\"text-xs text-slate-500\">${k}</div><div class=\"mt-1 text-2xl font-bold\">${t[k]||'-'}</div>`; wrap.appendChild(card); });
+    }
+
+    async function initShalat(){
+      const where=document.getElementById('shalatWhere'); const methodSel=document.getElementById('calcMethod');
+      const def={lat:35.4437, lon:139.6380, name:'Yokohama'}; let pos=def;
+      try{ const gp=await new Promise((res,rej)=> navigator.geolocation ? navigator.geolocation.getCurrentPosition(res,rej,{enableHighAccuracy:true,timeout:7000}) : rej('no geo')); pos={lat:gp.coords.latitude, lon:gp.coords.longitude, name:'Lokasi Anda'}; }catch{}
+      where.textContent=`${pos.name} (${pos.lat.toFixed(3)}, ${pos.lon.toFixed(3)})`;
+      await loadShalat(pos.lat,pos.lon,methodSel?.value||7);
+      methodSel?.addEventListener('change',()=> loadShalat(pos.lat,pos.lon,methodSel.value));
+      document.getElementById('btnLocate')?.addEventListener('click', async ()=>{ try{ const gp=await new Promise((res,rej)=> navigator.geolocation ? navigator.geolocation.getCurrentPosition(res,rej,{enableHighAccuracy:true,timeout:7000}) : rej('no geo')); pos={lat:gp.coords.latitude, lon:gp.coords.longitude, name:'Lokasi Anda'}; where.textContent=`${pos.name} (${pos.lat.toFixed(3)}, ${pos.lon.toFixed(3)})`; await loadShalat(pos.lat,pos.lon,methodSel.value); }catch{} });
+    }
+
+    // ======= Map (Leaflet + Overpass) dengan cache =======
+    async function initMap(){
+      const mapEl=document.getElementById('map'); if(!mapEl || !window.L) return;
+      const def={lat:35.4437, lon:139.6380, name:'Yokohama'}; let center=def;
+      try{ const gp=await new Promise((res,rej)=> navigator.geolocation ? navigator.geolocation.getCurrentPosition(res,rej,{enableHighAccuracy:true,timeout:7000}) : rej('no geo')); center={lat:gp.coords.latitude, lon:gp.coords.longitude, name:'Lokasi Anda'}; }catch{}
+      const map=L.map('map').setView([center.lat,center.lon],13);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution:'&copy; OpenStreetMap' }).addTo(map);
+      const cacheKey=`rbm_overpass_${center.lat.toFixed(2)}_${center.lon.toFixed(2)}`; let elements=getCache(cacheKey);
+      if(!elements){ const query=`[out:json];node(around:5000,${center.lat},${center.lon})[amenity=place_of_worship][religion=muslim];out;`; const url='https://overpass-api.de/api/interpreter?data='+encodeURIComponent(query); try{ const res=await fetch(url); const data=await res.json(); elements=data.elements||[]; setCache(cacheKey,elements,24*60*60*1000);}catch(e){ console.warn('Overpass failed',e); elements=[]; } }
+      elements.forEach(n=>{ const name=(n.tags&&(n.tags.name||n.tags['name:en']||n.tags['name:ja']||'Masjid')); L.marker([n.lat,n.lon]).addTo(map).bindPopup(`<strong>${name}</strong>`); });
+    }
+
+    // ======= Init =======
+    renderCategoryChips();
+    renderArticles();
+    initShalat();
+    initMap();
+
+    // Formspree messages (i18n)
+    const f=document.getElementById('contactForm'); const s=document.getElementById('contactStatus'); const submitBtn=document.getElementById('contactSubmit');
+    f?.addEventListener('submit', async (e)=>{ e.preventDefault(); s.textContent=i18n.t('form.sending'); submitBtn.disabled=true; try{ const formData=new FormData(f); const res=await fetch(f.action,{method:'POST',body:formData,headers:{'Accept':'application/json'}}); if(res.ok){ s.textContent=i18n.t('form.sent'); f.reset(); } else { s.textContent=i18n.t('form.fail'); } } catch{ s.textContent=i18n.t('form.net'); } finally { submitBtn.disabled=false; } });
   </script>
-  <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-  <!-- ====== END AUTO TRANSLATE ====== -->
-
-  <!-- (HAPUS i18n.js lama agar tidak bentrok) -->
-  <!-- <script src="i18n.js"></script> -->
 </body>
 </html>
