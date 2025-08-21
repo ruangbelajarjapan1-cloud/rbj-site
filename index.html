@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
@@ -60,6 +60,7 @@
           <a href="#tentang" class="hover:text-primary-700" data-i18n="nav.tentang">Tentang</a>
           <a href="#program" class="hover:text-primary-700" data-i18n="nav.program">Program</a>
           <a href="#jadwal" class="hover:text-primary-700" data-i18n="nav.jadwal">Jadwal</a>
+          <a href="#classroom" class="hover:text-primary-700" data-i18n="nav.classroom">Kelas</a>
           <a href="#artikel" class="hover:text-primary-700" data-i18n="nav.artikel">Artikel</a>
           <a href="#materi" class="hover:text-primary-700" data-i18n="nav.materi">Permintaan Materi</a>
           <a href="#galeri" class="hover:text-primary-700" data-i18n="nav.galeri">Galeri</a>
@@ -80,6 +81,7 @@
         <a href="#tentang" class="py-2" data-i18n="nav.tentang">Tentang</a>
         <a href="#program" class="py-2" data-i18n="nav.program">Program</a>
         <a href="#jadwal" class="py-2" data-i18n="nav.jadwal">Jadwal</a>
+        <a href="#classroom" class="py-2" data-i18n="nav.classroom">Kelas</a>
         <a href="#artikel" class="py-2" data-i18n="nav.artikel">Artikel</a>
         <a href="#materi" class="py-2" data-i18n="nav.materi">Permintaan Materi</a>
         <a href="#galeri" class="py-2" data-i18n="nav.galeri">Galeri</a>
@@ -110,9 +112,6 @@
             <div class="mt-6 flex flex-wrap gap-3">
               <a href="#daftar" class="px-5 py-3 rounded-xl bg-primary-600 text-white hover:bg-primary-700" data-i18n="hero.cta.primary">Daftar Kegiatan</a>
               <a href="#artikel" class="px-5 py-3 rounded-xl border hover:bg-slate-50" data-i18n="hero.cta.secondary">Baca Artikel</a>
-              <!-- Optional hero join button:
-              <a data-join-link target="_blank" rel="noopener" class="px-5 py-3 rounded-xl border hover:bg-slate-50" data-i18n="btn.join">Gabung Komunitas</a>
-              -->
             </div>
             <blockquote class="mt-6 p-4 rounded-xl bg-sand-50 ring-1 ring-slate-200 text-sm">
               <p class="italic" data-i18n="hero.ayah">“Sebaik-baik kalian adalah yang belajar Al-Qur'an dan mengajarkannya.”</p>
@@ -143,8 +142,66 @@
         <div class="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           <div class="p-6 rounded-2xl ring-1 ring-slate-200 shadow-sm bg-white"><h3 class="font-semibold" data-i18n="card.jp.title">Kelas Iqro` Anak</h3><p class="mt-2 text-sm text-slate-700" data-i18n="card.jp.p">Huruf hijaiyah, makharijul huruf.</p></div>
           <div class="p-6 rounded-2xl ring-1 ring-slate-200 shadow-sm bg-white"><h3 class="font-semibold" data-i18n="card.islam.title">Kelas PAI Online</h3><p class="mt-2 text-sm text-slate-700" data-i18n="card.islam.p">Adab harian, fiqh praktis, akhlak.</p></div>
-          <div class="p-6 rounded-2xl ring-1 ring-slate-200 shadow-sm bg-white"><h3 class="font-semibold" data-i18n="card.islam.title">Kelas Qur`an Online Anak</h3><p class="mt-2 text-sm text-slate-700" data-i18n="card.islam.p">makharijul huruf.</p></div>
+          <div class="p-6 rounded-2xl ring-1 ring-slate-200 shadow-sm bg-white"><h3 class="font-semibold" data-i18n="card.islam2.title">Kelas Qur`an Online Anak</h3><p class="mt-2 text-sm text-slate-700" data-i18n="card.islam2.p">Makharijul huruf.</p></div>
           <div class="p-6 rounded-2xl ring-1 ring-slate-200 shadow-sm bg-white"><h3 class="font-semibold" data-i18n="card.tahfidz.title">Perbaikan Bacaan Al Qur`an Dewasa</h3><p class="mt-2 text-sm text-slate-700" data-i18n="card.tahfidz.p">Tajwid & muraja'ah.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- KELAS (Google Classroom — Invite Only) -->
+    <section id="classroom" class="py-16 border-t">
+      <div class="max-w-7xl mx-auto px-4">
+        <div class="flex items-center justify-between gap-3">
+          <h2 class="text-2xl md:text-3xl font-bold" data-i18n="classroom.title">Kelas (Google Classroom)</h2>
+          <a href="https://classroom.google.com/" target="_blank" rel="noopener"
+             class="px-4 py-2 rounded-xl bg-primary-600 text-white hover:bg-primary-700" data-i18n="classroom.open">
+            Buka Google Classroom
+          </a>
+        </div>
+        <p class="mt-2 text-slate-600 text-sm" data-i18n="classroom.inviteOnly">
+          Akses kelas hanya melalui undangan. Silakan ajukan permintaan undangan di bawah.
+        </p>
+
+        <!-- Grid kelas -->
+        <div id="gc-classes" class="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+
+        <!-- Form Minta Undangan -->
+        <div class="mt-10 grid lg:grid-cols-3 gap-6">
+          <div class="lg:col-span-2 p-6 rounded-2xl ring-1 ring-slate-200 bg-white">
+            <h3 class="font-semibold" data-i18n="invite.title">Minta Undangan Kelas</h3>
+            <p class="text-sm text-slate-600 mt-1" data-i18n="invite.subtitle">Isi email yang digunakan di Google Classroom.</p>
+            <form id="inviteForm" action="https://formspree.io/f/mldlkpdq" method="POST" class="mt-4 grid gap-3">
+              <div class="grid sm:grid-cols-2 gap-3">
+                <input name="name" id="inv-name" required class="rounded-xl border p-3" data-i18n-ph="invite.ph.name" placeholder="Nama lengkap">
+                <input type="email" name="email" id="inv-email" required class="rounded-xl border p-3" data-i18n-ph="invite.ph.email" placeholder="Email Google (Classroom)">
+              </div>
+              <div class="grid sm:grid-cols-2 gap-3">
+                <select name="class" id="inv-class" required class="rounded-xl border p-3">
+                  <option value="" data-i18n="invite.select">Pilih kelas</option>
+                </select>
+                <input name="phone" id="inv-phone" class="rounded-xl border p-3" data-i18n-ph="invite.ph.phone" placeholder="Nomor WA (opsional)">
+              </div>
+              <textarea name="message" id="inv-msg" rows="3" class="rounded-xl border p-3" data-i18n-ph="invite.ph.note" placeholder="Catatan (opsional)"></textarea>
+              <input type="hidden" name="type" value="request_invite">
+              <div class="flex items-center gap-3">
+                <button type="submit" class="px-5 py-3 rounded-xl bg-primary-600 text-white" data-i18n="invite.submit">Kirim Permintaan</button>
+                <button type="button" id="invWaBtn" class="px-5 py-3 rounded-xl border hover:bg-slate-50" data-i18n="invite.whatsapp">Ajukan via WhatsApp</button>
+                <span id="invStatus" class="text-sm text-slate-600" aria-live="polite"></span>
+              </div>
+            </form>
+            <p class="mt-3 text-xs text-slate-500" data-i18n="invite.note">Admin akan memverifikasi lalu mengirim undangan langsung dari Google Classroom.</p>
+          </div>
+
+          <!-- Info singkat -->
+          <aside class="p-6 rounded-2xl ring-1 ring-slate-200 bg-white">
+            <h3 class="font-semibold mb-2" data-i18n="invite.how.title">Bagaimana prosesnya?</h3>
+            <ol class="list-decimal pl-5 text-sm text-slate-700 space-y-1">
+              <li data-i18n="invite.how.1">Kamu kirim permintaan undangan (form/WA).</li>
+              <li data-i18n="invite.how.2">Admin memverifikasi & mengundang emailmu dari Classroom.</li>
+              <li data-i18n="invite.how.3">Cek email → klik <em>Join</em> untuk masuk ke kelas.</li>
+            </ol>
+            <p class="mt-3 text-xs text-slate-500" data-i18n="invite.how.note">Kami tidak menampilkan kode kelas di sini demi keamanan.</p>
+          </aside>
         </div>
       </div>
     </section>
@@ -193,36 +250,36 @@
                 <div class="grid sm:grid-cols-2 gap-4">
                   <div>
                     <label class="text-sm" for="req-name" data-i18n="materi.form.name">Nama</label>
-                    <input id="req-name" name="name" required class="mt-1 w-full rounded-xl border p-3" placeholder="Nama Anda"/>
+                    <input id="req-name" name="name" required class="mt-1 w-full rounded-xl border p-3" data-i18n-ph="materi.ph.name" placeholder="Nama Anda"/>
                   </div>
                   <div>
                     <label class="text-sm" for="req-email" data-i18n="materi.form.email">Email</label>
-                    <input id="req-email" type="email" name="email" required class="mt-1 w-full rounded-xl border p-3" placeholder="email@contoh.com"/>
+                    <input id="req-email" type="email" name="email" required class="mt-1 w-full rounded-xl border p-3" data-i18n-ph="materi.ph.email" placeholder="email@contoh.com"/>
                   </div>
                 </div>
                 <div class="grid sm:grid-cols-2 gap-4">
                   <div>
                     <label class="text-sm" for="req-wa" data-i18n="materi.form.wa">Nomor WhatsApp</label>
-                    <input id="req-wa" name="wa" class="mt-1 w-full rounded-xl border p-3" placeholder="6285211286642"/>
+                    <input id="req-wa" name="wa" class="mt-1 w-full rounded-xl border p-3" data-i18n-ph="materi.ph.wa" placeholder="6285211286642"/>
                   </div>
                   <div>
                     <label class="text-sm" for="req-cat" data-i18n="materi.form.cat">Kategori Materi</label>
                     <select id="req-cat" name="category" class="mt-1 w-full rounded-xl border p-3">
-                      <option>PDF</option>
-                      <option>Audio</option>
-                      <option>Video</option>
-                      <option>Worksheet</option>
-                      <option>Poster</option>
+                      <option data-i18n="materi.cat.pdf">PDF</option>
+                      <option data-i18n="materi.cat.audio">Audio</option>
+                      <option data-i18n="materi.cat.video">Video</option>
+                      <option data-i18n="materi.cat.worksheet">Worksheet</option>
+                      <option data-i18n="materi.cat.poster">Poster</option>
                     </select>
                   </div>
                 </div>
                 <div>
                   <label class="text-sm" for="req-title" data-i18n="materi.form.title">Judul/Topik Materi</label>
-                  <input id="req-title" name="title" required class="mt-1 w-full rounded-xl border p-3" placeholder="Contoh: Makharijul Huruf"/>
+                  <input id="req-title" name="title" required class="mt-1 w-full rounded-xl border p-3" data-i18n-ph="materi.ph.title" placeholder="Contoh: Makharijul Huruf"/>
                 </div>
                 <div>
                   <label class="text-sm" for="req-msg" data-i18n="materi.form.msg">Pesan</label>
-                  <textarea id="req-msg" name="message" rows="4" class="mt-1 w-full rounded-xl border p-3" placeholder="Kebutuhan atau catatan tambahan"></textarea>
+                  <textarea id="req-msg" name="message" rows="4" class="mt-1 w-full rounded-xl border p-3" data-i18n-ph="materi.ph.msg" placeholder="Kebutuhan atau catatan tambahan"></textarea>
                 </div>
                 <input type="hidden" name="type" value="request_materi">
                 <div class="flex items-center gap-3">
@@ -236,10 +293,10 @@
           <!-- Kontak cepat WhatsApp -->
           <aside>
             <div class="p-6 rounded-2xl ring-1 ring-slate-200 bg-white">
-              <h3 class="font-semibold mb-2">Butuh cepat?</h3>
-              <p class="text-sm text-slate-600 mb-3">Kirim permintaan materi via WhatsApp. Pesan akan otomatis terisi dari formulir.</p>
+              <h3 class="font-semibold mb-2" data-i18n="materi.quick.title">Butuh cepat?</h3>
+              <p class="text-sm text-slate-600 mb-3" data-i18n="materi.quick.desc">Kirim permintaan materi via WhatsApp. Pesan akan otomatis terisi dari formulir.</p>
               <button id="waBtn" class="w-full px-4 py-2 rounded-xl border hover:bg-slate-50 text-sm" data-i18n="materi.wa.cta">Chat WhatsApp</button>
-              <p class="mt-2 text-xs text-slate-500">Silahkan WA ke admin.<code>Baarakallahu Fiikum</code>.</p>
+              <p class="mt-2 text-xs text-slate-500" data-i18n="materi.quick.note">Silakan hubungi admin via WhatsApp. Baarakallahu fiikum.</p>
             </div>
           </aside>
         </div>
@@ -250,7 +307,7 @@
     <section id="galeri" class="py-16 border-t">
       <div class="max-w-7xl mx-auto px-4">
         <h2 class="text-2xl md:text-3xl font-bold" data-i18n="sec.galeri">Galeri Kegiatan</h2>
-        <p class="mt-2 text-slate-600 text-sm">Galeri info dan kegiatan</p>
+        <p class="mt-2 text-slate-600 text-sm" data-i18n="galeri.desc">Galeri info dan kegiatan</p>
         <div class="mt-6">
           <iframe title="Galeri Drive" class="w-full h-[540px] rounded-2xl ring-1 ring-slate-200" src="https://drive.google.com/embeddedfolderview?id=19ZWDoIjY-5NavNYQCX3OpkxNuYyV6HFW#grid"></iframe>
         </div>
@@ -275,11 +332,11 @@
         <div class="bg-white p-4 rounded-2xl ring-1 ring-slate-200 shadow-sm">
           <form id="contactForm" action="https://formspree.io/f/mldlkpdq" method="POST" class="grid gap-4">
             <div><label class="text-sm" for="cf-name" data-i18n="form.name">Nama</label>
-              <input id="cf-name" name="name" required class="mt-1 w-full rounded-xl border p-3" placeholder="Nama Anda" /></div>
+              <input id="cf-name" name="name" required class="mt-1 w-full rounded-xl border p-3" data-i18n-ph="contact.ph.name" placeholder="Nama Anda" /></div>
             <div><label class="text-sm" for="cf-email" data-i18n="form.email">Email</label>
-              <input id="cf-email" type="email" name="email" required class="mt-1 w-full rounded-xl border p-3" placeholder="email@contoh.com" /></div>
+              <input id="cf-email" type="email" name="email" required class="mt-1 w-full rounded-xl border p-3" data-i18n-ph="contact.ph.email" placeholder="email@contoh.com" /></div>
             <div><label class="text-sm" for="cf-message" data-i18n="form.message">Pesan</label>
-              <textarea id="cf-message" name="message" rows="4" required class="mt-1 w-full rounded-xl border p-3" placeholder="Tulis pesan Anda"></textarea></div>
+              <textarea id="cf-message" name="message" rows="4" required class="mt-1 w-full rounded-xl border p-3" data-i18n-ph="contact.ph.msg" placeholder="Tulis pesan Anda"></textarea></div>
             <input type="hidden" name="page" value="rbm-site/index.html">
             <input type="text" name="_gotcha" style="display:none">
             <button type="submit" id="contactSubmit" class="px-5 py-3 rounded-xl bg-primary-600 text-white" data-i18n="form.send">Kirim</button>
@@ -314,9 +371,7 @@
 
   <script>
     // ======= CONFIG: Join Community URL =======
-    // Ganti dengan link grup WhatsApp/Telegram komunitas, contoh:
-    // WhatsApp: https://chat.whatsapp.com/ID_GRUP
-    // Telegram: https://t.me/+INVITE_CODE
+    // Ganti dengan link grup WhatsApp/Telegram komunitas
     const COMMUNITY_JOIN_URL = 'https://chat.whatsapp.com/YOUR_GROUP_ID';
 
     // ======= UI basics =======
@@ -331,7 +386,7 @@
     const nav = document.getElementById('mainNav');
     if (nav) {
       const links = nav.querySelectorAll('a[href^="#"]');
-      const ids = ['tentang','program','jadwal','artikel','materi','galeri','kontak','daftar'];
+      const ids = ['tentang','program','jadwal','classroom','artikel','materi','galeri','kontak','daftar'];
       const sections = ids.map(id => document.getElementById(id)).filter(Boolean);
       const onScroll = () => {
         let current = null;
@@ -349,17 +404,88 @@
     const I18N = {
       id: {
         'banner.text':'Assalamualaikum—Pendaftaran Program Semester Baru dibuka sampai 30 Agustus.','banner.cta':'Daftar sekarang','brand.name':'Ruang Belajar Muslim Jepang',
-        'nav.tentang':'Tentang','nav.program':'Program','nav.jadwal':'Jadwal','nav.artikel':'Artikel','nav.materi':'Permintaan Materi','nav.galeri':'Galeri','nav.kontak':'Kontak','nav.daftar':'Daftar',
-        'hero.badge':'Bismillah • Komunitas Belajar & Berbagi','hero.title.pre':'Belajar Islam sesuai sunnah ','hero.title.hl':'di Jepang','hero.subtitle':'Platform komunitas Muslim untuk kajian, program keluarga, dan kontribusi artikel harian.','hero.cta.primary':'Daftar Kegiatan','hero.cta.secondary':'Baca Artikel','hero.ayah':'“Sebaik-baik kalian adalah yang belajar Al-Qur\'an dan mengajarkannya.”','event.nearby':'Event Terdekat','event.sample':'Kajian Keluarga • Sabtu (lihat Jadwal)','sec.tentang':'Tentang Komunitas','tentang.p':'RBM Jepang adalah komunitas belajar nonformal di Yokohama—wadah keluarga Muslim untuk bertumbuh bersama: akidah, adab, dan bahasa Arab. Terbuka untuk anak, remaja, dan dewasa.','sec.program':'Program & Kegiatan','card.jp.title':'Kelas Iqro` Anak','card.jp.p':'Huruf hijaiyah, tartil menyenangkan.','card.islam.title':'Kelas PAI Online','card.islam.p':'Adab harian, fiqh praktis, akhlak.','card.tahfidz.title':'Perbaikan Bacaan Dewasa','card.tahfidz.p':'Tajwid & muraja\'ah.','sec.jadwal':'Jadwal','sch.1':'Kelas Iqro` anak — Selasa ~ Kamis 15:30 JST','sch.2':'Kelas PAI Online — Kamis 19:30 JST','sch.3':'Kelas Tajwid Online — Ahad 19:30 JST','sch.4':'Perbaikan Bacaan Dewasa — Ahad 21:00 JST','sec.artikel':'Artikel & Informasi Harian','art.add':'Tambah Artikel','art.hint':'Sumber artikel: Google Sheets (publish to web). Kolom: title/date/body/category.','art.modal.title':'Tambah Artikel','art.modal.judul':'Judul','art.modal.tanggal':'Tanggal','art.modal.isi':'Isi','art.modal.batal':'Batal','art.modal.simpan':'Simpan','sec.materi':'Permintaan Materi','materi.desc':'Isi formulir untuk meminta materi atau hubungi kami via WhatsApp.','materi.form.name':'Nama','materi.form.email':'Email','materi.form.wa':'Nomor WhatsApp','materi.form.title':'Judul/Topik Materi','materi.form.cat':'Kategori Materi','materi.form.msg':'Pesan','materi.form.send':'Kirim Permintaan','materi.wa.cta':'Chat WhatsApp','sec.galeri':'Galeri Kegiatan','sec.kontak':'Kontak','kontak.email':'Email','kontak.wa':'WhatsApp / Telegram','btn.join':'Gabung Komunitas','form.name':'Nama','form.email':'Email','form.message':'Pesan','form.send':'Kirim','form.sending':'Mengirim...','form.sent':'Terima kasih! Pesan Anda terkirim.','form.fail':'Gagal mengirim. Coba lagi atau email langsung.','form.net':'Koneksi bermasalah. Coba lagi ya.','sec.daftar':'Pendaftaran','daftar.p':'Silakan isi form pendaftaran (gantikan embed di bawah dengan Google Form Anda).','footer.copyright':'Semua hak cipta dilindungi.',
+        'nav.tentang':'Tentang','nav.program':'Program','nav.jadwal':'Jadwal','nav.classroom':'Kelas','nav.artikel':'Artikel','nav.materi':'Permintaan Materi','nav.galeri':'Galeri','nav.kontak':'Kontak','nav.daftar':'Daftar',
+        'hero.badge':'Bismillah • Komunitas Belajar & Berbagi','hero.title.pre':'Belajar Islam sesuai sunnah ','hero.title.hl':'di Jepang','hero.subtitle':'Platform komunitas Muslim untuk kajian, program keluarga, dan kontribusi artikel harian.','hero.cta.primary':'Daftar Kegiatan','hero.cta.secondary':'Baca Artikel','hero.ayah':'“Sebaik-baik kalian adalah yang belajar Al-Qur\'an dan mengajarkannya.”','event.nearby':'Event Terdekat','event.sample':'Kajian Keluarga • Sabtu (lihat Jadwal)',
+        'sec.tentang':'Tentang Komunitas','tentang.p':'RBM Jepang adalah komunitas belajar nonformal di Yokohama—wadah keluarga Muslim untuk bertumbuh bersama: akidah, adab, dan bahasa Arab. Terbuka untuk anak, remaja, dan dewasa.',
+        'sec.program':'Program & Kegiatan','card.jp.title':'Kelas Iqro` Anak','card.jp.p':'Huruf hijaiyah, makharijul huruf.','card.islam.title':'Kelas PAI Online','card.islam.p':'Adab harian, fiqh praktis, akhlak.','card.islam2.title':'Kelas Qur`an Online Anak','card.islam2.p':'Makharijul huruf.','card.tahfidz.title':'Perbaikan Bacaan Al Qur`an Dewasa','card.tahfidz.p':'Tajwid & muraja\'ah.',
+        'classroom.title':'Kelas (Google Classroom)','classroom.open':'Buka Google Classroom','classroom.inviteOnly':'Akses kelas hanya melalui undangan. Silakan ajukan permintaan undangan di bawah.',
+        'invite.title':'Minta Undangan Kelas','invite.subtitle':'Isi email yang digunakan di Google Classroom.','invite.select':'Pilih kelas','invite.submit':'Kirim Permintaan','invite.whatsapp':'Ajukan via WhatsApp','invite.note':'Admin akan memverifikasi lalu mengirim undangan langsung dari Google Classroom.',
+        'invite.how.title':'Bagaimana prosesnya?','invite.how.1':'Kamu kirim permintaan undangan (form/WA).','invite.how.2':'Admin memverifikasi & mengundang emailmu dari Classroom.','invite.how.3':'Cek email → klik Join untuk masuk ke kelas.','invite.how.note':'Kami tidak menampilkan kode kelas di sini demi keamanan.',
+        'invite.ph.name':'Nama lengkap','invite.ph.email':'Email Google (Classroom)','invite.ph.phone':'Nomor WA (opsional)','invite.ph.note':'Catatan (opsional)',
+        'sec.artikel':'Artikel & Informasi Harian','art.none':'Belum ada artikel.',
+        'sec.materi':'Permintaan Materi','materi.desc':'Isi formulir untuk meminta materi atau hubungi kami via WhatsApp.',
+        'materi.form.name':'Nama','materi.form.email':'Email','materi.form.wa':'Nomor WhatsApp','materi.form.title':'Judul/Topik Materi','materi.form.cat':'Kategori Materi','materi.form.msg':'Pesan','materi.form.send':'Kirim Permintaan',
+        'materi.cat.pdf':'PDF','materi.cat.audio':'Audio','materi.cat.video':'Video','materi.cat.worksheet':'Worksheet','materi.cat.poster':'Poster',
+        'materi.ph.name':'Nama Anda','materi.ph.email':'email@contoh.com','materi.ph.wa':'6285211286642','materi.ph.title':'Contoh: Makharijul Huruf','materi.ph.msg':'Kebutuhan atau catatan tambahan',
+        'materi.quick.title':'Butuh cepat?','materi.quick.desc':'Kirim permintaan materi via WhatsApp. Pesan akan otomatis terisi dari formulir.','materi.quick.note':'Silakan hubungi admin via WhatsApp. Baarakallahu fiikum.',
+        'materi.wa.cta':'Chat WhatsApp',
+        'materi.wa.preface':'Assalamualaikum admin RBM, saya ingin meminta materi.','materi.wa.name':'Nama','materi.wa.title':'Judul/Topik','materi.wa.category':'Kategori','materi.wa.email':'Email','materi.wa.phone':'No WA','materi.wa.message':'Pesan',
+        'sec.galeri':'Galeri Kegiatan','galeri.desc':'Galeri info dan kegiatan',
+        'sec.kontak':'Kontak','kontak.email':'Email','kontak.wa':'WhatsApp / Telegram','btn.join':'Gabung Komunitas',
+        'form.name':'Nama','form.email':'Email','form.message':'Pesan','form.send':'Kirim','form.sending':'Mengirim...','form.sent':'Terima kasih! Pesan Anda terkirim.','form.fail':'Gagal mengirim. Coba lagi atau email langsung.','form.net':'Koneksi bermasalah. Coba lagi ya.',
+        'contact.ph.name':'Nama Anda','contact.ph.email':'email@contoh.com','contact.ph.msg':'Tulis pesan Anda',
+        'sec.daftar':'Pendaftaran','daftar.p':'Silakan isi form pendaftaran.','footer.copyright':'Semua hak cipta dilindungi.',
         'sec.shalat':'Agenda Shalat (lokal)','shalat.desc':'Otomatis deteksi lokasi (izin browser) atau gunakan default Yokohama.','shalat.locate':'Gunakan Lokasi Saya'
       },
       en: {
-        'banner.text':'Assalamu\'alaykum—New Semester Registration is open until August 30.','banner.cta':'Register now','brand.name':'RBM Japan','nav.tentang':'About','nav.program':'Programs','nav.jadwal':'Schedule','nav.artikel':'Articles','nav.materi':'Request Materials','nav.galeri':'Gallery','nav.kontak':'Contact','nav.daftar':'Register','hero.badge':'Bismillah • Learn & Share','hero.title.pre':'Learn Islam upon the Sunnah ','hero.title.hl':'in Japan','hero.subtitle':'A community platform for studies, family programs, and daily article contributions.','hero.cta.primary':'See Activities','hero.cta.secondary':'Read Articles','hero.ayah':'“The best of you are those who learn the Qur\'an and teach it.”','event.nearby':'Upcoming Event','event.sample':'Family Study • Saturday (see Schedule)','sec.tentang':'About the Community','tentang.p':'RBM Japan is a non-formal learning community in Yokohama—supporting Muslim families in creed, manners, and Arabic. Open to kids, teens, and adults.','sec.program':'Programs & Activities','card.jp.title':'Kids\' Iqro Class','card.jp.p':'Hijaiyah letters, joyful tartil.','card.islam.title':'Online Islamic Studies','card.islam.p':'Daily manners, practical fiqh, character.','card.tahfidz.title':'Adult Recitation Improvement','card.tahfidz.p':'Tajwid & revision.','sec.jadwal':'Schedule','sch.1':'Kids\' Iqro — Tue ~ Thu 15:30 JST','sch.2':'Online PAI — Thu 19:30 JST','sch.3':'Online Tajwid — Sun 19:30 JST','sch.4':'Adult Recitation — Sun 21:00 JST','sec.artikel':'Daily Articles & Updates','sec.materi':'Material Request','materi.desc':'Fill the form to request materials or contact us via WhatsApp.','materi.form.name':'Name','materi.form.email':'Email','materi.form.wa':'WhatsApp Number','materi.form.title':'Material Title/Topic','materi.form.cat':'Material Category','materi.form.msg':'Message','materi.form.send':'Submit Request','materi.wa.cta':'WhatsApp Chat','sec.galeri':'Activity Gallery','sec.kontak':'Contact','kontak.email':'Email','kontak.wa':'WhatsApp / Telegram','btn.join':'Join the Community','form.name':'Name','form.email':'Email','form.message':'Message','form.send':'Send','form.sending':'Sending...','form.sent':'Thank you! Your message was sent.','form.fail':'Failed to send. Please try again or email us.','form.net':'Network error. Please try again.','sec.daftar':'Registration','daftar.p':'Please fill the registration form (replace the embed below with your Google Form).','sec.shalat':'Prayer Times (local)','shalat.desc':'Auto-detect location (browser permission) or use Yokohama default.','shalat.locate':'Use My Location'
+        'banner.text':"Assalamu'alaykum—New Semester Registration is open until August 30.",'banner.cta':'Register now','brand.name':'RBM Japan',
+        'nav.tentang':'About','nav.program':'Programs','nav.jadwal':'Schedule','nav.classroom':'Classes','nav.artikel':'Articles','nav.materi':'Request Materials','nav.galeri':'Gallery','nav.kontak':'Contact','nav.daftar':'Register',
+        'hero.badge':'Bismillah • Learn & Share','hero.title.pre':'Learn Islam upon the Sunnah ','hero.title.hl':'in Japan','hero.subtitle':'A community platform for studies, family programs, and daily article contributions.','hero.cta.primary':'See Activities','hero.cta.secondary':'Read Articles','hero.ayah':"“The best of you are those who learn the Qur'an and teach it.”",'event.nearby':'Upcoming Event','event.sample':'Family Study • Saturday (see Schedule)',
+        'sec.tentang':'About the Community','tentang.p':'RBM Japan is a non-formal learning community in Yokohama—supporting Muslim families in creed, manners, and Arabic. Open to kids, teens, and adults.',
+        'sec.program':'Programs & Activities','card.jp.title':"Kids' Iqro Class",'card.jp.p':'Hijaiyah letters, articulation.','card.islam.title':'Online Islamic Studies','card.islam.p':'Daily manners, practical fiqh, character.','card.islam2.title':"Kids' Qur’an Online",'card.islam2.p':'Makharijul huruf.','card.tahfidz.title':'Adult Recitation Improvement','card.tahfidz.p':'Tajwid & revision.',
+        'classroom.title':'Classes (Google Classroom)','classroom.open':'Open Google Classroom','classroom.inviteOnly':'Class access is by invitation only. Please request an invitation below.',
+        'invite.title':'Request a Class Invitation','invite.subtitle':'Enter the email you use with Google Classroom.','invite.select':'Select a class','invite.submit':'Send Request','invite.whatsapp':'Request via WhatsApp','invite.note':'Admin will verify and send an invitation directly from Google Classroom.',
+        'invite.how.title':'How does it work?','invite.how.1':'You submit an invite request (form/WhatsApp).','invite.how.2':'Admin verifies and invites your email from Classroom.','invite.how.3':'Check email → click Join to enter the class.','invite.how.note':'We do not display class codes here for security.',
+        'invite.ph.name':'Full name','invite.ph.email':'Google (Classroom) email','invite.ph.phone':'WhatsApp number (optional)','invite.ph.note':'Note (optional)',
+        'sec.artikel':'Daily Articles & Updates','art.none':'No articles yet.',
+        'sec.materi':'Material Request','materi.desc':'Fill the form to request materials or contact us via WhatsApp.',
+        'materi.form.name':'Name','materi.form.email':'Email','materi.form.wa':'WhatsApp Number','materi.form.title':'Material Title/Topic','materi.form.cat':'Material Category','materi.form.msg':'Message','materi.form.send':'Submit Request',
+        'materi.cat.pdf':'PDF','materi.cat.audio':'Audio','materi.cat.video':'Video','materi.cat.worksheet':'Worksheet','materi.cat.poster':'Poster',
+        'materi.ph.name':'Your name','materi.ph.email':'email@example.com','materi.ph.wa':'e.g., 6285211286642','materi.ph.title':'e.g., Makharijul Huruf','materi.ph.msg':'Your needs or extra notes',
+        'materi.quick.title':'Need it fast?','materi.quick.desc':'Send your material request via WhatsApp. The message will auto-fill from the form.','materi.quick.note':'Please contact the admin via WhatsApp. Baarakallahu feekum.',
+        'materi.wa.cta':'WhatsApp Chat',
+        'materi.wa.preface':"Assalamu'alaykum RBM admin, I'd like to request materials.",'materi.wa.name':'Name','materi.wa.title':'Title/Topic','materi.wa.category':'Category','materi.wa.email':'Email','materi.wa.phone':'WhatsApp','materi.wa.message':'Message',
+        'sec.galeri':'Activity Gallery','galeri.desc':'Gallery of information and activities',
+        'sec.kontak':'Contact','kontak.email':'Email','kontak.wa':'WhatsApp / Telegram','btn.join':'Join the Community',
+        'form.name':'Name','form.email':'Email','form.message':'Message','form.send':'Send','form.sending':'Sending...','form.sent':'Thank you! Your message was sent.','form.fail':'Failed to send. Please try again or email us.','form.net':'Network error. Please try again.',
+        'contact.ph.name':'Your name','contact.ph.email':'email@example.com','contact.ph.msg':'Write your message',
+        'sec.daftar':'Registration','daftar.p':'Please fill the registration form.','footer.copyright':'All rights reserved.',
+        'sec.shalat':'Prayer Times (local)','shalat.desc':'Auto-detect location (browser permission) or use Yokohama default.','shalat.locate':'Use My Location'
       }
     };
-    const i18n = { lang:'id', t(key){return (I18N[this.lang]&&I18N[this.lang][key])||I18N['id'][key]||key;}, apply(){ document.documentElement.lang=this.lang; document.querySelectorAll('[data-i18n]').forEach(el=>{const k=el.getAttribute('data-i18n'); const txt=this.t(k); if(txt) el.textContent=txt;}); document.querySelectorAll('[data-lang-btn]').forEach(b=>{ b.setAttribute('aria-pressed', b.getAttribute('data-lang-btn')===this.lang?'true':'false'); });}, set(l){ this.lang=(l==='en')?'en':'id'; localStorage.setItem('rbm_lang',this.lang); this.apply(); } };
+
+    const i18n = {
+      lang:'id',
+      t(key){return (I18N[this.lang]&&I18N[this.lang][key])||I18N['id'][key]||key;},
+      apply(){
+        document.documentElement.lang=this.lang;
+        // text nodes
+        document.querySelectorAll('[data-i18n]').forEach(el=>{
+          const k=el.getAttribute('data-i18n'); const txt=this.t(k); if(txt!==undefined){ el.textContent=txt; }
+        });
+        // placeholders
+        document.querySelectorAll('[data-i18n-ph]').forEach(el=>{
+          const k=el.getAttribute('data-i18n-ph'); const txt=this.t(k); if(txt!==undefined){ el.setAttribute('placeholder', txt); }
+        });
+        // pressed state on lang buttons
+        document.querySelectorAll('[data-lang-btn]').forEach(b=>{
+          b.setAttribute('aria-pressed', b.getAttribute('data-lang-btn')===this.lang?'true':'false');
+        });
+      },
+      set(l){ this.lang=(l==='en')?'en':'id'; localStorage.setItem('rbm_lang',this.lang); this.apply(); }
+    };
+
     document.querySelectorAll('[data-lang-btn]')?.forEach(btn=>btn.addEventListener('click',()=>i18n.set(btn.getAttribute('data-lang-btn'))));
-    (function initLang(){ const url=new URL(location.href); const q=(url.searchParams.get('lang')||'').toLowerCase(); const stored=localStorage.getItem('rbm_lang'); const browser=navigator.language?.startsWith('en')?'en':'id'; const init=(q==='en'||q==='id')?q:(stored||browser||'id'); i18n.set(init); const brand=document.querySelector('[data-i18n="brand.name"]'); if(brand && /brand\.name/i.test(brand.textContent)) brand.textContent=i18n.t('brand.name'); })();
+    (function initLang(){
+      const url=new URL(location.href);
+      const q=(url.searchParams.get('lang')||'').toLowerCase();
+      const stored=localStorage.getItem('rbm_lang');
+      const browser=navigator.language?.startsWith('en')?'en':'id';
+      const init=(q==='en'||q==='id')?q:(stored||browser||'id');
+      i18n.set(init);
+      const brand=document.querySelector('[data-i18n="brand.name"]');
+      if(brand && /brand\.name/i.test(brand.textContent)) brand.textContent=i18n.t('brand.name');
+    })();
 
     // ======= Artikel (Google Sheets CSV) + kategori =======
     const SHEETS_GVIZ_CSV = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS3pnUWK5c46NBvOhWg2-687urkAMMqOpocnribyfSriA28cJ-HgWLUh482bUxpSmnHKu2G4FStk0A6/pub?gid=0&single=true&output=csv';
@@ -396,16 +522,27 @@
 
     let CURRENT_CATEGORY='Semua';
     function renderCategoryChips(){
-      const wrap=document.getElementById('catFilter'); wrap.innerHTML='';
-      CATEGORIES.forEach(cat=>{ const btn=document.createElement('button'); btn.className='px-3 py-1.5 rounded-full border text-sm hover:bg-slate-50 ' + (cat===CURRENT_CATEGORY?'bg-primary-600 text-white border-primary-600':''); btn.textContent=cat; btn.addEventListener('click',()=>{CURRENT_CATEGORY=cat; renderArticles(); renderCategoryChips();}); wrap.appendChild(btn); });
+      const wrap=document.getElementById('catFilter'); if(!wrap) return; wrap.innerHTML='';
+      CATEGORIES.forEach(cat=>{
+        const btn=document.createElement('button');
+        btn.className='px-3 py-1.5 rounded-full border text-sm hover:bg-slate-50 ' + (cat===CURRENT_CATEGORY?'bg-primary-600 text-white border-primary-600':'');
+        btn.textContent=cat;
+        btn.addEventListener('click',()=>{CURRENT_CATEGORY=cat; renderArticles(); renderCategoryChips();});
+        wrap.appendChild(btn);
+      });
     }
 
     async function renderArticles(){
-      const wrap=document.getElementById('articles'); wrap.innerHTML='';
+      const wrap=document.getElementById('articles'); if(!wrap) return; wrap.innerHTML='';
       const listAll=await getArticles();
       const list=listAll.filter(a=> CURRENT_CATEGORY==='Semua' || (a.category||'Umum')===CURRENT_CATEGORY);
-      if(!list.length){ wrap.innerHTML='<p class="text-slate-600">Belum ada artikel.</p>'; return; }
-      list.forEach(a=>{ const el=document.createElement('article'); el.className='p-6 rounded-2xl ring-1 ring-slate-200 bg-white'; el.innerHTML=`<div class="text-xs text-primary-700 font-medium">${a.category||'Umum'}</div><h3 class="mt-1 font-semibold">${a.title||''}</h3><p class="mt-1 text-xs text-slate-500">${a.date||''}</p><p class="mt-3 text-sm text-slate-700">${(a.body||'').replace(/\n/g,'<br>')}</p>`; wrap.appendChild(el); });
+      if(!list.length){ wrap.innerHTML=`<p class="text-slate-600" data-i18n="art.none">${i18n.t('art.none')}</p>`; return; }
+      list.forEach(a=>{
+        const el=document.createElement('article');
+        el.className='p-6 rounded-2xl ring-1 ring-slate-200 bg-white';
+        el.innerHTML=`<div class="text-xs text-primary-700 font-medium">${a.category||'Umum'}</div><h3 class="mt-1 font-semibold">${a.title||''}</h3><p class="mt-1 text-xs text-slate-500">${a.date||''}</p><p class="mt-3 text-sm text-slate-700">${(a.body||'').replace(/\n/g,'<br>')}</p>`;
+        wrap.appendChild(el);
+      });
     }
 
     // ======= Shalat (AlAdhan) dengan cache =======
@@ -418,18 +555,33 @@
       const cacheKey=`rbm_pray_${today}_${lat.toFixed(2)}_${lon.toFixed(2)}_${method||7}`;
       let t=getCache(cacheKey);
       if(!t){ const url=`https://api.aladhan.com/v1/timings?latitude=${lat}&longitude=${lon}&method=${method||7}&timezonestring=${encodeURIComponent(tz)}`; const res=await fetch(url); const data=await res.json(); t=(data&&data.data&&data.data.timings)||{}; setCache(cacheKey,t,12*60*60*1000); }
-      const wrap=document.getElementById('shalatWrap'); wrap.innerHTML='';
-      ['Fajr','Dhuhr','Asr','Maghrib','Isha'].forEach(k=>{ const card=document.createElement('div'); card.className='p-5 rounded-2xl ring-1 ring-slate-200 bg-white'; card.innerHTML=`<div class="text-xs text-slate-500">${k}</div><div class="mt-1 text-2xl font-bold">${t[k]||'-'}</div>`; wrap.appendChild(card); });
+      const wrap=document.getElementById('shalatWrap'); if(!wrap) return; wrap.innerHTML='';
+      ['Fajr','Dhuhr','Asr','Maghrib','Isha'].forEach(k=>{
+        const card=document.createElement('div');
+        card.className='p-5 rounded-2xl ring-1 ring-slate-200 bg-white';
+        card.innerHTML=`<div class="text-xs text-slate-500">${k}</div><div class="mt-1 text-2xl font-bold">${t[k]||'-'}</div>`;
+        wrap.appendChild(card);
+      });
     }
 
     async function initShalat(){
       const where=document.getElementById('shalatWhere'); const methodSel=document.getElementById('calcMethod');
       const def={lat:35.4437, lon:139.6380, name:'Yokohama'}; let pos=def;
-      try{ const gp=await new Promise((res,rej)=> navigator.geolocation ? navigator.geolocation.getCurrentPosition(res,rej,{enableHighAccuracy:true,timeout:7000}) : rej('no geo')); pos={lat:gp.coords.latitude, lon:gp.coords.longitude, name:'Lokasi Anda'}; }catch{}
+      try{
+        const gp=await new Promise((res,rej)=> navigator.geolocation ? navigator.geolocation.getCurrentPosition(res,rej,{enableHighAccuracy:true,timeout:7000}) : rej('no geo'));
+        pos={lat:gp.coords.latitude, lon:gp.coords.longitude, name: i18n.lang==='en'?'Your location':'Lokasi Anda'};
+      }catch{}
       if(where) where.textContent=`${pos.name} (${pos.lat.toFixed(3)}, ${pos.lon.toFixed(3)})`;
       await loadShalat(pos.lat,pos.lon,methodSel?.value||7);
       methodSel?.addEventListener('change',()=> loadShalat(pos.lat,pos.lon,methodSel.value));
-      document.getElementById('btnLocate')?.addEventListener('click', async ()=>{ try{ const gp=await new Promise((res,rej)=> navigator.geolocation ? navigator.geolocation.getCurrentPosition(res,rej,{enableHighAccuracy:true,timeout:7000}) : rej('no geo')); pos={lat:gp.coords.latitude, lon:gp.coords.longitude, name:'Lokasi Anda'}; if(where) where.textContent=`${pos.name} (${pos.lat.toFixed(3)}, ${pos.lon.toFixed(3)})`; await loadShalat(pos.lat,pos.lon,methodSel.value); }catch{} });
+      document.getElementById('btnLocate')?.addEventListener('click', async ()=>{
+        try{
+          const gp=await new Promise((res,rej)=> navigator.geolocation ? navigator.geolocation.getCurrentPosition(res,rej,{enableHighAccuracy:true,timeout:7000}) : rej('no geo'));
+          pos={lat:gp.coords.latitude, lon:gp.coords.longitude, name: i18n.lang==='en'?'Your location':'Lokasi Anda'};
+          if(where) where.textContent=`${pos.name} (${pos.lat.toFixed(3)}, ${pos.lon.toFixed(3)})`;
+          await loadShalat(pos.lat,pos.lon,methodSel.value);
+        }catch{}
+      });
     }
 
     // ======= Init =======
@@ -439,10 +591,18 @@
 
     // Formspree messages (i18n)
     const f=document.getElementById('contactForm'); const s=document.getElementById('contactStatus'); const submitBtn=document.getElementById('contactSubmit');
-    f?.addEventListener('submit', async (e)=>{ e.preventDefault(); s.textContent=i18n.t('form.sending'); submitBtn.disabled=true; try{ const formData=new FormData(f); const res=await fetch(f.action,{method:'POST',body:formData,headers:{'Accept':'application/json'}}); if(res.ok){ s.textContent=i18n.t('form.sent'); f.reset(); } else { s.textContent=i18n.t('form.fail'); } } catch{ s.textContent=i18n.t('form.net'); } finally { submitBtn.disabled=false; } });
+    f?.addEventListener('submit', async (e)=>{
+      e.preventDefault(); s.textContent=i18n.t('form.sending'); submitBtn.disabled=true;
+      try{
+        const formData=new FormData(f);
+        const res=await fetch(f.action,{method:'POST',body:formData,headers:{'Accept':'application/json'}});
+        if(res.ok){ s.textContent=i18n.t('form.sent'); f.reset(); } else { s.textContent=i18n.t('form.fail'); }
+      } catch{ s.textContent=i18n.t('form.net'); } finally { submitBtn.disabled=false; }
+    });
   </script>
+
+  <!-- ====== WhatsApp helper for Material Request ====== -->
   <script>
-    // ====== WhatsApp helper for Material Request ======
     const WA_NUMBER = '6285211286642'; // Ganti ke nomor admin RBM
     function buildWaText(){
       const name = document.getElementById('req-name')?.value || '';
@@ -452,13 +612,13 @@
       const cat  = document.getElementById('req-cat')?.value || '';
       const msg  = document.getElementById('req-msg')?.value || '';
       const lines = [
-        'Assalamualaikum admin RBM, saya ingin meminta materi.',
-        name?`Nama: ${name}`:'',
-        title?`Judul/Topik: ${title}`:'',
-        cat?`Kategori: ${cat}`:'',
-        email?`Email: ${email}`:'',
-        wa?`No WA: ${wa}`:'',
-        msg?`Pesan: ${msg}`:''
+        i18n.t('materi.wa.preface'),
+        name?`${i18n.t('materi.wa.name')}: ${name}`:'',
+        title?`${i18n.t('materi.wa.title')}: ${title}`:'',
+        cat?`${i18n.t('materi.wa.category')}: ${cat}`:'',
+        email?`${i18n.t('materi.wa.email')}: ${email}`:'',
+        wa?`${i18n.t('materi.wa.phone')}: ${wa}`:'',
+        msg?`${i18n.t('materi.wa.message')}: ${msg}`:''
       ].filter(Boolean).join('\n');
       return encodeURIComponent(lines);
     }
@@ -469,10 +629,153 @@
 
     // ===== Formspree for Material Request =====
     const rf=document.getElementById('reqForm'); const rs=document.getElementById('reqStatus');
-    rf?.addEventListener('submit', async (e)=>{ e.preventDefault(); rs.textContent=(window.i18n?.t('form.sending'))||'Mengirim...'; const btn=rf.querySelector('button[type="submit"]'); if(btn) btn.disabled=true; try{ const fd=new FormData(rf); const res=await fetch(rf.action,{method:'POST',body:fd,headers:{'Accept':'application/json'}}); if(res.ok){ rs.textContent=(window.i18n?.t('form.sent'))||'Terkirim.'; rf.reset(); } else { rs.textContent=(window.i18n?.t('form.fail'))||'Gagal mengirim.'; } } catch{ rs.textContent=(window.i18n?.t('form.net'))||'Koneksi bermasalah.'; } finally { if(btn) btn.disabled=false; } });
+    rf?.addEventListener('submit', async (e)=>{
+      e.preventDefault(); rs.textContent=(window.i18n?.t('form.sending'))||'Mengirim...';
+      const btn=rf.querySelector('button[type="submit"]'); if(btn) btn.disabled=true;
+      try{
+        const fd=new FormData(rf);
+        const res=await fetch(rf.action,{method:'POST',body:fd,headers:{'Accept':'application/json'}});
+        if(res.ok){ rs.textContent=(window.i18n?.t('form.sent'))||'Terkirim.'; rf.reset(); }
+        else { rs.textContent=(window.i18n?.t('form.fail'))||'Gagal mengirim.'; }
+      } catch{ rs.textContent=(window.i18n?.t('form.net'))||'Koneksi bermasalah.'; }
+      finally { if(btn) btn.disabled=false; }
+    });
   </script>
+
+  <!-- ====== Classroom (Invite Only) data & handlers ====== -->
+  <script>
+    /** Jika ingin dikelola dari Google Sheets (Publish to web → CSV),
+     *  buat kolom: name,teacher,schedule,desc,link
+     *  lalu tempel URL CSV ke sini. Jika kosong, pakai fallback. */
+    const GC_CLASSES_CSV_URL = ""; // contoh: "https://docs.google.com/spreadsheets/d/e/XXX/pub?gid=0&single=true&output=csv"
+
+    /** Data fallback (edit sesuai kebutuhan) */
+    const GC_CLASSES_FALLBACK = [
+      { name: "Kelas Iqro' Anak",   teacher: "Ustadz A", schedule: "Selasa-Kamis 15:30 JST", desc: "Huruf hijaiyah & tartil", link: "" },
+      { name: "PAI Online",         teacher: "Ustadzah B", schedule: "Kamis 19:30 JST",       desc: "Adab harian & fiqh praktis", link: "" },
+      { name: "Tajwid Dewasa",      teacher: "Ustadz C", schedule: "Ahad 21:00 JST",          desc: "Perbaikan bacaan", link: "" },
+    ];
+
+    function csvParse(text){
+      const rows = text.trim().split(/\r?\n/);
+      const headers = rows.shift().split(",").map(h=>h.trim().toLowerCase());
+      return rows.map(line=>{
+        const out=[]; let cur="", q=false;
+        for (let i=0;i<line.length;i++){
+          const ch=line[i];
+          if (ch === '"'){ q = !q; continue; }
+          if (ch === ',' && !q){ out.push(cur); cur=""; continue; }
+          cur += ch;
+        }
+        out.push(cur);
+        const obj={}; headers.forEach((h,i)=> obj[h]=(out[i]||"").trim());
+        return {
+          name: obj.name||"",
+          teacher: obj.teacher||"",
+          schedule: obj.schedule||"",
+          desc: obj.desc||obj.description||"",
+          link: obj.link||""
+        };
+      }).filter(x=>x.name);
+    }
+
+    async function fetchClasses(){
+      if (GC_CLASSES_CSV_URL){
+        try{
+          const res = await fetch(GC_CLASSES_CSV_URL + (GC_CLASSES_CSV_URL.includes("?")?"&":"?") + "t=" + Date.now(), {cache:"no-store"});
+          const txt = await res.text();
+          return csvParse(txt);
+        }catch(e){ console.warn("Gagal ambil CSV, pakai fallback.", e); }
+      }
+      return GC_CLASSES_FALLBACK;
+    }
+
+    function renderClasses(list){
+      const wrap = document.getElementById("gc-classes");
+      const sel  = document.getElementById("inv-class");
+      if (!wrap || !sel) return;
+
+      wrap.innerHTML = "";
+      sel.innerHTML  = `<option value="">${i18n.t('invite.select')}</option>`;
+
+      list.forEach((c)=>{
+        // kartu kelas
+        const card = document.createElement("article");
+        card.className = "p-6 rounded-2xl ring-1 ring-slate-200 bg-white";
+        card.innerHTML = `
+          <div class="text-xs text-primary-700 font-medium">Google Classroom</div>
+          <h3 class="mt-1 font-semibold">${c.name}</h3>
+          <p class="text-sm text-slate-600">${[c.teacher, c.schedule].filter(Boolean).join(" • ")}</p>
+          <p class="mt-2 text-sm text-slate-700">${c.desc||""}</p>
+          <div class="mt-4 flex flex-wrap gap-2">
+            ${c.link ? `<a class="px-3 py-2 rounded-xl border hover:bg-slate-50" href="${c.link}" target="_blank" rel="noopener">${i18n.t('classroom.open')}</a>` : ""}
+            <button class="px-3 py-2 rounded-xl bg-primary-600 text-white hover:bg-primary-700">${i18n.t('invite.title')}</button>
+          </div>
+        `;
+        const btn = card.querySelector("button");
+        btn?.addEventListener("click", ()=>{
+          sel.value = c.name; 
+          document.getElementById("inv-name")?.focus();
+          window.scrollTo({ top: document.getElementById("inviteForm").getBoundingClientRect().top + window.scrollY - 120, behavior: "smooth" });
+        });
+        wrap.appendChild(card);
+
+        // opsi select
+        const opt = document.createElement("option");
+        opt.value = c.name;
+        opt.textContent = c.name;
+        sel.appendChild(opt);
+      });
+    }
+
+    function buildInviteWaText(){
+      const name = document.getElementById("inv-name")?.value || "";
+      const email= document.getElementById("inv-email")?.value || "";
+      const cls  = document.getElementById("inv-class")?.value || "";
+      const phone= document.getElementById("inv-phone")?.value || "";
+      const note = document.getElementById("inv-msg")?.value || "";
+      const lines = [
+        i18n.t('invite.wa.preface') || (i18n.lang==='en'
+          ? "Assalamu'alaykum admin RBM, I'd like to request a Google Classroom invitation."
+          : "Assalamualaikum admin RBM, saya ingin meminta undangan Google Classroom."),
+        cls?`${i18n.lang==='en'?'Class':'Kelas'}: ${cls}`:"",
+        name?`${i18n.lang==='en'?'Name':'Nama'}: ${name}`:"",
+        email?`Email: ${email}`:"",
+        phone?`${i18n.lang==='en'?'WhatsApp':'WA'}: ${phone}`:"",
+        note?`${i18n.lang==='en'?'Note':'Catatan'}: ${note}`:""
+      ].filter(Boolean).join("\n");
+      return encodeURIComponent(lines);
+    }
+
+    (async function(){
+      const classes = await fetchClasses();
+      renderClasses(classes);
+    })();
+
+    // Formspree (AJAX) untuk invite
+    document.getElementById("inviteForm")?.addEventListener("submit", async (e)=>{
+      e.preventDefault();
+      const form = e.currentTarget;
+      const status = document.getElementById("invStatus");
+      status.textContent = i18n.t('form.sending');
+      try{
+        const fd = new FormData(form);
+        const res = await fetch(form.action, { method:"POST", body: fd, headers:{ "Accept":"application/json" }});
+        if (res.ok){ status.textContent = i18n.t('invite.sent') || (i18n.lang==='en'?'Sent. We will invite your email from Google Classroom.':'Terkirim. Kami akan mengundang email Anda dari Google Classroom.'); form.reset(); }
+        else { status.textContent = i18n.t('form.fail'); }
+      }catch{
+        status.textContent = i18n.t('form.net');
+      }
+    });
+
+    // Tombol WhatsApp untuk invite
+    document.getElementById("invWaBtn")?.addEventListener("click", ()=>{
+      const url = `https://wa.me/${WA_NUMBER}?text=${buildInviteWaText()}`;
+      window.open(url, "_blank");
+    });
+  </script>
+
+  <!-- (opsional) tombol share to classroom -->
+  <script async defer src="https://apis.google.com/js/platform.js"></script>
 </body>
 </html>
-
-
-
