@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
@@ -420,6 +420,7 @@
         'sec.program':'Program & Kegiatan','card.jp.title':'Kelas Iqro` Anak','card.jp.p':'Huruf hijaiyah, makharijul huruf.','card.islam.title':'Kelas PAI Online','card.islam.p':'Adab harian, fiqh praktis, akhlak.','card.islam2.title':'Kelas Qur`an Online Anak','card.islam2.p':'Makharijul huruf.','card.tahfidz.title':'Perbaikan Bacaan Al Qur`an Dewasa','card.tahfidz.p':'Tajwid & muraja\'ah.',
         'classroom.title':'Kelas (Google Classroom)','classroom.open':'Buka Google Classroom','classroom.inviteOnly':'Akses kelas hanya melalui undangan. Silakan ajukan permintaan undangan di bawah.',
         'classroom.badge.gc':'Google Classroom','classroom.badge.invite':'Undangan','classroom.badge.soon':'Segera',
+        'classroom.join':'Masuk ke Kelas (Google Classroom)',
         'invite.title':'Minta Undangan Kelas','invite.subtitle':'Isi email yang digunakan di Google Classroom.','invite.select':'Pilih kelas','invite.submit':'Kirim Permintaan','invite.whatsapp':'Ajukan via WhatsApp','invite.note':'Admin akan memverifikasi lalu mengirim undangan langsung dari Google Classroom.',
         'invite.how.title':'Bagaimana prosesnya?','invite.how.1':'Kamu kirim permintaan undangan (form/WA).','invite.how.2':'Admin memverifikasi & mengundang emailmu dari Classroom.','invite.how.3':'Cek email → klik Join untuk masuk ke kelas.','invite.how.note':'Kami tidak menampilkan kode kelas di sini demi keamanan.',
         'invite.ph.name':'Nama lengkap','invite.ph.email':'Email Google (Classroom)','invite.ph.phone':'Nomor WA (opsional)','invite.ph.note':'Catatan (opsional)',
@@ -428,7 +429,7 @@
         'sec.artikel':'Artikel & Informasi Harian','art.none':'Belum ada artikel.',
         'sec.materi':'Permintaan Materi','materi.desc':'Isi formulir untuk meminta materi atau hubungi kami via WhatsApp.',
         'materi.form.name':'Nama','materi.form.email':'Email','materi.form.wa':'Nomor WhatsApp','materi.form.title':'Judul/Topik Materi','materi.form.cat':'Kategori Materi','materi.form.msg':'Pesan','materi.form.send':'Kirim Permintaan',
-        'materi.cat.pdf':'PDF','materi.cat.audio':'Audio','materi.cat.video':'Video','materi.cat.worksheet':'Worksheet','materi.cat.poster':'Poster',
+        'materi.cat.pdf':'PDF','materi.cat.audio':'Audio','materi.cat.video':'Video','materi.cat.worksheet':'Worksheet','materi.cat.poster':'Rekaman Pelajaran',
         'materi.ph.name':'Nama Anda','materi.ph.email':'email@contoh.com','materi.ph.wa':'6285211286642','materi.ph.title':'Contoh: Makharijul Huruf','materi.ph.msg':'Kebutuhan atau catatan tambahan',
         'materi.quick.title':'Butuh cepat?','materi.quick.desc':'Kirim permintaan materi via WhatsApp. Pesan akan otomatis terisi dari formulir.','materi.quick.note':'Silakan hubungi admin via WhatsApp. Baarakallahu fiikum.',
         'materi.wa.cta':'Chat WhatsApp',
@@ -448,6 +449,7 @@
         'sec.program':'Programs & Activities','card.jp.title':"Kids' Iqro Class",'card.jp.p':'Hijaiyah letters, articulation.','card.islam.title':'Online Islamic Studies','card.islam.p':'Daily manners, practical fiqh, character.','card.islam2.title':"Kids' Qur’an Online",'card.islam2.p':'Makharijul huruf.','card.tahfidz.title':'Adult Recitation Improvement','card.tahfidz.p':'Tajwid & revision.',
         'classroom.title':'Classes (Google Classroom)','classroom.open':'Open Google Classroom','classroom.inviteOnly':'Class access is by invitation only. Please request an invitation below.',
         'classroom.badge.gc':'Google Classroom','classroom.badge.invite':'Invite','classroom.badge.soon':'Soon',
+        'classroom.join':'Join Class (Google Classroom)',
         'invite.title':'Request a Class Invitation','invite.subtitle':'Enter the email you use with Google Classroom.','invite.select':'Select a class','invite.submit':'Send Request','invite.whatsapp':'Request via WhatsApp','invite.note':'Admin will verify and send an invitation directly from Google Classroom.',
         'invite.how.title':'How does it work?','invite.how.1':'You submit an invite request (form/WhatsApp).','invite.how.2':'Admin verifies and invites your email from Classroom.','invite.how.3':'Check email → click Join to enter the class.','invite.how.note':'We do not display class codes here for security.',
         'invite.ph.name':'Full name','invite.ph.email':'Google (Classroom) email','invite.ph.phone':'WhatsApp number (optional)','invite.ph.note':'Note (optional)',
@@ -743,7 +745,9 @@
       sel.innerHTML  = `<option value="">${i18n.t('invite.select')}</option>`;
 
       list.forEach((c)=>{
-        const hasGC = !!(c.link && c.link.trim());
+        const hasGC   = !!(c.link && c.link.trim());
+        const joinHref = hasGC ? c.link : "https://classroom.google.com/";
+
         const card = document.createElement("article");
         card.className = "p-6 rounded-2xl ring-1 ring-slate-200 bg-white";
         card.innerHTML = `
@@ -756,18 +760,12 @@
           <p class="text-sm text-slate-600">${[c.teacher, c.schedule].filter(Boolean).join(" • ")}</p>
           <p class="mt-2 text-sm text-slate-700">${c.desc || ""}</p>
           <div class="mt-4 flex flex-wrap gap-2">
-            ${hasGC ? `<a class="px-3 py-2 rounded-xl border hover:bg-slate-50" href="${c.link}" target="_blank" rel="noopener">${i18n.t('classroom.open')}</a>` : ""}
-            <button class="px-3 py-2 rounded-xl bg-primary-600 text-white hover:bg-primary-700">${i18n.t('invite.title')}</button>
+            <a class="px-3 py-2 rounded-xl bg-primary-600 text-white hover:bg-primary-700" href="${joinHref}" target="_blank" rel="noopener">${i18n.t('classroom.join')}</a>
           </div>
         `;
-        card.querySelector("button")?.addEventListener("click", ()=>{
-          sel.value = c.name;
-          document.getElementById("inv-name")?.focus();
-          const el = document.getElementById("inviteForm");
-          if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 120, behavior: "smooth" });
-        });
         wrap.appendChild(card);
 
+        // tetap isi dropdown form agar tidak error jika form masih dipakai
         const opt = document.createElement("option");
         opt.value = c.name; opt.textContent = c.name; sel.appendChild(opt);
       });
@@ -819,4 +817,3 @@
   <script async defer src="https://apis.google.com/js/platform.js"></script>
 </body>
 </html>
-
