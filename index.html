@@ -826,12 +826,10 @@
   <!-- Galeri Carousel JS (mandiri agar rapi) -->
   <script>
     // ====== GALERI: data gambar ======
-    const GALLERY_ITEMS = [
-      { src: 'daftar1.jpeg', title: 'Poster pendaftaran', caption: 'daftar1.jpeg' },
-      { src: 'masjid-hero.jpg', title: 'Masjid', caption: 'masjid-hero.jpg' }
-      // Tambahkan item lain di sini, contoh:
-      // { src: 'foto-3.jpg', title: 'Kegiatan A', caption: 'Kegiatan A' },
-    ];
+    $1
+
+    // Rasio tetap untuk semua foto agar simetris
+    const CAROUSEL_RATIO = '4 / 3';
 
     // ====== GALERI: inisialisasi carousel ======
     (function initGallery(){
@@ -852,19 +850,19 @@
         const fig = document.createElement('figure');
         fig.className = 'w-full shrink-0';
         fig.innerHTML = `
-          <div class="relative w-full pt-[56.25%] bg-slate-100">
+          <div class="relative w-full bg-slate-100" style="aspect-ratio: ${CAROUSEL_RATIO};">
             <img
               src="${i === 0 ? it.src : ''}"
               data-src="${it.src}"
               alt="${(it.title || it.caption || 'Galeri')}"
-              class="absolute inset-0 w-full h-full object-cover"
+              class="absolute inset-0 w-full h-full object-cover object-center"
               loading="${i < 2 ? 'eager' : 'lazy'}"
               decoding="async"
             />
+            ${(it.title || it.caption)
+              ? `<figcaption class="absolute left-0 right-0 bottom-0 px-3 py-2 text-xs md:text-sm text-white bg-gradient-to-t from-black/60 to-transparent truncate">${it.title || it.caption}</figcaption>`
+              : ''}
           </div>
-          ${ (it.title || it.caption)
-              ? `<figcaption class="px-4 py-3 text-sm text-slate-700">${it.title || it.caption}</figcaption>`
-              : '' }
         `;
         track.appendChild(fig);
       });
