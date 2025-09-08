@@ -829,7 +829,8 @@
     $1
 
     // Rasio tetap untuk semua foto agar simetris
-    const CAROUSEL_RATIO = '4 / 3';
+    const CAROUSEL_RATIO = 4/3; // 4:3
+    const CAROUSEL_RATIO_PERCENT = (1 / CAROUSEL_RATIO) * 100; // fallback padding-top %
 
     // ====== GALERI: inisialisasi carousel ======
     (function initGallery(){
@@ -850,7 +851,7 @@
         const fig = document.createElement('figure');
         fig.className = 'w-full shrink-0';
         fig.innerHTML = `
-          <div class="relative w-full bg-slate-100" style="aspect-ratio: ${CAROUSEL_RATIO};">
+          <div class="relative w-full bg-slate-100" style="padding-top:${CAROUSEL_RATIO_PERCENT}%;">
             <img
               src="${i === 0 ? it.src : ''}"
               data-src="${it.src}"
@@ -858,9 +859,10 @@
               class="absolute inset-0 w-full h-full object-cover object-center"
               loading="${i < 2 ? 'eager' : 'lazy'}"
               decoding="async"
+              onerror="this.removeAttribute('data-src');"
             />
             ${(it.title || it.caption)
-              ? `<figcaption class="absolute left-0 right-0 bottom-0 px-3 py-2 text-xs md:text-sm text-white bg-gradient-to-t from-black/60 to-transparent truncate">${it.title || it.caption}</figcaption>`
+              ? `<figcaption class=\"absolute left-0 right-0 bottom-0 px-3 py-2 text-xs md:text-sm text-white bg-gradient-to-t from-black/60 to-transparent truncate\">${it.title || it.caption}</figcaption>`
               : ''}
           </div>
         `;
