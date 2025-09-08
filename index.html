@@ -89,7 +89,7 @@
         <a href="#daftar" class="inline-flex items-center justify-center px-4 py-2 rounded-xl bg-primary-600 text-white" data-i18n="nav.daftar">Daftar</a>
         <!-- JOIN button (mobile) -->
         <a data-join-link target="_blank" rel="noopener" class="inline-flex items-center justify-center px-4 py-2 rounded-xl border" data-i18n="btn.join">Gabung Komunitas</a>
-        <div class="mt-2 inline-flex rounded-xl ring-1 ring-slate-200 overflow-hidden">
+        <div class="mt-2 inline-flex rounded-XL ring-1 ring-slate-200 overflow-hidden">
           <button data-lang-btn="id" class="px-3 py-2 text-sm hover:bg-slate-50" aria-pressed="false">ID</button>
           <button data-lang-btn="en" class="px-3 py-2 text-sm hover:bg-slate-50" aria-pressed="false">EN</button>
         </div>
@@ -165,7 +165,7 @@
         <!-- Grid kelas -->
         <div id="gc-classes" class="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
 
-        <!-- Form Minta Undangan -->
+        <!-- Form Minta Undangan (disembunyikan) -->
         <div class="mt-10 grid lg:grid-cols-3 gap-6 hidden">
           <div class="lg:col-span-2 p-6 rounded-2xl ring-1 ring-slate-200 bg-white">
             <h3 class="font-semibold" data-i18n="invite.title">Minta Undangan Kelas</h3>
@@ -225,7 +225,6 @@
             <span class="text-primary-700">☪️</span>
             <span data-i18n="sec.shalat">Agenda Shalat (lokal)</span>
           </h2>
-          <!-- Badge diperbesar -->
           <span id="shalatNext" class="text-base md:text-lg px-4 py-1.5 rounded-xl bg-primary-100 text-primary-900 ring-1 ring-primary-200 font-medium shadow-sm"></span>
         </div>
         <p class="mt-2 text-slate-600 text-sm" data-i18n="shalat.desc">Otomatis deteksi lokasi (izin browser) atau gunakan default Yokohama.</p>
@@ -313,13 +312,33 @@
       </div>
     </section>
 
-    <!-- Galeri (Drive embed, tanpa API) -->
+    <!-- Galeri (Carousel Slideshow) -->
     <section id="galeri" class="py-16 border-t">
       <div class="max-w-7xl mx-auto px-4">
         <h2 class="text-2xl md:text-3xl font-bold" data-i18n="sec.galeri">Galeri Kegiatan</h2>
         <p class="mt-2 text-slate-600 text-sm" data-i18n="galeri.desc">Galeri info dan kegiatan</p>
-        <div class="mt-6">
-          <iframe title="Galeri Drive" class="w-full h-[540px] rounded-2xl ring-1 ring-slate-200" src="https://drive.google.com/embeddedfolderview?id=19ZWDoIjY-5NavNYQCX3OpkxNuYyV6HFW#grid"></iframe>
+
+        <div id="galeriCarousel" class="relative mt-6 select-none">
+          <div class="overflow-hidden rounded-2xl ring-1 ring-slate-200 bg-white">
+            <div id="galeriTrack" class="flex transition-transform duration-500 ease-out"></div>
+          </div>
+
+          <button id="galPrev" type="button"
+            class="absolute left-2 top-1/2 -translate-y-1/2 w-10 h-10 grid place-items-center rounded-full bg-white/90 ring-1 ring-slate-200 shadow hover:bg-white focus:outline-none"
+            aria-label="Sebelumnya">‹</button>
+
+          <button id="galNext" type="button"
+            class="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 grid place-items-center rounded-full bg-white/90 ring-1 ring-slate-200 shadow hover:bg-white focus:outline-none"
+            aria-label="Berikutnya">›</button>
+
+          <div id="galDots" class="mt-4 flex justify-center gap-2"></div>
+        </div>
+
+        <!-- opsional: link ke Google Drive (lihat semua) -->
+        <div class="mt-3 text-center">
+          <a class="text-sm underline text-slate-600 hover:text-primary-700"
+             href="https://drive.google.com/drive/folders/19ZWDoIjY-5NavNYQCX3OpkxNuYyV6HFW"
+             target="_blank" rel="noopener">Lihat semua foto di Google Drive</a>
         </div>
       </div>
     </section>
@@ -486,8 +505,6 @@
         document.querySelectorAll('[data-lang-btn]').forEach(b=>{
           b.setAttribute('aria-pressed', b.getAttribute('data-lang-btn')===this.lang?'true':'false');
         });
-
-        // ==== re-render badge "Next prayer / Shalat berikutnya" saat bahasa diganti
         if (window.LAST_SHALAT_TIMINGS) showNextPrayerInfo(window.LAST_SHALAT_TIMINGS);
       },
       set(l){ this.lang=(l==='en')?'en':'id'; localStorage.setItem('rbm_lang',this.lang); this.apply(); }
@@ -564,7 +581,6 @@
     }
 
     // ====== SHALAT (AlAdhan) dengan cache + highlight next prayer ======
-    // simpan timings terakhir agar bisa re-render saat ganti bahasa
     let LAST_SHALAT_TIMINGS = null;
 
     function getCache(key){ try{ const x=JSON.parse(localStorage.getItem(key)||'null'); if(!x) return null; if(Date.now()>x.exp){ localStorage.removeItem(key); return null; } return x.val; }catch{return null;} }
@@ -606,7 +622,7 @@
         setCache(cacheKey,t,12*60*60*1000);
       }
 
-      LAST_SHALAT_TIMINGS = t; // simpan
+      LAST_SHALAT_TIMINGS = t;
 
       const wrap=document.getElementById('shalatWrap'); if(!wrap) return; wrap.innerHTML='';
       const order=['Fajr','Dhuhr','Asr','Maghrib','Isha'];
@@ -675,13 +691,8 @@
     f?.addEventListener('submit', async (e)=>{ e.preventDefault(); s.textContent=i18n.t('form.sending'); submitBtn.disabled=true; try{ const formData=new FormData(f); const res=await fetch(f.action,{method:'POST',body:formData,headers:{'Accept':'application/json'}}); if(res.ok){ s.textContent=i18n.t('form.sent'); f.reset(); } else { s.textContent=i18n.t('form.fail'); } } catch{ s.textContent=i18n.t('form.net'); } finally { submitBtn.disabled=false; } });
 
     // ====== Classroom (Invite Only) data & handlers ======
-    /** Ambil data kelas dari Google Sheets (Publish to web → CSV)
-     *  Kolom yang didukung (bebas huruf besar/kecil):
-     *  name | teacher | schedule | desc/description | link/tautan
-     */
     const GC_CLASSES_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRc8MkQP07ECukMAy_VVab5kvWYA27wraKVgaiBWuyfjQSF_GU51h5mVrh1KbcvteCeycOuwLN_zefT/pub?gid=0&single=true&output=csv";
 
-    // (opsional) fallback jika CSV gagal dimuat
     const GC_CLASSES_FALLBACK = [
       { name: "Kelas Iqro' Anak", teacher: "Ustadz/ah", schedule: "Selasa–Kamis 15:30 JST", desc: "Huruf hijaiyah & tartil", link: "" },
       { name: "PAI Online", teacher: "Ustadz/ah", schedule: "Kamis 19:30 JST", desc: "Adab harian & fiqh praktis", link: "" },
@@ -765,7 +776,6 @@
         `;
         wrap.appendChild(card);
 
-        // tetap isi dropdown form agar tidak error jika form masih dipakai
         const opt = document.createElement("option");
         opt.value = c.name; opt.textContent = c.name; sel.appendChild(opt);
       });
@@ -811,6 +821,136 @@
       const url = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(lines)}`;
       window.open(url, "_blank");
     });
+  </script>
+
+  <!-- Galeri Carousel JS (mandiri agar rapi) -->
+  <script>
+    // ====== GALERI: data gambar ======
+    const GALLERY_ITEMS = [
+      { src: 'daftar1.jpeg', title: 'Poster pendaftaran', caption: 'daftar1.jpeg' },
+      { src: 'masjid-hero.jpg', title: 'Masjid', caption: 'masjid-hero.jpg' }
+      // Tambahkan item lain di sini, contoh:
+      // { src: 'foto-3.jpg', title: 'Kegiatan A', caption: 'Kegiatan A' },
+    ];
+
+    // ====== GALERI: inisialisasi carousel ======
+    (function initGallery(){
+      const track = document.getElementById('galeriTrack');
+      const wrap  = document.getElementById('galeriCarousel');
+      const btnPrev = document.getElementById('galPrev');
+      const btnNext = document.getElementById('galNext');
+      const dotsWrap = document.getElementById('galDots');
+      if (!track || !wrap || !GALLERY_ITEMS.length) {
+        btnPrev?.classList.add('hidden');
+        btnNext?.classList.add('hidden');
+        dotsWrap?.classList.add('hidden');
+        return;
+      }
+
+      track.innerHTML = '';
+      GALLERY_ITEMS.forEach((it, i) => {
+        const fig = document.createElement('figure');
+        fig.className = 'w-full shrink-0';
+        fig.innerHTML = `
+          <div class="relative w-full pt-[56.25%] bg-slate-100">
+            <img
+              src="${i === 0 ? it.src : ''}"
+              data-src="${it.src}"
+              alt="${(it.title || it.caption || 'Galeri')}"
+              class="absolute inset-0 w-full h-full object-cover"
+              loading="${i < 2 ? 'eager' : 'lazy'}"
+              decoding="async"
+            />
+          </div>
+          ${ (it.title || it.caption)
+              ? `<figcaption class="px-4 py-3 text-sm text-slate-700">${it.title || it.caption}</figcaption>`
+              : '' }
+        `;
+        track.appendChild(fig);
+      });
+
+      dotsWrap.innerHTML = '';
+      const dots = GALLERY_ITEMS.map((_, i) => {
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'w-2.5 h-2.5 rounded-full bg-slate-300 data-[active=true]:bg-primary-600';
+        b.setAttribute('aria-label', `Slide ${i+1}`);
+        b.addEventListener('click', () => goTo(i));
+        dotsWrap.appendChild(b);
+        return b;
+      });
+
+      let index = 0;
+      let autoplayTimer = null;
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      function lazyLoad(i){
+        const slide = track.children[i];
+        const img = slide?.querySelector('img[data-src]');
+        if (img && !img.src) { img.src = img.getAttribute('data-src'); img.removeAttribute('data-src'); }
+        const next = track.children[(i+1) % GALLERY_ITEMS.length]?.querySelector('img[data-src]');
+        if (next && !next.src) { next.src = next.getAttribute('data-src'); next.removeAttribute('data-src'); }
+      }
+
+      function updateUI(){
+        track.style.transform = `translateX(-${index * 100}%)`;
+        dots.forEach((d, i) => d.dataset.active = (i === index) ? 'true' : 'false');
+        lazyLoad(index);
+      }
+
+      function goTo(i){
+        index = (i + GALLERY_ITEMS.length) % GALLERY_ITEMS.length;
+        updateUI();
+      }
+
+      function next(){ goTo(index + 1); }
+      function prev(){ goTo(index - 1); }
+
+      btnNext?.addEventListener('click', next);
+      btnPrev?.addEventListener('click', prev);
+
+      ;[btnPrev, btnNext].forEach(b => b?.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight') next();
+        if (e.key === 'ArrowLeft')  prev();
+      }));
+
+      let isDown = false, startX = 0, curX = 0;
+      track.addEventListener('pointerdown', (e) => {
+        isDown = true; startX = e.clientX; curX = startX;
+        track.style.transition = 'none';
+        track.setPointerCapture?.(e.pointerId);
+      });
+      window.addEventListener('pointermove', (e) => {
+        if (!isDown) return;
+        curX = e.clientX;
+        const dx = curX - startX;
+        track.style.transform = `translateX(calc(-${index * 100}% + ${dx}px))`;
+      });
+      window.addEventListener('pointerup', () => {
+        if (!isDown) return;
+        isDown = false;
+        track.style.transition = '';
+        const dx = curX - startX;
+        if (Math.abs(dx) > 50) (dx < 0 ? next() : prev());
+        else updateUI();
+      });
+
+      function startAutoplay(){
+        if (prefersReduced) return;
+        stopAutoplay();
+        autoplayTimer = setInterval(next, 5000);
+      }
+      function stopAutoplay(){ if (autoplayTimer) clearInterval(autoplayTimer); }
+      wrap.addEventListener('mouseenter', stopAutoplay);
+      wrap.addEventListener('mouseleave', startAutoplay);
+      wrap.addEventListener('touchstart', stopAutoplay, {passive:true});
+      wrap.addEventListener('touchend',   startAutoplay, {passive:true});
+
+      lazyLoad(0);
+      updateUI();
+      startAutoplay();
+      window.addEventListener('resize', () => updateUI());
+    })();
   </script>
 
   <!-- (opsional) tombol share to classroom -->
