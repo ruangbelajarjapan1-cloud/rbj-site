@@ -17,49 +17,56 @@
       theme: {
         extend: {
           colors: {
-            primary: { DEFAULT:'#16a34a', 50:'#f0fdf4', 100:'#dcfce7', 200:'#bbf7d0', 600:'#16a34a', 700:'#15803d' },
+            primary: { DEFAULT:'#16a34a', 50:'#f0fdf4', 100:'#dcfce7', 600:'#16a34a', 700:'#15803d' },
           },
           fontFamily: { sans: ['Inter', 'sans-serif'] },
-          animation: { 'scroll': 'scroll 40s linear infinite' }
+          animation: { 'scroll': 'scroll 40s linear infinite' } // Kecepatan animasi galeri
         }
       }
     };
   </script>
   <style>
-    body { font-family: 'Inter', sans-serif; -webkit-tap-highlight-color: transparent; padding-bottom: 80px; }
+    body { font-family: 'Inter', sans-serif; -webkit-tap-highlight-color: transparent; padding-bottom: 80px; overscroll-behavior-y: contain; }
     @media (min-width: 768px) { body { padding-bottom: 0; } }
     
-    /* Animasi Carousel */
+    /* Animasi Carousel Infinite */
     @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-    .animate-scroll { display: flex; width: max-content; animation: scroll 40s linear infinite; }
-    .hide-scrollbar::-webkit-scrollbar { display: none; }
+    .animate-scroll { display: flex; width: max-content; animation: scroll 45s linear infinite; }
+    .animate-scroll:hover { animation-play-state: paused; } /* Berhenti saat disentuh */
     
-    /* Masonry Layout untuk Galeri Pinterest Style */
-    .masonry-grid { column-count: 2; column-gap: 1rem; }
-    @media (min-width: 768px) { .masonry-grid { column-count: 3; } }
-    @media (min-width: 1024px) { .masonry-grid { column-count: 4; } }
-    .masonry-item { break-inside: avoid; margin-bottom: 1rem; }
+    /* Scroll Progress Bar */
+    #progress-bar { width: 0%; height: 4px; background: #16a34a; position: fixed; top: 0; left: 0; z-index: 100; transition: width 0.1s; }
+    
+    /* Hide Scrollbar */
+    .hide-scrollbar::-webkit-scrollbar { display: none; }
   </style>
 </head>
 <body class="bg-gray-50 text-slate-900 antialiased">
 
-  <header class="hidden md:block sticky top-0 z-40 bg-white/90 backdrop-blur border-b transition-all duration-300" id="navbar">
+  <div id="progress-bar"></div>
+
+  <a href="https://ramadhan-seven.vercel.app/" target="_blank" class="fixed bottom-24 md:bottom-10 right-4 md:right-10 z-50 bg-gradient-to-r from-orange-500 to-amber-500 text-white px-5 py-3 rounded-full shadow-xl flex items-center gap-2 animate-bounce hover:scale-105 transition font-bold border-2 border-white ring-2 ring-orange-200">
+    <span class="text-lg">🌙</span>
+    <span class="text-sm">App Ramadhan</span>
+  </a>
+
+  <header class="hidden md:block sticky top-0 z-40 bg-white/95 backdrop-blur border-b shadow-sm transition-all duration-300" id="navbar">
     <div class="max-w-7xl mx-auto px-4 h-20 flex items-center justify-between">
       <a href="#" class="flex items-center gap-3">
         <img src="logo.png" class="h-10 w-10 rounded-lg object-contain" onerror="this.src='favicon-32x32.png'"/>
-        <div><h1 class="font-bold text-xl text-slate-900" data-i18n="brand">RBM Jepang</h1><p class="text-xs text-slate-500 font-medium uppercase">Ruang Belajar Muslim</p></div>
+        <div><h1 class="font-bold text-xl text-slate-900">RBM Jepang</h1><p class="text-xs text-slate-500 font-medium uppercase">Ruang Belajar Muslim</p></div>
       </a>
       <nav class="flex gap-1 bg-slate-100 p-1 rounded-full text-sm font-medium">
-        <a href="#program" class="px-5 py-2 rounded-full hover:bg-white transition" data-i18n="nav.program">Program</a>
-        <a href="#jadwal" class="px-5 py-2 rounded-full hover:bg-white transition" data-i18n="nav.jadwal">Jadwal</a>
-        <a href="#galeri" class="px-5 py-2 rounded-full hover:bg-white transition" data-i18n="nav.galeri">Galeri</a>
+        <a href="#program" class="px-5 py-2 rounded-full hover:bg-white transition">Program</a>
+        <a href="#jadwal" class="px-5 py-2 rounded-full hover:bg-white transition">Jadwal</a>
+        <a href="#galeri" class="px-5 py-2 rounded-full hover:bg-white transition">Galeri</a>
       </nav>
       <div class="flex items-center gap-3">
         <div class="flex bg-slate-100 rounded-lg p-1">
           <button onclick="setLang('id')" class="px-3 py-1 rounded text-xs font-bold transition lang-btn" data-lang="id">ID</button>
           <button onclick="setLang('en')" class="px-3 py-1 rounded text-xs font-bold transition lang-btn" data-lang="en">EN</button>
         </div>
-        <a href="#daftar" class="px-6 py-2 rounded-xl bg-primary-600 text-white text-sm font-bold shadow-lg hover:bg-primary-700" data-i18n="nav.daftar">Daftar</a>
+        <a href="#daftar" class="px-6 py-2 rounded-xl bg-primary-600 text-white text-sm font-bold shadow-lg hover:bg-primary-700">Daftar</a>
       </div>
     </div>
   </header>
@@ -69,17 +76,16 @@
       <img src="logo.png" class="h-8 w-8 rounded bg-primary-50" onerror="this.src='favicon-32x32.png'">
       <span class="font-bold text-lg text-primary-700">RBMJ</span>
     </div>
-    <div class="flex items-center gap-2">
-       <button onclick="toggleLang()" id="mobileLangBtn" class="text-xs font-bold bg-slate-100 px-2 py-1 rounded text-slate-600 border border-slate-200">ID</button>
-      <a href="https://ramadhan-seven.vercel.app/" class="text-xs font-bold text-orange-600 bg-orange-50 px-3 py-1.5 rounded-full border border-orange-100">🌙 App</a>
+    <div class="flex items-center gap-3">
+      <button onclick="toggleLang()" id="mobileLangBtn" class="text-xs font-bold bg-slate-100 px-3 py-1.5 rounded-lg text-slate-600 border border-slate-200">ID</button>
     </div>
   </div>
 
   <main>
-    <section class="relative bg-white md:pt-8">
+    <section class="relative bg-white md:pt-6">
       <div class="max-w-7xl mx-auto md:px-4">
         <div class="relative w-full aspect-[16/9] md:aspect-[21/9] md:rounded-3xl overflow-hidden shadow-sm md:shadow-xl group">
-          <img src="hero.jpg?v=2" alt="Hero RBMJ" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/1600x900?text=Sedang+Memuat+Gambar...'"/>
+          <img id="heroImg" src="hero.jpg" alt="Hero RBMJ" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/1600x900?text=Upload+hero.jpg+di+Folder+Utama'"/>
           <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-6 md:p-12 text-white">
             <span class="bg-primary-600 w-fit px-3 py-1 rounded-lg text-[10px] md:text-xs font-bold uppercase tracking-wider mb-2 animate-pulse" data-i18n="hero.badge">Pendaftaran Dibuka</span>
             <h2 class="text-3xl md:text-5xl font-extrabold leading-tight mb-2" data-i18n="hero.title">Belajar Islam <br/>di Negeri Sakura</h2>
@@ -89,26 +95,51 @@
       </div>
     </section>
 
-    <section id="program" class="py-10 md:py-16 bg-slate-50">
+    <section id="galeri" class="py-10 md:py-16 bg-white overflow-hidden border-b border-slate-100">
+      <div class="text-center mb-8 px-4">
+        <h2 class="text-xl md:text-2xl font-bold" data-i18n="sec.galeri">Dokumentasi Kegiatan</h2>
+        <p class="text-xs text-slate-500 mt-1">Geser untuk melihat, klik untuk memperbesar</p>
+      </div>
+      
+      <div class="relative w-full">
+        <div class="absolute left-0 top-0 bottom-0 w-8 md:w-32 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none"></div>
+        <div class="absolute right-0 top-0 bottom-0 w-8 md:w-32 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none"></div>
+
+        <div id="galleryTrack" class="animate-scroll gap-4 px-4 items-center">
+          </div>
+      </div>
+    </section>
+
+    <section id="jadwal" class="py-10 bg-slate-50 border-y border-slate-100">
+      <div class="max-w-7xl mx-auto px-4">
+        <div class="flex items-center justify-between mb-6">
+          <div><h2 class="text-xl md:text-2xl font-bold" data-i18n="sec.jadwal">Waktu Shalat</h2><p class="text-xs text-slate-500" id="currentDate">...</p></div>
+          <button id="btnGeo" class="text-xs bg-white text-primary-700 px-3 py-2 rounded-lg font-bold border border-slate-200 shadow-sm" data-i18n="btn.loc">📍 Lokasi Saya</button>
+        </div>
+        <div id="prayerGrid" class="grid grid-cols-5 gap-2 md:gap-4"></div>
+      </div>
+    </section>
+
+    <section id="program" class="py-10 md:py-16 bg-white">
       <div class="max-w-7xl mx-auto px-4">
         <h2 class="text-xl md:text-2xl font-bold mb-6" data-i18n="sec.program">Program Unggulan</h2>
         <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6">
-          <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100">
+          <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100 hover:border-primary-200 transition">
             <div class="w-10 h-10 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center text-xl mb-3">📖</div>
             <h3 class="font-bold text-sm md:text-base">Iqro' Anak</h3>
             <p class="text-xs text-slate-500 mt-1" data-i18n="prog.1">Belajar baca Al-Qur'an dari nol.</p>
           </div>
-          <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100">
+          <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100 hover:border-primary-200 transition">
             <div class="w-10 h-10 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center text-xl mb-3">💻</div>
             <h3 class="font-bold text-sm md:text-base">PAI Online</h3>
             <p class="text-xs text-slate-500 mt-1" data-i18n="prog.2">Fiqh, Aqidah & Akhlak praktis.</p>
           </div>
-           <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100">
+          <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100 hover:border-primary-200 transition">
             <div class="w-10 h-10 rounded-lg bg-orange-50 text-orange-600 flex items-center justify-center text-xl mb-3">🕌</div>
             <h3 class="font-bold text-sm md:text-base">Kajian Sunnah</h3>
             <p class="text-xs text-slate-500 mt-1" data-i18n="prog.3">Rutin offline & online.</p>
           </div>
-          <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100">
+          <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100 hover:border-primary-200 transition">
             <div class="w-10 h-10 rounded-lg bg-purple-50 text-purple-600 flex items-center justify-center text-xl mb-3">🎓</div>
             <h3 class="font-bold text-sm md:text-base">Tahsin Dewasa</h3>
             <p class="text-xs text-slate-500 mt-1" data-i18n="prog.4">Perbaikan bacaan Al-Qur'an.</p>
@@ -117,26 +148,7 @@
       </div>
     </section>
 
-    <section id="jadwal" class="py-10 bg-white border-y border-slate-100">
-      <div class="max-w-7xl mx-auto px-4">
-        <div class="flex items-center justify-between mb-6">
-          <div><h2 class="text-xl md:text-2xl font-bold" data-i18n="sec.jadwal">Waktu Shalat</h2><p class="text-xs text-slate-500" id="currentDate">...</p></div>
-          <button id="btnGeo" class="text-xs bg-primary-50 text-primary-700 px-3 py-2 rounded-lg font-bold border border-primary-100" data-i18n="btn.loc">📍 Lokasi Saya</button>
-        </div>
-        <div id="prayerGrid" class="grid grid-cols-5 gap-2 md:gap-4"></div>
-      </div>
-    </section>
-
-    <section id="galeri" class="py-10 md:py-16 bg-slate-50">
-      <div class="max-w-7xl mx-auto px-4">
-        <h2 class="text-xl md:text-2xl font-bold mb-6 text-center" data-i18n="sec.galeri">Dokumentasi Kegiatan</h2>
-        
-        <div class="masonry-grid" id="galleryMasonry">
-          </div>
-      </div>
-    </section>
-
-    <section id="artikel" class="py-10 md:py-16 bg-white">
+    <section id="artikel" class="py-10 md:py-16 bg-slate-50">
       <div class="max-w-7xl mx-auto px-4">
         <h2 class="text-xl md:text-2xl font-bold mb-6" data-i18n="sec.info">Info Terkini</h2>
         <div id="contentGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
@@ -145,85 +157,87 @@
 
   </main>
 
-  <nav class="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 z-50 pb-safe">
-    <div class="grid grid-cols-5 h-16 items-center text-[10px] font-medium text-slate-500">
+  <nav class="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 z-40 pb-safe shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)]">
+    <div class="grid grid-cols-4 h-16 items-center text-[10px] font-medium text-slate-500">
       <a href="#" class="flex flex-col items-center gap-1 text-primary-600"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path></svg><span data-i18n="nav.home">Home</span></a>
       <a href="#program" class="flex flex-col items-center gap-1 hover:text-primary-600"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg><span data-i18n="nav.program">Program</span></a>
       <a href="#jadwal" class="flex flex-col items-center gap-1 hover:text-primary-600"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><span data-i18n="nav.jadwal">Jadwal</span></a>
       <a href="#galeri" class="flex flex-col items-center gap-1 hover:text-primary-600"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg><span data-i18n="nav.galeri">Galeri</span></a>
-      <a href="#daftar" class="flex flex-col items-center gap-1 hover:text-primary-600"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg><span data-i18n="nav.daftar">Daftar</span></a>
     </div>
   </nav>
 
-  <section id="daftar" class="hidden fixed inset-0 z-[60] bg-white overflow-y-auto pt-safe">
-    <div class="h-14 flex items-center justify-between px-4 border-b sticky top-0 bg-white">
-      <button onclick="document.getElementById('daftar').classList.add('hidden')" class="text-2xl font-bold">&larr;</button>
+  <section id="daftar" class="hidden fixed inset-0 z-[60] bg-white overflow-y-auto pt-safe animate-slide-up">
+    <div class="h-14 flex items-center justify-between px-4 border-b sticky top-0 bg-white shadow-sm">
+      <button onclick="document.getElementById('daftar').classList.add('hidden')" class="text-2xl font-bold p-2 text-slate-500 hover:text-slate-900">&times;</button>
       <span class="font-bold">Form Pendaftaran</span>
       <div class="w-8"></div>
     </div>
     <iframe src="https://forms.gle/dxqRenLyLq3KJ6cr5" class="w-full h-[90vh] border-0"></iframe>
   </section>
 
-  <div id="lightbox" class="fixed inset-0 z-[70] bg-black/95 hidden flex items-center justify-center p-2 backdrop-blur-sm" onclick="this.classList.add('hidden')">
-    <img id="lightboxImg" class="max-w-full max-h-[85vh] rounded shadow-lg" />
+  <div id="lightbox" class="fixed inset-0 z-[70] bg-black/95 hidden flex items-center justify-center p-2 backdrop-blur-sm transition-opacity" onclick="this.classList.add('hidden')">
+    <img id="lightboxImg" class="max-w-full max-h-[85vh] rounded shadow-lg transform transition" />
   </div>
 
   <script>
-    // --- 1. BAHASA / LANGUAGE (I18N) ---
+    // --- 0. HERO IMAGE CACHE BUSTER ---
+    // Menambahkan timestamp agar browser melupakan gambar lama dan memuat yang baru
+    document.getElementById('heroImg').src = 'hero.jpg?v=' + new Date().getTime();
+
+    // --- 1. SCROLL PROGRESS BAR ---
+    window.onscroll = () => {
+      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      document.getElementById("progress-bar").style.width = scrolled + "%";
+    };
+
+    // --- 2. BAHASA / I18N ---
     const TRANSLATIONS = {
       id: {
-        brand: "RBM Jepang", "nav.program": "Program", "nav.jadwal": "Jadwal", "nav.galeri": "Galeri", "nav.daftar": "Daftar", "nav.home":"Home",
+        "nav.program": "Program", "nav.jadwal": "Jadwal", "nav.galeri": "Galeri", "nav.home":"Home",
         "hero.badge": "Pendaftaran Dibuka", "hero.title": "Belajar Islam <br/>di Negeri Sakura", "hero.desc": "Wadah keluarga Muslim di Yokohama untuk menuntut ilmu syar'i dan mempererat ukhuwah.",
         "sec.program": "Program Unggulan", "prog.1": "Belajar baca Al-Qur'an dari nol.", "prog.2": "Fiqh, Aqidah & Akhlak praktis.", "prog.3": "Rutin offline & online.", "prog.4": "Perbaikan bacaan Al-Qur'an.",
         "sec.jadwal": "Waktu Shalat", "btn.loc": "📍 Lokasi Saya", "sec.galeri": "Dokumentasi Kegiatan", "sec.info": "Info Terkini"
       },
       en: {
-        brand: "RBM Japan", "nav.program": "Programs", "nav.jadwal": "Prayers", "nav.galeri": "Gallery", "nav.daftar": "Join", "nav.home":"Home",
+        "nav.program": "Programs", "nav.jadwal": "Prayers", "nav.galeri": "Gallery", "nav.home":"Home",
         "hero.badge": "Registration Open", "hero.title": "Learn Islam <br/>in Japan", "hero.desc": "Community for Muslim families in Yokohama to learn Islamic knowledge and strengthen brotherhood.",
         "sec.program": "Our Programs", "prog.1": "Learn Quran from scratch.", "prog.2": "Fiqh, Aqidah & Ethics.", "prog.3": "Regular offline & online.", "prog.4": "Quran recitation correction.",
         "sec.jadwal": "Prayer Times", "btn.loc": "📍 My Location", "sec.galeri": "Activity Gallery", "sec.info": "Latest Info"
       }
     };
-
     let currentLang = localStorage.getItem('lang') || 'id';
-    
     function setLang(lang) {
-      currentLang = lang;
-      localStorage.setItem('lang', lang);
+      currentLang = lang; localStorage.setItem('lang', lang);
       document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
         if(TRANSLATIONS[lang][key]) el.innerHTML = TRANSLATIONS[lang][key];
       });
-      // Update Button Styles
       document.querySelectorAll('.lang-btn').forEach(btn => {
         if(btn.dataset.lang === lang) btn.classList.add('bg-white', 'text-primary-600', 'shadow');
         else btn.classList.remove('bg-white', 'text-primary-600', 'shadow');
       });
-      // Mobile Btn
-      const mob = document.getElementById('mobileLangBtn');
-      if(mob) mob.innerText = lang.toUpperCase();
+      const mob = document.getElementById('mobileLangBtn'); if(mob) mob.innerText = lang.toUpperCase();
     }
-    
     function toggleLang() { setLang(currentLang === 'id' ? 'en' : 'id'); }
-    setLang(currentLang); // Init
+    setLang(currentLang);
 
-    // --- 2. MASONRY GALLERY (Auto Portrait/Landscape) ---
-    const galleryContainer = document.getElementById('galleryMasonry');
-    // Kita gunakan 11 foto di assets
-    for(let i=1; i<=11; i++) {
-      const div = document.createElement('div');
-      div.className = "masonry-item break-inside-avoid mb-4 group cursor-zoom-in";
-      div.innerHTML = `
-        <img src="assets/${i}.jpeg" loading="lazy" 
-          class="w-full h-auto rounded-xl object-cover shadow-sm group-hover:shadow-md transition duration-300"
-          onclick="event.stopPropagation(); document.getElementById('lightboxImg').src=this.src; document.getElementById('lightbox').classList.remove('hidden');"
-          onerror="this.style.display='none'"
-        >
-      `;
-      galleryContainer.appendChild(div);
+    // --- 3. GALERI ANIMASI (SMART ASPECT RATIO) ---
+    // Menggunakan tinggi tetap (h-48) dan width auto agar tidak crop kepala
+    const track = document.getElementById('galleryTrack');
+    for(let k=0; k<2; k++) { 
+      for(let i=1; i<=11; i++) {
+        const img = document.createElement('img');
+        img.src = `assets/${i}.jpeg`;
+        // "h-48 w-auto" adalah kuncinya: Tinggi sama, lebar menyesuaikan (potrait jadi ramping, landscape jadi lebar)
+        img.className = "h-40 md:h-56 w-auto max-w-xs object-contain rounded-xl shadow-md hover:scale-105 transition duration-300 cursor-zoom-in bg-white p-1";
+        img.onclick = () => { document.getElementById('lightboxImg').src = `assets/${i}.jpeg`; document.getElementById('lightbox').classList.remove('hidden'); };
+        track.appendChild(img);
+      }
     }
 
-    // --- 3. JADWAL SHALAT ---
+    // --- 4. JADWAL SHALAT ---
     async function loadPrayerTimes(lat, lon) {
       const grid = document.getElementById('prayerGrid');
       try {
@@ -234,7 +248,7 @@
         document.getElementById('currentDate').innerText = data.data.date.readable;
         grid.innerHTML = '';
         ['Fajr','Dhuhr','Asr','Maghrib','Isha'].forEach(p => {
-          grid.innerHTML += `<div class="bg-slate-50 rounded-xl p-2 text-center border border-slate-100"><p class="text-[10px] uppercase text-slate-400 font-bold">${p}</p><p class="text-base md:text-lg font-bold text-slate-800">${t[p]}</p></div>`;
+          grid.innerHTML += `<div class="bg-white rounded-xl p-2 text-center border border-slate-100 shadow-sm"><p class="text-[10px] uppercase text-slate-400 font-bold">${p}</p><p class="text-base md:text-lg font-bold text-slate-800">${t[p]}</p></div>`;
         });
       } catch(e) {}
     }
@@ -243,7 +257,7 @@
       if(navigator.geolocation) navigator.geolocation.getCurrentPosition(p => loadPrayerTimes(p.coords.latitude, p.coords.longitude));
     };
 
-    // --- 4. KONTEN (Google Sheets) ---
+    // --- 5. KONTEN GOOGLE SHEETS ---
     const CONTENT_CSV = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTVxGRvlEuYhCTuDCtzQD3sxgkLRDTku-sSPuvZ8xYKLNxmy5jtEBZWMAzTXxDnOCX7IV-szkvQyUei/pub?gid=0&single=true&output=csv';
     async function loadContent() {
       const grid = document.getElementById('contentGrid');
@@ -260,7 +274,7 @@
              const ytId = link.match(/(?:youtu\.be\/|youtube\.com\/(?:.*v=|.*\/))([^&?]*)/)?.[1];
              media = `<div class="aspect-video bg-black relative rounded-t-xl overflow-hidden"><img src="https://img.youtube.com/vi/${ytId}/hqdefault.jpg" class="w-full h-full object-cover opacity-80"><div class="absolute inset-0 flex items-center justify-center text-white text-4xl">▶</div></div>`;
           }
-          grid.innerHTML += `<div class="bg-white border rounded-xl shadow-sm hover:shadow-md transition"><a href="${link||'#'}" target="_blank">${media}<div class="p-4"><span class="text-[10px] font-bold uppercase text-primary-600">${cat} • ${date}</span><h3 class="font-bold text-slate-900 mt-1 mb-2 line-clamp-2">${title}</h3><p class="text-sm text-slate-500 line-clamp-2">${desc}</p></div></a></div>`;
+          grid.innerHTML += `<div class="bg-white border rounded-xl shadow-sm hover:shadow-md transition"><a href="${link||'#'}" target="_blank">${media}<div class="p-4"><span class="text-[10px] font-bold uppercase text-primary-600 bg-primary-50 px-2 py-1 rounded">${cat} • ${date}</span><h3 class="font-bold text-slate-900 mt-2 mb-2 line-clamp-2">${title}</h3><p class="text-sm text-slate-500 line-clamp-2">${desc}</p></div></a></div>`;
         });
       } catch(e) {}
     }
