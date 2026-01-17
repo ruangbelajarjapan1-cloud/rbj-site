@@ -20,7 +20,7 @@
             primary: { DEFAULT:'#16a34a', 50:'#f0fdf4', 100:'#dcfce7', 600:'#16a34a', 700:'#15803d' },
           },
           fontFamily: { sans: ['Inter', 'sans-serif'] },
-          animation: { 'scroll': 'scroll 40s linear infinite' } // Kecepatan animasi galeri
+          animation: { 'scroll': 'scroll 40s linear infinite' }
         }
       }
     };
@@ -32,7 +32,7 @@
     /* Animasi Carousel Infinite */
     @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
     .animate-scroll { display: flex; width: max-content; animation: scroll 45s linear infinite; }
-    .animate-scroll:hover { animation-play-state: paused; } /* Berhenti saat disentuh */
+    .animate-scroll:hover { animation-play-state: paused; }
     
     /* Scroll Progress Bar */
     #progress-bar { width: 0%; height: 4px; background: #16a34a; position: fixed; top: 0; left: 0; z-index: 100; transition: width 0.1s; }
@@ -45,9 +45,9 @@
 
   <div id="progress-bar"></div>
 
-  <a href="https://ramadhan-seven.vercel.app/" target="_blank" class="fixed bottom-24 md:bottom-10 right-4 md:right-10 z-50 bg-gradient-to-r from-orange-500 to-amber-500 text-white px-5 py-3 rounded-full shadow-xl flex items-center gap-2 animate-bounce hover:scale-105 transition font-bold border-2 border-white ring-2 ring-orange-200">
-    <span class="text-lg">🌙</span>
-    <span class="text-sm">App Ramadhan</span>
+  <a href="https://ramadhan-seven.vercel.app/" target="_blank" class="fixed bottom-24 md:bottom-10 right-4 md:right-10 z-50 bg-gradient-to-r from-orange-500 to-amber-500 text-white px-5 py-3 rounded-full shadow-xl flex items-center gap-2 animate-bounce hover:scale-105 transition font-bold border-2 border-white ring-2 ring-orange-200 group">
+    <span class="text-xl group-hover:rotate-12 transition">🌙</span>
+    <span class="text-sm font-bold">App Ramadhan</span>
   </a>
 
   <header class="hidden md:block sticky top-0 z-40 bg-white/95 backdrop-blur border-b shadow-sm transition-all duration-300" id="navbar">
@@ -66,6 +66,7 @@
           <button onclick="setLang('id')" class="px-3 py-1 rounded text-xs font-bold transition lang-btn" data-lang="id">ID</button>
           <button onclick="setLang('en')" class="px-3 py-1 rounded text-xs font-bold transition lang-btn" data-lang="en">EN</button>
         </div>
+        <a href="https://ramadhan-seven.vercel.app/" target="_blank" class="px-4 py-2 rounded-xl bg-orange-50 text-orange-700 text-sm font-bold border border-orange-200 hover:bg-orange-100 transition">🌙 Ramadhan</a>
         <a href="#daftar" class="px-6 py-2 rounded-xl bg-primary-600 text-white text-sm font-bold shadow-lg hover:bg-primary-700">Daftar</a>
       </div>
     </div>
@@ -84,8 +85,10 @@
   <main>
     <section class="relative bg-white md:pt-6">
       <div class="max-w-7xl mx-auto md:px-4">
-        <div class="relative w-full aspect-[16/9] md:aspect-[21/9] md:rounded-3xl overflow-hidden shadow-sm md:shadow-xl group">
-          <img id="heroImg" src="hero.jpg" alt="Hero RBMJ" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/1600x900?text=Upload+hero.jpg+di+Folder+Utama'"/>
+        <div class="relative w-full aspect-[16/9] md:aspect-[21/9] md:rounded-3xl overflow-hidden shadow-sm md:shadow-xl group bg-slate-200">
+          
+          <img src="sampul.jpg" alt="Hero RBMJ" class="w-full h-full object-cover animate-fade-in" onerror="this.src='hero.jpg'"/>
+          
           <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-6 md:p-12 text-white">
             <span class="bg-primary-600 w-fit px-3 py-1 rounded-lg text-[10px] md:text-xs font-bold uppercase tracking-wider mb-2 animate-pulse" data-i18n="hero.badge">Pendaftaran Dibuka</span>
             <h2 class="text-3xl md:text-5xl font-extrabold leading-tight mb-2" data-i18n="hero.title">Belajar Islam <br/>di Negeri Sakura</h2>
@@ -180,10 +183,6 @@
   </div>
 
   <script>
-    // --- 0. HERO IMAGE CACHE BUSTER ---
-    // Menambahkan timestamp agar browser melupakan gambar lama dan memuat yang baru
-    document.getElementById('heroImg').src = 'hero.jpg?v=' + new Date().getTime();
-
     // --- 1. SCROLL PROGRESS BAR ---
     window.onscroll = () => {
       const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
