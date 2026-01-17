@@ -43,6 +43,10 @@
     .ticker-item { display: inline-block; white-space: nowrap; padding-left: 100%; animation: ticker 80s linear infinite; }
     .ticker-item:hover { animation-play-state: paused; }
 
+    /* SCROLL REVEAL ANIMATION (FITUR BARU) */
+    .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+    .reveal.active { opacity: 1; transform: translateY(0); }
+
     /* Scroll & Gallery */
     #progress-bar { width: 0%; height: 3px; background: #ca8a04; position: fixed; top: 32px; left: 0; z-index: 50; transition: width 0.1s; }
     .hide-scrollbar::-webkit-scrollbar { display: none; }
@@ -129,7 +133,8 @@
         <div class="relative w-full aspect-[16/9] md:aspect-[21/9] md:rounded-3xl overflow-hidden shadow-sm md:shadow-xl group bg-slate-200">
           <img id="heroImage" src="sampul.jpg" alt="Hero RBMJ" class="w-full h-full object-cover animate-fade-in" onerror="this.src='https://placehold.co/1600x900?text=Upload+sampul.jpg'"/>
           <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-6 md:p-12 text-white">
-            <span class="bg-primary-600 w-fit px-3 py-1 rounded-lg text-[10px] md:text-xs font-bold uppercase tracking-wider mb-2 animate-pulse" data-i18n="hero.badge">Pendaftaran Dibuka</span>
+            <span id="smartGreeting" class="bg-primary-600 w-fit px-3 py-1 rounded-lg text-[10px] md:text-xs font-bold uppercase tracking-wider mb-2 animate-pulse">Assalamualaikum</span>
+            
             <h2 class="text-3xl md:text-5xl font-extrabold leading-tight mb-2" data-i18n="hero.title">Belajar Islam <br/>di Negeri Sakura</h2>
             <p class="text-sm md:text-lg opacity-90 line-clamp-2 md:line-clamp-none max-w-2xl" data-i18n="hero.desc">Wadah keluarga Muslim di Yokohama untuk menuntut ilmu syar'i dan mempererat ukhuwah.</p>
           </div>
@@ -137,7 +142,7 @@
       </div>
     </section>
 
-    <section id="galeri" class="py-10 md:py-16 bg-white overflow-hidden border-b border-slate-100">
+    <section id="galeri" class="py-10 md:py-16 bg-white overflow-hidden border-b border-slate-100 reveal">
       <div class="text-center mb-8 px-4">
         <h2 class="text-xl md:text-2xl font-bold" data-i18n="sec.galeri">Dokumentasi Kegiatan</h2>
         <p class="text-xs text-slate-500 mt-1">Geser untuk melihat, klik untuk memperbesar</p>
@@ -149,7 +154,7 @@
       </div>
     </section>
 
-    <section id="jadwal" class="py-10 bg-slate-50 border-y border-slate-100">
+    <section id="jadwal" class="py-10 bg-slate-50 border-y border-slate-100 reveal">
       <div class="max-w-7xl mx-auto px-4">
         <div class="flex items-center justify-between mb-6">
           <div>
@@ -163,26 +168,26 @@
       </div>
     </section>
 
-    <section id="program" class="py-10 md:py-16 bg-white">
+    <section id="program" class="py-10 md:py-16 bg-white reveal">
       <div class="max-w-7xl mx-auto px-4">
         <h2 class="text-xl md:text-2xl font-bold mb-6" data-i18n="sec.program">Program Unggulan</h2>
         <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6">
-          <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100 hover:border-primary-200 transition">
+          <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100 hover:border-primary-200 transition hover:-translate-y-1 duration-300">
             <div class="w-10 h-10 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center text-xl mb-3">📖</div>
             <h3 class="font-bold text-sm md:text-base">Iqro' Anak</h3>
             <p class="text-xs text-slate-500 mt-1" data-i18n="prog.1">Belajar baca Al-Qur'an dari nol.</p>
           </div>
-          <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100 hover:border-primary-200 transition">
+          <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100 hover:border-primary-200 transition hover:-translate-y-1 duration-300">
             <div class="w-10 h-10 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center text-xl mb-3">💻</div>
             <h3 class="font-bold text-sm md:text-base">PAI Online</h3>
             <p class="text-xs text-slate-500 mt-1" data-i18n="prog.2">Fiqh, Aqidah & Akhlak praktis.</p>
           </div>
-          <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100 hover:border-primary-200 transition">
+          <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100 hover:border-primary-200 transition hover:-translate-y-1 duration-300">
             <div class="w-10 h-10 rounded-lg bg-orange-50 text-orange-600 flex items-center justify-center text-xl mb-3">🕌</div>
             <h3 class="font-bold text-sm md:text-base">Kajian Sunnah</h3>
             <p class="text-xs text-slate-500 mt-1" data-i18n="prog.3">Rutin offline & online.</p>
           </div>
-          <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100 hover:border-primary-200 transition">
+          <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100 hover:border-primary-200 transition hover:-translate-y-1 duration-300">
             <div class="w-10 h-10 rounded-lg bg-purple-50 text-purple-600 flex items-center justify-center text-xl mb-3">🎓</div>
             <h3 class="font-bold text-sm md:text-base">Tahsin Dewasa</h3>
             <p class="text-xs text-slate-500 mt-1" data-i18n="prog.4">Perbaikan bacaan Al-Qur'an.</p>
@@ -191,7 +196,7 @@
       </div>
     </section>
 
-    <section id="artikel" class="py-10 md:py-16 bg-slate-50">
+    <section id="artikel" class="py-10 md:py-16 bg-slate-50 reveal">
       <div class="max-w-7xl mx-auto px-4">
         <h2 class="text-xl md:text-2xl font-bold mb-6" data-i18n="sec.info">Info Terkini</h2>
         <div id="contentGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
@@ -225,18 +230,15 @@
         <h3 class="text-xl font-bold mb-1">Kalkulator Zakat Maal</h3>
         <p class="text-xs text-slate-500">Alat bantu hitung (2.5%)</p>
       </div>
-      
       <div class="space-y-4">
         <div>
           <label class="block text-xs font-bold text-slate-600 mb-1">Total Harta (Tabungan/Emas/dll)</label>
           <input type="number" id="zakatInput" placeholder="Contoh: 100000" class="w-full p-3 rounded-xl border border-slate-300 focus:border-primary-500 focus:ring-1 focus:ring-primary-500 outline-none font-mono text-lg">
         </div>
-        
         <div class="bg-primary-50 p-4 rounded-xl border border-primary-100 text-center">
           <p class="text-xs text-primary-600 font-bold uppercase">Wajib Zakat Anda (2.5%)</p>
           <p class="text-2xl font-bold text-primary-700 mt-1" id="zakatResult">-</p>
         </div>
-
         <button onclick="calculateZakat()" class="w-full py-3 rounded-xl bg-primary-600 text-white font-bold hover:bg-primary-700 transition shadow-lg">Hitung Sekarang</button>
         <button onclick="document.getElementById('zakatModal').classList.add('hidden')" class="w-full py-3 rounded-xl bg-slate-100 text-slate-600 font-bold hover:bg-slate-200 transition">Tutup</button>
       </div>
@@ -249,27 +251,44 @@
   </div>
 
   <script>
-    // --- LOGIC CALCULATOR ZAKAT ---
+    // --- LOGIC: SMART GREETING (SAPAAN OTOMATIS) ---
+    document.addEventListener("DOMContentLoaded", () => {
+        const hero = document.getElementById('heroImage');
+        if(hero) hero.src = 'sampul.jpg?v=' + new Date().getTime();
+
+        // Greeting Logic
+        const hour = new Date().getHours();
+        let greeting = "Assalamualaikum";
+        if(hour >= 4 && hour < 11) greeting = "Assalamualaikum, Selamat Pagi";
+        else if(hour >= 11 && hour < 15) greeting = "Assalamualaikum, Selamat Siang";
+        else if(hour >= 15 && hour < 18) greeting = "Assalamualaikum, Selamat Sore";
+        else greeting = "Assalamualaikum, Selamat Malam";
+        
+        const greetEl = document.getElementById("smartGreeting");
+        if(greetEl) greetEl.innerText = greeting;
+    });
+
+    // --- LOGIC: SCROLL REVEAL (ANIMASI MUNCUL) ---
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting) {
+          entry.target.classList.add('active');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // --- LOGIC: ZAKAT CALCULATOR ---
     function calculateZakat() {
       const input = document.getElementById('zakatInput').value;
       const resultBox = document.getElementById('zakatResult');
-      
-      if (!input || input <= 0) {
-        resultBox.innerText = "0";
-        return;
-      }
-      
-      const zakat = input * 0.025; // 2.5%
-      // Format number with commas
+      if (!input || input <= 0) { resultBox.innerText = "0"; return; }
+      const zakat = input * 0.025; 
       resultBox.innerText = Math.floor(zakat).toLocaleString();
     }
 
     // --- UTILS ---
-    document.addEventListener("DOMContentLoaded", () => {
-        const hero = document.getElementById('heroImage');
-        if(hero) hero.src = 'sampul.jpg?v=' + new Date().getTime();
-    });
-
     function copyText(text) {
       navigator.clipboard.writeText(text).then(() => {
         const t = document.getElementById("toast");
@@ -326,7 +345,7 @@
       }
     }
 
-    // --- JADWAL SHALAT (With Copy Feature) ---
+    // --- JADWAL SHALAT ---
     async function loadPrayerTimes(lat, lon) {
       const grid = document.getElementById('prayerGrid');
       try {
