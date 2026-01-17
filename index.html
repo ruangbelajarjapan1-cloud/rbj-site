@@ -10,6 +10,17 @@
   <meta name="theme-color" content="#16a34a" />
   <link rel="icon" type="image/png" href="favicon-32x32.png" />
 
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CommunityOrganization",
+    "name": "RBM Jepang",
+    "url": "https://rbm-jepang.org",
+    "logo": "logo.png",
+    "description": "Wadah keluarga Muslim di Yokohama untuk menuntut ilmu syar'i."
+  }
+  </script>
+
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <script>
@@ -18,6 +29,7 @@
         extend: {
           colors: {
             primary: { DEFAULT:'#16a34a', 50:'#f0fdf4', 100:'#dcfce7', 600:'#16a34a', 700:'#15803d' },
+            secondary: { DEFAULT:'#eab308', 50:'#fefce8', 600:'#ca8a04' } // Warna emas untuk Ramadhan
           },
           fontFamily: { sans: ['Inter', 'sans-serif'] },
           animation: { 'scroll': 'scroll 40s linear infinite' }
@@ -35,44 +47,76 @@
     .animate-scroll:hover { animation-play-state: paused; }
     
     /* Scroll Progress Bar */
-    #progress-bar { width: 0%; height: 4px; background: #16a34a; position: fixed; top: 0; left: 0; z-index: 100; transition: width 0.1s; }
+    #progress-bar { width: 0%; height: 4px; background: #ca8a04; position: fixed; top: 0; left: 0; z-index: 100; transition: width 0.1s; }
     
-    /* Hide Scrollbar */
-    .hide-scrollbar::-webkit-scrollbar { display: none; }
+    /* Active Menu Style */
+    .nav-active { color: #16a34a; background-color: #f0fdf4; font-weight: 700; }
+
+    /* SMART TICKER ANIMATION */
+    @keyframes ticker {
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
+    }
+    .ticker-wrap {
+      width: 100%;
+      overflow: hidden;
+      white-space: nowrap;
+      box-sizing: border-box;
+    }
+    .ticker-item {
+      display: inline-block;
+      padding-left: 100%;
+      animation: ticker 30s linear infinite;
+    }
+    .ticker-item:hover { animation-play-state: paused; }
   </style>
 </head>
-<body class="bg-gray-50 text-slate-900 antialiased">
+<body class="bg-gray-50 text-slate-900 antialiased relative pt-8 md:pt-0">
 
-  <div id="progress-bar"></div>
+  <div class="fixed top-0 left-0 right-0 h-8 bg-slate-900 text-white z-[60] flex items-center text-xs font-medium overflow-hidden shadow-md">
+    <div class="bg-primary-600 px-3 h-full flex items-center z-10 shrink-0 font-bold shadow-lg">
+      <span class="hidden md:inline mr-1">📅</span> <span id="hijriDate">Loading...</span>
+    </div>
+    <div class="ticker-wrap flex items-center">
+      <div class="ticker-item" id="tickerContent">
+        Memuat Data Jadwal Shalat & Ramadhan...
+      </div>
+    </div>
+  </div>
+
+  <div id="progress-bar" class="mt-8 md:mt-0"></div>
+
+  <button id="backToTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="fixed bottom-24 md:bottom-10 left-4 md:left-10 z-40 bg-white text-primary-600 p-3 rounded-full shadow-lg border border-primary-100 opacity-0 translate-y-10 transition-all duration-300 pointer-events-none hover:bg-primary-50">
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path></svg>
+  </button>
 
   <a href="https://ramadhan-seven.vercel.app/" target="_blank" class="fixed bottom-24 md:bottom-10 right-4 md:right-10 z-50 bg-gradient-to-r from-orange-500 to-amber-500 text-white px-5 py-3 rounded-full shadow-xl flex items-center gap-2 animate-bounce hover:scale-105 transition font-bold border-2 border-white ring-2 ring-orange-200 group">
     <span class="text-xl group-hover:rotate-12 transition">🌙</span>
     <span class="text-sm font-bold">App Ramadhan</span>
   </a>
 
-  <header class="hidden md:block sticky top-0 z-40 bg-white/95 backdrop-blur border-b shadow-sm transition-all duration-300" id="navbar">
+  <header class="hidden md:block sticky top-0 z-40 bg-white/95 backdrop-blur border-b shadow-sm transition-all duration-300 mt-8 md:mt-0" id="navbar">
     <div class="max-w-7xl mx-auto px-4 h-20 flex items-center justify-between">
       <a href="#" class="flex items-center gap-3">
         <img src="logo.png" class="h-10 w-10 rounded-lg object-contain" onerror="this.src='favicon-32x32.png'"/>
         <div><h1 class="font-bold text-xl text-slate-900">RBM Jepang</h1><p class="text-xs text-slate-500 font-medium uppercase">Ruang Belajar Muslim</p></div>
       </a>
       <nav class="flex gap-1 bg-slate-100 p-1 rounded-full text-sm font-medium">
-        <a href="#program" class="px-5 py-2 rounded-full hover:bg-white transition">Program</a>
-        <a href="#jadwal" class="px-5 py-2 rounded-full hover:bg-white transition">Jadwal</a>
-        <a href="#galeri" class="px-5 py-2 rounded-full hover:bg-white transition">Galeri</a>
+        <a href="#program" class="nav-link px-5 py-2 rounded-full hover:bg-white transition">Program</a>
+        <a href="#jadwal" class="nav-link px-5 py-2 rounded-full hover:bg-white transition">Jadwal</a>
+        <a href="#galeri" class="nav-link px-5 py-2 rounded-full hover:bg-white transition">Galeri</a>
       </nav>
       <div class="flex items-center gap-3">
         <div class="flex bg-slate-100 rounded-lg p-1">
           <button onclick="setLang('id')" class="px-3 py-1 rounded text-xs font-bold transition lang-btn" data-lang="id">ID</button>
           <button onclick="setLang('en')" class="px-3 py-1 rounded text-xs font-bold transition lang-btn" data-lang="en">EN</button>
         </div>
-        <a href="https://ramadhan-seven.vercel.app/" target="_blank" class="px-4 py-2 rounded-xl bg-orange-50 text-orange-700 text-sm font-bold border border-orange-200 hover:bg-orange-100 transition">🌙 Ramadhan</a>
         <a href="#daftar" class="px-6 py-2 rounded-xl bg-primary-600 text-white text-sm font-bold shadow-lg hover:bg-primary-700">Daftar</a>
       </div>
     </div>
   </header>
 
-  <div class="md:hidden sticky top-0 z-40 bg-white/95 backdrop-blur border-b px-4 h-14 flex items-center justify-between shadow-sm">
+  <div class="md:hidden sticky top-8 z-40 bg-white/95 backdrop-blur border-b px-4 h-14 flex items-center justify-between shadow-sm">
     <div class="flex items-center gap-2">
       <img src="logo.png" class="h-8 w-8 rounded bg-primary-50" onerror="this.src='favicon-32x32.png'">
       <span class="font-bold text-lg text-primary-700">RBMJ</span>
@@ -83,11 +127,11 @@
   </div>
 
   <main>
-    <section class="relative bg-white md:pt-6">
+    <section id="home" class="relative bg-white md:pt-6">
       <div class="max-w-7xl mx-auto md:px-4">
         <div class="relative w-full aspect-[16/9] md:aspect-[21/9] md:rounded-3xl overflow-hidden shadow-sm md:shadow-xl group bg-slate-200">
           
-          <img src="sampul.jpg" alt="Hero RBMJ" class="w-full h-full object-cover animate-fade-in" onerror="this.src='hero.jpg'"/>
+          <img id="heroImage" src="sampul.jpg" alt="Hero RBMJ" class="w-full h-full object-cover animate-fade-in" onerror="this.src='hero.jpg'"/>
           
           <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-6 md:p-12 text-white">
             <span class="bg-primary-600 w-fit px-3 py-1 rounded-lg text-[10px] md:text-xs font-bold uppercase tracking-wider mb-2 animate-pulse" data-i18n="hero.badge">Pendaftaran Dibuka</span>
@@ -103,13 +147,10 @@
         <h2 class="text-xl md:text-2xl font-bold" data-i18n="sec.galeri">Dokumentasi Kegiatan</h2>
         <p class="text-xs text-slate-500 mt-1">Geser untuk melihat, klik untuk memperbesar</p>
       </div>
-      
       <div class="relative w-full">
         <div class="absolute left-0 top-0 bottom-0 w-8 md:w-32 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none"></div>
         <div class="absolute right-0 top-0 bottom-0 w-8 md:w-32 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none"></div>
-
-        <div id="galleryTrack" class="animate-scroll gap-4 px-4 items-center">
-          </div>
+        <div id="galleryTrack" class="animate-scroll gap-4 px-4 items-center"></div>
       </div>
     </section>
 
@@ -183,15 +224,37 @@
   </div>
 
   <script>
-    // --- 1. SCROLL PROGRESS BAR ---
-    window.onscroll = () => {
-      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      const scrolled = (winScroll / height) * 100;
-      document.getElementById("progress-bar").style.width = scrolled + "%";
-    };
+    // --- 0. FORCE IMAGE RELOAD & BACK TO TOP ---
+    document.addEventListener("DOMContentLoaded", function() {
+        var hero = document.getElementById('heroImage');
+        if(hero) hero.src = 'sampul.jpg?v=' + new Date().getTime();
+    });
 
-    // --- 2. BAHASA / I18N ---
+    const btt = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => {
+      // Logic Back to Top
+      if (window.scrollY > 300) btt.classList.remove('opacity-0', 'translate-y-10', 'pointer-events-none');
+      else btt.classList.add('opacity-0', 'translate-y-10', 'pointer-events-none');
+      
+      // Logic Scroll Progress
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      document.getElementById("progress-bar").style.width = ((window.scrollY / height) * 100) + "%";
+      
+      // Active Menu Highlighting
+      const sections = document.querySelectorAll('section');
+      const navLinks = document.querySelectorAll('.nav-link');
+      let current = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        if (pageYOffset >= (sectionTop - 150)) current = section.getAttribute('id');
+      });
+      navLinks.forEach(link => {
+        link.classList.remove('nav-active');
+        if (link.getAttribute('href').includes(current)) link.classList.add('nav-active');
+      });
+    });
+
+    // --- 1. BAHASA / I18N ---
     const TRANSLATIONS = {
       id: {
         "nav.program": "Program", "nav.jadwal": "Jadwal", "nav.galeri": "Galeri", "nav.home":"Home",
@@ -222,41 +285,64 @@
     function toggleLang() { setLang(currentLang === 'id' ? 'en' : 'id'); }
     setLang(currentLang);
 
-    // --- 3. GALERI ANIMASI (SMART ASPECT RATIO) ---
-    // Menggunakan tinggi tetap (h-48) dan width auto agar tidak crop kepala
+    // --- 2. GALERI ANIMASI ---
     const track = document.getElementById('galleryTrack');
     for(let k=0; k<2; k++) { 
       for(let i=1; i<=11; i++) {
         const img = document.createElement('img');
         img.src = `assets/${i}.jpeg`;
-        // "h-48 w-auto" adalah kuncinya: Tinggi sama, lebar menyesuaikan (potrait jadi ramping, landscape jadi lebar)
         img.className = "h-40 md:h-56 w-auto max-w-xs object-contain rounded-xl shadow-md hover:scale-105 transition duration-300 cursor-zoom-in bg-white p-1";
         img.onclick = () => { document.getElementById('lightboxImg').src = `assets/${i}.jpeg`; document.getElementById('lightbox').classList.remove('hidden'); };
         track.appendChild(img);
       }
     }
 
-    // --- 4. JADWAL SHALAT ---
+    // --- 3. LOGIC UTAMA: TICKER, SHALAT, HIJRIAH, COUNTDOWN ---
     async function loadPrayerTimes(lat, lon) {
       const grid = document.getElementById('prayerGrid');
       try {
         const date = new Date();
+        // Fetch API AlAdhan (Includes Hijri)
         const res = await fetch(`https://api.aladhan.com/v1/timings/${date.getDate()}-${date.getMonth()+1}-${date.getFullYear()}?latitude=${lat}&longitude=${lon}&method=7`);
         const data = await res.json();
         const t = data.data.timings;
+        const hijri = data.data.date.hijri;
+        
+        // 1. UPDATE TANGGAL HIJRIAH DI TICKER
+        document.getElementById('hijriDate').innerText = `${hijri.day} ${hijri.month.en} ${hijri.year} H`;
+        
+        // 2. UPDATE TICKER CONTENT (SHALAT + COUNTDOWN)
+        // Hitung Countdown Ramadhan (Estimasi)
+        const today = new Date();
+        const ramadhanYear = (today.getMonth() > 3) ? today.getFullYear() + 1 : today.getFullYear(); 
+        const ramadhanStart = new Date(`Feb 17, ${ramadhanYear}`); // Estimasi kasar 2026/2027
+        const diffTime = Math.abs(ramadhanStart - today);
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+        const countdownText = `⏳ Menuju Ramadhan: ${diffDays} Hari Lagi`;
+        
+        // Format Ticker String
+        const prayerString = `🕌 Subuh ${t.Fajr} • Dzuhur ${t.Dhuhr} • Ashar ${t.Asr} • Maghrib ${t.Maghrib} • Isya ${t.Isha}`;
+        
+        // Masukkan ke Ticker
+        const tickerContent = document.getElementById('tickerContent');
+        tickerContent.innerHTML = `<span class="text-yellow-300 font-bold mx-4">${countdownText}</span>  |  <span class="mx-4">${prayerString}</span>  |  <span class="mx-4 text-primary-200">Jangan lupa dzikir pagi petang!</span>`;
+
+        // 3. UPDATE GRID UTAMA
         document.getElementById('currentDate').innerText = data.data.date.readable;
         grid.innerHTML = '';
         ['Fajr','Dhuhr','Asr','Maghrib','Isha'].forEach(p => {
           grid.innerHTML += `<div class="bg-white rounded-xl p-2 text-center border border-slate-100 shadow-sm"><p class="text-[10px] uppercase text-slate-400 font-bold">${p}</p><p class="text-base md:text-lg font-bold text-slate-800">${t[p]}</p></div>`;
         });
-      } catch(e) {}
+      } catch(e) {
+        console.error(e);
+      }
     }
-    loadPrayerTimes(35.4437, 139.6380);
+    loadPrayerTimes(35.4437, 139.6380); // Default Yokohama
     document.getElementById('btnGeo').onclick = () => {
       if(navigator.geolocation) navigator.geolocation.getCurrentPosition(p => loadPrayerTimes(p.coords.latitude, p.coords.longitude));
     };
 
-    // --- 5. KONTEN GOOGLE SHEETS ---
+    // --- 4. KONTEN GOOGLE SHEETS ---
     const CONTENT_CSV = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTVxGRvlEuYhCTuDCtzQD3sxgkLRDTku-sSPuvZ8xYKLNxmy5jtEBZWMAzTXxDnOCX7IV-szkvQyUei/pub?gid=0&single=true&output=csv';
     async function loadContent() {
       const grid = document.getElementById('contentGrid');
