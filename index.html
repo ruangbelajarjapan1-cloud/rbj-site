@@ -34,28 +34,16 @@
     @media (min-width: 768px) { body { padding-bottom: 0; } }
     .sticky-nav { position: sticky; top: 32px; z-index: 40; }
 
-    /* --- PERBAIKAN RUNNING TEXT (TICKER) --- */
-    /* 1. Animasi berjalan dari 0 (posisi padding) ke -100% (habis ke kiri) */
+    /* RUNNING TEXT (TICKER) */
     @keyframes ticker {
       0% { transform: translate3d(0, 0, 0); }
       100% { transform: translate3d(-100%, 0, 0); }
     }
-    .ticker-wrap {
-      width: 100%;
-      overflow: hidden;
-      white-space: nowrap;
-      box-sizing: border-box;
-    }
-    .ticker-item {
-      display: inline-block;
-      white-space: nowrap;
-      padding-left: 100%; /* Memastikan teks mulai muncul dari ujung kanan layar */
-      /* 2. Durasi diperlambat jadi 80s agar enak dibaca */
-      animation: ticker 80s linear infinite; 
-    }
-    .ticker-item:hover { animation-play-state: paused; } /* Berhenti saat disentuh mouse */
+    .ticker-wrap { width: 100%; overflow: hidden; white-space: nowrap; box-sizing: border-box; }
+    .ticker-item { display: inline-block; white-space: nowrap; padding-left: 100%; animation: ticker 80s linear infinite; }
+    .ticker-item:hover { animation-play-state: paused; }
 
-    /* Scroll Progress & Gallery */
+    /* Scroll & Gallery */
     #progress-bar { width: 0%; height: 3px; background: #ca8a04; position: fixed; top: 32px; left: 0; z-index: 50; transition: width 0.1s; }
     .hide-scrollbar::-webkit-scrollbar { display: none; }
     .nav-active { color: #16a34a; background-color: #f0fdf4; font-weight: 700; }
@@ -63,9 +51,15 @@
     @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
     .animate-scroll { display: flex; width: max-content; animation: scroll 45s linear infinite; }
     .animate-scroll:hover { animation-play-state: paused; }
+
+    /* Toast Notification */
+    #toast { visibility: hidden; min-width: 250px; margin-left: -125px; background-color: #333; color: #fff; text-align: center; border-radius: 50px; padding: 16px; position: fixed; z-index: 100; left: 50%; bottom: 100px; font-size: 14px; opacity: 0; transition: opacity 0.3s; }
+    #toast.show { visibility: visible; opacity: 1; }
   </style>
 </head>
 <body class="bg-gray-50 text-slate-900 antialiased relative">
+
+  <div id="toast">✅ Teks berhasil disalin!</div>
 
   <div class="fixed top-0 left-0 right-0 h-8 bg-slate-900 text-white z-[60] flex items-center text-xs font-medium overflow-hidden shadow-md">
     <div class="bg-primary-600 px-3 h-full flex items-center gap-2 z-10 shrink-0 font-bold shadow-[2px_0_5px_rgba(0,0,0,0.3)]">
@@ -74,10 +68,9 @@
       </div>
       <span id="hijriDate" class="hidden md:inline text-[10px] md:text-xs">Loading...</span>
     </div>
-    
     <div class="ticker-wrap flex items-center">
       <div class="ticker-item" id="tickerContent">
-        Tunggu sebentar, sedang memuat jadwal shalat...
+        Sedang memuat jadwal shalat...
       </div>
     </div>
   </div>
@@ -104,11 +97,16 @@
         <a href="#jadwal" class="nav-link px-5 py-2 rounded-full hover:bg-white transition">Jadwal</a>
         <a href="#galeri" class="nav-link px-5 py-2 rounded-full hover:bg-white transition">Galeri</a>
       </nav>
-      <div class="flex items-center gap-3">
-        <div class="flex bg-slate-100 rounded-lg p-1">
+      <div class="flex items-center gap-2">
+        <div class="flex bg-slate-100 rounded-lg p-1 mr-2">
           <button onclick="setLang('id')" class="px-3 py-1 rounded text-xs font-bold transition lang-btn" data-lang="id">ID</button>
           <button onclick="setLang('en')" class="px-3 py-1 rounded text-xs font-bold transition lang-btn" data-lang="en">EN</button>
         </div>
+        
+        <button onclick="document.getElementById('zakatModal').classList.remove('hidden')" class="px-5 py-2 rounded-xl bg-white text-slate-700 text-sm font-bold border border-slate-200 hover:bg-slate-50 hover:text-primary-700 transition flex items-center gap-2">
+          <span>🧮</span> Hitung Zakat
+        </button>
+        
         <a href="#daftar" class="px-6 py-2 rounded-xl bg-primary-600 text-white text-sm font-bold shadow-lg hover:bg-primary-700">Daftar</a>
       </div>
     </div>
@@ -119,7 +117,8 @@
       <img src="logo.png" class="h-8 w-8 rounded bg-primary-50 object-contain" onerror="this.src='favicon-32x32.png'">
       <span class="font-bold text-lg text-primary-700">RBMJ</span>
     </div>
-    <div class="flex items-center gap-3">
+    <div class="flex items-center gap-2">
+      <button onclick="document.getElementById('zakatModal').classList.remove('hidden')" class="text-xs font-bold bg-slate-50 text-slate-700 px-3 py-1.5 rounded-lg border border-slate-200 flex items-center gap-1">🧮 Zakat</button>
       <button onclick="toggleLang()" id="mobileLangBtn" class="text-xs font-bold bg-slate-100 px-3 py-1.5 rounded-lg text-slate-600 border border-slate-200">ID</button>
     </div>
   </div>
@@ -153,9 +152,13 @@
     <section id="jadwal" class="py-10 bg-slate-50 border-y border-slate-100">
       <div class="max-w-7xl mx-auto px-4">
         <div class="flex items-center justify-between mb-6">
-          <div><h2 class="text-xl md:text-2xl font-bold" data-i18n="sec.jadwal">Waktu Shalat</h2><p class="text-xs text-slate-500" id="currentDate">...</p></div>
+          <div>
+            <h2 class="text-xl md:text-2xl font-bold" data-i18n="sec.jadwal">Waktu Shalat</h2>
+            <p class="text-xs text-slate-500" id="currentDate">...</p>
+          </div>
           <button id="btnGeo" class="text-xs bg-white text-primary-700 px-3 py-2 rounded-lg font-bold border border-slate-200 shadow-sm" data-i18n="btn.loc">📍 Lokasi Saya</button>
         </div>
+        <p class="text-xs text-slate-400 mb-4 italic text-center md:text-left">*Klik pada kotak waktu untuk menyalin (Copy)</p>
         <div id="prayerGrid" class="grid grid-cols-5 gap-2 md:gap-4"></div>
       </div>
     </section>
@@ -215,16 +218,65 @@
     <iframe src="https://forms.gle/dxqRenLyLq3KJ6cr5" class="w-full h-[90vh] border-0"></iframe>
   </section>
 
+  <div id="zakatModal" class="fixed inset-0 z-[70] bg-black/80 hidden flex items-center justify-center p-4 backdrop-blur-sm transition-opacity" onclick="if(event.target===this) this.classList.add('hidden')">
+    <div class="bg-white w-full max-w-sm rounded-2xl overflow-hidden shadow-2xl animate-fade-in-up p-6">
+      <div class="text-center mb-6">
+        <div class="w-12 h-12 bg-primary-100 text-primary-600 rounded-full flex items-center justify-center text-2xl mx-auto mb-3">🧮</div>
+        <h3 class="text-xl font-bold mb-1">Kalkulator Zakat Maal</h3>
+        <p class="text-xs text-slate-500">Alat bantu hitung (2.5%)</p>
+      </div>
+      
+      <div class="space-y-4">
+        <div>
+          <label class="block text-xs font-bold text-slate-600 mb-1">Total Harta (Tabungan/Emas/dll)</label>
+          <input type="number" id="zakatInput" placeholder="Contoh: 100000" class="w-full p-3 rounded-xl border border-slate-300 focus:border-primary-500 focus:ring-1 focus:ring-primary-500 outline-none font-mono text-lg">
+        </div>
+        
+        <div class="bg-primary-50 p-4 rounded-xl border border-primary-100 text-center">
+          <p class="text-xs text-primary-600 font-bold uppercase">Wajib Zakat Anda (2.5%)</p>
+          <p class="text-2xl font-bold text-primary-700 mt-1" id="zakatResult">-</p>
+        </div>
+
+        <button onclick="calculateZakat()" class="w-full py-3 rounded-xl bg-primary-600 text-white font-bold hover:bg-primary-700 transition shadow-lg">Hitung Sekarang</button>
+        <button onclick="document.getElementById('zakatModal').classList.add('hidden')" class="w-full py-3 rounded-xl bg-slate-100 text-slate-600 font-bold hover:bg-slate-200 transition">Tutup</button>
+      </div>
+      <p class="text-[10px] text-slate-400 text-center mt-4">*Pastikan harta sudah mencapai Nishab (85g Emas) & Haul (1 tahun).</p>
+    </div>
+  </div>
+
   <div id="lightbox" class="fixed inset-0 z-[70] bg-black/95 hidden flex items-center justify-center p-2 backdrop-blur-sm transition-opacity" onclick="this.classList.add('hidden')">
     <img id="lightboxImg" class="max-w-full max-h-[85vh] rounded shadow-lg transform transition" />
   </div>
 
   <script>
-    // --- 0. FORCE IMAGE RELOAD ---
-    document.addEventListener("DOMContentLoaded", function() {
-        var hero = document.getElementById('heroImage');
+    // --- LOGIC CALCULATOR ZAKAT ---
+    function calculateZakat() {
+      const input = document.getElementById('zakatInput').value;
+      const resultBox = document.getElementById('zakatResult');
+      
+      if (!input || input <= 0) {
+        resultBox.innerText = "0";
+        return;
+      }
+      
+      const zakat = input * 0.025; // 2.5%
+      // Format number with commas
+      resultBox.innerText = Math.floor(zakat).toLocaleString();
+    }
+
+    // --- UTILS ---
+    document.addEventListener("DOMContentLoaded", () => {
+        const hero = document.getElementById('heroImage');
         if(hero) hero.src = 'sampul.jpg?v=' + new Date().getTime();
     });
+
+    function copyText(text) {
+      navigator.clipboard.writeText(text).then(() => {
+        const t = document.getElementById("toast");
+        t.className = "show";
+        setTimeout(() => { t.className = t.className.replace("show", ""); }, 3000);
+      });
+    }
 
     const btt = document.getElementById('backToTop');
     window.addEventListener('scroll', () => {
@@ -247,38 +299,22 @@
       });
     });
 
-    // --- 1. BAHASA / I18N ---
+    // --- I18N ---
     const TRANSLATIONS = {
-      id: {
-        "nav.program": "Program", "nav.jadwal": "Jadwal", "nav.galeri": "Galeri", "nav.home":"Home",
-        "hero.badge": "Pendaftaran Dibuka", "hero.title": "Belajar Islam <br/>di Negeri Sakura", "hero.desc": "Wadah keluarga Muslim di Yokohama untuk menuntut ilmu syar'i dan mempererat ukhuwah.",
-        "sec.program": "Program Unggulan", "prog.1": "Belajar baca Al-Qur'an dari nol.", "prog.2": "Fiqh, Aqidah & Akhlak praktis.", "prog.3": "Rutin offline & online.", "prog.4": "Perbaikan bacaan Al-Qur'an.",
-        "sec.jadwal": "Waktu Shalat", "btn.loc": "📍 Lokasi Saya", "sec.galeri": "Dokumentasi Kegiatan", "sec.info": "Info Terkini"
-      },
-      en: {
-        "nav.program": "Programs", "nav.jadwal": "Prayers", "nav.galeri": "Gallery", "nav.home":"Home",
-        "hero.badge": "Registration Open", "hero.title": "Learn Islam <br/>in Japan", "hero.desc": "Community for Muslim families in Yokohama to learn Islamic knowledge and strengthen brotherhood.",
-        "sec.program": "Our Programs", "prog.1": "Learn Quran from scratch.", "prog.2": "Fiqh, Aqidah & Ethics.", "prog.3": "Regular offline & online.", "prog.4": "Quran recitation correction.",
-        "sec.jadwal": "Prayer Times", "btn.loc": "📍 My Location", "sec.galeri": "Activity Gallery", "sec.info": "Latest Info"
-      }
+      id: { "nav.program": "Program", "nav.jadwal": "Jadwal", "nav.galeri": "Galeri", "nav.home":"Home", "hero.badge": "Pendaftaran Dibuka", "hero.title": "Belajar Islam <br/>di Negeri Sakura", "hero.desc": "Wadah keluarga Muslim di Yokohama untuk menuntut ilmu syar'i dan mempererat ukhuwah.", "sec.program": "Program Unggulan", "prog.1": "Belajar baca Al-Qur'an dari nol.", "prog.2": "Fiqh, Aqidah & Akhlak praktis.", "prog.3": "Rutin offline & online.", "prog.4": "Perbaikan bacaan Al-Qur'an.", "sec.jadwal": "Waktu Shalat", "btn.loc": "📍 Lokasi Saya", "sec.galeri": "Dokumentasi Kegiatan", "sec.info": "Info Terkini" },
+      en: { "nav.program": "Programs", "nav.jadwal": "Prayers", "nav.galeri": "Gallery", "nav.home":"Home", "hero.badge": "Registration Open", "hero.title": "Learn Islam <br/>in Japan", "hero.desc": "Community for Muslim families in Yokohama to learn Islamic knowledge and strengthen brotherhood.", "sec.program": "Our Programs", "prog.1": "Learn Quran from scratch.", "prog.2": "Fiqh, Aqidah & Ethics.", "prog.3": "Regular offline & online.", "prog.4": "Quran recitation correction.", "sec.jadwal": "Prayer Times", "btn.loc": "📍 My Location", "sec.galeri": "Activity Gallery", "sec.info": "Latest Info" }
     };
     let currentLang = localStorage.getItem('lang') || 'id';
     function setLang(lang) {
       currentLang = lang; localStorage.setItem('lang', lang);
-      document.querySelectorAll('[data-i18n]').forEach(el => {
-        const key = el.getAttribute('data-i18n');
-        if(TRANSLATIONS[lang][key]) el.innerHTML = TRANSLATIONS[lang][key];
-      });
-      document.querySelectorAll('.lang-btn').forEach(btn => {
-        if(btn.dataset.lang === lang) btn.classList.add('bg-white', 'text-primary-600', 'shadow');
-        else btn.classList.remove('bg-white', 'text-primary-600', 'shadow');
-      });
+      document.querySelectorAll('[data-i18n]').forEach(el => { const key = el.getAttribute('data-i18n'); if(TRANSLATIONS[lang][key]) el.innerHTML = TRANSLATIONS[lang][key]; });
+      document.querySelectorAll('.lang-btn').forEach(btn => { if(btn.dataset.lang === lang) btn.classList.add('bg-white', 'text-primary-600', 'shadow'); else btn.classList.remove('bg-white', 'text-primary-600', 'shadow'); });
       const mob = document.getElementById('mobileLangBtn'); if(mob) mob.innerText = lang.toUpperCase();
     }
     function toggleLang() { setLang(currentLang === 'id' ? 'en' : 'id'); }
     setLang(currentLang);
 
-    // --- 2. GALERI ANIMASI ---
+    // --- GALERI ---
     const track = document.getElementById('galleryTrack');
     for(let k=0; k<2; k++) { 
       for(let i=1; i<=11; i++) {
@@ -290,7 +326,7 @@
       }
     }
 
-    // --- 3. LOGIC UTAMA: TICKER ---
+    // --- JADWAL SHALAT (With Copy Feature) ---
     async function loadPrayerTimes(lat, lon) {
       const grid = document.getElementById('prayerGrid');
       try {
@@ -301,30 +337,28 @@
         const hijri = data.data.date.hijri;
         
         document.getElementById('hijriDate').innerText = `${hijri.day} ${hijri.month.en} ${hijri.year} H`;
-        
-        // Countdown
-        const today = new Date();
-        const ramadhanYear = (today.getMonth() > 3) ? today.getFullYear() + 1 : today.getFullYear(); 
-        const ramadhanStart = new Date(`Feb 17, ${ramadhanYear}`); 
+        const today = new Date(); const ramadhanYear = (today.getMonth() > 3) ? today.getFullYear() + 1 : today.getFullYear(); const ramadhanStart = new Date(`Feb 17, ${ramadhanYear}`); 
         const diffDays = Math.ceil(Math.abs(ramadhanStart - today) / (1000 * 60 * 60 * 24)); 
         const countdownText = `⏳ Menuju Ramadhan: ${diffDays} Hari Lagi`;
         const prayerString = `🕌 Subuh ${t.Fajr} • Dzuhur ${t.Dhuhr} • Ashar ${t.Asr} • Maghrib ${t.Maghrib} • Isya ${t.Isha}`;
-        
-        document.getElementById('tickerContent').innerHTML = `<span class="text-yellow-300 font-bold mx-4">${countdownText}</span>  |  <span class="mx-4">${prayerString}</span>  |  <span class="mx-4 text-primary-200">Jangan lupa dzikir pagi petang!</span>`;
+        document.getElementById('tickerContent').innerHTML = `<span class="text-yellow-300 font-bold mx-4">${countdownText}</span> | <span class="mx-4">${prayerString}</span> | <span class="mx-4 text-primary-200">Jangan lupa dzikir pagi petang!</span>`;
 
         document.getElementById('currentDate').innerText = data.data.date.readable;
         grid.innerHTML = '';
         ['Fajr','Dhuhr','Asr','Maghrib','Isha'].forEach(p => {
-          grid.innerHTML += `<div class="bg-white rounded-xl p-2 text-center border border-slate-100 shadow-sm"><p class="text-[10px] uppercase text-slate-400 font-bold">${p}</p><p class="text-base md:text-lg font-bold text-slate-800">${t[p]}</p></div>`;
+          const time = t[p];
+          grid.innerHTML += `
+            <div class="bg-white rounded-xl p-2 text-center border border-slate-100 shadow-sm cursor-pointer hover:bg-primary-50 transition active:scale-95" onclick="copyText('${p}: ${time}')">
+              <p class="text-[10px] uppercase text-slate-400 font-bold">${p}</p>
+              <p class="text-base md:text-lg font-bold text-slate-800">${time}</p>
+            </div>`;
         });
       } catch(e) {}
     }
     loadPrayerTimes(35.4437, 139.6380);
-    document.getElementById('btnGeo').onclick = () => {
-      if(navigator.geolocation) navigator.geolocation.getCurrentPosition(p => loadPrayerTimes(p.coords.latitude, p.coords.longitude));
-    };
+    document.getElementById('btnGeo').onclick = () => { if(navigator.geolocation) navigator.geolocation.getCurrentPosition(p => loadPrayerTimes(p.coords.latitude, p.coords.longitude)); };
 
-    // --- 4. KONTEN CSV ---
+    // --- KONTEN ---
     const CONTENT_CSV = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTVxGRvlEuYhCTuDCtzQD3sxgkLRDTku-sSPuvZ8xYKLNxmy5jtEBZWMAzTXxDnOCX7IV-szkvQyUei/pub?gid=0&single=true&output=csv';
     async function loadContent() {
       const grid = document.getElementById('contentGrid');
