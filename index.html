@@ -29,7 +29,7 @@
         extend: {
           colors: {
             primary: { DEFAULT:'#16a34a', 50:'#f0fdf4', 100:'#dcfce7', 600:'#16a34a', 700:'#15803d' },
-            secondary: { DEFAULT:'#eab308', 50:'#fefce8', 600:'#ca8a04' } // Warna emas untuk Ramadhan
+            secondary: { DEFAULT:'#eab308', 50:'#fefce8', 600:'#ca8a04' }
           },
           fontFamily: { sans: ['Inter', 'sans-serif'] },
           animation: { 'scroll': 'scroll 40s linear infinite' }
@@ -90,9 +90,9 @@
     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path></svg>
   </button>
 
-  <a href="https://ramadhan-seven.vercel.app/" target="_blank" class="fixed bottom-24 md:bottom-10 right-4 md:right-10 z-50 bg-gradient-to-r from-orange-500 to-amber-500 text-white px-5 py-3 rounded-full shadow-xl flex items-center gap-2 animate-bounce hover:scale-105 transition font-bold border-2 border-white ring-2 ring-orange-200 group">
-    <span class="text-xl group-hover:rotate-12 transition">🌙</span>
-    <span class="text-sm font-bold">App Ramadhan</span>
+  <a href="https://ramadhan-seven.vercel.app/" target="_blank" class="fixed bottom-24 md:bottom-10 right-4 md:right-10 z-50 bg-gradient-to-r from-orange-500 to-amber-500 text-white px-4 py-2.5 rounded-full shadow-xl flex items-center gap-3 animate-bounce hover:scale-105 transition font-bold border-2 border-white ring-2 ring-orange-200 group pl-2">
+    <img src="logo.png" alt="App Logo" class="w-8 h-8 rounded-full bg-white/20 p-0.5 group-hover:rotate-12 transition" onerror="this.src='favicon-32x32.png'">
+    <span class="text-sm font-bold leading-tight">App<br>Ramadhan</span>
   </a>
 
   <header class="hidden md:block sticky top-0 z-40 bg-white/95 backdrop-blur border-b shadow-sm transition-all duration-300 mt-8 md:mt-0" id="navbar">
@@ -124,13 +124,12 @@
     <div class="flex items-center gap-3">
       <button onclick="toggleLang()" id="mobileLangBtn" class="text-xs font-bold bg-slate-100 px-3 py-1.5 rounded-lg text-slate-600 border border-slate-200">ID</button>
     </div>
-  </div>
+  </header>
 
   <main>
-    <section id="home" class="relative bg-white md:pt-6">
+    <section id="home" class="relative bg-white pt-14 md:pt-6">
       <div class="max-w-7xl mx-auto md:px-4">
         <div class="relative w-full aspect-[16/9] md:aspect-[21/9] md:rounded-3xl overflow-hidden shadow-sm md:shadow-xl group bg-slate-200">
-          
           <img id="heroImage" src="sampul.jpg" alt="Hero RBMJ" class="w-full h-full object-cover animate-fade-in" onerror="this.src='hero.jpg'"/>
           
           <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-6 md:p-12 text-white">
@@ -315,7 +314,7 @@
         // Hitung Countdown Ramadhan (Estimasi)
         const today = new Date();
         const ramadhanYear = (today.getMonth() > 3) ? today.getFullYear() + 1 : today.getFullYear(); 
-        const ramadhanStart = new Date(`Feb 17, ${ramadhanYear}`); // Estimasi kasar 2026/2027
+        const ramadhanStart = new Date(`Feb 17, ${ramadhanYear}`); // Estimasi kasar
         const diffTime = Math.abs(ramadhanStart - today);
         const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
         const countdownText = `⏳ Menuju Ramadhan: ${diffDays} Hari Lagi`;
