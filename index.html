@@ -3,417 +3,191 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-  <title>RBM Jepang</title>
-  <meta name="description" content="Komunitas belajar Islam dan keluarga Muslim di Jepang." />
-  
+  <title>RBM Jepang - Beranda</title>
   <link rel="icon" type="image/png" href="logo.png" />
-  <link rel="apple-touch-icon" href="logo.png" />
-  
-  <link rel="manifest" href="site.webmanifest">
-  <meta name="theme-color" content="#16a34a" />
-
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <script>
     tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            primary: { DEFAULT:'#16a34a', 50:'#f0fdf4', 100:'#dcfce7', 600:'#16a34a', 700:'#15803d' },
-            secondary: { DEFAULT:'#eab308', 50:'#fefce8', 600:'#ca8a04' }
-          },
-          fontFamily: { sans: ['Inter', 'sans-serif'] },
-          animation: { 'scroll': 'scroll 45s linear infinite' }
-        }
-      }
+      theme: { extend: { colors: { primary: { DEFAULT:'#16a34a', 50:'#f0fdf4', 100:'#dcfce7', 600:'#16a34a', 700:'#15803d' } }, fontFamily: { sans: ['Inter', 'sans-serif'] }, animation: { 'scroll': 'scroll 45s linear infinite' } } }
     };
   </script>
   <style>
-    /* LAYOUT UTAMA */
-    body { font-family: 'Inter', sans-serif; padding-top: 32px; padding-bottom: 80px; overscroll-behavior-y: contain; }
-    @media (min-width: 768px) { body { padding-bottom: 0; } }
-    .sticky-nav { position: sticky; top: 32px; z-index: 40; }
-
-    /* RUNNING TEXT (TICKER) */
-    @keyframes ticker {
-      0% { transform: translate3d(0, 0, 0); }
-      100% { transform: translate3d(-100%, 0, 0); }
-    }
+    body { font-family: 'Inter', sans-serif; padding-top: 32px; }
+    @keyframes ticker { 0% { transform: translate3d(0, 0, 0); } 100% { transform: translate3d(-100%, 0, 0); } }
     .ticker-wrap { width: 100%; overflow: hidden; white-space: nowrap; box-sizing: border-box; }
     .ticker-item { display: inline-block; white-space: nowrap; padding-left: 100%; animation: ticker 80s linear infinite; }
-    .ticker-item:hover { animation-play-state: paused; }
-
-    /* Scroll & Gallery */
-    #progress-bar { width: 0%; height: 3px; background: #ca8a04; position: fixed; top: 32px; left: 0; z-index: 50; transition: width 0.1s; }
-    .hide-scrollbar::-webkit-scrollbar { display: none; }
-    .nav-active { color: #16a34a; background-color: #f0fdf4; font-weight: 700; }
-    
     @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
     .animate-scroll { display: flex; width: max-content; animation: scroll 45s linear infinite; }
-    .animate-scroll:hover { animation-play-state: paused; }
-
-    /* Toast Notification */
-    #toast { visibility: hidden; min-width: 250px; margin-left: -125px; background-color: #333; color: #fff; text-align: center; border-radius: 50px; padding: 16px; position: fixed; z-index: 100; left: 50%; bottom: 100px; font-size: 14px; opacity: 0; transition: opacity 0.3s; }
-    #toast.show { visibility: visible; opacity: 1; }
-    
-    /* Currency Toggle Style */
     .curr-btn.active { background-color: #16a34a; color: white; border-color: #16a34a; }
   </style>
 </head>
-<body class="bg-gray-50 text-slate-900 antialiased relative">
-
-  <div id="toast">✅ Teks berhasil disalin!</div>
+<body class="bg-slate-50 text-slate-900 antialiased">
 
   <div class="fixed top-0 left-0 right-0 h-8 bg-slate-900 text-white z-[60] flex items-center text-xs font-medium overflow-hidden shadow-md">
     <div class="bg-primary-600 px-3 h-full flex items-center gap-2 z-10 shrink-0 font-bold shadow-[2px_0_5px_rgba(0,0,0,0.3)]">
-      <div class="bg-white rounded-full p-0.5 w-5 h-5 flex items-center justify-center">
-        <img src="logo.png" alt="RBM" class="w-full h-full object-contain" onerror="this.src='favicon-32x32.png'">
-      </div>
-      <span id="hijriDate" class="hidden md:inline text-[10px] md:text-xs">Loading...</span>
+      <span id="hijriDate" class="text-[10px] md:text-xs">Loading...</span>
     </div>
     <div class="ticker-wrap flex items-center">
-      <div class="ticker-item" id="tickerContent">
-        Sedang memuat jadwal shalat...
-      </div>
+      <div class="ticker-item" id="tickerContent">Sedang memuat jadwal shalat...</div>
     </div>
   </div>
 
-  <div id="progress-bar"></div>
-
-  <button id="backToTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="fixed bottom-24 md:bottom-10 left-4 md:left-10 z-40 bg-white text-primary-600 p-3 rounded-full shadow-lg border border-primary-100 opacity-0 translate-y-10 transition-all duration-300 pointer-events-none hover:bg-primary-50">
-    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path></svg>
-  </button>
-
-  <a href="https://ramadhan-seven.vercel.app/" target="_blank" class="fixed bottom-24 md:bottom-10 right-4 md:right-10 z-50 bg-gradient-to-r from-orange-500 to-amber-500 text-white px-4 py-2.5 rounded-full shadow-xl flex items-center gap-3 animate-bounce hover:scale-105 transition font-bold border-2 border-white ring-2 ring-orange-200 group pl-2">
-    <img src="logo.png" alt="App Logo" class="w-8 h-8 rounded-full bg-white/90 p-0.5 group-hover:rotate-12 transition shadow-sm" onerror="this.src='favicon-32x32.png'">
-    <span class="text-sm font-bold leading-tight">App<br>Ramadhan</span>
-  </a>
-
-  <header class="hidden md:block sticky-nav bg-white/95 backdrop-blur border-b shadow-sm transition-all duration-300" id="navbar">
-    <div class="max-w-7xl mx-auto px-4 h-20 flex items-center justify-between">
-      <a href="#" class="flex items-center gap-3 group">
-        <img src="logo.png" class="h-10 w-10 rounded-lg object-contain group-hover:scale-105 transition" onerror="this.src='favicon-32x32.png'"/>
-        <div><h1 class="font-bold text-xl text-slate-900">RBM Jepang</h1><p class="text-xs text-slate-500 font-medium uppercase">Ruang Belajar Muslim</p></div>
-      </a>
-      <nav class="flex gap-1 bg-slate-100 p-1 rounded-full text-sm font-medium">
-        <a href="#program" class="nav-link px-5 py-2 rounded-full hover:bg-white transition" data-i18n="nav.program">Program</a>
-        <a href="#jadwal" class="nav-link px-5 py-2 rounded-full hover:bg-white transition" data-i18n="nav.jadwal">Jadwal</a>
-        <a href="#galeri" class="nav-link px-5 py-2 rounded-full hover:bg-white transition" data-i18n="nav.galeri">Galeri</a>
-      </nav>
-      <div class="flex items-center gap-2">
-        <div class="flex bg-slate-100 rounded-lg p-1 mr-2">
-          <button onclick="setLang('id')" class="px-3 py-1 rounded text-xs font-bold transition lang-btn" data-lang="id">ID</button>
-          <button onclick="setLang('en')" class="px-3 py-1 rounded text-xs font-bold transition lang-btn" data-lang="en">EN</button>
-        </div>
-        
-        <button onclick="document.getElementById('zakatModal').classList.remove('hidden')" class="px-5 py-2 rounded-xl bg-white text-slate-700 text-sm font-bold border border-slate-200 hover:bg-slate-50 hover:text-primary-700 transition flex items-center gap-2 group">
-          <span>🧮</span> <span data-i18n="nav.zakat">Hitung Zakat</span>
-        </button>
-        
-        <a href="#daftar" class="px-6 py-2 rounded-xl bg-primary-600 text-white text-sm font-bold shadow-lg hover:bg-primary-700" data-i18n="nav.daftar">Daftar</a>
-      </div>
-    </div>
-  </header>
-
-  <div class="md:hidden sticky-nav bg-white/95 backdrop-blur border-b px-4 h-14 flex items-center justify-between shadow-sm">
-    <div class="flex items-center gap-2">
-      <img src="logo.png" class="h-8 w-8 rounded bg-primary-50 object-contain" onerror="this.src='favicon-32x32.png'">
-      <span class="font-bold text-lg text-primary-700">RBMJ</span>
-    </div>
-    <div class="flex items-center gap-2">
-      <button onclick="document.getElementById('zakatModal').classList.remove('hidden')" class="text-xs font-bold bg-slate-50 text-slate-700 px-3 py-1.5 rounded-lg border border-slate-200 flex items-center gap-1">🧮 Zakat</button>
-      <button onclick="toggleLang()" id="mobileLangBtn" class="text-xs font-bold bg-slate-100 px-3 py-1.5 rounded-lg text-slate-600 border border-slate-200">ID</button>
-    </div>
-  </div>
+  <div id="header-container"></div>
 
   <main>
-    <section id="home" class="relative bg-white pt-4 md:pt-6">
-      <div class="max-w-7xl mx-auto md:px-4">
-        <div class="relative w-full aspect-[16/9] md:aspect-[21/9] md:rounded-3xl overflow-hidden shadow-sm md:shadow-xl group bg-slate-200">
-          <img id="heroImage" src="sampul.jpg" alt="Hero RBMJ" class="w-full h-full object-cover animate-fade-in" onerror="this.src='https://placehold.co/1600x900?text=Upload+sampul.jpg'"/>
-          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-6 md:p-12 text-white">
-            <span id="smartGreeting" class="bg-primary-600 w-fit px-3 py-1 rounded-lg text-[10px] md:text-xs font-bold uppercase tracking-wider mb-2 animate-pulse">Assalamualaikum</span>
-            <h2 class="text-3xl md:text-5xl font-extrabold leading-tight mb-2" data-i18n="hero.title">Belajar Islam <br/>di Negeri Sakura</h2>
-            <p class="text-sm md:text-lg opacity-90 line-clamp-2 md:line-clamp-none max-w-2xl" data-i18n="hero.desc">Wadah keluarga Muslim di Yokohama untuk menuntut ilmu syar'i dan mempererat ukhuwah.</p>
+    <section id="home" class="relative pt-6 pb-10">
+      <div class="max-w-7xl mx-auto px-4">
+        <div class="relative w-full aspect-[4/3] md:aspect-[21/9] rounded-3xl overflow-hidden shadow-xl bg-slate-800">
+          <img id="heroImage" src="sampul.jpg" alt="Hero RBMJ" class="w-full h-full object-cover opacity-80" onerror="this.src='https://placehold.co/1600x900?text=Upload+sampul.jpg'"/>
+          <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent flex flex-col justify-end p-8 md:p-16 text-white">
+            <span id="smartGreeting" class="bg-primary-600 w-fit px-4 py-1.5 rounded-full text-[10px] md:text-xs font-bold uppercase tracking-widest mb-4 shadow-lg">Assalamualaikum</span>
+            <h2 class="text-4xl md:text-6xl font-extrabold leading-tight mb-4 tracking-tight" data-i18n="hero.title">Belajar Islam <br/>di Negeri Sakura</h2>
+            <p class="text-base md:text-xl opacity-90 max-w-2xl leading-relaxed mb-6" data-i18n="hero.desc">Wadah keluarga Muslim di Yokohama untuk menuntut ilmu syar'i dan mempererat ukhuwah.</p>
+            <div class="flex gap-4">
+              <a href="#daftar" class="px-6 py-3 bg-white text-slate-900 font-bold rounded-xl hover:bg-slate-100 transition shadow-lg">Gabung Sekarang</a>
+              <button onclick="document.getElementById('zakatModal').classList.remove('hidden')" class="px-6 py-3 bg-black/30 backdrop-blur border border-white/20 text-white font-bold rounded-xl hover:bg-black/50 transition">🧮 Zakat</button>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="galeri" class="py-10 md:py-16 bg-white overflow-hidden border-b border-slate-100 reveal">
-      <div class="text-center mb-8 px-4">
-        <h2 class="text-xl md:text-2xl font-bold" data-i18n="sec.galeri">Dokumentasi Kegiatan</h2>
-        <p class="text-xs text-slate-500 mt-1">Geser untuk melihat, klik untuk memperbesar</p>
-      </div>
-      <div class="relative w-full">
-        <div class="absolute left-0 top-0 bottom-0 w-8 md:w-32 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none"></div>
-        <div class="absolute right-0 top-0 bottom-0 w-8 md:w-32 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none"></div>
-        <div id="galleryTrack" class="animate-scroll gap-4 px-4 items-center"></div>
-      </div>
-    </section>
-
-    <section id="jadwal" class="py-10 bg-slate-50 border-y border-slate-100 reveal">
+    <section id="program" class="py-16 bg-white border-y border-slate-100">
       <div class="max-w-7xl mx-auto px-4">
-        <div class="flex items-center justify-between mb-6">
+        <div class="flex justify-between items-end mb-8">
           <div>
-            <h2 class="text-xl md:text-2xl font-bold" data-i18n="sec.jadwal">Waktu Shalat</h2>
-            <p class="text-xs text-slate-500" id="currentDate">...</p>
+            <h2 class="text-3xl font-extrabold text-slate-900" data-i18n="sec.program">Program Kami</h2>
+            <div class="w-16 h-1.5 bg-primary-500 rounded-full mt-3"></div>
           </div>
-          <button id="btnGeo" class="text-xs bg-white text-primary-700 px-3 py-2 rounded-lg font-bold border border-slate-200 shadow-sm" data-i18n="btn.loc">📍 Lokasi Saya</button>
+          <a href="program.html" class="hidden md:inline-flex items-center gap-2 font-bold text-primary-600 hover:text-primary-800 transition">Lihat Semua Program &rarr;</a>
         </div>
-        <p class="text-xs text-slate-400 mb-4 italic text-center md:text-left">*Klik pada kotak waktu untuk menyalin (Copy)</p>
-        <div id="prayerGrid" class="grid grid-cols-5 gap-2 md:gap-4"></div>
+        
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+          <div class="bg-slate-50 p-6 rounded-3xl border border-slate-100 shadow-sm hover:shadow-md hover:-translate-y-1 transition duration-300">
+            <div class="w-12 h-12 rounded-2xl bg-blue-100 text-blue-600 flex items-center justify-center text-2xl mb-4">📖</div>
+            <h3 class="font-bold text-lg text-slate-800">Iqro' Anak</h3>
+            <p class="text-sm text-slate-600 mt-2" data-i18n="prog.1">Belajar baca Al-Qur'an dari nol.</p>
+          </div>
+          <div class="bg-slate-50 p-6 rounded-3xl border border-slate-100 shadow-sm hover:shadow-md hover:-translate-y-1 transition duration-300">
+            <div class="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-600 flex items-center justify-center text-2xl mb-4">💻</div>
+            <h3 class="font-bold text-lg text-slate-800">PAI Online</h3>
+            <p class="text-sm text-slate-600 mt-2" data-i18n="prog.2">Fiqh, Aqidah & Akhlak praktis.</p>
+          </div>
+          <div class="bg-slate-50 p-6 rounded-3xl border border-slate-100 shadow-sm hover:shadow-md hover:-translate-y-1 transition duration-300">
+            <div class="w-12 h-12 rounded-2xl bg-orange-100 text-orange-600 flex items-center justify-center text-2xl mb-4">🕌</div>
+            <h3 class="font-bold text-lg text-slate-800">Kajian Sunnah</h3>
+            <p class="text-sm text-slate-600 mt-2" data-i18n="prog.3">Rutin offline & online.</p>
+          </div>
+          <div class="bg-slate-50 p-6 rounded-3xl border border-slate-100 shadow-sm hover:shadow-md hover:-translate-y-1 transition duration-300">
+            <div class="w-12 h-12 rounded-2xl bg-purple-100 text-purple-600 flex items-center justify-center text-2xl mb-4">🎓</div>
+            <h3 class="font-bold text-lg text-slate-800">Tahsin Dewasa</h3>
+            <p class="text-sm text-slate-600 mt-2" data-i18n="prog.4">Perbaikan bacaan Al-Qur'an.</p>
+          </div>
+        </div>
+        <a href="program.html" class="md:hidden mt-6 block text-center font-bold text-primary-600 border border-primary-200 py-3 rounded-xl hover:bg-primary-50">Lihat Semua Program</a>
       </div>
     </section>
 
-    <section id="program" class="py-10 md:py-16 bg-white reveal">
+    <section id="jadwal" class="py-16 bg-slate-900 text-white">
       <div class="max-w-7xl mx-auto px-4">
-        <h2 class="text-xl md:text-2xl font-bold mb-6" data-i18n="sec.program">Program Unggulan</h2>
-        <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6">
-          <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100 hover:border-primary-200 transition hover:-translate-y-1 duration-300">
-            <div class="w-10 h-10 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center text-xl mb-3">📖</div>
-            <h3 class="font-bold text-sm md:text-base">Iqro' Anak</h3>
-            <p class="text-xs text-slate-500 mt-1" data-i18n="prog.1">Belajar baca Al-Qur'an dari nol.</p>
+        <div class="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
+          <div>
+            <h2 class="text-3xl font-extrabold" data-i18n="sec.jadwal">Waktu Shalat Yokohama</h2>
+            <p class="text-slate-400 mt-2" id="currentDate">Memuat...</p>
           </div>
-          <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100 hover:border-primary-200 transition hover:-translate-y-1 duration-300">
-            <div class="w-10 h-10 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center text-xl mb-3">💻</div>
-            <h3 class="font-bold text-sm md:text-base">PAI Online</h3>
-            <p class="text-xs text-slate-500 mt-1" data-i18n="prog.2">Fiqh, Aqidah & Akhlak praktis.</p>
-          </div>
-          <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100 hover:border-primary-200 transition hover:-translate-y-1 duration-300">
-            <div class="w-10 h-10 rounded-lg bg-orange-50 text-orange-600 flex items-center justify-center text-xl mb-3">🕌</div>
-            <h3 class="font-bold text-sm md:text-base">Kajian Sunnah</h3>
-            <p class="text-xs text-slate-500 mt-1" data-i18n="prog.3">Rutin offline & online.</p>
-          </div>
-          <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100 hover:border-primary-200 transition hover:-translate-y-1 duration-300">
-            <div class="w-10 h-10 rounded-lg bg-purple-50 text-purple-600 flex items-center justify-center text-xl mb-3">🎓</div>
-            <h3 class="font-bold text-sm md:text-base">Tahsin Dewasa</h3>
-            <p class="text-xs text-slate-500 mt-1" data-i18n="prog.4">Perbaikan bacaan Al-Qur'an.</p>
-          </div>
+          <button id="btnGeo" class="w-fit text-sm bg-primary-600 text-white px-5 py-2.5 rounded-xl font-bold hover:bg-primary-500 transition shadow-lg">📍 Perbarui Lokasi Saya</button>
         </div>
+        <div id="prayerGrid" class="grid grid-cols-5 gap-3 md:gap-6"></div>
       </div>
     </section>
 
-    <section id="artikel" class="py-10 md:py-16 bg-slate-50 reveal">
+    <section id="artikel" class="py-16 bg-white border-b border-slate-100">
       <div class="max-w-7xl mx-auto px-4">
-        <h2 class="text-xl md:text-2xl font-bold mb-6" data-i18n="sec.info">Info Terkini</h2>
+        <div class="flex justify-between items-end mb-8">
+          <div>
+            <h2 class="text-3xl font-extrabold text-slate-900" data-i18n="sec.info">Info Terkini</h2>
+            <div class="w-16 h-1.5 bg-primary-500 rounded-full mt-3"></div>
+          </div>
+          <a href="artikel.html" class="hidden md:inline-flex items-center gap-2 font-bold text-primary-600 hover:text-primary-800 transition">Baca Artikel Lainnya &rarr;</a>
+        </div>
         <div id="contentGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        <a href="artikel.html" class="md:hidden mt-6 block text-center font-bold text-primary-600 border border-primary-200 py-3 rounded-xl hover:bg-primary-50">Baca Artikel Lainnya</a>
       </div>
     </section>
 
   </main>
 
-  <nav class="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 z-40 pb-safe shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)]">
-    <div class="grid grid-cols-4 h-16 items-center text-[10px] font-medium text-slate-500">
-      <a href="#" class="flex flex-col items-center gap-1 text-primary-600"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path></svg><span data-i18n="nav.home">Home</span></a>
-      <a href="#program" class="flex flex-col items-center gap-1 hover:text-primary-600"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg><span data-i18n="nav.program">Program</span></a>
-      <a href="#jadwal" class="flex flex-col items-center gap-1 hover:text-primary-600"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><span data-i18n="nav.jadwal">Jadwal</span></a>
-      <a href="#galeri" class="flex flex-col items-center gap-1 hover:text-primary-600"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg><span data-i18n="nav.galeri">Galeri</span></a>
-    </div>
-  </nav>
-
-  <section id="daftar" class="hidden fixed inset-0 z-[60] bg-white overflow-y-auto pt-safe animate-slide-up">
-    <div class="h-14 flex items-center justify-between px-4 border-b sticky top-0 bg-white shadow-sm">
-      <button onclick="document.getElementById('daftar').classList.add('hidden')" class="text-2xl font-bold p-2 text-slate-500 hover:text-slate-900">&times;</button>
-      <span class="font-bold">Form Pendaftaran</span>
-      <div class="w-8"></div>
-    </div>
-    <iframe src="https://forms.gle/dxqRenLyLq3KJ6cr5" class="w-full h-[90vh] border-0"></iframe>
-  </section>
+  <div id="footer-container"></div>
 
   <div id="zakatModal" class="fixed inset-0 z-[70] bg-black/80 hidden flex items-center justify-center p-4 backdrop-blur-sm transition-opacity" onclick="if(event.target===this) this.classList.add('hidden')">
-    <div class="bg-white w-full max-w-sm rounded-2xl overflow-hidden shadow-2xl animate-fade-in-up p-6">
+    <div class="bg-white w-full max-w-sm rounded-3xl overflow-hidden shadow-2xl p-8">
       <div class="text-center mb-6">
-        <div class="w-12 h-12 bg-primary-100 text-primary-600 rounded-full flex items-center justify-center text-2xl mx-auto mb-3">🧮</div>
-        <h3 class="text-xl font-bold mb-1" data-i18n="zakat.title">Kalkulator Zakat Maal</h3>
-        <p class="text-xs text-slate-500" data-i18n="zakat.subtitle">Zakat Harta Simpanan/Emas (2.5%)</p>
+        <div class="w-14 h-14 bg-primary-100 text-primary-600 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-4">🧮</div>
+        <h3 class="text-xl font-extrabold text-slate-800">Kalkulator Zakat</h3>
+        <p class="text-xs text-slate-500 mt-1">Zakat Harta Simpanan (2.5%)</p>
       </div>
-      
-      <div class="space-y-4">
-        <div class="flex justify-center gap-2 mb-4">
-          <button onclick="setCurrency('JPY')" id="currJPY" class="curr-btn active px-4 py-1.5 rounded-full border text-xs font-bold transition">¥ JPY</button>
-          <button onclick="setCurrency('IDR')" id="currIDR" class="curr-btn px-4 py-1.5 rounded-full border text-xs font-bold transition">Rp IDR</button>
+      <div class="space-y-5">
+        <div class="flex justify-center gap-2 bg-slate-100 p-1.5 rounded-xl">
+          <button onclick="setCurrency('JPY')" id="currJPY" class="curr-btn w-full py-2 rounded-lg text-sm font-bold transition">¥ JPY</button>
+          <button onclick="setCurrency('IDR')" id="currIDR" class="curr-btn w-full py-2 rounded-lg text-sm font-bold transition">Rp IDR</button>
         </div>
-
         <div>
-          <label class="block text-xs font-bold text-slate-600 mb-1" data-i18n="zakat.label">Total Harta (Tabungan/Emas)</label>
-          <input type="number" id="zakatInput" placeholder="0" class="w-full p-3 rounded-xl border border-slate-300 focus:border-primary-500 focus:ring-1 focus:ring-primary-500 outline-none font-mono text-lg">
+          <label class="block text-xs font-bold text-slate-600 mb-2 uppercase tracking-wider">Total Tabungan & Emas</label>
+          <input type="number" id="zakatInput" placeholder="Masukkan angka..." class="w-full p-4 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none font-bold text-lg transition">
         </div>
-        
-        <div class="bg-primary-50 p-4 rounded-xl border border-primary-100 text-center">
-          <p class="text-xs text-primary-600 font-bold uppercase" data-i18n="zakat.result">Wajib Zakat (2.5%)</p>
-          <p class="text-2xl font-bold text-primary-700 mt-1" id="zakatResult">-</p>
+        <div class="bg-primary-50 p-5 rounded-2xl border border-primary-100 text-center">
+          <p class="text-xs text-primary-600 font-bold uppercase tracking-wider">Wajib Zakat Dikeluarkan</p>
+          <p class="text-3xl font-extrabold text-primary-700 mt-2" id="zakatResult">-</p>
         </div>
-
-        <button onclick="calculateZakat()" class="w-full py-3 rounded-xl bg-primary-600 text-white font-bold hover:bg-primary-700 transition shadow-lg" data-i18n="zakat.btn">Hitung</button>
-        <button onclick="document.getElementById('zakatModal').classList.add('hidden')" class="w-full py-3 rounded-xl bg-slate-100 text-slate-600 font-bold hover:bg-slate-200 transition" data-i18n="zakat.close">Tutup</button>
+        <div class="flex gap-3">
+          <button onclick="document.getElementById('zakatModal').classList.add('hidden')" class="w-1/3 py-3 rounded-xl bg-slate-100 text-slate-600 font-bold hover:bg-slate-200 transition">Tutup</button>
+          <button onclick="calculateZakat()" class="w-2/3 py-3 rounded-xl bg-primary-600 text-white font-bold hover:bg-primary-700 transition shadow-lg">Hitung Zakat</button>
+        </div>
       </div>
-      <p class="text-[10px] text-slate-400 text-center mt-4" id="nishabInfo"></p>
+      <p class="text-[10px] text-slate-400 text-center mt-5" id="nishabInfo"></p>
     </div>
   </div>
 
-  <div id="lightbox" class="fixed inset-0 z-[70] bg-black/95 hidden flex items-center justify-center p-2 backdrop-blur-sm transition-opacity" onclick="this.classList.add('hidden')">
-    <img id="lightboxImg" class="max-w-full max-h-[85vh] rounded shadow-lg transform transition" />
-  </div>
-
+  <script src="layout.js"></script>
   <script>
-    // --- LOGIC: ZAKAT CALCULATOR (CURRENCY AWARE) ---
+    // --- GREETING OTOMATIS ---
+    const hour = new Date().getHours();
+    let greeting = "Assalamualaikum";
+    if(hour >= 4 && hour < 11) greeting = "Assalamualaikum, Selamat Pagi";
+    else if(hour >= 11 && hour < 15) greeting = "Assalamualaikum, Selamat Siang";
+    else if(hour >= 15 && hour < 18) greeting = "Assalamualaikum, Selamat Sore";
+    else greeting = "Assalamualaikum, Selamat Malam";
+    document.getElementById("smartGreeting").innerText = greeting;
+
+    // --- KALKULATOR ZAKAT ---
     let selectedCurr = 'JPY';
     const NISHAB_GOLD_GRAM = 85;
-    // Estimasi harga emas (Bisa diupdate manual/API kedepannya)
     const GOLD_PRICE = { JPY: 13000, IDR: 1300000 }; 
 
     function setCurrency(curr) {
       selectedCurr = curr;
-      // Update Button Styles
-      document.getElementById('currJPY').className = `curr-btn px-4 py-1.5 rounded-full border text-xs font-bold transition ${curr==='JPY'?'active bg-primary-600 text-white':'bg-white text-slate-600'}`;
-      document.getElementById('currIDR').className = `curr-btn px-4 py-1.5 rounded-full border text-xs font-bold transition ${curr==='IDR'?'active bg-primary-600 text-white':'bg-white text-slate-600'}`;
+      document.getElementById('currJPY').className = `curr-btn w-full py-2 rounded-lg text-sm font-bold transition ${curr==='JPY'?'active bg-white shadow-sm text-primary-700':'text-slate-500 hover:bg-slate-200'}`;
+      document.getElementById('currIDR').className = `curr-btn w-full py-2 rounded-lg text-sm font-bold transition ${curr==='IDR'?'active bg-white shadow-sm text-primary-700':'text-slate-500 hover:bg-slate-200'}`;
       
-      // Update Nishab Info Text
       const nishabVal = (NISHAB_GOLD_GRAM * GOLD_PRICE[curr]).toLocaleString();
       const symbol = curr === 'JPY' ? '¥' : 'Rp';
-      const textID = `*Nishab (85g Emas) estimasi: ${symbol} ${nishabVal}`;
-      const textEN = `*Nishab (85g Gold) approx: ${symbol} ${nishabVal}`;
-      
-      document.getElementById('nishabInfo').innerText = currentLang === 'id' ? textID : textEN;
-      
-      // Recalculate if value exists
+      document.getElementById('nishabInfo').innerText = `*Batas Nishab (85g Emas) estimasi: ${symbol} ${nishabVal}`;
       calculateZakat();
     }
 
     function calculateZakat() {
       const input = document.getElementById('zakatInput').value;
       const resultBox = document.getElementById('zakatResult');
-      
-      if (!input || input <= 0) {
-        resultBox.innerText = selectedCurr === 'JPY' ? "¥ 0" : "Rp 0";
-        return;
-      }
+      if (!input || input <= 0) { resultBox.innerText = selectedCurr === 'JPY' ? "¥ 0" : "Rp 0"; return; }
       
       const zakat = input * 0.025;
-      
-      // Format Currency
-      const formatter = new Intl.NumberFormat(selectedCurr === 'JPY' ? 'ja-JP' : 'id-ID', {
-        style: 'currency',
-        currency: selectedCurr,
-        minimumFractionDigits: 0
-      });
-      
+      const formatter = new Intl.NumberFormat(selectedCurr === 'JPY' ? 'ja-JP' : 'id-ID', { style: 'currency', currency: selectedCurr, minimumFractionDigits: 0 });
       resultBox.innerText = formatter.format(zakat);
     }
+    setCurrency('JPY');
 
-    // --- UTILS & INIT ---
-    document.addEventListener("DOMContentLoaded", () => {
-        const hero = document.getElementById('heroImage');
-        if(hero) hero.src = 'sampul.jpg?v=' + new Date().getTime();
-        
-        // Smart Greeting
-        const hour = new Date().getHours();
-        let greeting = "Assalamualaikum";
-        if(hour >= 4 && hour < 11) greeting = "Assalamualaikum, Selamat Pagi";
-        else if(hour >= 11 && hour < 15) greeting = "Assalamualaikum, Selamat Siang";
-        else if(hour >= 15 && hour < 18) greeting = "Assalamualaikum, Selamat Sore";
-        else greeting = "Assalamualaikum, Selamat Malam";
-        const greetEl = document.getElementById("smartGreeting");
-        if(greetEl) greetEl.innerText = greeting;
-
-        // Init Currency
-        setCurrency('JPY');
-    });
-
-    // SCROLL REVEAL
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('active'); });
-    }, { threshold: 0.1 });
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-    // COPY TEXT
-    function copyText(text) {
-      navigator.clipboard.writeText(text).then(() => {
-        const t = document.getElementById("toast");
-        t.className = "show";
-        setTimeout(() => { t.className = t.className.replace("show", ""); }, 3000);
-      });
-    }
-
-    // SCROLL SPY & BACK TO TOP
-    const btt = document.getElementById('backToTop');
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 300) btt.classList.remove('opacity-0', 'translate-y-10', 'pointer-events-none');
-      else btt.classList.add('opacity-0', 'translate-y-10', 'pointer-events-none');
-      
-      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      document.getElementById("progress-bar").style.width = ((window.scrollY / height) * 100) + "%";
-      
-      const sections = document.querySelectorAll('section');
-      const navLinks = document.querySelectorAll('.nav-link');
-      let current = '';
-      sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        if (pageYOffset >= (sectionTop - 200)) current = section.getAttribute('id');
-      });
-      navLinks.forEach(link => {
-        link.classList.remove('nav-active');
-        if (link.getAttribute('href').includes(current)) link.classList.add('nav-active');
-      });
-    });
-
-    // --- I18N (UPDATED WITH ZAKAT KEYS) ---
-    const TRANSLATIONS = {
-      id: { 
-        "nav.program": "Program", "nav.jadwal": "Jadwal", "nav.galeri": "Galeri", "nav.home":"Home", "nav.zakat": "Hitung Zakat", "nav.daftar": "Daftar",
-        "hero.badge": "Pendaftaran Dibuka", "hero.title": "Belajar Islam <br/>di Negeri Sakura", "hero.desc": "Wadah keluarga Muslim di Yokohama untuk menuntut ilmu syar'i dan mempererat ukhuwah.", 
-        "sec.program": "Program Unggulan", "prog.1": "Belajar baca Al-Qur'an dari nol.", "prog.2": "Fiqh, Aqidah & Akhlak praktis.", "prog.3": "Rutin offline & online.", "prog.4": "Perbaikan bacaan Al-Qur'an.", 
-        "sec.jadwal": "Waktu Shalat", "btn.loc": "📍 Lokasi Saya", "sec.galeri": "Dokumentasi Kegiatan", "sec.info": "Info Terkini",
-        "zakat.title": "Kalkulator Zakat Maal", "zakat.subtitle": "Zakat Harta Simpanan/Emas (2.5%)", "zakat.label": "Total Harta (Tabungan/Emas)", "zakat.result": "Wajib Zakat (2.5%)", "zakat.btn": "Hitung", "zakat.close": "Tutup"
-      },
-      en: { 
-        "nav.program": "Programs", "nav.jadwal": "Prayers", "nav.galeri": "Gallery", "nav.home":"Home", "nav.zakat": "Calc Zakat", "nav.daftar": "Join Us",
-        "hero.badge": "Registration Open", "hero.title": "Learn Islam <br/>in Japan", "hero.desc": "Community for Muslim families in Yokohama to learn Islamic knowledge and strengthen brotherhood.", 
-        "sec.program": "Our Programs", "prog.1": "Learn Quran from scratch.", "prog.2": "Fiqh, Aqidah & Ethics.", "prog.3": "Regular offline & online.", "prog.4": "Quran recitation correction.", 
-        "sec.jadwal": "Prayer Times", "btn.loc": "📍 My Location", "sec.galeri": "Activity Gallery", "sec.info": "Latest Info",
-        "zakat.title": "Zakat Maal Calculator", "zakat.subtitle": "Wealth/Gold Zakat (2.5%)", "zakat.label": "Total Wealth (Cash/Gold)", "zakat.result": "Zakat Due (2.5%)", "zakat.btn": "Calculate", "zakat.close": "Close"
-      }
-    };
-    
-    let currentLang = localStorage.getItem('lang') || 'id';
-    
-    function setLang(lang) {
-      currentLang = lang; localStorage.setItem('lang', lang);
-      // Update Texts
-      document.querySelectorAll('[data-i18n]').forEach(el => { 
-        const key = el.getAttribute('data-i18n'); 
-        if(TRANSLATIONS[lang][key]) el.innerHTML = TRANSLATIONS[lang][key]; 
-      });
-      // Update Buttons
-      document.querySelectorAll('.lang-btn').forEach(btn => { 
-        if(btn.dataset.lang === lang) btn.classList.add('bg-white', 'text-primary-600', 'shadow'); 
-        else btn.classList.remove('bg-white', 'text-primary-600', 'shadow'); 
-      });
-      // Update Mobile Button
-      const mob = document.getElementById('mobileLangBtn'); 
-      if(mob) mob.innerText = lang.toUpperCase();
-      
-      // Refresh Zakat Info (Currency text depends on language)
-      setCurrency(selectedCurr);
-    }
-    
-    function toggleLang() { setLang(currentLang === 'id' ? 'en' : 'id'); }
-    setLang(currentLang);
-
-    // --- GALERI ---
-    const track = document.getElementById('galleryTrack');
-    for(let k=0; k<2; k++) { 
-      for(let i=1; i<=11; i++) {
-        const img = document.createElement('img');
-        img.src = `assets/${i}.jpeg`;
-        img.className = "h-40 md:h-56 w-auto max-w-xs object-contain rounded-xl shadow-md hover:scale-105 transition duration-300 cursor-zoom-in bg-white p-1";
-        img.onclick = () => { document.getElementById('lightboxImg').src = `assets/${i}.jpeg`; document.getElementById('lightbox').classList.remove('hidden'); };
-        track.appendChild(img);
-      }
-    }
-
-    // --- JADWAL SHALAT ---
+    // --- JADWAL SHALAT ALADHAN API ---
     async function loadPrayerTimes(lat, lon) {
       const grid = document.getElementById('prayerGrid');
       try {
@@ -424,117 +198,62 @@
         const hijri = data.data.date.hijri;
         
         document.getElementById('hijriDate').innerText = `${hijri.day} ${hijri.month.en} ${hijri.year} H`;
-        const today = new Date(); const ramadhanYear = (today.getMonth() > 3) ? today.getFullYear() + 1 : today.getFullYear(); const ramadhanStart = new Date(`Feb 17, ${ramadhanYear}`); 
-        const diffDays = Math.ceil(Math.abs(ramadhanStart - today) / (1000 * 60 * 60 * 24)); 
-        const countdownText = `⏳ Menuju Ramadhan: ${diffDays} Hari Lagi`;
-        const prayerString = `🕌 Subuh ${t.Fajr} • Dzuhur ${t.Dhuhr} • Ashar ${t.Asr} • Maghrib ${t.Maghrib} • Isya ${t.Isha}`;
-        document.getElementById('tickerContent').innerHTML = `<span class="text-yellow-300 font-bold mx-4">${countdownText}</span> | <span class="mx-4">${prayerString}</span> | <span class="mx-4 text-primary-200">Jangan lupa dzikir pagi petang!</span>`;
-
+        document.getElementById('tickerContent').innerHTML = `<span class="mx-4">🕌 Subuh ${t.Fajr} • Dzuhur ${t.Dhuhr} • Ashar ${t.Asr} • Maghrib ${t.Maghrib} • Isya ${t.Isha}</span>`;
         document.getElementById('currentDate').innerText = data.data.date.readable;
+        
         grid.innerHTML = '';
         ['Fajr','Dhuhr','Asr','Maghrib','Isha'].forEach(p => {
-          const time = t[p];
           grid.innerHTML += `
-            <div class="bg-white rounded-xl p-2 text-center border border-slate-100 shadow-sm cursor-pointer hover:bg-primary-50 transition active:scale-95" onclick="copyText('${p}: ${time}')">
-              <p class="text-[10px] uppercase text-slate-400 font-bold">${p}</p>
-              <p class="text-base md:text-lg font-bold text-slate-800">${time}</p>
+            <div class="bg-slate-800 rounded-2xl p-4 text-center border border-slate-700 shadow-sm hover:bg-slate-700 transition">
+              <p class="text-[10px] md:text-xs uppercase text-slate-400 font-bold mb-1">${p}</p>
+              <p class="text-xl md:text-2xl font-extrabold text-white">${t[p]}</p>
             </div>`;
         });
       } catch(e) {}
     }
-    loadPrayerTimes(35.4437, 139.6380);
+    loadPrayerTimes(35.4437, 139.6380); // Default Yokohama
     document.getElementById('btnGeo').onclick = () => { if(navigator.geolocation) navigator.geolocation.getCurrentPosition(p => loadPrayerTimes(p.coords.latitude, p.coords.longitude)); };
 
-   // --- KONTEN (SECURE & SANITIZED) ---
+    // --- KONTEN ARTIKEL GOOGLE SHEETS (AMAN DARI XSS) ---
     const CONTENT_CSV = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTVxGRvlEuYhCTuDCtzQD3sxgkLRDTku-sSPuvZ8xYKLNxmy5jtEBZWMAzTXxDnOCX7IV-szkvQyUei/pub?gid=0&single=true&output=csv';
-
-    // Helper untuk mencegah XSS (Membersihkan HTML tag dari text)
-    function escapeHTML(str) {
-        if (!str) return "";
-        return str.replace(/[&<>'"]/g, 
-            tag => ({
-                '&': '&amp;',
-                '<': '&lt;',
-                '>': '&gt;',
-                "'": '&#39;',
-                '"': '&quot;'
-            }[tag]));
-    }
+    function escapeHTML(str) { return !str ? "" : str.replace(/[&<>'"]/g, tag => ({'&': '&amp;','<': '&lt;','>': '&gt;',"'": '&#39;','"': '&quot;'}[tag])); }
 
     async function loadContent() {
       const grid = document.getElementById('contentGrid');
-      // Tampilkan skeleton loading state jika perlu
-      grid.innerHTML = '<p class="text-sm text-slate-500 animate-pulse">Sedang memuat berita...</p>';
-
+      grid.innerHTML = '<p class="text-sm text-slate-500 col-span-full">Memuat berita terbaru...</p>';
       try {
         const res = await fetch(CONTENT_CSV);
-        if (!res.ok) throw new Error("Gagal mengambil data");
-        
         const text = await res.text();
-        // Parsing CSV yang lebih aman (handle koma dalam kutip)
         const rows = text.trim().split('\n').slice(1).map(r => r.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/));
-        
-        grid.innerHTML = ''; // Clear loading
-
+        grid.innerHTML = ''; 
         rows.forEach(r => {
-          // Bersihkan tanda kutip CSV
           let [date, cat, title, desc, link, img] = r.map(c => c?.replace(/^"|"$/g, '').trim());
-          
           if(!title) return;
-
-          // Sanitasi input text untuk mencegah XSS
-          const safeDate = escapeHTML(date);
-          const safeCat = escapeHTML(cat);
-          const safeTitle = escapeHTML(title);
-          const safeDesc = escapeHTML(desc);
-          const safeLink = link || '#'; // Link tetap raw karena butuh href, tapi hati-hati validasi URL idealnya
-
+          
+          const safeTitle = escapeHTML(title); const safeDesc = escapeHTML(desc);
+          const safeDate = escapeHTML(date); const safeCat = escapeHTML(cat);
           let media = "";
-          // Logic Video Youtube
+          
           if(safeCat.toLowerCase() === 'video') {
-             // Ekstrak ID dengan Regex yang aman
-             const ytMatch = safeLink.match(/(?:youtu\.be\/|youtube\.com\/(?:.*v=|.*\/))([^&?]*)/);
-             const ytId = ytMatch ? ytMatch[1] : null;
-             
-             if (ytId) {
-                 media = `
-                 <div class="aspect-video bg-black relative rounded-t-xl overflow-hidden group">
-                    <img src="https://img.youtube.com/vi/${ytId}/hqdefault.jpg" 
-                         class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition" 
-                         alt="${safeTitle}" loading="lazy">
-                    <div class="absolute inset-0 flex items-center justify-center text-white text-4xl group-hover:scale-110 transition">▶</div>
-                 </div>`;
-             }
+             const ytMatch = (link||'').match(/(?:youtu\.be\/|youtube\.com\/(?:.*v=|.*\/))([^&?]*)/);
+             if (ytMatch) media = `<div class="aspect-video bg-slate-200 relative overflow-hidden"><img src="https://img.youtube.com/vi/${ytMatch[1]}/hqdefault.jpg" class="w-full h-full object-cover opacity-90"><div class="absolute inset-0 flex items-center justify-center text-white text-4xl drop-shadow-lg">▶</div></div>`;
           }
 
-          // Buat elemen DOM secara aman
-          const cardHtml = `
-            <div class="bg-white border border-slate-200 rounded-xl shadow-sm hover:shadow-md transition hover:-translate-y-1 duration-300 flex flex-col h-full">
-                <a href="${safeLink}" target="_blank" rel="noopener noreferrer" class="flex-1">
+          grid.insertAdjacentHTML('beforeend', `
+            <div class="bg-white border border-slate-100 rounded-3xl overflow-hidden shadow-sm hover:shadow-lg transition duration-300 flex flex-col h-full group">
+                <a href="${link||'#'}" target="_blank" rel="noopener noreferrer" class="flex-1 flex flex-col">
                     ${media}
-                    <div class="p-4">
-                        <span class="inline-block text-[10px] font-bold uppercase text-primary-700 bg-primary-50 px-2 py-1 rounded border border-primary-100 mb-2">
-                            ${safeCat} • ${safeDate}
-                        </span>
-                        <h3 class="font-bold text-slate-900 text-lg leading-snug mb-2 line-clamp-2" title="${safeTitle}">
-                            ${safeTitle}
-                        </h3>
-                        <p class="text-sm text-slate-600 line-clamp-3 leading-relaxed">
-                            ${safeDesc}
-                        </p>
+                    <div class="p-6 flex-1 flex flex-col">
+                        <span class="text-[10px] font-bold uppercase tracking-wider text-primary-600 mb-2">${safeCat} • ${safeDate}</span>
+                        <h3 class="font-extrabold text-slate-900 text-lg leading-tight mb-2 group-hover:text-primary-600 transition line-clamp-2">${safeTitle}</h3>
+                        <p class="text-sm text-slate-600 line-clamp-3 leading-relaxed flex-1">${safeDesc}</p>
                     </div>
                 </a>
-            </div>`;
-            
-          grid.insertAdjacentHTML('beforeend', cardHtml);
+            </div>`);
         });
-      } catch(e) {
-          console.error(e);
-          grid.innerHTML = `<div class="col-span-full text-center text-red-500 text-sm bg-red-50 p-4 rounded-lg">Gagal memuat berita. Pastikan koneksi internet lancar.</div>`;
-      }
+      } catch(e) { grid.innerHTML = `<p class="text-red-500 text-sm col-span-full">Gagal memuat berita.</p>`; }
     }
     loadContent();
   </script>
 </body>
 </html>
-
