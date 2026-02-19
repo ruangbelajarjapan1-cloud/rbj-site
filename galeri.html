@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Galeri - RBMJ</title>
-  <link rel="icon" href="logo.jpg" />
+  <link rel="icon" href="logo.png" />
   <script src="https://cdn.tailwindcss.com"></script>
   <script>tailwind.config={theme:{extend:{colors:{primary:{DEFAULT:'#16a34a',50:'#f0fdf4',100:'#dcfce7',200:'#bbf7d0',300:'#86efac',400:'#4ade80',500:'#22c55e',600:'#16a34a',700:'#15803d',800:'#166534',900:'#14532d'}}}}}</script>
 </head>
@@ -14,36 +14,63 @@
 
   <main class="py-16 min-h-[70vh]">
     <div class="max-w-7xl mx-auto px-4">
-      <a href="index.html" class="text-sm text-primary-700 hover:underline font-medium">&larr; <span data-i18n="back.home">Kembali ke Beranda</span></a>
+      <a href="index.html" class="text-sm text-primary-700 hover:underline font-medium">← <span data-i18n="back.home">Kembali ke Beranda</span></a>
       <h1 class="mt-4 text-3xl md:text-4xl font-extrabold text-slate-900" data-i18n="sec.galeri">Galeri Kegiatan</h1>
       <div class="w-20 h-1.5 bg-primary-500 rounded-full mt-4 mb-4"></div>
-      <p class="text-lg text-slate-600 max-w-2xl leading-relaxed" data-i18n="galeri.intro">Dokumentasi momen kebersamaan dan kegiatan belajar komunitas kita.</p>
+      <p class="text-lg text-slate-600 max-w-2xl leading-relaxed" data-i18n="galeri.intro">Klik pada foto untuk memperbesar. Dokumentasi momen kebersamaan dan kegiatan belajar komunitas kita.</p>
 
-      <div class="mt-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
-        <div class="rounded-2xl overflow-hidden aspect-square border border-slate-200 bg-white shadow-sm group cursor-pointer">
-          <img src="g1.jpg" alt="Kegiatan 1" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" loading="lazy" onerror="this.src='https://placehold.co/400x400?text=Foto+1'" />
+      <div id="gridGaleri" class="mt-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
         </div>
-        <div class="rounded-2xl overflow-hidden aspect-square border border-slate-200 bg-white shadow-sm group cursor-pointer">
-          <img src="g2.jpg" alt="Kegiatan 2" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" loading="lazy" onerror="this.src='https://placehold.co/400x400?text=Foto+2'" />
-        </div>
-        <div class="rounded-2xl overflow-hidden aspect-square border border-slate-200 bg-white shadow-sm group cursor-pointer">
-          <img src="g3.jpg" alt="Kegiatan 3" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" loading="lazy" onerror="this.src='https://placehold.co/400x400?text=Foto+3'" />
-        </div>
-        <div class="rounded-2xl overflow-hidden aspect-square border border-slate-200 bg-white shadow-sm group cursor-pointer">
-          <img src="g4.jpg" alt="Kegiatan 4" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" loading="lazy" onerror="this.src='https://placehold.co/400x400?text=Foto+4'" />
-        </div>
-        <div class="rounded-2xl overflow-hidden aspect-square border border-slate-200 bg-white shadow-sm group cursor-pointer">
-          <img src="g5.jpg" alt="Kegiatan 5" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" loading="lazy" onerror="this.src='https://placehold.co/400x400?text=Foto+5'" />
-        </div>
-        <div class="rounded-2xl overflow-hidden aspect-square border border-slate-200 bg-white shadow-sm group cursor-pointer">
-          <img src="g6.jpg" alt="Kegiatan 6" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" loading="lazy" onerror="this.src='https://placehold.co/400x400?text=Foto+6'" />
-        </div>
-      </div>
     </div>
   </main>
 
   <div id="footer-container"></div>
+
+  <div id="lightbox" class="fixed inset-0 z-[100] bg-slate-900/95 hidden flex flex-col items-center justify-center p-4 backdrop-blur-sm transition-opacity opacity-0" onclick="closeLightbox()">
+    <button class="absolute top-6 right-6 text-white text-4xl font-light hover:text-primary-400 transition">&times;</button>
+    <img id="lightboxImg" class="max-w-full max-h-[85vh] rounded-xl shadow-2xl transform scale-95 transition-transform duration-300" src="" alt="Zoomed Foto" />
+  </div>
+
   <script src="layout.js"></script>
   <script src="i18n.js"></script>
+  <script>
+    // --- LOAD FOTO OTOMATIS DARI FOLDER ASSETS ---
+    const grid = document.getElementById('gridGaleri');
+    
+    // Looping file 1.jpeg sampai 11.jpeg
+    for(let i=1; i<=11; i++) {
+      const imgHtml = `
+        <div class="rounded-2xl overflow-hidden aspect-square border border-slate-200 bg-white shadow-sm group cursor-pointer" onclick="openLightbox('assets/${i}.jpeg')">
+          <img src="assets/${i}.jpeg" alt="Kegiatan RBMJ ${i}" class="w-full h-full object-cover group-hover:scale-110 group-hover:opacity-90 transition duration-500" loading="lazy" onerror="this.parentElement.style.display='none';" />
+        </div>
+      `;
+      grid.insertAdjacentHTML('beforeend', imgHtml);
+    }
+
+    // --- FUNGSI LIGHTBOX (ZOOM GAMBAR) ---
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+
+    function openLightbox(imgSrc) {
+      lightboxImg.src = imgSrc;
+      lightbox.classList.remove('hidden');
+      // Sedikit jeda agar animasi transisi opacity & scale terlihat mulus
+      setTimeout(() => {
+        lightbox.classList.remove('opacity-0');
+        lightboxImg.classList.remove('scale-95');
+        lightboxImg.classList.add('scale-100');
+      }, 10);
+    }
+
+    function closeLightbox() {
+      lightbox.classList.add('opacity-0');
+      lightboxImg.classList.remove('scale-100');
+      lightboxImg.classList.add('scale-95');
+      // Tunggu animasi selesai baru sembunyikan div
+      setTimeout(() => {
+        lightbox.classList.add('hidden');
+      }, 300);
+    }
+  </script>
 </body>
 </html>
