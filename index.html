@@ -445,28 +445,96 @@
     loadPrayerTimes(35.4437, 139.6380);
     document.getElementById('btnGeo').onclick = () => { if(navigator.geolocation) navigator.geolocation.getCurrentPosition(p => loadPrayerTimes(p.coords.latitude, p.coords.longitude)); };
 
-    // --- KONTEN ---
+   // --- KONTEN (SECURE & SANITIZED) ---
     const CONTENT_CSV = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTVxGRvlEuYhCTuDCtzQD3sxgkLRDTku-sSPuvZ8xYKLNxmy5jtEBZWMAzTXxDnOCX7IV-szkvQyUei/pub?gid=0&single=true&output=csv';
+
+    // Helper untuk mencegah XSS (Membersihkan HTML tag dari text)
+    function escapeHTML(str) {
+        if (!str) return "";
+        return str.replace(/[&<>'"]/g, 
+            tag => ({
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                "'": '&#39;',
+                '"': '&quot;'
+            }[tag]));
+    }
+
     async function loadContent() {
       const grid = document.getElementById('contentGrid');
+      // Tampilkan skeleton loading state jika perlu
+      grid.innerHTML = '<p class="text-sm text-slate-500 animate-pulse">Sedang memuat berita...</p>';
+
       try {
         const res = await fetch(CONTENT_CSV);
+        if (!res.ok) throw new Error("Gagal mengambil data");
+        
         const text = await res.text();
+        // Parsing CSV yang lebih aman (handle koma dalam kutip)
         const rows = text.trim().split('\n').slice(1).map(r => r.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/));
-        grid.innerHTML = '';
+        
+        grid.innerHTML = ''; // Clear loading
+
         rows.forEach(r => {
-          const [date, cat, title, desc, link, img] = r.map(c => c?.replace(/^"|"$/g, '').trim());
+          // Bersihkan tanda kutip CSV
+          let [date, cat, title, desc, link, img] = r.map(c => c?.replace(/^"|"$/g, '').trim());
+          
           if(!title) return;
+
+          // Sanitasi input text untuk mencegah XSS
+          const safeDate = escapeHTML(date);
+          const safeCat = escapeHTML(cat);
+          const safeTitle = escapeHTML(title);
+          const safeDesc = escapeHTML(desc);
+          const safeLink = link || '#'; // Link tetap raw karena butuh href, tapi hati-hati validasi URL idealnya
+
           let media = "";
-          if(cat?.toLowerCase() === 'video') {
-             const ytId = link.match(/(?:youtu\.be\/|youtube\.com\/(?:.*v=|.*\/))([^&?]*)/)?.[1];
-             media = `<div class="aspect-video bg-black relative rounded-t-xl overflow-hidden"><img src="https://img.youtube.com/vi/${ytId}/hqdefault.jpg" class="w-full h-full object-cover opacity-80"><div class="absolute inset-0 flex items-center justify-center text-white text-4xl">▶</div></div>`;
+          // Logic Video Youtube
+          if(safeCat.toLowerCase() === 'video') {
+             // Ekstrak ID dengan Regex yang aman
+             const ytMatch = safeLink.match(/(?:youtu\.be\/|youtube\.com\/(?:.*v=|.*\/))([^&?]*)/);
+             const ytId = ytMatch ? ytMatch[1] : null;
+             
+             if (ytId) {
+                 media = `
+                 <div class="aspect-video bg-black relative rounded-t-xl overflow-hidden group">
+                    <img src="https://img.youtube.com/vi/${ytId}/hqdefault.jpg" 
+                         class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition" 
+                         alt="${safeTitle}" loading="lazy">
+                    <div class="absolute inset-0 flex items-center justify-center text-white text-4xl group-hover:scale-110 transition">▶</div>
+                 </div>`;
+             }
           }
-          grid.innerHTML += `<div class="bg-white border rounded-xl shadow-sm hover:shadow-md transition"><a href="${link||'#'}" target="_blank">${media}<div class="p-4"><span class="text-[10px] font-bold uppercase text-primary-600 bg-primary-50 px-2 py-1 rounded">${cat} • ${date}</span><h3 class="font-bold text-slate-900 mt-2 mb-2 line-clamp-2">${title}</h3><p class="text-sm text-slate-500 line-clamp-2">${desc}</p></div></a></div>`;
+
+          // Buat elemen DOM secara aman
+          const cardHtml = `
+            <div class="bg-white border border-slate-200 rounded-xl shadow-sm hover:shadow-md transition hover:-translate-y-1 duration-300 flex flex-col h-full">
+                <a href="${safeLink}" target="_blank" rel="noopener noreferrer" class="flex-1">
+                    ${media}
+                    <div class="p-4">
+                        <span class="inline-block text-[10px] font-bold uppercase text-primary-700 bg-primary-50 px-2 py-1 rounded border border-primary-100 mb-2">
+                            ${safeCat} • ${safeDate}
+                        </span>
+                        <h3 class="font-bold text-slate-900 text-lg leading-snug mb-2 line-clamp-2" title="${safeTitle}">
+                            ${safeTitle}
+                        </h3>
+                        <p class="text-sm text-slate-600 line-clamp-3 leading-relaxed">
+                            ${safeDesc}
+                        </p>
+                    </div>
+                </a>
+            </div>`;
+            
+          grid.insertAdjacentHTML('beforeend', cardHtml);
         });
-      } catch(e) {}
+      } catch(e) {
+          console.error(e);
+          grid.innerHTML = `<div class="col-span-full text-center text-red-500 text-sm bg-red-50 p-4 rounded-lg">Gagal memuat berita. Pastikan koneksi internet lancar.</div>`;
+      }
     }
     loadContent();
   </script>
 </body>
 </html>
+
