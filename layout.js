@@ -23,7 +23,7 @@ const siteHeader = `
           <button data-lang-btn="id" onclick="changeLang('id')" class="px-3 py-1.5 rounded-lg text-xs font-bold text-slate-600 hover:bg-white transition">ID</button>
           <button data-lang-btn="ja" onclick="changeLang('ja')" class="px-3 py-1.5 rounded-lg text-xs font-bold text-slate-600 hover:bg-white transition">JA</button>
         </div>
-        <a href="index.html#daftar" class="px-6 py-2.5 rounded-xl bg-primary-600 text-white text-sm font-bold shadow-lg shadow-primary-500/30 hover:bg-primary-700 hover:-translate-y-0.5 transition-all" data-i18n="nav.daftar">Daftar</a>
+        <button onclick="openDaftarModal()" class="px-6 py-2.5 rounded-xl bg-primary-600 text-white text-sm font-bold shadow-lg shadow-primary-500/30 hover:bg-primary-700 hover:-translate-y-0.5 transition-all" data-i18n="nav.daftar">Daftar</button>
       </div>
 
       <button id="menuBtn" class="md:hidden p-2 rounded-xl border border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-primary-600 transition">
@@ -33,12 +33,13 @@ const siteHeader = `
 
     <div id="mobileMenu" class="md:hidden hidden border-t border-slate-100 bg-white absolute w-full shadow-2xl pb-4 rounded-b-3xl">
       <nav class="max-w-7xl mx-auto px-4 py-4 grid gap-2 text-sm font-semibold">
-        <a href="tentang.html" class="p-4 rounded-2xl text-slate-700 hover:bg-slate-50 hover:text-primary-600 transition flex items-center gap-3" data-i18n="nav.tentang"><span class="text-xl">🏢</span> Tentang Kami</a>
-        <a href="program.html" class="p-4 rounded-2xl text-slate-700 hover:bg-slate-50 hover:text-primary-600 transition flex items-center gap-3" data-i18n="nav.program"><span class="text-xl">📚</span> Program</a>
-        <a href="index.html#jadwal" class="p-4 rounded-2xl text-slate-700 hover:bg-slate-50 hover:text-primary-600 transition flex items-center gap-3" data-i18n="nav.jadwal"><span class="text-xl">🕌</span> Jadwal Shalat</a>
-        <a href="artikel.html" class="p-4 rounded-2xl text-slate-700 hover:bg-slate-50 hover:text-primary-600 transition flex items-center gap-3" data-i18n="nav.artikel"><span class="text-xl">📰</span> Artikel</a>
-        <a href="galeri.html" class="p-4 rounded-2xl text-slate-700 hover:bg-slate-50 hover:text-primary-600 transition flex items-center gap-3" data-i18n="nav.galeri"><span class="text-xl">📸</span> Galeri</a>
-        <a href="kontak.html" class="p-4 rounded-2xl text-slate-700 hover:bg-slate-50 hover:text-primary-600 transition flex items-center gap-3" data-i18n="nav.kontak"><span class="text-xl">💬</span> Kontak</a>
+        <a href="tentang.html" class="p-4 rounded-2xl text-slate-700 hover:bg-slate-50 hover:text-primary-600 transition flex items-center gap-3"><span class="text-xl">🏢</span> Tentang Kami</a>
+        <a href="program.html" class="p-4 rounded-2xl text-slate-700 hover:bg-slate-50 hover:text-primary-600 transition flex items-center gap-3"><span class="text-xl">📚</span> Program</a>
+        <a href="index.html#jadwal" class="p-4 rounded-2xl text-slate-700 hover:bg-slate-50 hover:text-primary-600 transition flex items-center gap-3"><span class="text-xl">🕌</span> Jadwal Shalat</a>
+        <a href="artikel.html" class="p-4 rounded-2xl text-slate-700 hover:bg-slate-50 hover:text-primary-600 transition flex items-center gap-3"><span class="text-xl">📰</span> Artikel</a>
+        <a href="galeri.html" class="p-4 rounded-2xl text-slate-700 hover:bg-slate-50 hover:text-primary-600 transition flex items-center gap-3"><span class="text-xl">📸</span> Galeri</a>
+        <a href="kontak.html" class="p-4 rounded-2xl text-slate-700 hover:bg-slate-50 hover:text-primary-600 transition flex items-center gap-3"><span class="text-xl">💬</span> Kontak</a>
+        <button onclick="openDaftarModal()" class="w-full mt-2 px-4 py-3 rounded-xl bg-primary-600 text-white text-center font-bold">Daftar Sekarang</button>
       </nav>
     </div>
   </header>
@@ -65,20 +66,49 @@ const siteFooter = `
   </footer>
 `;
 
+// Komponen Popup Google Form Global
+const siteModalDaftar = `
+  <div id="modalDaftar" class="fixed inset-0 z-[100] bg-slate-900/80 hidden flex-col items-center justify-center p-4 md:p-10 backdrop-blur-sm transition-opacity opacity-0">
+    <div class="bg-white w-full max-w-4xl h-full md:h-[85vh] rounded-3xl flex flex-col overflow-hidden shadow-2xl transform scale-95 transition-transform duration-300 relative">
+      <div class="h-16 flex items-center justify-between px-6 border-b border-slate-100 bg-white shrink-0">
+        <span class="font-extrabold text-lg text-slate-800">Pendaftaran RBMJ</span>
+        <button onclick="closeDaftarModal()" class="text-3xl text-slate-400 hover:text-red-500 transition">&times;</button>
+      </div>
+      <div class="flex-1 w-full bg-slate-50 relative overflow-hidden">
+        <iframe src="https://forms.gle/dxqRenLyLq3KJ6cr5" class="absolute inset-0 w-full h-full border-0"></iframe>
+      </div>
+    </div>
+  </div>
+`;
+
+// Fungsi Buka Tutup Modal Daftar
+window.openDaftarModal = function() {
+  const modal = document.getElementById('modalDaftar');
+  if(modal) {
+    modal.classList.remove('hidden');
+    setTimeout(() => { modal.classList.remove('opacity-0'); modal.children[0].classList.remove('scale-95'); }, 10);
+  }
+};
+window.closeDaftarModal = function() {
+  const modal = document.getElementById('modalDaftar');
+  if(modal) {
+    modal.classList.add('opacity-0'); modal.children[0].classList.add('scale-95');
+    setTimeout(() => { modal.classList.add('hidden'); }, 300);
+  }
+};
+
 document.addEventListener("DOMContentLoaded", () => {
     const headerContainer = document.getElementById("header-container");
     const footerContainer = document.getElementById("footer-container");
+    
     if(headerContainer) headerContainer.innerHTML = siteHeader;
-    if(footerContainer) footerContainer.innerHTML = siteFooter;
+    // Inject Footer dan Modal Daftar di akhir body
+    if(footerContainer) footerContainer.innerHTML = siteFooter + siteModalDaftar;
 
     const yearEl = document.getElementById('year');
     if(yearEl) yearEl.textContent = new Date().getFullYear();
 
     const btn = document.getElementById('menuBtn');
     const menu = document.getElementById('mobileMenu');
-    if(btn && menu) {
-        btn.addEventListener('click', () => {
-            menu.classList.toggle('hidden');
-        });
-    }
+    if(btn && menu) btn.addEventListener('click', () => menu.classList.toggle('hidden'));
 });
