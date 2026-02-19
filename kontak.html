@@ -1,93 +1,69 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Kontak - RBMJ</title>
-  <meta property="og:title" content="Kontak - RBM Jepang" />
-  <meta property="og:image" content="hero.jpg" />
   <link rel="icon" href="logo.jpg" />
   <script src="https://cdn.tailwindcss.com"></script>
   <script>tailwind.config={theme:{extend:{colors:{primary:{DEFAULT:'#16a34a',50:'#f0fdf4',100:'#dcfce7',200:'#bbf7d0',300:'#86efac',400:'#4ade80',500:'#22c55e',600:'#16a34a',700:'#15803d',800:'#166534',900:'#14532d'}}}}}</script>
 </head>
-<body class="bg-white text-slate-900">
-  <!-- Header -->
-  <header class="sticky top-0 z-50 bg-white/90 backdrop-blur border-b">
-    <div class="max-w-7xl mx-auto px-4">
-      <div class="flex items-center justify-between h-16">
-        <a href="index.html" class="flex items-center gap-3"><img src="logo.jpg" class="h-9 w-9 rounded-lg ring-1 ring-primary-200" alt=""><span class="font-bold text-lg" data-i18n="brand.name">Ruang Belajar Muslim Jepang</span></a>
-        <nav class="hidden md:flex items-center gap-5 text-sm">
-          <a href="index.html#tentang" data-i18n="nav.tentang">Tentang</a>
-          <a href="index.html#program" data-i18n="nav.program">Program</a>
-          <a href="index.html#jadwal" data-i18n="nav.jadwal">Jadwal</a>
-          <a href="index.html#artikel" data-i18n="nav.artikel">Artikel</a>
-          <a href="index.html#galeri" data-i18n="nav.galeri">Galeri</a>
-          <a href="index.html#kontak" data-i18n="nav.kontak">Kontak</a>
-          <a href="index.html#daftar" class="px-4 py-2 rounded-xl bg-primary-600 text-white" data-i18n="nav.daftar">Daftar</a>
-          <div class="ml-1 inline-flex rounded-xl ring-1 ring-slate-200 overflow-hidden">
-            <button data-lang-btn="id" onclick="changeLang('id')" class="px-3 py-2 text-sm" data-i18n-lang-id>ID</button>
-            <button data-lang-btn="ja" onclick="changeLang('ja')" class="px-3 py-2 text-sm" data-i18n-lang-ja>日本語</button>
-          </div>
-        </nav>
-        <button id="menuBtn" class="md:hidden p-2 rounded-lg border">☰</button>
-      </div>
-    </div>
-    <div id="mobileMenu" class="md:hidden hidden border-t bg-white">
-      <nav class="max-w-7xl mx-auto px-4 py-3 grid gap-2 text-sm">
-        <a href="index.html#tentang" data-i18n="nav.tentang">Tentang</a>
-        <a href="index.html#program" data-i18n="nav.program">Program</a>
-        <a href="index.html#jadwal" data-i18n="nav.jadwal">Jadwal</a>
-        <a href="index.html#artikel" data-i18n="nav.artikel">Artikel</a>
-        <a href="index.html#galeri" data-i18n="nav.galeri">Galeri</a>
-        <a href="index.html#kontak" data-i18n="nav.kontak">Kontak</a>
-        <a href="index.html#daftar" class="px-4 py-2 rounded-xl bg-primary-600 text-white" data-i18n="nav.daftar">Daftar</a>
-        <div class="mt-2 inline-flex rounded-xl ring-1 ring-slate-200 overflow-hidden">
-          <button data-lang-btn="id" onclick="changeLang('id')" class="px-3 py-2 text-sm" data-i18n-lang-id>ID</button>
-          <button data-lang-btn="ja" onclick="changeLang('ja')" class="px-3 py-2 text-sm" data-i18n-lang-ja>日本語</button>
-        </div>
-      </nav>
-    </div>
-  </header>
+<body class="bg-slate-50 text-slate-900">
 
-  <main class="py-16">
-    <div class="max-w-7xl mx-auto px-4">
-      <a href="index.html" class="text-sm text-primary-700 hover:underline">&larr; <span data-i18n="back.home">Kembali ke Beranda</span></a>
-      <h1 class="mt-4 text-3xl md:text-4xl font-bold" data-i18n="sec.kontak">Kontak</h1>
+  <div id="header-container"></div>
 
-      <div class="mt-8 grid lg:grid-cols-2 gap-10 items-start">
+  <main class="py-16 min-h-[70vh]">
+    <div class="max-w-7xl mx-auto px-4">
+      <a href="index.html" class="text-sm text-primary-700 hover:underline font-medium">&larr; <span data-i18n="back.home">Kembali ke Beranda</span></a>
+      <h1 class="mt-4 text-3xl md:text-4xl font-extrabold text-slate-900" data-i18n="sec.kontak">Hubungi Kami</h1>
+      <div class="w-20 h-1.5 bg-primary-500 rounded-full mt-4 mb-8"></div>
+
+      <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
         <div>
+          <p class="text-lg text-slate-600 mb-8 leading-relaxed">Silakan hubungi kami untuk informasi program, pendaftaran, atau jika ada pertanyaan lainnya seputar kegiatan RBM Jepang.</p>
+          
           <div class="grid sm:grid-cols-2 gap-4">
-            <div class="p-4 rounded-xl bg-white ring-1 ring-slate-200"><p class="text-sm text-slate-600" data-i18n="kontak.email">Email</p><a href="mailto:ruangbelajarmuslimjapan1@gmail.com" class="font-medium">halo@rbmj.org</a></div>
-            <div class="p-4 rounded-xl bg-white ring-1 ring-slate-200"><p class="text-sm text-slate-600" data-i18n="kontak.wa">WhatsApp / Telegram</p><a href="#" class="font-medium" data-i18n="btn.join">Gabung Grup</a></div>
+            <div class="p-6 rounded-3xl bg-white border border-slate-200 shadow-sm hover:border-primary-300 transition">
+              <div class="w-10 h-10 bg-primary-50 rounded-xl flex items-center justify-center text-primary-600 mb-3">📧</div>
+              <p class="text-xs font-bold uppercase text-slate-500 tracking-wider mb-1" data-i18n="kontak.email">Email</p>
+              <a href="mailto:ruangbelajarmuslimjapan1@gmail.com" class="font-bold text-slate-800 hover:text-primary-600 break-words">halo@rbmj.org</a>
+            </div>
+            <div class="p-6 rounded-3xl bg-white border border-slate-200 shadow-sm hover:border-primary-300 transition">
+              <div class="w-10 h-10 bg-primary-50 rounded-xl flex items-center justify-center text-primary-600 mb-3">💬</div>
+              <p class="text-xs font-bold uppercase text-slate-500 tracking-wider mb-1" data-i18n="kontak.wa">WhatsApp / Telegram</p>
+              <a href="#" class="font-bold text-slate-800 hover:text-primary-600 inline-flex items-center gap-1" data-i18n="btn.join">Gabung Grup &rarr;</a>
+            </div>
           </div>
-          <div class="mt-6 aspect-video rounded-xl overflow-hidden ring-1 ring-slate-200 bg-white">
-            <iframe class="w-full h-full" src="https://maps.google.com" loading="lazy" title="Map"></iframe>
+
+          <div class="mt-8 aspect-video rounded-3xl overflow-hidden border border-slate-200 shadow-sm bg-white p-2">
+            <iframe class="w-full h-full rounded-2xl" src="https://maps.google.com/maps?q=Yokohama&t=&z=13&ie=UTF8&iwloc=&output=embed" loading="lazy" title="Map Yokohama"></iframe>
           </div>
         </div>
 
-        <div class="bg-white p-4 rounded-2xl ring-1 ring-slate-200 shadow-sm">
-          <form class="grid gap-4" onsubmit="alert('Form contoh. Silakan kirim via email/WA.'); return false;">
-            <div><label class="text-sm" data-i18n="form.name">Nama</label><input class="mt-1 w-full rounded-xl border p-3" placeholder="Nama Anda" /></div>
-            <div><label class="text-sm" data-i18n="form.email">Email</label><input type="email" class="mt-1 w-full rounded-xl border p-3" placeholder="email@contoh.com" /></div>
-            <div><label class="text-sm" data-i18n="form.message">Pesan</label><textarea rows="4" class="mt-1 w-full rounded-xl border p-3" placeholder="Tulis pesan Anda"></textarea></div>
-            <button type="submit" class="px-5 py-3 rounded-xl bg-primary-600 text-white" data-i18n="form.send">Kirim</button>
+        <div class="bg-white p-8 md:p-10 rounded-3xl border border-slate-200 shadow-lg">
+          <h3 class="text-2xl font-bold mb-6 text-slate-800">Kirim Pesan</h3>
+          <form class="grid gap-5" action="terima-kasih.html">
+            <div>
+              <label class="block text-sm font-bold text-slate-700 mb-2" data-i18n="form.name">Nama Lengkap</label>
+              <input type="text" required class="w-full rounded-xl border border-slate-300 px-4 py-3 bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition" placeholder="Masukkan nama Anda" />
+            </div>
+            <div>
+              <label class="block text-sm font-bold text-slate-700 mb-2" data-i18n="form.email">Alamat Email</label>
+              <input type="email" required class="w-full rounded-xl border border-slate-300 px-4 py-3 bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition" placeholder="email@contoh.com" />
+            </div>
+            <div>
+              <label class="block text-sm font-bold text-slate-700 mb-2" data-i18n="form.message">Pesan Anda</label>
+              <textarea rows="5" required class="w-full rounded-xl border border-slate-300 px-4 py-3 bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition" placeholder="Tulis pesan atau pertanyaan Anda di sini..."></textarea>
+            </div>
+            <button type="submit" class="w-full mt-2 px-6 py-4 rounded-xl bg-primary-600 text-white font-bold text-lg hover:bg-primary-700 shadow-md hover:shadow-lg transition hover:-translate-y-1" data-i18n="form.send">Kirim Pesan Sekarang</button>
           </form>
         </div>
       </div>
     </div>
   </main>
 
-  <footer class="py-10 border-t mt-10">
-    <div class="max-w-7xl mx-auto px-4 text-sm text-slate-600 flex flex-col md:flex-row gap-3 md:items-center md:justify-between">
-      <p>© <span id="year"></span> <span data-i18n="brand.name">Ruang Belajar Muslim Jepang</span>. <span data-i18n="footer.copyright">Semua hak cipta dilindungi.</span></p>
-      <div class="flex gap-4"><a href="#">Privasi</a><a href="#">S&K</a></div>
-    </div>
-  </footer>
-
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-    const btn=document.getElementById('menuBtn'), menu=document.getElementById('mobileMenu');
-    btn?.addEventListener('click',()=>menu.classList.toggle('hidden'));
-  </script>
+  <div id="footer-container"></div>
+  <script src="layout.js"></script>
   <script src="i18n.js"></script>
 </body>
 </html>
