@@ -14,25 +14,28 @@
 
   <main class="py-16 min-h-[70vh]">
     <div class="max-w-7xl mx-auto px-4">
-      <a href="index.html" class="text-sm text-primary-700 hover:underline font-medium">&larr; <span data-i18n="back.home">Kembali ke Beranda</span></a>
+      <a href="index.html" class="text-sm text-primary-700 hover:underline font-medium">← <span data-i18n="back.home">Kembali ke Beranda</span></a>
       <h1 class="mt-4 text-3xl md:text-4xl font-extrabold text-slate-900" data-i18n="sec.program">Program & Kegiatan</h1>
       <div class="w-20 h-1.5 bg-primary-500 rounded-full mt-4 mb-8"></div>
+      <p class="text-slate-600 mb-6">Klik pada kartu kelas di bawah ini untuk melihat detail lengkapnya.</p>
 
       <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        <div class="p-8 rounded-3xl bg-white border border-slate-100 shadow-sm hover:shadow-md hover:-translate-y-1 transition duration-300">
+        <div onclick="openClassInfo('iqro')" class="cursor-pointer p-8 rounded-3xl bg-white border border-slate-100 shadow-sm hover:shadow-lg hover:border-primary-200 hover:-translate-y-1 transition duration-300">
           <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center text-2xl mb-4">📖</div>
-          <h3 class="font-bold text-lg text-slate-800" data-i18n="card.jp.title">Kelas Iqro' Anak</h3>
-          <p class="mt-2 text-slate-600 leading-relaxed" data-i18n="card.jp.p">Pengenalan huruf hijaiyah dan dasar membaca Al-Qur'an.</p>
+          <h3 class="font-bold text-lg text-slate-800">Kelas Iqro' Anak</h3>
+          <p class="mt-2 text-slate-600 leading-relaxed text-sm">Pengenalan huruf hijaiyah dan dasar membaca Al-Qur'an.</p>
         </div>
-        <div class="p-8 rounded-3xl bg-white border border-slate-100 shadow-sm hover:shadow-md hover:-translate-y-1 transition duration-300">
+        
+        <div onclick="openClassInfo('pai')" class="cursor-pointer p-8 rounded-3xl bg-white border border-slate-100 shadow-sm hover:shadow-lg hover:border-primary-200 hover:-translate-y-1 transition duration-300">
           <div class="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center text-2xl mb-4">💻</div>
-          <h3 class="font-bold text-lg text-slate-800" data-i18n="card.islam.title">Kelas PAI Online</h3>
-          <p class="mt-2 text-slate-600 leading-relaxed" data-i18n="card.islam.p">Pelajaran Adab, Fiqh praktis, dan Aqidah untuk anak.</p>
+          <h3 class="font-bold text-lg text-slate-800">Kelas PAI Online</h3>
+          <p class="mt-2 text-slate-600 leading-relaxed text-sm">Pelajaran Adab, Fiqh praktis, dan Aqidah untuk anak.</p>
         </div>
-        <div class="p-8 rounded-3xl bg-white border border-slate-100 shadow-sm hover:shadow-md hover:-translate-y-1 transition duration-300">
+        
+        <div onclick="openClassInfo('tahsin')" class="cursor-pointer p-8 rounded-3xl bg-white border border-slate-100 shadow-sm hover:shadow-lg hover:border-primary-200 hover:-translate-y-1 transition duration-300">
           <div class="w-12 h-12 bg-purple-50 text-purple-600 rounded-2xl flex items-center justify-center text-2xl mb-4">🎓</div>
-          <h3 class="font-bold text-lg text-slate-800" data-i18n="card.tahfidz.title">Tahsin Dewasa</h3>
-          <p class="mt-2 text-slate-600 leading-relaxed" data-i18n="card.tahfidz.p">Perbaikan bacaan Al-Qur'an (Tajwid) dan setoran hafalan.</p>
+          <h3 class="font-bold text-lg text-slate-800">Tahsin Dewasa</h3>
+          <p class="mt-2 text-slate-600 leading-relaxed text-sm">Perbaikan bacaan Al-Qur'an (Tajwid) dan setoran hafalan.</p>
         </div>
       </div>
 
@@ -40,34 +43,24 @@
       <div class="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
         <div class="p-6 rounded-2xl bg-white border border-slate-100 shadow-sm flex items-center gap-4">
           <div class="w-12 h-12 rounded-full bg-slate-200 flex items-center justify-center text-slate-500 font-bold">UH</div>
-          <div>
-            <p class="font-bold text-slate-800">Ustadz Hasan</p>
-            <p class="text-xs text-slate-500 mt-0.5">Tahsin Dewasa</p>
-          </div>
+          <div><p class="font-bold text-slate-800">Ustadz Hasan</p><p class="text-xs text-slate-500 mt-0.5">Tahsin Dewasa</p></div>
         </div>
         <div class="p-6 rounded-2xl bg-white border border-slate-100 shadow-sm flex items-center gap-4">
           <div class="w-12 h-12 rounded-full bg-slate-200 flex items-center justify-center text-slate-500 font-bold">RS</div>
-          <div>
-            <p class="font-bold text-slate-800">Regi Sensei</p>
-            <p class="text-xs text-slate-500 mt-0.5">PAI Online</p>
-          </div>
+          <div><p class="font-bold text-slate-800">Regi Sensei</p><p class="text-xs text-slate-500 mt-0.5">PAI Online</p></div>
         </div>
         <div class="p-6 rounded-2xl bg-white border border-slate-100 shadow-sm flex items-center gap-4">
           <div class="w-12 h-12 rounded-full bg-slate-200 flex items-center justify-center text-slate-500 font-bold">UK</div>
-          <div>
-            <p class="font-bold text-slate-800">Ummu Khayla</p>
-            <p class="text-xs text-slate-500 mt-0.5">Iqro' Anak</p>
-          </div>
+          <div><p class="font-bold text-slate-800">Ummu Khayla</p><p class="text-xs text-slate-500 mt-0.5">Iqro' Anak</p></div>
         </div>
       </div>
 
       <div class="mt-16 bg-primary-50 rounded-3xl p-8 border border-primary-100">
-        <h2 class="text-xl font-bold text-primary-800 flex items-center gap-2" data-i18n="program.module.title"><span>📚</span> Modul Pembelajaran (PDF)</h2>
+        <h2 class="text-xl font-bold text-primary-800 flex items-center gap-2"><span>📚</span> Modul Pembelajaran (PDF)</h2>
         <ul class="mt-4 space-y-3">
           <li>
-            <a href="modul-contoh.pdf" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-white text-primary-700 font-medium hover:bg-primary-600 hover:text-white transition shadow-sm border border-primary-100">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-              <span data-i18n="program.module.sample">Unduh Modul Contoh</span>
+            <a href="modul-contoh.pdf" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-white text-primary-700 font-bold hover:bg-primary-600 hover:text-white transition shadow-sm border border-primary-100">
+              Unduh Modul PDF
             </a>
           </li>
         </ul>
@@ -77,7 +70,54 @@
 
   <div id="footer-container"></div>
 
+  <div id="classModal" class="fixed inset-0 z-[110] bg-slate-900/80 hidden flex items-center justify-center p-4 backdrop-blur-sm transition-opacity opacity-0" onclick="if(event.target===this) closeClassInfo()">
+    <div class="bg-white max-w-lg w-full rounded-3xl p-8 transform scale-95 transition-transform duration-300 shadow-2xl relative">
+      <button onclick="closeClassInfo()" class="absolute top-5 right-5 text-2xl text-slate-400 hover:text-red-500">&times;</button>
+      <div id="modalClassIcon" class="w-14 h-14 rounded-2xl flex items-center justify-center text-3xl mb-4 bg-slate-100"></div>
+      <h3 id="modalClassTitle" class="font-extrabold text-2xl text-slate-900 mb-2"></h3>
+      <p id="modalClassDesc" class="text-slate-600 leading-relaxed mb-6"></p>
+      
+      <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 mb-6">
+        <p class="text-sm font-bold text-slate-700 mb-1">Jadwal Rutin:</p>
+        <p id="modalClassJadwal" class="text-sm text-slate-600"></p>
+      </div>
+
+      <div class="flex gap-3">
+        <button onclick="closeClassInfo()" class="w-1/3 py-3 rounded-xl bg-slate-100 text-slate-700 font-bold hover:bg-slate-200 transition">Tutup</button>
+        <button onclick="closeClassInfo(); openDaftarModal()" class="w-2/3 py-3 rounded-xl bg-primary-600 text-white font-bold hover:bg-primary-700 shadow-md transition">Daftar Kelas Ini</button>
+      </div>
+    </div>
+  </div>
+
   <script src="layout.js"></script>
   <script src="i18n.js"></script>
+  <script>
+    // Data Detail Kelas
+    const classesData = {
+      'iqro': { icon: '📖', color: 'bg-blue-100 text-blue-600', title: "Kelas Iqro' Anak", desc: "Membimbing anak-anak dari dasar pengenalan huruf hijaiyah, makharijul huruf, hingga bisa membaca Al-Qur'an dengan lancar. Cocok untuk usia dini.", jadwal: "Selasa ~ Kamis (15:30 JST)" },
+      'pai': { icon: '💻', color: 'bg-emerald-100 text-emerald-600', title: "Kelas PAI Online", desc: "Pembelajaran Pendidikan Agama Islam khusus anak. Membahas adab harian, tata cara shalat (Fiqh), dan penanaman Aqidah shahihah sesuai sunnah.", jadwal: "Kamis (19:30 JST)" },
+      'tahsin': { icon: '🎓', color: 'bg-purple-100 text-purple-600', title: "Tahsin Dewasa", desc: "Kelas intensif bagi jamaah dewasa untuk menyempurnakan bacaan Al-Qur'an (Tahsin & Tajwid) serta pendampingan setoran hafalan surah-surah pendek.", jadwal: "Ahad (21:00 JST)" }
+    };
+
+    function openClassInfo(id) {
+      const data = classesData[id];
+      const modal = document.getElementById('classModal');
+      
+      document.getElementById('modalClassIcon').className = `w-14 h-14 rounded-2xl flex items-center justify-center text-3xl mb-4 ${data.color}`;
+      document.getElementById('modalClassIcon').innerText = data.icon;
+      document.getElementById('modalClassTitle').innerText = data.title;
+      document.getElementById('modalClassDesc').innerText = data.desc;
+      document.getElementById('modalClassJadwal').innerText = data.jadwal;
+
+      modal.classList.remove('hidden');
+      setTimeout(() => { modal.classList.remove('opacity-0'); modal.children[0].classList.remove('scale-95'); }, 10);
+    }
+
+    function closeClassInfo() {
+      const modal = document.getElementById('classModal');
+      modal.classList.add('opacity-0'); modal.children[0].classList.add('scale-95');
+      setTimeout(() => { modal.classList.add('hidden'); }, 300);
+    }
+  </script>
 </body>
 </html>
