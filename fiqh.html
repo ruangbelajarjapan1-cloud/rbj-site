@@ -16,68 +16,22 @@
     <div class="max-w-4xl mx-auto px-4">
       
       <div class="text-center mb-10">
-        <a href="index.html" class="text-sm text-primary-700 hover:underline font-medium inline-block mb-4">← Kembali ke Beranda</a>
+        <a href="index.html" class="text-sm text-primary-700 hover:underline font-bold inline-block mb-4">← Kembali ke Beranda</a>
         <h1 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4">Pusat Tanya Jawab Fiqh</h1>
-        <p class="text-slate-600 mb-8 max-w-2xl mx-auto">Panduan hukum Islam praktis untuk keseharian Muslim di Jepang, bersumber dari dalil yang shahih dan fatwa ulama terpercaya (Risalah Haramain).</p>
+        <p class="text-slate-600 mb-8 max-w-2xl mx-auto">Panduan hukum Islam praktis untuk keseharian Muslim di Jepang, bersumber dari dalil yang shahih dan fatwa ulama (Risalah Haramain).</p>
         
         <div class="relative max-w-2xl mx-auto">
-          <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-            <span class="text-xl">🔍</span>
-          </div>
-          <input type="text" id="searchInput" onkeyup="filterFiqh()" placeholder="Cari pertanyaan... (misal: shinkansen, halal, jamak)" class="w-full pl-12 pr-4 py-4 rounded-2xl border-2 border-slate-200 focus:border-primary-500 focus:ring-4 focus:ring-primary-100 outline-none transition text-lg shadow-sm" />
+          <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-xl">🔍</div>
+          <input type="text" id="searchInput" onkeyup="cariFiqh()" placeholder="Cari pertanyaan... (misal: shinkansen, halal, jamak)" class="w-full pl-12 pr-4 py-4 rounded-2xl border-2 border-slate-200 focus:border-primary-500 focus:ring-4 focus:ring-primary-100 outline-none transition text-lg shadow-sm" />
         </div>
       </div>
 
-      <div id="fiqhGrid" class="grid gap-6">
-        
-        <article class="fiqh-card p-6 rounded-3xl bg-white border border-slate-200 shadow-sm hover:shadow-md transition">
-          <div class="flex items-center gap-2 mb-3">
-            <span class="px-3 py-1 bg-blue-50 text-blue-700 text-[10px] font-bold rounded-lg uppercase tracking-wider">Ibadah / Shalat</span>
-          </div>
-          <h3 class="font-extrabold text-lg text-slate-900 mb-2 question-text">Bolehkah shalat fardhu sambil duduk di dalam kereta atau Shinkansen?</h3>
-          <p class="text-sm text-slate-700 mb-4 leading-relaxed answer-text">Hukum asal shalat fardhu adalah wajib berdiri. Namun, jika kondisi benar-benar tidak memungkinkan untuk berdiri dan dikhawatirkan waktu shalat akan habis sebelum tiba di tempat tujuan, maka diperbolehkan shalat sambil duduk di kursi sesuai kemampuan.</p>
-          <div class="pt-4 border-t border-slate-100 flex items-start gap-2">
-            <span class="text-lg">📚</span>
-            <p class="text-xs text-slate-500 font-medium leading-relaxed">
-              <strong class="text-primary-700">Sumber:</strong> Fatwa Syekh Abdul Aziz bin Baz (Majmu' Fatawa 12/56) - Sesuai panduan Risalah Haramain.
-            </p>
-          </div>
-        </article>
-
-        <article class="fiqh-card p-6 rounded-3xl bg-white border border-slate-200 shadow-sm hover:shadow-md transition">
-          <div class="flex items-center gap-2 mb-3">
-            <span class="px-3 py-1 bg-emerald-50 text-emerald-700 text-[10px] font-bold rounded-lg uppercase tracking-wider">Makanan / Halal</span>
-          </div>
-          <h3 class="font-extrabold text-lg text-slate-900 mb-2 question-text">Bagaimana hukum makanan di Jepang yang mengandung Emulsifier (Pengemulsi/E471)?</h3>
-          <p class="text-sm text-slate-700 mb-4 leading-relaxed answer-text">Harus dipastikan sumbernya. Jika emulsifier berasal dari tumbuhan (nabati), maka halal. Namun jika berasal dari hewan yang tidak disembelih secara syar'i atau turunan babi, maka haram. Jika ragu atau tidak tahu (syubhat), maka wajib ditinggalkan demi menjaga agama.</p>
-          <div class="pt-4 border-t border-slate-100 flex items-start gap-2">
-            <span class="text-lg">📚</span>
-            <p class="text-xs text-slate-500 font-medium leading-relaxed">
-              <strong class="text-primary-700">Sumber:</strong> Fatwa Al-Lajnah Ad-Daimah (Komite Tetap Riset Ilmiah dan Fatwa Arab Saudi).
-            </p>
-          </div>
-        </article>
-
-        <article class="fiqh-card p-6 rounded-3xl bg-white border border-slate-200 shadow-sm hover:shadow-md transition">
-          <div class="flex items-center gap-2 mb-3">
-            <span class="px-3 py-1 bg-orange-50 text-orange-700 text-[10px] font-bold rounded-lg uppercase tracking-wider">Muamalah / Kerja</span>
-          </div>
-          <h3 class="font-extrabold text-lg text-slate-900 mb-2 question-text">Bolehkah menjamak shalat karena terikat shift kerja (Arubaito) yang sangat ketat?</h3>
-          <p class="text-sm text-slate-700 mb-4 leading-relaxed answer-text">Diperbolehkan menjamak shalat (tanpa meng-qashar) hanya sesekali dalam kondisi yang sangat mendesak atau darurat agar tidak meninggalkan shalat sama sekali. Namun, hal ini tidak boleh dijadikan kebiasaan harian. Pekerja wajib mengomunikasikan hak ibadahnya kepada atasan secara baik-baik.</p>
-          <div class="pt-4 border-t border-slate-100 flex items-start gap-2">
-            <span class="text-lg">📚</span>
-            <p class="text-xs text-slate-500 font-medium leading-relaxed">
-              <strong class="text-primary-700">Sumber:</strong> Syekh Ibnu Utsaimin (Syarh Mumti') & Hadits Ibnu Abbas riwayat Muslim.
-            </p>
-          </div>
-        </article>
-
-      </div>
+      <div id="fiqhGrid" class="grid gap-5"></div>
       
       <div id="noResult" class="hidden text-center py-10">
         <span class="text-4xl">📂</span>
         <h3 class="font-bold text-slate-800 mt-4 text-lg">Pertanyaan belum tersedia</h3>
-        <p class="text-slate-500 text-sm mt-2">Coba gunakan kata kunci lain, atau tanyakan langsung ke Ustadz melalui form kontak.</p>
+        <p class="text-slate-500 text-sm mt-2">Coba gunakan kata kunci lain, atau tanyakan langsung ke Ustadz.</p>
       </div>
 
     </div>
@@ -85,30 +39,127 @@
 
   <div id="footer-container"></div>
 
+  <div id="fiqhModal" class="fixed inset-0 z-[110] bg-slate-900/80 hidden flex items-center justify-center p-4 backdrop-blur-sm transition-opacity opacity-0" onclick="if(event.target===this) tutupModalFiqh()">
+    <div class="bg-white max-w-2xl w-full rounded-3xl p-6 md:p-8 transform scale-95 transition-transform duration-300 shadow-2xl relative max-h-[90vh] overflow-y-auto">
+      <button onclick="tutupModalFiqh()" class="absolute top-5 right-5 text-3xl text-slate-400 hover:text-red-500">&times;</button>
+      
+      <div id="modalKategori" class="inline-block px-3 py-1 text-[10px] font-bold rounded-lg uppercase tracking-wider mb-4"></div>
+      <h3 id="modalTanya" class="font-extrabold text-2xl text-slate-900 mb-4 leading-tight"></h3>
+      <div class="w-16 h-1 bg-primary-500 rounded-full mb-6"></div>
+      
+      <p id="modalJawab" class="text-slate-700 leading-relaxed mb-8 md:text-lg"></p>
+
+      <div class="bg-primary-50 p-5 md:p-6 rounded-2xl border border-primary-100">
+        <p class="text-xs font-bold text-primary-800 uppercase tracking-wider mb-2 flex items-center gap-2"><span>📂</span> Dalil & Sumber Rujukan</p>
+        <p id="modalDalil" class="text-sm text-primary-900 leading-relaxed font-medium"></p>
+      </div>
+
+      <div class="mt-8">
+        <button onclick="tutupModalFiqh()" class="w-full py-3 md:py-4 rounded-xl bg-slate-100 text-slate-700 font-bold hover:bg-slate-200 transition shadow-sm">Tutup Penjelasan</button>
+      </div>
+    </div>
+  </div>
+
   <script src="layout.js"></script>
+  <script src="i18n.js"></script>
   <script>
-    // FUNGSI PENCARIAN CERDAS (SMART FILTER)
-    function filterFiqh() {
-      const input = document.getElementById("searchInput").value.toLowerCase();
-      const cards = document.querySelectorAll(".fiqh-card");
-      let hasVisibleCard = false;
+    // --- DATABASE MINI FIQH ---
+    // Cara menambah data: cukup copy { ... } dan ganti isinya.
+    const dataFiqh = [
+      {
+        id: 1,
+        kategori: "Ibadah / Shalat",
+        warna: "bg-blue-50 text-blue-700",
+        tanya: "Bolehkah shalat fardhu sambil duduk di dalam kereta atau Shinkansen?",
+        jawab_pendek: "Hukum asal shalat fardhu adalah wajib berdiri. Namun, jika kondisi darurat...",
+        jawab_panjang: "Hukum asal shalat fardhu adalah wajib berdiri. Namun, jika kondisi benar-benar tidak memungkinkan untuk berdiri dan dikhawatirkan waktu shalat akan habis sebelum tiba di tempat tujuan, maka diperbolehkan shalat sambil duduk di kursi sesuai kemampuan.",
+        dalil: "Fatwa Syekh Abdul Aziz bin Baz (Majmu' Fatawa 12/56) - Sesuai panduan Risalah Haramain."
+      },
+      {
+        id: 2,
+        kategori: "Makanan / Halal",
+        warna: "bg-emerald-50 text-emerald-700",
+        tanya: "Bagaimana hukum makanan di Jepang yang mengandung Emulsifier (Pengemulsi/E471)?",
+        jawab_pendek: "Jika berasal dari tumbuhan (nabati) halal, jika dari hewan haram (babi/tidak disembelih syar'i)...",
+        jawab_panjang: "Harus dipastikan sumbernya. Jika emulsifier berasal dari tumbuhan (nabati), maka halal. Namun jika berasal dari hewan yang tidak disembelih secara syar'i atau turunan babi, maka haram. Jika ragu atau tidak tahu (syubhat), maka wajib ditinggalkan demi menjaga agama.",
+        dalil: "Fatwa Al-Lajnah Ad-Daimah (Komite Tetap Riset Ilmiah dan Fatwa Arab Saudi)."
+      },
+      {
+        id: 3,
+        kategori: "Muamalah / Kerja",
+        warna: "bg-orange-50 text-orange-700",
+        tanya: "Bolehkah menjamak shalat karena terikat shift kerja (Arubaito) yang sangat ketat?",
+        jawab_pendek: "Boleh sesekali dalam kondisi darurat, tapi tidak boleh dijadikan kebiasaan harian...",
+        jawab_panjang: "Diperbolehkan menjamak shalat (tanpa meng-qashar) hanya sesekali dalam kondisi yang sangat mendesak atau darurat agar tidak meninggalkan shalat sama sekali. Namun, hal ini tidak boleh dijadikan kebiasaan harian. Pekerja wajib mengomunikasikan hak ibadahnya kepada atasan secara baik-baik.",
+        dalil: "Syekh Ibnu Utsaimin (Syarh Mumti') & Hadits Ibnu Abbas riwayat Muslim."
+      }
+    ];
 
-      cards.forEach(card => {
-        // Ambil teks pertanyaan dan jawaban di dalam kartu
-        const question = card.querySelector(".question-text").innerText.toLowerCase();
-        const answer = card.querySelector(".answer-text").innerText.toLowerCase();
+    const grid = document.getElementById("fiqhGrid");
 
-        // Jika kata kunci cocok, tampilkan kartu. Jika tidak, sembunyikan.
-        if (question.includes(input) || answer.includes(input)) {
-          card.style.display = "block";
-          hasVisibleCard = true;
-        } else {
-          card.style.display = "none";
-        }
+    // Fungsi menampilkan kartu ke layar
+    function renderFiqh(data) {
+      grid.innerHTML = "";
+      if (data.length === 0) {
+        document.getElementById("noResult").style.display = "block";
+        return;
+      }
+      document.getElementById("noResult").style.display = "none";
+
+      data.forEach(item => {
+        const card = `
+          <article onclick="bukaModalFiqh(${item.id})" class="cursor-pointer p-6 rounded-3xl bg-white border border-slate-200 shadow-sm hover:shadow-lg hover:border-primary-300 hover:-translate-y-1 transition duration-300">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="px-3 py-1 ${item.warna} text-[10px] font-bold rounded-lg uppercase tracking-wider">${item.kategori}</span>
+            </div>
+            <h3 class="font-extrabold text-lg text-slate-900 mb-2">${item.tanya}</h3>
+            <p class="text-sm text-slate-600 line-clamp-2">${item.jawab_pendek}</p>
+            <div class="mt-4 pt-4 border-t border-slate-100 text-sm font-bold text-primary-600 flex items-center gap-2">
+              Baca Penjelasan & Dalil &rarr;
+            </div>
+          </article>
+        `;
+        grid.insertAdjacentHTML("beforeend", card);
       });
+    }
 
-      // Tampilkan pesan jika tidak ada hasil
-      document.getElementById("noResult").style.display = hasVisibleCard ? "none" : "block";
+    // Tampilkan semua data saat pertama buka
+    renderFiqh(dataFiqh);
+
+    // Fungsi Pencarian Cerdas
+    function cariFiqh() {
+      const keyword = document.getElementById("searchInput").value.toLowerCase();
+      const hasilFilter = dataFiqh.filter(item => 
+        item.tanya.toLowerCase().includes(keyword) || 
+        item.jawab_panjang.toLowerCase().includes(keyword)
+      );
+      renderFiqh(hasilFilter);
+    }
+
+    // --- LOGIKA POP-UP (MODAL) ---
+    function bukaModalFiqh(id) {
+      const item = dataFiqh.find(d => d.id === id);
+      if (!item) return;
+
+      document.getElementById("modalKategori").className = `inline-block px-3 py-1 text-[10px] font-bold rounded-lg uppercase tracking-wider mb-4 ${item.warna}`;
+      document.getElementById("modalKategori").innerText = item.kategori;
+      document.getElementById("modalTanya").innerText = item.tanya;
+      document.getElementById("modalJawab").innerText = item.jawab_panjang;
+      document.getElementById("modalDalil").innerText = item.dalil;
+
+      const modal = document.getElementById("fiqhModal");
+      modal.classList.remove("hidden");
+      setTimeout(() => {
+        modal.classList.remove("opacity-0");
+        modal.children[0].classList.remove("scale-95");
+      }, 10);
+    }
+
+    function tutupModalFiqh() {
+      const modal = document.getElementById("fiqhModal");
+      modal.classList.add("opacity-0");
+      modal.children[0].classList.add("scale-95");
+      setTimeout(() => { modal.classList.add("hidden"); }, 300);
     }
   </script>
 </body>
