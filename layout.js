@@ -13,6 +13,8 @@ const siteHeader = `
         <a href="tentang.html" class="px-5 py-2 rounded-full text-slate-600 hover:bg-white hover:text-primary-600 hover:shadow-sm transition" data-i18n="nav.tentang">Tentang</a>
         <a href="program.html" class="px-5 py-2 rounded-full text-slate-600 hover:bg-white hover:text-primary-600 hover:shadow-sm transition" data-i18n="nav.program">Program</a>
         <a href="index.html#jadwal" class="px-5 py-2 rounded-full text-slate-600 hover:bg-white hover:text-primary-600 hover:shadow-sm transition" data-i18n="nav.jadwal">Jadwal</a>
+        <a href="fiqh.html" class="px-5 py-2 rounded-full text-slate-600 hover:bg-white hover:text-primary-600 hover:shadow-sm transition" data-i18n="nav.fiqh">Tanya Fiqh</a>
+        
         <a href="artikel.html" class="px-5 py-2 rounded-full text-slate-600 hover:bg-white hover:text-primary-600 hover:shadow-sm transition" data-i18n="nav.artikel">Artikel</a>
         <a href="galeri.html" class="px-5 py-2 rounded-full text-slate-600 hover:bg-white hover:text-primary-600 hover:shadow-sm transition" data-i18n="nav.galeri">Galeri</a>
         <a href="kontak.html" class="px-5 py-2 rounded-full text-slate-600 hover:bg-white hover:text-primary-600 hover:shadow-sm transition" data-i18n="nav.kontak">Kontak</a>
@@ -33,12 +35,15 @@ const siteHeader = `
 
     <div id="mobileMenu" class="md:hidden hidden border-t border-slate-100 bg-white absolute w-full shadow-2xl pb-4 rounded-b-3xl">
       <nav class="max-w-7xl mx-auto px-4 py-4 grid gap-2 text-sm font-semibold">
-        <a href="tentang.html" class="p-4 rounded-2xl text-slate-700 hover:bg-slate-50 hover:text-primary-600 transition flex items-center gap-3"><span class="text-xl">🏢</span> Tentang Kami</a>
-        <a href="program.html" class="p-4 rounded-2xl text-slate-700 hover:bg-slate-50 hover:text-primary-600 transition flex items-center gap-3"><span class="text-xl">📚</span> Program</a>
-        <a href="index.html#jadwal" class="p-4 rounded-2xl text-slate-700 hover:bg-slate-50 hover:text-primary-600 transition flex items-center gap-3"><span class="text-xl">🕌</span> Jadwal Shalat</a>
-        <a href="artikel.html" class="p-4 rounded-2xl text-slate-700 hover:bg-slate-50 hover:text-primary-600 transition flex items-center gap-3"><span class="text-xl">📰</span> Artikel</a>
-        <a href="galeri.html" class="p-4 rounded-2xl text-slate-700 hover:bg-slate-50 hover:text-primary-600 transition flex items-center gap-3"><span class="text-xl">📸</span> Galeri</a>
-        <a href="kontak.html" class="p-4 rounded-2xl text-slate-700 hover:bg-slate-50 hover:text-primary-600 transition flex items-center gap-3"><span class="text-xl">💬</span> Kontak</a>
+        <a href="tentang.html" class="p-4 rounded-2xl text-slate-700 hover:bg-slate-50 hover:text-primary-600 transition flex items-center gap-3" data-i18n="nav.tentang"><span class="text-xl">🏢</span> Tentang Kami</a>
+        <a href="program.html" class="p-4 rounded-2xl text-slate-700 hover:bg-slate-50 hover:text-primary-600 transition flex items-center gap-3" data-i18n="nav.program"><span class="text-xl">📚</span> Program</a>
+        <a href="index.html#jadwal" class="p-4 rounded-2xl text-slate-700 hover:bg-slate-50 hover:text-primary-600 transition flex items-center gap-3" data-i18n="nav.jadwal"><span class="text-xl">🕌</span> Jadwal Shalat</a>
+        
+        <a href="fiqh.html" class="p-4 rounded-2xl text-slate-700 hover:bg-slate-50 hover:text-primary-600 transition flex items-center gap-3" data-i18n="nav.fiqh"><span class="text-xl">📓</span> Tanya Fiqh</a>
+
+        <a href="artikel.html" class="p-4 rounded-2xl text-slate-700 hover:bg-slate-50 hover:text-primary-600 transition flex items-center gap-3" data-i18n="nav.artikel"><span class="text-xl">📰</span> Artikel</a>
+        <a href="galeri.html" class="p-4 rounded-2xl text-slate-700 hover:bg-slate-50 hover:text-primary-600 transition flex items-center gap-3" data-i18n="nav.galeri"><span class="text-xl">📸</span> Galeri</a>
+        <a href="kontak.html" class="p-4 rounded-2xl text-slate-700 hover:bg-slate-50 hover:text-primary-600 transition flex items-center gap-3" data-i18n="nav.kontak"><span class="text-xl">💬</span> Kontak</a>
         <button onclick="openDaftarModal()" class="w-full mt-2 px-4 py-3 rounded-xl bg-primary-600 text-white text-center font-bold">Daftar Sekarang</button>
       </nav>
     </div>
@@ -102,7 +107,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const footerContainer = document.getElementById("footer-container");
     
     if(headerContainer) headerContainer.innerHTML = siteHeader;
-    // Inject Footer dan Modal Daftar di akhir body
     if(footerContainer) footerContainer.innerHTML = siteFooter + siteModalDaftar;
 
     const yearEl = document.getElementById('year');
