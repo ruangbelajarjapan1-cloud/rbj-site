@@ -22,8 +22,10 @@ const siteHeader = `
 
       <div class="hidden md:flex items-center gap-3">
         <div class="flex bg-slate-100 rounded-xl p-1 border border-slate-200">
-          <button data-lang-btn="id" onclick="changeLang('id')" class="px-3 py-1.5 rounded-lg text-xs font-bold text-slate-600 hover:bg-white transition">ID</button>
-          <button data-lang-btn="ja" onclick="changeLang('ja')" class="px-3 py-1.5 rounded-lg text-xs font-bold text-slate-600 hover:bg-white transition">JA</button>
+        <button data-lang-btn="id" onclick="changeLang('id')" class="px-3 py-1.5 rounded-lg text-xs font-bold text-slate-600 hover:bg-white transition">ID</button>
+        <button data-lang-btn="en" onclick="changeLang('en')" class="px-3 py-1.5 rounded-lg text-xs font-bold text-slate-600 hover:bg-white transition">EN</button>
+        <button data-lang-btn="ja" onclick="changeLang('ja')" class="px-3 py-1.5 rounded-lg text-xs font-bold text-slate-600 hover:bg-white transition">JA</button>
+      </div>
         </div>
         <button onclick="openDaftarModal()" class="px-6 py-2.5 rounded-xl bg-primary-600 text-white text-sm font-bold shadow-lg shadow-primary-500/30 hover:bg-primary-700 hover:-translate-y-0.5 transition-all" data-i18n="nav.daftar">Daftar</button>
       </div>
