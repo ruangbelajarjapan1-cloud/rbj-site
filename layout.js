@@ -1,4 +1,5 @@
 // File: layout.js
+
 const siteHeader = `
   <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-slate-100 shadow-sm transition-all duration-300">
     <div class="max-w-7xl mx-auto px-4 h-20 flex items-center justify-between">
@@ -22,10 +23,9 @@ const siteHeader = `
 
       <div class="hidden md:flex items-center gap-3">
         <div class="flex bg-slate-100 rounded-xl p-1 border border-slate-200">
-        <button data-lang-btn="id" onclick="changeLang('id')" class="px-3 py-1.5 rounded-lg text-xs font-bold text-slate-600 hover:bg-white transition">ID</button>
-        <button data-lang-btn="en" onclick="changeLang('en')" class="px-3 py-1.5 rounded-lg text-xs font-bold text-slate-600 hover:bg-white transition">EN</button>
-        <button data-lang-btn="ja" onclick="changeLang('ja')" class="px-3 py-1.5 rounded-lg text-xs font-bold text-slate-600 hover:bg-white transition">JA</button>
-      </div>
+          <button data-lang-btn="id" onclick="changeLang('id')" class="px-3 py-1.5 rounded-lg text-xs font-bold text-slate-600 hover:bg-white transition">ID</button>
+          <button data-lang-btn="en" onclick="changeLang('en')" class="px-3 py-1.5 rounded-lg text-xs font-bold text-slate-600 hover:bg-white transition">EN</button>
+          <button data-lang-btn="ja" onclick="changeLang('ja')" class="px-3 py-1.5 rounded-lg text-xs font-bold text-slate-600 hover:bg-white transition">JA</button>
         </div>
         <button onclick="openDaftarModal()" class="px-6 py-2.5 rounded-xl bg-primary-600 text-white text-sm font-bold shadow-lg shadow-primary-500/30 hover:bg-primary-700 hover:-translate-y-0.5 transition-all" data-i18n="nav.daftar">Daftar</button>
       </div>
@@ -73,17 +73,52 @@ const siteFooter = `
   </footer>
 `;
 
-// Komponen Popup Google Form Global
+// Komponen Popup Pendaftaran Native & Kids Friendly
 const siteModalDaftar = `
   <div id="modalDaftar" class="fixed inset-0 z-[100] bg-slate-900/80 hidden flex-col items-center justify-center p-4 md:p-10 backdrop-blur-sm transition-opacity opacity-0">
-    <div class="bg-white w-full max-w-4xl h-full md:h-[85vh] rounded-3xl flex flex-col overflow-hidden shadow-2xl transform scale-95 transition-transform duration-300 relative">
-      <div class="h-16 flex items-center justify-between px-6 border-b border-slate-100 bg-white shrink-0">
-        <span class="font-extrabold text-lg text-slate-800">Pendaftaran RBMJ</span>
-        <button onclick="closeDaftarModal()" class="text-3xl text-slate-400 hover:text-red-500 transition">&times;</button>
+    <div class="bg-white w-full max-w-2xl max-h-[90vh] rounded-[2rem] flex flex-col overflow-hidden shadow-2xl transform scale-95 transition-transform duration-300 relative">
+      
+      <div class="h-20 flex items-center justify-between px-8 bg-emerald-50 border-b-2 border-emerald-100 shrink-0">
+        <div class="flex items-center gap-3">
+          <span class="text-3xl">📝</span>
+          <span class="font-extrabold text-xl text-emerald-900">Formulir Pendaftaran</span>
+        </div>
+        <button onclick="closeDaftarModal()" class="text-4xl text-emerald-300 hover:text-red-400 transition">&times;</button>
       </div>
-      <div class="flex-1 w-full bg-slate-50 relative overflow-hidden">
-        <iframe src="https://forms.gle/dxqRenLyLq3KJ6cr5" class="absolute inset-0 w-full h-full border-0"></iframe>
+
+      <div class="flex-1 overflow-y-auto p-8">
+        <form id="formPendaftaran" class="grid gap-6">
+          
+          <div>
+            <label class="block text-sm font-extrabold text-slate-700 mb-2">Nama Peserta</label>
+            <input type="text" name="nama" required class="w-full rounded-2xl border-2 border-slate-200 px-5 py-4 bg-slate-50 focus:bg-white focus:outline-none focus:ring-4 focus:ring-emerald-100 focus:border-emerald-400 transition" placeholder="Masukkan nama lengkap" />
+          </div>
+
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="block text-sm font-extrabold text-slate-700 mb-2">Usia</label>
+              <input type="number" name="usia" required class="w-full rounded-2xl border-2 border-slate-200 px-5 py-4 bg-slate-50 focus:bg-white focus:outline-none focus:ring-4 focus:ring-emerald-100 focus:border-emerald-400 transition" placeholder="Misal: 7" />
+            </div>
+            <div>
+              <label class="block text-sm font-extrabold text-slate-700 mb-2">Pilihan Kelas</label>
+              <select name="kelas" required class="w-full rounded-2xl border-2 border-slate-200 px-5 py-4 bg-slate-50 focus:bg-white focus:outline-none focus:ring-4 focus:ring-emerald-100 focus:border-emerald-400 transition appearance-none cursor-pointer">
+                <option value="">-- Pilih Kelas --</option>
+                <option value="Iqro Anak">Iqro' Anak</option>
+                <option value="PAI Online">PAI Online</option>
+                <option value="Tahsin Dewasa">Tahsin Dewasa</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-sm font-extrabold text-slate-700 mb-2">Nomor WhatsApp / Telegram</label>
+            <input type="text" name="wa" required class="w-full rounded-2xl border-2 border-slate-200 px-5 py-4 bg-slate-50 focus:bg-white focus:outline-none focus:ring-4 focus:ring-emerald-100 focus:border-emerald-400 transition" placeholder="+81 atau +62..." />
+          </div>
+
+          <button type="submit" id="btnDaftarSubmit" class="w-full mt-4 px-6 py-4 rounded-2xl bg-emerald-500 text-white font-extrabold text-lg hover:bg-emerald-600 shadow-lg hover:-translate-y-1 transition duration-300">Kirim Pendaftaran</button>
+        </form>
       </div>
+
     </div>
   </div>
 `;
@@ -117,4 +152,41 @@ document.addEventListener("DOMContentLoaded", () => {
     const btn = document.getElementById('menuBtn');
     const menu = document.getElementById('mobileMenu');
     if(btn && menu) btn.addEventListener('click', () => menu.classList.toggle('hidden'));
+
+    // --- LOGIKA PENGIRIMAN FORM PENDAFTARAN ---
+    const formDaftar = document.getElementById('formPendaftaran');
+    const btnDaftarSubmit = document.getElementById('btnDaftarSubmit');
+
+    if(formDaftar) {
+      formDaftar.addEventListener('submit', async (e) => {
+        e.preventDefault(); 
+        
+        btnDaftarSubmit.innerText = "Memproses Pendaftaran..."; 
+        btnDaftarSubmit.disabled = true;
+
+        // URL Google Apps Script yang sudah dimasukkan
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbxawic2JbTpJecAKmyw5NusmWdQtggjP3R8ffl3FnEekRp94lMzSEL8WFLg8VK9XPMjrg/exec'; 
+        const formData = new FormData(formDaftar);
+
+        try {
+          const response = await fetch(scriptURL, { method: 'POST', body: formData });
+          if(response.ok) {
+            // Ubah tampilan form menjadi pesan sukses
+            formDaftar.innerHTML = `
+              <div class="text-center py-10">
+                <div class="text-6xl mb-4">🎉</div>
+                <h3 class="text-2xl font-extrabold text-emerald-800 mb-2">Alhamdulillah!</h3>
+                <p class="text-slate-600">Pendaftaran berhasil dikirim. Admin akan segera menghubungi Anda melalui WhatsApp.</p>
+                <button type="button" onclick="closeDaftarModal()" class="mt-8 px-6 py-3 rounded-xl bg-slate-100 font-bold text-slate-700 hover:bg-slate-200">Tutup</button>
+              </div>
+            `;
+          }
+        } catch (error) {
+          alert("Maaf, terjadi kesalahan jaringan. Silakan coba lagi.");
+          btnDaftarSubmit.innerText = "Kirim Pendaftaran";
+          btnDaftarSubmit.disabled = false;
+        }
+      });
+    }
+
 });
