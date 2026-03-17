@@ -65,35 +65,57 @@
   <script>
     // --- DATABASE MINI FIQH ---
     // Cara menambah data: cukup copy { ... } dan ganti isinya.
-    const dataFiqh = [
-      {
-        id: 1,
-        kategori: "Ibadah / Shalat",
-        warna: "bg-blue-50 text-blue-700",
-        tanya: "Bolehkah shalat fardhu sambil duduk di dalam kereta atau Shinkansen?",
-        jawab_pendek: "Hukum asal shalat fardhu adalah wajib berdiri. Namun, jika kondisi darurat...",
-        jawab_panjang: "Hukum asal shalat fardhu adalah wajib berdiri. Namun, jika kondisi benar-benar tidak memungkinkan untuk berdiri dan dikhawatirkan waktu shalat akan habis sebelum tiba di tempat tujuan, maka diperbolehkan shalat sambil duduk di kursi sesuai kemampuan.",
-        dalil: "Fatwa Syekh Abdul Aziz bin Baz (Majmu' Fatawa 12/56) - Sesuai panduan Risalah Haramain."
-      },
-      {
-        id: 2,
-        kategori: "Makanan / Halal",
-        warna: "bg-emerald-50 text-emerald-700",
-        tanya: "Bagaimana hukum makanan di Jepang yang mengandung Emulsifier (Pengemulsi/E471)?",
-        jawab_pendek: "Jika berasal dari tumbuhan (nabati) halal, jika dari hewan haram (babi/tidak disembelih syar'i)...",
-        jawab_panjang: "Harus dipastikan sumbernya. Jika emulsifier berasal dari tumbuhan (nabati), maka halal. Namun jika berasal dari hewan yang tidak disembelih secara syar'i atau turunan babi, maka haram. Jika ragu atau tidak tahu (syubhat), maka wajib ditinggalkan demi menjaga agama.",
-        dalil: "Fatwa Al-Lajnah Ad-Daimah (Komite Tetap Riset Ilmiah dan Fatwa Arab Saudi)."
-      },
-      {
-        id: 3,
-        kategori: "Muamalah / Kerja",
-        warna: "bg-orange-50 text-orange-700",
-        tanya: "Bolehkah menjamak shalat karena terikat shift kerja (Arubaito) yang sangat ketat?",
-        jawab_pendek: "Boleh sesekali dalam kondisi darurat, tapi tidak boleh dijadikan kebiasaan harian...",
-        jawab_panjang: "Diperbolehkan menjamak shalat (tanpa meng-qashar) hanya sesekali dalam kondisi yang sangat mendesak atau darurat agar tidak meninggalkan shalat sama sekali. Namun, hal ini tidak boleh dijadikan kebiasaan harian. Pekerja wajib mengomunikasikan hak ibadahnya kepada atasan secara baik-baik.",
-        dalil: "Syekh Ibnu Utsaimin (Syarh Mumti') & Hadits Ibnu Abbas riwayat Muslim."
+    // --- DATABASE FIQH (DARI GOOGLE SHEETS) ---
+    // Variabel kosong untuk menampung data dari Sheet nanti
+    let dataFiqh = []; 
+
+    // Ganti tulisan LINK_CSV_ANDA dengan link yang Anda copy dari Langkah 1.1
+    const URL_SHEET_FIQH = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTVxGRvlEuYhCTuDCtzQD3sxgkLRDTku-sSPuvZ8xYKLNxmy5jtEBZWMAzTXxDnOCX7IV-szkvQyUei/pub?gid=42053170&single=true&output=csv'; 
+
+    // Fungsi kecil untuk membersihkan teks dari Google Sheets agar rapi
+    function bersihkanTeks(str) { 
+      return !str ? "" : str.replace(/^"|"$/g, '').trim(); 
+    }
+
+    // Fungsi utama si "Kurir" pengambil data
+    async function ambilDataFiqh() {
+      const grid = document.getElementById("fiqhGrid");
+      grid.innerHTML = '<p class="text-center text-slate-500 py-10 font-bold animate-pulse">Mengambil data dari Ustadz...</p>';
+
+      try {
+        // 1. Kurir menjemput data ke Google Sheets
+        const response = await fetch(URL_SHEET_FIQH);
+        const teksCSV = await response.text();
+        
+        // 2. Membongkar paket data CSV menjadi baris-baris data
+        // Rumus (regex) ini dipakai agar tanda koma di dalam kalimat jawaban tidak merusak susunan tabel
+        const barisData = teksCSV.trim().split('\n').slice(1).map(r => r.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/));
+
+        // 3. Memasukkan data ke dalam variabel dataFiqh kita
+        dataFiqh = barisData.map(kolom => {
+          return {
+            id: parseInt(bersihkanTeks(kolom[0])),
+            kategori: bersihkanTeks(kolom[1]),
+            warna: bersihkanTeks(kolom[2]),
+            tanya: bersihkanTeks(kolom[3]),
+            jawab_pendek: bersihkanTeks(kolom[4]),
+            jawab_panjang: bersihkanTeks(kolom[5]),
+            dalil: bersihkanTeks(kolom[6])
+          };
+        });
+
+        // 4. Tampilkan ke layar
+        renderFiqh(dataFiqh);
+
+      } catch (error) {
+        grid.innerHTML = '<p class="text-center text-red-500 py-10">Gagal memuat data. Periksa koneksi internet.</p>';
       }
-    ];
+    }
+
+    // Jalankan fungsi pengambil data saat halaman dibuka
+    ambilDataFiqh();
+
+    // Sisa fungsi renderFiqh(data), cariFiqh(), dan bukaModalFiqh() biarkan sama seperti sebelumnya...
 
     const grid = document.getElementById("fiqhGrid");
 
