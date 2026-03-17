@@ -16,7 +16,21 @@
       'kontak.email':'Email', 'kontak.wa':'WhatsApp / Telegram', 'btn.join':'Gabung Grup',
       'kontak.form.t':'Kirim Pesan',
       'form.name':'Nama Lengkap', 'form.email':'Alamat Email', 'form.message':'Pesan Anda', 'form.send':'Kirim Pesan Sekarang',
-      'back.home':'Kembali ke Beranda'
+      'back.home':'Kembali ke Beranda',
+      // MULAI: Kamus Form Pendaftaran
+      'form.daftar.title': 'Formulir Pendaftaran',
+      'form.daftar.name': 'Nama Peserta',
+      'form.daftar.name_ph': 'Masukkan nama lengkap',
+      'form.daftar.age': 'Usia',
+      'form.daftar.age_ph': 'Misal: 7',
+      'form.daftar.class': 'Pilihan Kelas',
+      'form.daftar.class_opt': '-- Pilih Kelas --',
+      'form.daftar.wa': 'Nomor WhatsApp / Telegram',
+      'form.daftar.wa_ph': '+81 atau +62...',
+      'form.daftar.btn': 'Kirim Pendaftaran',
+      'form.daftar.success_t': 'Alhamdulillah!',
+      'form.daftar.success_d': 'Pendaftaran berhasil dikirim. Admin akan segera menghubungi Anda melalui WhatsApp.',
+      'form.daftar.close': 'Tutup'
     },
     ja: {
       'brand.name':'RBM ジャパン',
@@ -34,7 +48,21 @@
       'kontak.email':'メール', 'kontak.wa':'WhatsApp / Telegram', 'btn.join':'グループに参加',
       'kontak.form.t':'メッセージを送る',
       'form.name':'お名前', 'form.email':'メールアドレス', 'form.message':'メッセージ', 'form.send':'送信する',
-      'back.home':'ホームへ戻る'
+      'back.home':'ホームへ戻る',
+      // MULAI: Kamus Form Pendaftaran
+      'form.daftar.title': '申込フォーム',
+      'form.daftar.name': '参加者名',
+      'form.daftar.name_ph': 'フルネームを入力',
+      'form.daftar.age': '年齢',
+      'form.daftar.age_ph': '例：7',
+      'form.daftar.class': '希望クラス',
+      'form.daftar.class_opt': '-- クラスを選択 --',
+      'form.daftar.wa': 'WhatsApp / Telegram 番号',
+      'form.daftar.wa_ph': '+81 または +62...',
+      'form.daftar.btn': '申し込む',
+      'form.daftar.success_t': 'アルハムドゥリッラー！',
+      'form.daftar.success_d': '申し込みが完了しました。管理者がWhatsAppでご連絡します。',
+      'form.daftar.close': '閉じる'
     },
     en: {
       'brand.name':'RBM Japan',
@@ -52,7 +80,21 @@
       'kontak.email':'Email', 'kontak.wa':'WhatsApp / Telegram', 'btn.join':'Join Group',
       'kontak.form.t':'Send a Message',
       'form.name':'Full Name', 'form.email':'Email Address', 'form.message':'Your Message', 'form.send':'Send Message Now',
-      'back.home':'Back to Home'
+      'back.home':'Back to Home',
+      // MULAI: Kamus Form Pendaftaran
+      'form.daftar.title': 'Registration Form',
+      'form.daftar.name': 'Participant Name',
+      'form.daftar.name_ph': 'Enter full name',
+      'form.daftar.age': 'Age',
+      'form.daftar.age_ph': 'e.g., 7',
+      'form.daftar.class': 'Class Selection',
+      'form.daftar.class_opt': '-- Select Class --',
+      'form.daftar.wa': 'WhatsApp / Telegram Number',
+      'form.daftar.wa_ph': '+81 or +62...',
+      'form.daftar.btn': 'Submit Registration',
+      'form.daftar.success_t': 'Alhamdulillah!',
+      'form.daftar.success_d': 'Registration successfully submitted. Admin will contact you via WhatsApp shortly.',
+      'form.daftar.close': 'Close'
     }
   };
 
@@ -60,16 +102,23 @@
     try {
       const d = dict[lang] || dict.id;
       document.documentElement.lang = lang === 'ja' ? 'ja' : 'id';
+      
+      // 1. Menerjemahkan teks biasa
       document.querySelectorAll('[data-i18n]').forEach(el => {
         const k = el.getAttribute('data-i18n');
         if (d[k] != null) el.textContent = d[k];
       });
+      
+      // 2. Menerjemahkan kotak isian (placeholder) - INI LOGIKA BARUNYA
+      document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+        const k = el.getAttribute('data-i18n-placeholder');
+        if (d[k] != null) el.placeholder = d[k];
+      });
+
       document.querySelectorAll('[data-i18n-html]').forEach(el => {
         const k = el.getAttribute('data-i18n-html');
         if (d[k] != null) el.innerHTML = d[k];
       });
-      document.querySelectorAll('[data-i18n-lang-id]').forEach(el => el.textContent = d['lang.id'] || 'ID');
-      document.querySelectorAll('[data-i18n-lang-ja]').forEach(el => el.textContent = d['lang.ja'] || '日本語');
     } catch(e) {
       console.error('[i18n] applyLang error:', e);
     }
@@ -85,7 +134,6 @@
     applyLang(initial);
   }
 
-  // Pastikan DOM siap
   if (document.readyState !== 'loading') init();
   else document.addEventListener('DOMContentLoaded', init);
 
