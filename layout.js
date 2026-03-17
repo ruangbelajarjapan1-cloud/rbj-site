@@ -81,7 +81,7 @@ const siteModalDaftar = `
       <div class="h-20 flex items-center justify-between px-8 bg-emerald-50 border-b-2 border-emerald-100 shrink-0">
         <div class="flex items-center gap-3">
           <span class="text-3xl">📝</span>
-          <span class="font-extrabold text-xl text-emerald-900">Formulir Pendaftaran</span>
+          <span class="font-extrabold text-xl text-emerald-900" data-i18n="form.daftar.title">Formulir Pendaftaran</span>
         </div>
         <button onclick="closeDaftarModal()" class="text-4xl text-emerald-300 hover:text-red-400 transition">&times;</button>
       </div>
@@ -90,19 +90,19 @@ const siteModalDaftar = `
         <form id="formPendaftaran" class="grid gap-6">
           
           <div>
-            <label class="block text-sm font-extrabold text-slate-700 mb-2">Nama Peserta</label>
-            <input type="text" name="nama" required class="w-full rounded-2xl border-2 border-slate-200 px-5 py-4 bg-slate-50 focus:bg-white focus:outline-none focus:ring-4 focus:ring-emerald-100 focus:border-emerald-400 transition" placeholder="Masukkan nama lengkap" />
+            <label class="block text-sm font-extrabold text-slate-700 mb-2" data-i18n="form.daftar.name">Nama Peserta</label>
+            <input type="text" name="nama" required class="w-full rounded-2xl border-2 border-slate-200 px-5 py-4 bg-slate-50 focus:bg-white focus:outline-none focus:ring-4 focus:ring-emerald-100 focus:border-emerald-400 transition" data-i18n-placeholder="form.daftar.name_ph" placeholder="Masukkan nama lengkap" />
           </div>
 
           <div class="grid grid-cols-2 gap-4">
             <div>
-              <label class="block text-sm font-extrabold text-slate-700 mb-2">Usia</label>
-              <input type="number" name="usia" required class="w-full rounded-2xl border-2 border-slate-200 px-5 py-4 bg-slate-50 focus:bg-white focus:outline-none focus:ring-4 focus:ring-emerald-100 focus:border-emerald-400 transition" placeholder="Misal: 7" />
+              <label class="block text-sm font-extrabold text-slate-700 mb-2" data-i18n="form.daftar.age">Usia</label>
+              <input type="number" name="usia" required class="w-full rounded-2xl border-2 border-slate-200 px-5 py-4 bg-slate-50 focus:bg-white focus:outline-none focus:ring-4 focus:ring-emerald-100 focus:border-emerald-400 transition" data-i18n-placeholder="form.daftar.age_ph" placeholder="Misal: 7" />
             </div>
             <div>
-              <label class="block text-sm font-extrabold text-slate-700 mb-2">Pilihan Kelas</label>
+              <label class="block text-sm font-extrabold text-slate-700 mb-2" data-i18n="form.daftar.class">Pilihan Kelas</label>
               <select name="kelas" required class="w-full rounded-2xl border-2 border-slate-200 px-5 py-4 bg-slate-50 focus:bg-white focus:outline-none focus:ring-4 focus:ring-emerald-100 focus:border-emerald-400 transition appearance-none cursor-pointer">
-                <option value="">-- Pilih Kelas --</option>
+                <option value="" data-i18n="form.daftar.class_opt">-- Pilih Kelas --</option>
                 <option value="Iqro Anak">Iqro' Anak</option>
                 <option value="PAI Online">PAI Online</option>
                 <option value="Tahsin Dewasa">Tahsin Dewasa</option>
@@ -111,11 +111,11 @@ const siteModalDaftar = `
           </div>
 
           <div>
-            <label class="block text-sm font-extrabold text-slate-700 mb-2">Nomor WhatsApp / Telegram</label>
-            <input type="text" name="wa" required class="w-full rounded-2xl border-2 border-slate-200 px-5 py-4 bg-slate-50 focus:bg-white focus:outline-none focus:ring-4 focus:ring-emerald-100 focus:border-emerald-400 transition" placeholder="+81 atau +62..." />
+            <label class="block text-sm font-extrabold text-slate-700 mb-2" data-i18n="form.daftar.wa">Nomor WhatsApp / Telegram</label>
+            <input type="text" name="wa" required class="w-full rounded-2xl border-2 border-slate-200 px-5 py-4 bg-slate-50 focus:bg-white focus:outline-none focus:ring-4 focus:ring-emerald-100 focus:border-emerald-400 transition" data-i18n-placeholder="form.daftar.wa_ph" placeholder="+81 atau +62..." />
           </div>
 
-          <button type="submit" id="btnDaftarSubmit" class="w-full mt-4 px-6 py-4 rounded-2xl bg-emerald-500 text-white font-extrabold text-lg hover:bg-emerald-600 shadow-lg hover:-translate-y-1 transition duration-300">Kirim Pendaftaran</button>
+          <button type="submit" id="btnDaftarSubmit" class="w-full mt-4 px-6 py-4 rounded-2xl bg-emerald-500 text-white font-extrabold text-lg hover:bg-emerald-600 shadow-lg hover:-translate-y-1 transition duration-300" data-i18n="form.daftar.btn">Kirim Pendaftaran</button>
         </form>
       </div>
 
@@ -170,16 +170,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
         try {
           const response = await fetch(scriptURL, { method: 'POST', body: formData });
-          if(response.ok) {
+         if(response.ok) {
             // Ubah tampilan form menjadi pesan sukses
             formDaftar.innerHTML = `
               <div class="text-center py-10">
                 <div class="text-6xl mb-4">🎉</div>
-                <h3 class="text-2xl font-extrabold text-emerald-800 mb-2">Alhamdulillah!</h3>
-                <p class="text-slate-600">Pendaftaran berhasil dikirim. Admin akan segera menghubungi Anda melalui WhatsApp.</p>
-                <button type="button" onclick="closeDaftarModal()" class="mt-8 px-6 py-3 rounded-xl bg-slate-100 font-bold text-slate-700 hover:bg-slate-200">Tutup</button>
+                <h3 class="text-2xl font-extrabold text-emerald-800 mb-2" data-i18n="form.daftar.success_t">Alhamdulillah!</h3>
+                <p class="text-slate-600" data-i18n="form.daftar.success_d">Pendaftaran berhasil dikirim. Admin akan segera menghubungi Anda melalui WhatsApp.</p>
+                <button type="button" onclick="closeDaftarModal()" class="mt-8 px-6 py-3 rounded-xl bg-slate-100 font-bold text-slate-700 hover:bg-slate-200" data-i18n="form.daftar.close">Tutup</button>
               </div>
             `;
+            // Paksa script i18n untuk membaca ulang agar pesan yang baru muncul ini langsung diterjemahkan
+            if(window.changeLang) window.changeLang(localStorage.getItem('lang') || 'id');
           }
         } catch (error) {
           alert("Maaf, terjadi kesalahan jaringan. Silakan coba lagi.");
