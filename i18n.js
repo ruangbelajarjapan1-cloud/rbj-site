@@ -55,7 +55,30 @@
       'program.teacher.title':'講師一覧','program.module.title':'モジュール（PDF）','program.module.sample':'サンプルPDF',
       'artikel.intro':'コミュニティ向けの短い記事やお役立ち情報です。','artikel.readmore':'続きを読む',
       'galeri.intro':'活動の写真です—このフォルダに画像を追加し、ソースを差し替えてください。'
+    }, // <-- Tambahkan koma di sini
+    // MULAI DARI SINI: Tambahkan blok bahasa Inggris
+    en: {
+      'brand.name': 'RBM Japan',
+      'nav.tentang': 'About',
+      'nav.program': 'Programs',
+      'nav.jadwal': 'Schedule',
+      'nav.artikel': 'Articles',
+      'nav.galeri': 'Gallery',
+      'nav.kontak': 'Contact',
+      'nav.daftar': 'Register',
+      'nav.fiqh': 'Fiqh Q&A',
+      'hero.title.pre': 'Learn Islam according to the Sunnah ',
+      'hero.title.hl': 'in Japan',
+      'hero.subtitle': 'A Muslim community platform for learning Islam upon the Sunnah in Japan.',
+      'hero.cta.primary': 'Register Now',
+      'hero.cta.secondary': 'View Programs',
+      'form.name': 'Full Name',
+      'form.email': 'Email Address',
+      'form.message': 'Your Message',
+      'form.send': 'Send Message',
+      'back.home': 'Back to Home'
     }
+    // SAMPAI SINI
   };
 
   function applyLang(lang) {
